@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+        
+        <title>Git 与 GitHub 不完全教程（一）</title>
+        <meta charset="utf-8" />
+                                                                
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+                        <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-43833562-1', 'my website');
+                ga('send', 'pageview');
+
+              </script>
+          
+
+
+
+        </head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="">老逸的博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://scutlaoyi.github.com">Home</a></li>
+
+                                                  
+              </ul>
+            </div>
+
+          <section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/learning Git 1.html" rel="bookmark"
+                   title="Permalink to Git 与 GitHub 不完全教程（一）">Git 与 GitHub 不完全教程（一）</a></h2>
+                      
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2013-09-07T16:00:00">
+                六 07 九月 2013
+              </abbr>
+                            <address class="vcard author">
+                By <a class="url fn" href="/author/lao-yi.html">老逸</a>
+              </address>
+                          </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>git是常用的配置管理工具，关于Git的介绍请见维基百科（维基百科关于Git的介绍），Github是常用的代码托管服务（维基百科关于GitHub的介绍），在此敲一份扫盲和不完全配置帖，留待日后自己可查看，顺带给大家方便学习。</p>
+<p>由于时间有限，仅记录最简单的终端界面下Git的使用，自认为已经足够，如更喜欢GUI界面风格请自行脑补。</p>
+<p>本文档操作环境为GNU/Linux Ubuntu 12.04 LTS x64，为方便windows用户，在配置时添加了windows下的安装配置过程，不保证万无一失。</p>
+<div class="section" id="git">
+<h2>Git篇：</h2>
+<div class="section" id="id1">
+<h3>安装与配置git</h3>
+<p>Ubuntu: 简单:</p>
+<pre class="literal-block">
+sudo apt-get install git
+</pre>
+<p>即可。</p>
+<p>以上代码没看懂的请别往下看了，扫盲Ubuntu先。</p>
+<p>windows:到这个网址下载:</p>
+<blockquote>
+<a class="reference external" href="http://msysgit.github.io/">http://msysgit.github.io/</a></blockquote>
+<dl class="docutils">
+<dt>或者git官网下载:</dt>
+<dd><a class="reference external" href="http://git-scm.com/download/win">http://git-scm.com/download/win</a></dd>
+</dl>
+<p>安装即可。</p>
+</div>
+<div class="section" id="id2">
+<h3>首次使用</h3>
+<p>windows下使用终端的Git需要启动Git自带的终端，而不是windows的命令行，
+一般在安装后有一个叫做Git bash的东西，启动之即可。暂时不要使用Git GUI，如果有的话。</p>
+<p>Ubuntu下则比较简单，直接启动终端即可，终端可直接调用Git的命令。</p>
+<p>首次使用必须指定用户的用户名和邮箱，这个据说在提交代码的时候会作为标识出现。</p>
+<p>敲入以下代码:</p>
+<pre class="literal-block">
+git config --global user.name &quot;John Doe&quot;
+git config --global user.email johndoe&#64;example.com
+</pre>
+<p>并将其中的John Doe和 <a class="reference external" href="mailto:johndoe&#64;example.com">johndoe&#64;example.com</a> 替换为自己的名字和邮箱即可。</p>
+<p>之后便可以开始使用啦～</p>
+<p>此外，关于配置信息的补充说明：查看当前配置信息的命令是:</p>
+<pre class="literal-block">
+git config --list
+</pre>
+</div>
+<div class="section" id="id3">
+<h3>正式开始</h3>
+<p>我们从本地的使用开始，众所周知，Git使用一种仓库的形式进行配置管理，仓库实际上是以某个文件夹作为根目录，其内容便是仓库中的内容。假设在当前目录下需要使用Git建立仓库，敲入命令:</p>
+<pre class="literal-block">
+git init
+</pre>
+<p>即可完成新本地仓库的建立。
+敲入该命令后会在本目录下自动建立一个.git文件保存Git所需的仓库信息，这个文件默认情况下是不可见的，一般也不需要手动更改。</p>
+<p>查看当前仓库的状态可敲命令:</p>
+<pre class="literal-block">
+git status
+</pre>
+<p>仓库存在多种状态，若根本没有建立仓库，则状态为:</p>
+<pre class="literal-block">
+fatal: Not a git repository
+</pre>
+<p>当建立好仓库并且没有新的更改产生时，状态为:</p>
+<pre class="literal-block">
+# On branch master
+#
+# Initial commit
+#
+nothing to commit (create/copy files and use &quot;git add&quot; to track)
+</pre>
+<p>对于我们建立的文件，存在若干种状态，已修改的，已添加的，和已提交的。
+仓库的文件管理需要经过几个状态，被修改-&gt;添加到提交列表-&gt;提交仓库。
+只有被提交到仓库中的文件才是真的储存到仓库中，否则只是在现有文件夹中。</p>
+<p>当我们在空仓库中新建一个readme.txt文件，并写入一些文本后，该文件在仓库中的状态便为已修改。此时仓库状态为:</p>
+<pre class="literal-block">
+# On branch master
+#
+# Initial commit
+#
+# Untracked files:
+#   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+#
+# readme.txt
+othing added to commit but untracked files present (use &quot;git add&quot; to track)
+</pre>
+<p>该状态表示有一个新文件状态为untracked，仅仅发生了更改，没有添加到提交列表，也没有提交。</p>
+<p>此时，使用命令: &quot;git add&quot;可以添加文件到提交列表中。git add后连接文件名或者目录项，例如:</p>
+<pre class="literal-block">
+git add . #将当前文件夹中被修改且未添加到提交列表中的文件全部添加
+git add abc.def #将当前文件夹中abc.def文件添加到提交列表中
+git add *.abc #将所有后缀为abc的文件添加到提交列表中
+</pre>
+<p>因此，使用 &quot;git add .&quot; 将上文的readme.txt加入提交列表，仓库的状态变为:</p>
+<pre class="literal-block">
+# On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#   (use &quot;git rm --cached &lt;file&gt;...&quot; to unstage)
+#
+# new file:   readme.txt
+</pre>
+<p>在添加后的状态下我们可以将列表中的文件提交到仓库中，作为一个版本。每提交一次就相当于在仓库中保存了提交状态的一个文件副本。只要仓库没死掉（地震、火灾、海啸或其他因素导致硬盘数据丢失），就可以通过提交的识别码恢复到某个提交状态。
+提交的指令为：&quot;git commit&quot; 每一份提交都需要一段说明信息作为标记，以供日后查找识别某个版本。
+上面的提交指令敲入后git会启动一个文本编辑界面供用户输入说明信息。
+有一个便捷的操作，如果想要提交的说明信息比较简短，可以在commit后添加-m参数并直接连接字符串，该字符串便成为说明信息，示例如下:</p>
+<pre class="literal-block">
+git commit -m &quot;initial commit&quot;
+</pre>
+<p>提交完所有被修改的文件后，仓库重新返回状态:</p>
+<pre class="literal-block">
+# On branch master
+nothing to commit (working directory clean)
+</pre>
+<p>那么，仓库中的数据如何被有效利用呢？这里分为两种情况：</p>
+<blockquote>
+<p>1.仓库上一次提交后，有了新的修改，且目前想要回复到提交后的原始状态：</p>
+<p>假设readme.txt提交后的原始信息为:</p>
+<pre class="literal-block">
+Hey!
+It's some change.
+</pre>
+<p>发生了修改，变成这样子了(-_-|||):</p>
+<pre class="literal-block">
+Hey! My name is szy. I'm from scut!
+It's sunny today~
+</pre>
+<p>此时没有add也没有commit，git的状态为:</p>
+<pre class="literal-block">
+# On branch master
+# Changes not staged for commit:
+#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+#
+# modified:   readme.txt
+#
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</pre>
+<p>很明显，git也告诉我们了，使用checkout命令可以从仓库中取出文件副本覆盖现有的被修改文件:</p>
+<pre class="literal-block">
+git checkout -- readme.txt
+</pre>
+<p>执行后就能得到原始的readme版本了:</p>
+<pre class="literal-block">
+Hey!
+It's some change.
+</pre>
+<p>2.仓库的修改已提交，想要返回某个历史版本：</p>
+<p>这种情况下新的修改已经作为一个版本记录到仓库里了，想要返回某个历史版本，首先需要查看所有历史版本，命令为:</p>
+<pre class="literal-block">
+git log
+</pre>
+<p>终端会返回每一个历史版本的提交信息（就是之前敲的那个字符串）和提交的代号等，大概如下:</p>
+<pre class="literal-block">
+commit d4e8fb1393d5bcf4044b06c35869177037ab5da9
+Author: scutLaoYi &lt;HelloWorld636596&#64;126.com&gt;
+Date:   Tue Sep 3 15:50:23 2013 +0800
+
+    change
+
+commit 3cf8790b69961b317ea75e326271379840c541c2
+Author: scutLaoYi &lt;HelloWorld636596&#64;126.com&gt;
+Date:   Tue Sep 3 15:36:52 2013 +0800
+
+    initial commit.
+</pre>
+<p>上述的内容显示了两个历史版本，commit后接的一串代码为提交代号，Date下方的文本为提交信息。找到自己需要的版本，记录版本号，使用git reset命令便可返回到对应版本。注意，只是仓库返回了对应版本，文件仍为修改后版本，若确定没有必要保存新的修改数据，想直接返回到历史版本，就在这个情况下调用 checkout命令恢复即可。但小心这个操作会完全覆盖掉新的更改。</p>
+</blockquote>
+<p>基本上git的菜鸟级操作就有如上几个，懂的这些命令就可以在自己本地实施配置管理啦。</p>
+<p>下一篇将聊一下branch以及远端仓库和GitHub的使用，外加一些VPN的内容。</p>
+<p>参考文档：Git-Documentation:
+<a class="reference external" href="http://git-scm.com/documentation">http://git-scm.com/documentation</a></p>
+</div>
+</div>
+
+            </div><!-- /.entry-content -->
+            
+
+        </div><!-- /.eleven.columns -->
+        
+     <div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+            </ul>
+
+<h4>Categories</h4>
+<ul>
+			<li><a href="/category/git.html">git</a></li>
+			<li><a href="/category/others.html">others</a></li>
+	</ul>
+
+
+<h4>Tags</h4>
+	<ul>
+		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
+		    <li class="tag-1"><a href="/tag/gitgithub.html">git/github</a></li>
+	</ul>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul>
+      <li><a href="sina blog">http://blog.sina.com/scutLaoYi</a></li>
+    </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+                                <li><div class="btn primary"><a href="https://github.com/scutLaoYi" target="_blank">Github</a></div></li>
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+
+</body>
+</html>
