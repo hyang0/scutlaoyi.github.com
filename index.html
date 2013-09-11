@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
         
-        <title>老逸的博客</title>
+        <title>老逸的个人站</title>
         <meta charset="utf-8" />
                                                                 
 
@@ -43,7 +43,7 @@
         <div class="row">
 
           <header id="banner" class="body">
-                  <h1><a href="">老逸的博客 <strong></strong></a></h1>
+                  <h1><a href="">老逸的个人站 <strong></strong></a></h1>
           </header><!-- /#banner -->
 
             <div id="navigation" class="navbar row">
@@ -91,6 +91,47 @@ scutlaoyi.github.com</p>
 								<div class="row tag-row">
 																			<span>Tagged as : </span>
 																					<a class="danger label" href="/tag/hello.html">hello</a>
+																											</div>
+
+
+
+				        </article></li>
+								        <li><article class="hentry">
+				                <header> <h2 class="entry-title"><a href="/Python001.html" rel="bookmark" title="Permalink to Python 笔记（一）">Python 笔记（一）</a></h2> </header>
+				                <footer class="post-info">
+				                    <abbr class="published" title="2013-09-11T15:30:00"> 三 11 九月 2013 </abbr>
+				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
+				                <div class="entry-content"> <p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3，</strong>
+<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<p><strong>脚本声明和中文编码</strong></p>
+<p>在Python脚本的首行和次行添加以下命令可在命令行调用，并设置编码为中文gb2312：</p>
+<div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<span class="c"># -*- coding:gb2312 -*-</span>
+</pre></div>
+<p>Python的注释以#开始，单行注释</p>
+<p>单句Python语句占一行时结尾不用任何符号，多句时用分号分割，但极不推荐此种风格。</p>
+<p><strong>字符串</strong></p>
+<p>字符串有三种写法，单引号或双引号包围的单行字符串（可用反斜杠连接多行），或者三个单引号或双引号跨多行：</p>
+<div class="highlight"><pre><span class="c">#简单的输出语句，包含三种字符串形式</span>
+<span class="k">print</span> <span class="s">&#39;Hello,python!&#39;</span>
+<span class="k">print</span> <span class="s">u&quot;中文是可以支持的.&quot;</span>
+<span class="k">print</span> <span class="s">u&#39;&#39;&#39;字符串的第三种格式</span>
+<span class="s">跨行字符串:用三个单引号或双引号约束。</span>
+<span class="s">前方的u使该字符串作为unicode编码，正确处理中文。</span>
+<span class="s">&#39;&#39;&#39;</span>
+</pre></div>
+<p><strong>原始字符串</strong></p>
+<div class="highlight"><pre><span class="c">#普通字符串和原始字符串（r ...</span></pre></div> </div><!-- /.entry-content -->
+
+								<div class="medium primary btn"><a href="/Python001.html" rel="bookmark" title="Permalink to Python 笔记（一）">Read more <i class="icon-arrow-right"></i></a></div>
+
+
+
+								<div class="row tag-row">
+																			<span>Tagged as : </span>
+																					<a class="danger label" href="/tag/python.html">Python</a>
 																											</div>
 
 
@@ -239,6 +280,7 @@ sudo apt-get install git
 <h4>Categories</h4>
 <ul>
 			<li><a href="/category/itpm.html">ITPM</a></li>
+			<li><a href="/category/python.html">Python</a></li>
 			<li><a href="/category/git.html">git</a></li>
 			<li><a href="/category/others.html">others</a></li>
 	</ul>
@@ -246,9 +288,10 @@ sudo apt-get install git
 
 <h4>Tags</h4>
 	<ul>
-		    <li class="tag-4"><a href="/tag/itpm.html">ITPM</a></li>
 		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
 		    <li class="tag-1"><a href="/tag/gitgithub.html">git/github</a></li>
+		    <li class="tag-4"><a href="/tag/python.html">Python</a></li>
+		    <li class="tag-4"><a href="/tag/itpm.html">ITPM</a></li>
 	</ul>
 
 

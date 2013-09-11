@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+        
+        <title>Python 笔记（一）</title>
+        <meta charset="utf-8" />
+                                                                
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+	<!-- google analyse -->
+          <script type="text/javascript">
+
+ 		var _gaq = _gaq || [];
+ 		 _gaq.push(['_setAccount', 'UA-43833562-1']);
+ 		 _gaq.push(['_trackPageview']);
+
+ 		 (function() {
+  			  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   			 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  			})();
+
+	</script>
+	<!-- end of google analyse -->
+
+
+
+        </head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="">老逸的个人站 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://scutlaoyi.github.com">Home</a></li>
+
+                            <li><a href="studioIndex.html">our studio</a></li>
+                                                  
+              </ul>
+            </div>
+
+          <section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/Python001.html" rel="bookmark"
+                   title="Permalink to Python 笔记（一）">Python 笔记（一）</a></h2>
+                      
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2013-09-11T15:30:00">
+                三 11 九月 2013
+              </abbr>
+                            <address class="vcard author">
+                By <a class="url fn" href="/author/lao-yi.html">老逸</a>
+              </address>
+                          </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3，</strong>
+<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<p><strong>脚本声明和中文编码</strong></p>
+<p>在Python脚本的首行和次行添加以下命令可在命令行调用，并设置编码为中文gb2312：</p>
+<div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<span class="c"># -*- coding:gb2312 -*-</span>
+</pre></div>
+<p>Python的注释以#开始，单行注释</p>
+<p>单句Python语句占一行时结尾不用任何符号，多句时用分号分割，但极不推荐此种风格。</p>
+<p><strong>字符串</strong></p>
+<p>字符串有三种写法，单引号或双引号包围的单行字符串（可用反斜杠连接多行），或者三个单引号或双引号跨多行：</p>
+<div class="highlight"><pre><span class="c">#简单的输出语句，包含三种字符串形式</span>
+<span class="k">print</span> <span class="s">&#39;Hello,python!&#39;</span>
+<span class="k">print</span> <span class="s">u&quot;中文是可以支持的.&quot;</span>
+<span class="k">print</span> <span class="s">u&#39;&#39;&#39;字符串的第三种格式</span>
+<span class="s">跨行字符串:用三个单引号或双引号约束。</span>
+<span class="s">前方的u使该字符串作为unicode编码，正确处理中文。</span>
+<span class="s">&#39;&#39;&#39;</span>
+</pre></div>
+<p><strong>原始字符串</strong></p>
+<div class="highlight"><pre><span class="c">#普通字符串和原始字符串（r），原始字符串不进行自动转义</span>
+<span class="k">print</span> <span class="s">&quot;This is a normal string: C:</span><span class="se">\n</span><span class="s">ow\print</span><span class="se">\t</span><span class="s">he\location\in\windows&quot;</span>
+<span class="k">print</span> <span class="s">r&quot;This is a raw string with same content:C:\now\print\the\location\in\windows&quot;</span>
+</pre></div>
+<p><strong>变量</strong></p>
+<p>Python的变量不用声明类型，据说这种风格为鸭子类型，关于鸭子类型以后研究清楚了再详细记录。算术操作与C++类似，简单的赋值等操作如下：</p>
+<div class="highlight"><pre><span class="c">#单个菊花为乘法，双菊花为求幂</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="k">print</span> <span class="s">&quot;</span><span class="si">%d</span><span class="s"> ** 3 = &quot;</span> <span class="o">%</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">3</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="s">&quot;scutlaoyi.github.com&quot;</span>
+<span class="k">print</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s"> is my blog~&quot;</span> <span class="o">%</span> <span class="n">y</span>
+</pre></div>
+<p>关于print的补充：print可类似C的printf，参数列表前用百分号，参数列表使用元组包括。单个参数可省略元组的括号。print也可连接多个元素，使用逗号分隔，其输出为同一行。</p>
+<p>Python会在print后自动添加换行，方便操作，若不想换行，在print行最末添加逗号即可</p>
+<dl class="docutils">
+<dt>::</dt>
+<dd>print &quot;这行不会自动换行&quot;,</dd>
+</dl>
+<p><strong>命令行获取用户输入</strong></p>
+<p>获取用户输入有两种方式，input和raw_input，均读取一行，
+但input将内容当作Python语句处理，raw_input直接当成字符串</p>
+<div class="highlight"><pre><span class="c">#raw_input:获取用户输入，全部当成字符串</span>
+<span class="n">usrInput</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s">&quot;write something:&quot;</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&quot;you have typed:&quot;</span><span class="p">,</span> <span class="n">usrInput</span>
+
+<span class="c">#input:获取用户输入，将内容当作Python语句</span>
+<span class="n">usrInNum</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;Give me a number:&quot;</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&quot;</span><span class="si">%d</span><span class="s"> * 2 = &quot;</span> <span class="o">%</span> <span class="n">usrInNum</span><span class="p">,</span> <span class="n">usrInNum</span> <span class="o">*</span> <span class="mi">2</span>
+</pre></div>
+<p><strong>列表</strong></p>
+<p>Python拥有强大的内置数据结构，列表、元组和字典，类似于C++标准库中的vector，提供了丰富的功能。
+列表与元组类似，但列表可更改，元组不可更改。列表用[]包括，元组用()包括。</p>
+<p>关于列表的操作：</p>
+<div class="highlight"><pre><span class="n">strList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">strList</span><span class="p">,</span> <span class="s">&quot;is from list(&#39;hello&#39;)&quot;</span>
+<span class="n">aList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span>
+<span class="k">print</span> <span class="s">&quot;The list is :&quot;</span><span class="p">,</span> <span class="n">aList</span>
+<span class="c">#正向索引</span>
+<span class="k">print</span> <span class="s">&quot;The second one in list:&quot;</span><span class="p">,</span> <span class="n">aList</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="c">#逆向索引，倒数第一个</span>
+<span class="k">print</span> <span class="s">&quot;The last one in list:&quot;</span><span class="p">,</span> <span class="n">aList</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="c">#切片操作，从首个到第三个(不包含第四个)</span>
+<span class="k">print</span> <span class="s">&quot;The first to the third elements in list:&quot;</span><span class="p">,</span> <span class="n">aList</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="c">#步进为2</span>
+<span class="k">print</span> <span class="s">&quot;The first, third, fifth elements in list:&quot;</span><span class="p">,</span> <span class="n">aList</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">6</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="c">#</span>
+<span class="k">print</span> <span class="s">&quot;List length:</span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">aList</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&quot;Max number in list:&quot;</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">aList</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&quot;Min number in list:</span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">min</span><span class="p">(</span><span class="n">aList</span><span class="p">)</span>
+<span class="c">#列表的编辑操作</span>
+<span class="n">aList</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">print</span> <span class="s">&quot;The second one of list has been changed to </span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">aList</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">aList</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+<span class="k">print</span> <span class="s">&quot;After deleting the sixth element, length of list is:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">aList</span><span class="p">)</span>
+<span class="n">aList</span><span class="p">[</span><span class="mi">5</span><span class="p">:]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+<span class="k">print</span> <span class="s">&quot;Change from the sixth elements:&quot;</span><span class="p">,</span> <span class="n">aList</span>
+<span class="n">aList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">151</span><span class="p">)</span>
+<span class="n">aList</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span>
+<span class="n">bList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="n">aList</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">bList</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&quot;After appending and extending, the aList is:&quot;</span><span class="p">,</span> <span class="n">aList</span>
+<span class="k">print</span> <span class="s">&quot;pop the last one:&quot;</span><span class="p">,</span> <span class="n">aList</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&quot;pop the first one:&quot;</span><span class="p">,</span> <span class="n">aList</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">aList</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">151</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&quot;remove the 151 in aList:&quot;</span><span class="p">,</span> <span class="n">aList</span>
+
+<span class="c">#查找</span>
+<span class="n">ind</span> <span class="o">=</span> <span class="n">aList</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&quot;the index of 10 in aList is:</span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">ind</span>
+<span class="n">aList</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&quot;sorted:&quot;</span><span class="p">,</span> <span class="n">aList</span>
+<span class="n">aList</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&quot;reversed:&quot;</span><span class="p">,</span> <span class="n">aList</span>
+</pre></div>
+<hr class="docutils" />
+<p>更多Python学习，推荐：</p>
+<blockquote>
+<p>简明Python教程： <a class="reference external" href="http://www.2cto.com/shouce/pythonjc/index.html">http://www.2cto.com/shouce/pythonjc/index.html</a></p>
+<p>《Python基础教程》</p>
+</blockquote>
+
+            </div><!-- /.entry-content -->
+            
+
+        </div><!-- /.eleven.columns -->
+        
+     <div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+        <li><a href="studioIndex.html">our studio</a></li>
+            </ul>
+
+<h4>Categories</h4>
+<ul>
+			<li><a href="/category/itpm.html">ITPM</a></li>
+			<li><a href="/category/python.html">Python</a></li>
+			<li><a href="/category/git.html">git</a></li>
+			<li><a href="/category/others.html">others</a></li>
+	</ul>
+
+
+<h4>Tags</h4>
+	<ul>
+		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
+		    <li class="tag-1"><a href="/tag/gitgithub.html">git/github</a></li>
+		    <li class="tag-4"><a href="/tag/python.html">Python</a></li>
+		    <li class="tag-4"><a href="/tag/itpm.html">ITPM</a></li>
+	</ul>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul>
+      <li><a href="http://blog.sina.com/scutLaoYi">sina blog</a></li>
+    </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Contact scutLaoYi: HelloWorld636596@126.com <br />
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+                                <li><div class="btn primary"><a href="https://github.com/scutLaoYi" target="_blank">Github</a></div></li>
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+
+</body>
+</html>
