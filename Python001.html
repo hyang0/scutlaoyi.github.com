@@ -115,10 +115,8 @@
 </pre></div>
 <p>关于print的补充：print可类似C的printf，参数列表前用百分号，参数列表使用元组包括。单个参数可省略元组的括号。print也可连接多个元素，使用逗号分隔，其输出为同一行。</p>
 <p>Python会在print后自动添加换行，方便操作，若不想换行，在print行最末添加逗号即可</p>
-<dl class="docutils">
-<dt>::</dt>
-<dd>print &quot;这行不会自动换行&quot;,</dd>
-</dl>
+<div class="highlight"><pre><span class="k">print</span> <span class="s">&quot;这行不会自动换行&quot;</span><span class="p">,</span>
+</pre></div>
 <p><strong>命令行获取用户输入</strong></p>
 <p>获取用户输入有两种方式，input和raw_input，均读取一行，
 但input将内容当作Python语句处理，raw_input直接当成字符串</p>
@@ -175,6 +173,55 @@
 <span class="n">aList</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
 <span class="k">print</span> <span class="s">&quot;reversed:&quot;</span><span class="p">,</span> <span class="n">aList</span>
 </pre></div>
+<p><strong>元组</strong></p>
+<p>创建元组的几种方法：</p>
+<div class="highlight"><pre><span class="n">tupleA</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,)</span>
+<span class="n">tupleB</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">tupleC</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">)</span>
+</pre></div>
+<p>元组的基本操作与list类似，但不能更改，在此不再赘述。</p>
+<p><strong>字符串的补充方法</strong></p>
+<p>find：</p>
+<div class="highlight"><pre><span class="n">strA</span> <span class="o">=</span> <span class="s">&quot;Hey!My name is szy!&quot;</span>
+<span class="n">ind</span> <span class="o">=</span> <span class="n">strA</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;My&quot;</span><span class="p">)</span>
+<span class="c">#ind == 4</span>
+<span class="n">ind</span> <span class="o">=</span> <span class="n">strA</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;scutLaoYi&quot;</span><span class="p">)</span>
+<span class="c">#ind == -1</span>
+<span class="n">ind</span> <span class="o">=</span> <span class="n">strA</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;My&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+<span class="c">#ind == -1, 定义起点终点</span>
+</pre></div>
+<p>join:</p>
+<div class="highlight"><pre><span class="c">#注意join的另一方为字符串列表</span>
+<span class="n">seq</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="s">&#39;2&#39;</span><span class="p">,</span> <span class="s">&#39;3&#39;</span><span class="p">,</span> <span class="s">&#39;4&#39;</span><span class="p">,</span> <span class="s">&#39;5&#39;</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="s">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+<span class="c">#result == &quot;1/2/3/4&quot;</span>
+</pre></div>
+<p>split:</p>
+<div class="highlight"><pre><span class="c">#类似join的反向操作</span>
+<span class="k">print</span> <span class="n">result</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span>
+<span class="c">#[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;]</span>
+</pre></div>
+<p>lower:</p>
+<div class="highlight"><pre><span class="n">upStr</span> <span class="o">=</span> <span class="s">&quot;AbCdE&quot;</span>
+<span class="k">print</span> <span class="n">upStr</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="c">#abcde</span>
+</pre></div>
+<p>upper:</p>
+<div class="highlight"><pre><span class="k">print</span> <span class="n">upStr</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="c">#ABCDE</span>
+</pre></div>
+<p>replace:</p>
+<div class="highlight"><pre><span class="k">print</span> <span class="n">upStr</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="s">&#39;a&#39;</span><span class="p">)</span>
+<span class="c">#abCdE</span>
+</pre></div>
+<p>strip:</p>
+<div class="highlight"><pre><span class="n">longStr</span> <span class="o">=</span> <span class="s">&quot;  !! This is a string with some rubbish  ~~ &quot;</span>
+<span class="k">print</span> <span class="n">longStr</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="c">#!! This is a string with some rubbish.  ~~</span>
+<span class="k">print</span> <span class="n">longStr</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&#39; !~&#39;</span><span class="p">)</span>
+<span class="c">#This is a string with some rubbish.</span>
+</pre></div>
+<p>其他大量内置的方法可查看documentation.</p>
 <hr class="docutils" />
 <p>更多Python学习，推荐：</p>
 <blockquote>
@@ -206,10 +253,10 @@
 
 <h4>Tags</h4>
 	<ul>
-		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
 		    <li class="tag-1"><a href="/tag/gitgithub.html">git/github</a></li>
-		    <li class="tag-4"><a href="/tag/python.html">Python</a></li>
+		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
 		    <li class="tag-4"><a href="/tag/itpm.html">ITPM</a></li>
+		    <li class="tag-4"><a href="/tag/python.html">Python</a></li>
 	</ul>
 
 
