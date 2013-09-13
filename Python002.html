@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+        
+        <title>Python 笔记（二）</title>
+        <meta charset="utf-8" />
+                                                                
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+	<!-- google analyse -->
+          <script type="text/javascript">
+
+ 		var _gaq = _gaq || [];
+ 		 _gaq.push(['_setAccount', 'UA-43833562-1']);
+ 		 _gaq.push(['_trackPageview']);
+
+ 		 (function() {
+  			  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   			 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  			})();
+
+	</script>
+	<!-- end of google analyse -->
+
+
+
+        </head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="">老逸的个人站 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://scutlaoyi.github.com">Home</a></li>
+
+                            <li><a href="studioIndex.html">our studio</a></li>
+                                                  
+              </ul>
+            </div>
+
+          <section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/Python002.html" rel="bookmark"
+                   title="Permalink to Python 笔记（二）">Python 笔记（二）</a></h2>
+                      
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2013-09-13T22:30:00">
+                五 13 九月 2013
+              </abbr>
+                            <address class="vcard author">
+                By <a class="url fn" href="/author/lao-yi.html">老逸</a>
+              </address>
+                          </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3，</strong>
+<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<p><strong>字典</strong></p>
+<p>字典类似C++中STL的map，可保存键/值映射关系。但Python的字典比C++的简便得多。</p>
+<p>创建字典的几种方法</p>
+<div class="highlight"><pre><span class="n">mapOne</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;name&#39;</span><span class="p">:</span><span class="s">&#39;szy&#39;</span><span class="p">,</span> <span class="s">&#39;age&#39;</span><span class="p">:</span><span class="mi">85</span><span class="p">}</span> <span class="c">#创建有俩映射的字典</span>
+<span class="n">mapTwo</span> <span class="o">=</span> <span class="p">{}</span> <span class="c">#空字典</span>
+<span class="c">#dict函数创建字典</span>
+<span class="n">mapThree</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;szy&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">85</span><span class="p">)</span>
+</pre></div>
+<p>关于字典的基本函数</p>
+<div class="highlight"><pre><span class="c">#键/值对的数量</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">mapOne</span><span class="p">)</span>
+<span class="c">#2</span>
+<span class="c">#取值</span>
+<span class="n">mapOne</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span>
+<span class="c">#&#39;szy&#39;</span>
+<span class="c">#赋值</span>
+<span class="n">mapOne</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;scutLaoYi&#39;</span>
+<span class="n">mapOne</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span>
+<span class="c">#&#39;scutLaoYi&#39;</span>
+<span class="c">#删除映射</span>
+<span class="k">del</span> <span class="n">mapOne</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span>
+<span class="c">#mapOne == {&#39;age&#39;:85}</span>
+<span class="c">#检测是否存在映射关系</span>
+<span class="s">&#39;age&#39;</span> <span class="ow">in</span> <span class="n">mapOne</span>
+<span class="c">#True</span>
+<span class="s">&#39;name&#39;</span> <span class="ow">in</span> <span class="n">mapOne</span>
+<span class="c">#False</span>
+<span class="c">#新建映射只需要直接赋值，键不用预先存在</span>
+<span class="n">mapOne</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;szy&#39;</span>
+<span class="c">#mapOne == {&#39;name&#39;:&#39;szy&#39;, &#39;age&#39;:85}</span>
+</pre></div>
+<p>利用字典格式化字符串</p>
+<p>这个功能非常好用，在大量使用到某个字典的时候可以不用每次去一个个赋值，只需要把字典作为参数传入即可
+注意括号后有个s</p>
+<div class="highlight"><pre><span class="n">formatStr</span> <span class="o">=</span> <span class="s">&quot;name: </span><span class="si">%(name)s</span><span class="s">, age:</span><span class="si">%(age)s</span><span class="s">&quot;</span>
+<span class="k">print</span> <span class="n">formatStr</span> <span class="o">%</span> <span class="n">mapOne</span>
+<span class="c">#name: szy, age:85</span>
+</pre></div>
+<p><strong>字典其他常用函数</strong></p>
+<p>:clear</p>
+<p>清空字典</p>
+<div class="highlight"><pre><span class="n">mapThree</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="c">#mapThree == {}</span>
+</pre></div>
+<p>:copy</p>
+<p>浅复制，复制的仅仅是字典，当值为列表等对象时复制的是对象的引用</p>
+<div class="highlight"><pre><span class="n">mapFour</span> <span class="o">=</span> <span class="n">mapOne</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+<p>:get</p>
+<p>获取值，若不存在则返回默认值</p>
+<p>这个函数可以防止由于键/值对不存在导致的抛出异常
+默认不存在返回None，可设定第二个参数为返回值</p>
+<div class="highlight"><pre><span class="k">print</span> <span class="n">mapThree</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;height&#39;</span><span class="p">)</span>
+<span class="c">#None</span>
+<span class="k">print</span> <span class="n">mapThree</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;height&quot;</span><span class="p">,</span> <span class="s">&#39;149cm&#39;</span><span class="p">)</span>
+<span class="c">#149cm</span>
+<span class="k">print</span> <span class="n">mapOne</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">)</span>
+<span class="c">#szy</span>
+</pre></div>
+<p>:items</p>
+<p>获取所有键/值对的元组，以列表方式返回</p>
+<div class="highlight"><pre><span class="n">it</span> <span class="o">=</span> <span class="n">mapOne</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">it</span>
+<span class="c">#[(&#39;age&#39;, 85), (&#39;name&#39;, &#39;szy&#39;)]</span>
+</pre></div>
+<p>:iteritems</p>
+<p>返回所有键值对的迭代器</p>
+<p>由于迭代器暂时没有开始研究，在此跳过</p>
+<p>:keys</p>
+<p>获取所有键的列表</p>
+<div class="highlight"><pre><span class="k">print</span> <span class="n">mapOne</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="c">#[&#39;age&#39;, &#39;name&#39;]</span>
+</pre></div>
+<p>:values</p>
+<p>获取所有值的列表</p>
+<div class="highlight"><pre><span class="k">print</span> <span class="n">mapOne</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+<span class="c">#[85, &#39;szy&#39;]</span>
+</pre></div>
+<p>:pop</p>
+<p>返回键的值并删除键/值对</p>
+<div class="highlight"><pre><span class="k">print</span> <span class="n">mapOne</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">)</span>
+<span class="c">#szy</span>
+<span class="k">print</span> <span class="n">mapOne</span>
+<span class="c">#{&#39;age&#39;: 85}</span>
+</pre></div>
+<p>:popitem</p>
+<p>随机弹出并删除键/值对，用于遍历和清空字典且不知道键值对的情况</p>
+<p>:setdefault(a, b)</p>
+<p>键a不存在则设置为b，键a存在则返回a的当前值，均返回a的值</p>
+<div class="highlight"><pre><span class="n">mapOne</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;scutLaoYi&#39;</span><span class="p">)</span>
+<span class="c">#&#39;scutLaoYi&#39;</span>
+<span class="n">mapOne</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;szy&#39;</span><span class="p">)</span>
+<span class="c">#&#39;scutLaoYi&#39;</span>
+</pre></div>
+<hr class="docutils" />
+<p><strong>赋值的其他形式</strong></p>
+<div class="highlight"><pre><span class="c">#调用函数返回的元组可直接给多个变量赋值</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="c">#值交换</span>
+<span class="c">#数量不一致时抛异常</span>
+</pre></div>
+<p><strong>布尔值</strong></p>
+<blockquote>
+<p>False: False, None, 0(所有数值类型), [], (), {}</p>
+<p>True: 上述值外的一切均为True</p>
+</blockquote>
+<p><strong>条件判断</strong></p>
+<div class="highlight"><pre><span class="n">num</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;Enter a number:&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&quot;num &gt; 0&quot;</span>
+<span class="k">elif</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">10</span><span class="p">:</span>
+                <span class="k">print</span> <span class="s">&quot;num &lt; -10&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span> <span class="s">&quot;num &lt; 0&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&quot;num == 0&quot;</span>
+
+<span class="k">if</span> <span class="n">numOne</span> <span class="o">&gt;</span> <span class="mi">100</span> <span class="ow">and</span> <span class="n">numTwo</span> <span class="o">&lt;</span> <span class="mi">50</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&quot;nothing...&quot;</span>
+
+<span class="k">if</span> <span class="n">numOne</span> <span class="o">&lt;</span> <span class="mi">100</span> <span class="ow">or</span> <span class="n">numTwo</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&quot;also nothing...&quot;</span>
+</pre></div>
+<p><strong>新奇的条件判断</strong></p>
+<div class="highlight"><pre><span class="n">x</span> <span class="ow">is</span> <span class="n">y</span> <span class="c">#相同对象</span>
+<span class="n">x</span> <span class="ow">in</span> <span class="n">y</span> <span class="c">#y容器中包含x</span>
+<span class="mi">0</span> <span class="o">&lt;</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">100</span> <span class="c">#age在(0,100)范围内（比C++爽）</span>
+</pre></div>
+<p><strong>断言</strong></p>
+<p>当断言被触发的时候条件语句后面的字符串会被输出</p>
+<div class="highlight"><pre><span class="n">num</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;number &lt; 100&quot;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">,</span> <span class="s">&quot;Hey! num is not less than 100!&quot;</span>
+</pre></div>
+<p><strong>简单的循环</strong></p>
+<div class="highlight"><pre><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&quot;so many string ...&quot;</span>
+
+<span class="n">strOne</span> <span class="o">=</span> <span class="s">&quot;Hey!This is a string&quot;</span>
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">strOne</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">word</span><span class="p">,</span>
+
+<span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="c">#[0, 1, 2, 3, 4]</span>
+<span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="c">#[0, 2, 4, 6, 8]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mf">0.</span> <span class="mi">5</span><span class="p">):</span>
+        <span class="k">print</span> <span class="n">i</span><span class="p">,</span>
+</pre></div>
+<p><strong>zip迭代</strong></p>
+<p>注意该函数终止于短序列的结束</p>
+<div class="highlight"><pre><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;c&#39;</span><span class="p">]</span>
+<span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
+<span class="c">#[(&#39;a&#39;, 1), (&#39;b&#39;, 2), (&#39;c&#39;, 3)]</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">numbers</span><span class="p">):</span>
+        <span class="k">print</span> <span class="n">name</span><span class="p">,</span> <span class="n">number</span>
+</pre></div>
+<p><strong>获取索引值的循环</strong></p>
+<div class="highlight"><pre><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">string</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">strings</span><span class="p">):</span>
+        <span class="c">#...</span>
+</pre></div>
+<p><strong>break, continue, else</strong></p>
+<p>else在循环正常退出(非break)后执行</p>
+<div class="highlight"><pre><span class="n">num</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="k">while</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;num &lt; 100:&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">100</span><span class="p">:</span>
+                <span class="k">print</span> <span class="s">&quot;num == 100&quot;</span>
+                <span class="k">break</span>
+<span class="k">else</span>
+        <span class="k">print</span> <span class="s">&quot;num &gt;= 100&quot;</span>
+</pre></div>
+<p><strong>列表推导式</strong></p>
+<p>Python一个牛逼的功能，可以大幅度拓展for循环的能力</p>
+<p>基本语法： [(算术表达式用于获取结果) for arg1 in stage1 (for arg2 in stage2...) (if ...)]</p>
+<div class="highlight"><pre><span class="p">[</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
+<span class="c">#[1, 4, 9, 16, 25, 36, 49, 64, 81]</span>
+<span class="p">[</span><span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
+<span class="c">#[1, 3, 2, 6, 3, 9, 4, 12]</span>
+<span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">if</span> <span class="n">y</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+<span class="c">#[2, 4, 6, 4, 6, 8, 6, 8, 10, 8, 10, 12]</span>
+</pre></div>
+<p><strong>pass</strong></p>
+<p>无话可说的时候就用这个苟延残喘一下</p>
+<div class="highlight"><pre><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="k">pass</span>
+<span class="c"># -_-\\\</span>
+</pre></div>
+<p><strong>exec</strong></p>
+<p>可将其后的字符串作为Python语句执行
+这种做法在字符串为用户输入时非常危险
+类似的还有os.system('...')，虽然我自己一直在用 ^_^</p>
+<div class="highlight"><pre><span class="k">exec</span> <span class="s">&quot;print &#39;Hello!&#39;&quot;</span>
+<span class="c">#Hello!</span>
+</pre></div>
+<p>默认情况下exec与外部代码共享命名空间
+可以限定命名空间使其与外部隔离，方法是给个字典，键为变量名，值为变量值
+限定命名空间可限制内层代码的作用范围，防止命名污染，有助于提高安全性</p>
+<div class="highlight"><pre><span class="n">scope</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;x&#39;</span><span class="p">:</span><span class="s">&quot;szy&quot;</span><span class="p">}</span>
+<span class="k">exec</span> <span class="s">&quot;print x&quot;</span> <span class="ow">in</span> <span class="n">scope</span>
+<span class="c">#szy</span>
+</pre></div>
+<hr class="docutils" />
+<p>更多Python学习，推荐：</p>
+<blockquote>
+<p>简明Python教程： <a class="reference external" href="http://www.2cto.com/shouce/pythonjc/index.html">http://www.2cto.com/shouce/pythonjc/index.html</a></p>
+<p>《Python基础教程》</p>
+</blockquote>
+
+            </div><!-- /.entry-content -->
+            
+
+        </div><!-- /.eleven.columns -->
+        
+     <div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+        <li><a href="studioIndex.html">our studio</a></li>
+            </ul>
+
+<h4>Categories</h4>
+<ul>
+			<li><a href="/category/itpm.html">ITPM</a></li>
+			<li><a href="/category/python.html">Python</a></li>
+			<li><a href="/category/git.html">git</a></li>
+			<li><a href="/category/others.html">others</a></li>
+	</ul>
+
+
+<h4>Tags</h4>
+	<ul>
+		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
+		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
+		    <li class="tag-1"><a href="/tag/gitgithub.html">git/github</a></li>
+		    <li class="tag-4"><a href="/tag/itpm.html">ITPM</a></li>
+	</ul>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul>
+      <li><a href="http://blog.sina.com/scutLaoYi">sina blog</a></li>
+    </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Contact scutLaoYi: HelloWorld636596@126.com <br />
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+                                <li><div class="btn primary"><a href="https://github.com/scutLaoYi" target="_blank">Github</a></div></li>
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+
+</body>
+</html>
