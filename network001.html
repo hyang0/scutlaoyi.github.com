@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+        
+        <title>socket编程(1):单线程tcp服务器/客户端</title>
+        <meta charset="utf-8" />
+                                                                
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+	<!-- google analyse -->
+          <script type="text/javascript">
+
+ 		var _gaq = _gaq || [];
+ 		 _gaq.push(['_setAccount', 'UA-43833562-1']);
+ 		 _gaq.push(['_trackPageview']);
+
+ 		 (function() {
+  			  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   			 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  			})();
+
+	</script>
+	<!-- end of google analyse -->
+
+
+
+        </head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="">老逸的个人站 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://scutlaoyi.github.com">Home</a></li>
+
+                            <li><a href="studioIndex.html">our studio</a></li>
+                                                  
+              </ul>
+            </div>
+
+          <section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/network001.html" rel="bookmark"
+                   title="Permalink to socket编程(1):单线程tcp服务器/客户端">socket编程(1):单线程tcp服务器/客户端</a></h2>
+                      
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2013-09-17T15:30:00">
+                二 17 九月 2013
+              </abbr>
+                            <address class="vcard author">
+                By <a class="url fn" href="/author/lao-yi.html">老逸</a>
+              </address>
+                          </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p><strong>tcp的单线程socket比较简单，以下是GNU/Linux环境下socket通讯的测试，分为C++版本和Python版本。</strong></p>
+<div class="section" id="id1">
+<h2>服务器：</h2>
+<p>流程：创建socket-绑定端口-监听-获取连接-读写操作-关闭连接并结束</p>
+<p><strong>C++版本：</strong></p>
+<div class="highlight"><pre><span class="cp">#include &lt;cstdio&gt;</span>
+<span class="cp">#include &lt;cstdlib&gt;</span>
+<span class="cp">#include &lt;cstring&gt;</span>
+<span class="cp">#include &lt;cerrno&gt;</span>
+<span class="cp">#include &lt;unistd.h&gt;</span>
+<span class="cp">#include &lt;sys/types.h&gt;</span>
+<span class="cp">#include &lt;sys/socket.h&gt;</span>
+<span class="cp">#include &lt;netinet/in.h&gt;</span>
+<span class="cp">#include &lt;arpa/inet.h&gt;</span>
+
+<span class="c1">//定义缓冲区的大小</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXBUF</span> <span class="o">=</span> <span class="mi">4096</span><span class="p">;</span>
+<span class="c1">//定义端口号</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">SERVER_PORT</span> <span class="o">=</span> <span class="mi">9876</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">args</span><span class="p">[])</span>
+<span class="p">{</span>
+        <span class="c1">//服务器的socket识别码和客户机的socket识别码</span>
+        <span class="kt">int</span> <span class="n">serverDes</span><span class="p">,</span> <span class="n">clientDes</span><span class="p">;</span>
+        <span class="c1">//结构体用来设置连接的属性</span>
+        <span class="k">struct</span> <span class="n">sockaddr_in</span> <span class="n">serverAddr</span><span class="p">;</span>
+        <span class="c1">//缓冲区用于获取和暂存数据</span>
+        <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="n">MAXBUF</span><span class="p">];</span>
+
+        <span class="c1">//创建socket连接，成功返回识别码，-1表示出错</span>
+        <span class="c1">//AF_INET为ipv4连接，SOCK_STREAM为socket的类型</span>
+        <span class="n">serverDes</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">serverDes</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="p">{</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">&quot;creating socket error!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">try</span>
+        <span class="p">{</span>
+                <span class="c1">//初始化结构体并设定连接属性</span>
+                <span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">serverAddr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr_in</span><span class="p">));</span>
+                <span class="n">serverAddr</span><span class="p">.</span><span class="n">sin_family</span> <span class="o">=</span> <span class="n">AF_INET</span><span class="p">;</span>
+                <span class="c1">//设定接受所有本机ip的连接</span>
+                <span class="n">serverAddr</span><span class="p">.</span><span class="n">sin_addr</span><span class="p">.</span><span class="n">s_addr</span> <span class="o">=</span> <span class="n">htonl</span><span class="p">(</span><span class="n">INADDR_ANY</span><span class="p">);</span>
+                <span class="c1">//设定监听的端口号</span>
+                <span class="n">serverAddr</span><span class="p">.</span><span class="n">sin_port</span> <span class="o">=</span> <span class="n">htons</span><span class="p">(</span><span class="n">SERVER_PORT</span><span class="p">);</span>
+
+                <span class="c1">//绑定socket和ip端口，-1为出错</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">bind</span><span class="p">(</span><span class="n">serverDes</span><span class="p">,</span> <span class="p">(</span><span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">serverAddr</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">sockaddr</span><span class="p">))</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="p">{</span>
+                        <span class="n">throw</span> <span class="s">&quot;binding socket error!&quot;</span><span class="p">;</span>
+                <span class="p">}</span>
+
+                <span class="c1">//开始监听serverDes的socket，队列最长为10（最大的等待连接数）</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">listen</span><span class="p">(</span><span class="n">serverDes</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="p">{</span>
+                        <span class="n">throw</span> <span class="s">&quot;listening socket error!&quot;</span><span class="p">;</span>
+                <span class="p">}</span>
+
+                <span class="k">while</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+                <span class="p">{</span>
+                        <span class="c1">//建立一个连接，-1为出错</span>
+                        <span class="n">clientDes</span> <span class="o">=</span> <span class="n">accept</span><span class="p">(</span><span class="n">serverDes</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span><span class="o">*</span><span class="p">)</span><span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+                        <span class="k">if</span><span class="p">(</span><span class="n">clientDes</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                        <span class="p">{</span>
+                                <span class="n">throw</span> <span class="s">&quot;accepting socket error!&quot;</span><span class="p">;</span>
+                        <span class="p">}</span>
+
+                        <span class="c1">//获取数据，写入buf缓冲区，数据量最长为MAXBUF，返回实际获取长度写入len</span>
+                        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">recv</span><span class="p">(</span><span class="n">clientDes</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">MAXBUF</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+                        <span class="k">if</span><span class="p">(</span><span class="n">len</span> <span class="o">&gt;=</span> <span class="n">MAXBUF</span><span class="p">)</span>
+                        <span class="p">{</span>
+                                <span class="n">len</span> <span class="o">=</span> <span class="n">MAXBUF</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+                        <span class="p">}</span>
+
+                        <span class="c1">//输出获取的数据</span>
+                        <span class="n">buf</span><span class="p">[</span><span class="n">len</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+                        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;recieve from client:%s&quot;</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+
+                        <span class="c1">//关闭连接</span>
+                        <span class="n">close</span><span class="p">(</span><span class="n">clientDes</span><span class="p">);</span>
+
+                        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;continue?(y/n)&quot;</span><span class="p">);</span>
+                        <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%s&quot;</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+                        <span class="k">if</span><span class="p">(</span><span class="n">buf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;y&#39;</span><span class="p">)</span>
+                                <span class="k">continue</span><span class="p">;</span>
+                        <span class="k">else</span>
+                                <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">catch</span><span class="p">(</span><span class="kt">char</span> <span class="k">const</span> <span class="o">*</span><span class="n">inf</span><span class="p">)</span>
+        <span class="p">{</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s&quot;</span><span class="p">,</span> <span class="n">inf</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">close</span><span class="p">(</span><span class="n">serverDes</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+<p><strong>Python版本：</strong></p>
+<p>长度对比那可真是...</p>
+<div class="highlight"><pre><span class="c">#!usr/bin/python</span>
+
+<span class="kn">import</span> <span class="nn">socket</span>
+
+<span class="c">#创建socket，返回socket对象写入s</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">()</span>
+<span class="c">#获取本机的ip</span>
+<span class="n">host</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">gethostname</span><span class="p">()</span>
+<span class="c">#设定端口号为4445</span>
+<span class="n">port</span> <span class="o">=</span> <span class="mi">4445</span>
+<span class="c">#绑定socket对象到本机ip的端口上</span>
+<span class="n">s</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">))</span>
+
+<span class="k">print</span> <span class="s">&quot;Server running...&quot;</span>
+<span class="c">#开始监听，队列长度为5（与C++版本相同）</span>
+<span class="n">s</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="c">#建立一个连接，返回客户端的socket对象和地址值（ip，port）</span>
+        <span class="n">c</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+        <span class="k">print</span> <span class="s">&#39;Got connection from&#39;</span><span class="p">,</span> <span class="n">addr</span>
+        <span class="c">#接收数据</span>
+        <span class="n">recieveMes</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+        <span class="k">print</span> <span class="s">&#39;message:&#39;</span><span class="p">,</span> <span class="n">recieveMes</span>
+        <span class="c">#发送数据</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s">&#39;Hello,world&#39;</span><span class="p">)</span>
+        <span class="c">#关闭连接</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="section" id="id2">
+<h2>客户机：</h2>
+<p>流程：创建socket-连接服务器IP和端口-读写操作-关闭连接并结束</p>
+<p><strong>C++版本：</strong></p>
+<div class="highlight"><pre><span class="cp">#include &lt;cstdio&gt;</span>
+<span class="cp">#include &lt;cstdlib&gt;</span>
+<span class="cp">#include &lt;unistd.h&gt;</span>
+<span class="cp">#include &lt;cstring&gt;</span>
+<span class="cp">#include &lt;errno.h&gt;</span>
+<span class="cp">#include &lt;sys/types.h&gt;</span>
+<span class="cp">#include &lt;sys/socket.h&gt;</span>
+<span class="cp">#include &lt;netinet/in.h&gt;</span>
+<span class="cp">#include &lt;arpa/inet.h&gt;</span>
+
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAX_BUF</span> <span class="o">=</span> <span class="mi">4096</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">PORT</span> <span class="o">=</span> <span class="mi">9876</span><span class="p">;</span>
+<span class="c1">//设定连接到localhost上</span>
+<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;127.0.0.1&quot;</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">args</span><span class="p">[])</span>
+<span class="p">{</span>
+        <span class="c1">//客户端的socket识别码</span>
+        <span class="kt">int</span> <span class="n">clientDes</span><span class="p">;</span>
+        <span class="c1">//缓冲区</span>
+        <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="n">MAX_BUF</span><span class="p">];</span>
+        <span class="c1">//结构体</span>
+        <span class="k">struct</span> <span class="n">sockaddr_in</span> <span class="n">serverAddr</span><span class="p">;</span>
+
+        <span class="c1">//创建socket</span>
+        <span class="n">clientDes</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">clientDes</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">{</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">&quot;creating socket failed!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">try</span>
+        <span class="p">{</span>
+                <span class="c1">//初始化并设置连接参数，AF_INET,host,port与前文相似</span>
+                <span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">serverAddr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">serverAddr</span><span class="p">));</span>
+                <span class="n">serverAddr</span><span class="p">.</span><span class="n">sin_family</span> <span class="o">=</span> <span class="n">AF_INET</span><span class="p">;</span>
+                <span class="n">serverAddr</span><span class="p">.</span><span class="n">sin_port</span> <span class="o">=</span> <span class="n">htons</span><span class="p">(</span><span class="n">PORT</span><span class="p">);</span>
+                <span class="n">serverAddr</span><span class="p">.</span><span class="n">sin_addr</span><span class="p">.</span><span class="n">s_addr</span> <span class="o">=</span> <span class="n">inet_addr</span><span class="p">(</span><span class="n">host</span><span class="p">);</span>
+
+                <span class="c1">//连接到服务器</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">connect</span><span class="p">(</span><span class="n">clientDes</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">serverAddr</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+                        <span class="n">throw</span> <span class="s">&quot;connecting socket failed!&quot;</span><span class="p">;</span>
+
+                <span class="n">printf</span><span class="p">(</span><span class="s">&quot;connection success!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+                <span class="n">printf</span><span class="p">(</span><span class="s">&quot;enter your message:&quot;</span><span class="p">);</span>
+                <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%s&quot;</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">));</span>
+                <span class="c1">//发射数据</span>
+                <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">send</span><span class="p">(</span><span class="n">clientDes</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">buf</span><span class="p">),</span> <span class="mi">0</span><span class="p">);</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">len</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+                        <span class="n">throw</span> <span class="s">&quot;sending message failed!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">catch</span><span class="p">(</span><span class="kt">char</span> <span class="k">const</span> <span class="o">*</span><span class="n">mes</span><span class="p">)</span>
+        <span class="p">{</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">&quot;error:%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">mes</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">//关闭连接</span>
+        <span class="n">close</span><span class="p">(</span><span class="n">clientDes</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+<p><strong>Python版本：</strong></p>
+<p>就不怎么解释了，一样的。</p>
+<div class="highlight"><pre><span class="c">#!usr/bin/python</span>
+
+<span class="kn">import</span> <span class="nn">socket</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">()</span>
+
+<span class="c">#host = socket.gethostname()</span>
+<span class="n">host</span> <span class="o">=</span> <span class="s">&#39;127.0.0.1&#39;</span>
+<span class="n">port</span> <span class="o">=</span> <span class="mi">4445</span>
+
+<span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">))</span>
+<span class="n">message</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s">&quot;send some message:&quot;</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&quot;From server:&quot;</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="s">&quot;get data:&quot;</span>
+<span class="k">print</span> <span class="n">s</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+</pre></div>
+<p>至此，socket单线程tcp服务器和客户机就出来了。</p>
+<p><strong>下一篇：socket单线程udp服务器和客户机</strong></p>
+</div>
+
+            </div><!-- /.entry-content -->
+            
+
+        </div><!-- /.eleven.columns -->
+        
+     <div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+        <li><a href="studioIndex.html">our studio</a></li>
+            </ul>
+
+<h4>Categories</h4>
+<ul>
+			<li><a href="/category/itpm.html">ITPM</a></li>
+			<li><a href="/category/python.html">Python</a></li>
+			<li><a href="/category/git.html">git</a></li>
+			<li><a href="/category/network.html">network</a></li>
+			<li><a href="/category/others.html">others</a></li>
+	</ul>
+
+
+<h4>Tags</h4>
+	<ul>
+		    <li class="tag-4"><a href="/tag/itpm.html">ITPM</a></li>
+		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
+		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
+		    <li class="tag-1"><a href="/tag/gitgithub.html">git/github</a></li>
+		    <li class="tag-4"><a href="/tag/network.html">network</a></li>
+	</ul>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul>
+      <li><a href="http://blog.sina.com/scutLaoYi">sina blog</a></li>
+    </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Contact scutLaoYi: HelloWorld636596@126.com <br />
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+                                <li><div class="btn primary"><a href="https://github.com/scutLaoYi" target="_blank">Github</a></div></li>
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
         
-        <title>Hello,world!</title>
+        <title>老逸的个人站 - network</title>
         <meta charset="utf-8" />
                                                                 
 
@@ -57,41 +57,54 @@
               </ul>
             </div>
 
-          <section id="content" class="body">
+          <section id="content">
+
+
 
    <div class="row">
+
+
         <div class="eleven columns">
+		         <ol id="post-list">
+								        <li><article class="hentry">
+				                <header> <h2 class="entry-title"><a href="/network001.html" rel="bookmark" title="Permalink to socket编程(1):单线程tcp服务器/客户端">socket编程(1):单线程tcp服务器/客户端</a></h2> </header>
+				                <footer class="post-info">
+				                    <abbr class="published" title="2013-09-17T15:30:00"> 二 17 九月 2013 </abbr>
+				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
+				                <div class="entry-content"> <p><strong>tcp的单线程socket比较简单，以下是GNU/Linux环境下socket通讯的测试，分为C++版本和Python版本。</strong></p>
+<p><strong>服务器：</strong></p>
+<p>流程：创建socket-绑定端口-监听-获取连接-读写操作-关闭连接并结束</p>
+<p>C++版本：</p>
+<div class="highlight"><pre><span class="cp">#include &lt;cstdio&gt;</span>
+<span class="cp">#include &lt;cstdlib&gt;</span>
+<span class="cp">#include &lt;cstring&gt;</span>
+<span class="cp">#include &lt;cerrno&gt;</span>
+<span class="cp">#include &lt;unistd.h&gt;</span>
+<span class="cp">#include &lt;sys/types.h&gt;</span>
+<span class="cp">#include &lt;sys/socket.h&gt;</span>
+<span class="cp">#include &lt;netinet/in.h&gt;</span>
+<span class="cp">#include &lt;arpa/inet.h&gt;</span>
+
+<span class="c1">//定义缓冲区的大小</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXBUF</span> <span class="o">=</span> <span class="mi">4096</span><span class="p">;</span>
+<span class="c1">//定义端口号</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">SERVER_PORT</span> <span class="o">=</span> <span class="mi">9876</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int ...</span></pre></div> </div><!-- /.entry-content -->
+
+								<div class="medium primary btn"><a href="/network001.html" rel="bookmark" title="Permalink to socket编程(1):单线程tcp服务器/客户端">Read more <i class="icon-arrow-right"></i></a></div>
 
 
-            <header>
-              <h2 class="entry-title">
-                <a href="/first article.html" rel="bookmark"
-                   title="Permalink to Hello,world!">Hello,world!</a></h2>
-                      
-            </header>
-            <footer class="post-info">
-              <abbr class="published" title="2023-09-07T13:00:00">
-                四 07 九月 2023
-              </abbr>
-                            <address class="vcard author">
-                By <a class="url fn" href="/author/lao-yi.html">老逸</a>
-              </address>
-                          </footer><!-- /.post-info -->
-            <div class="entry-content">
-              <div class="section" id="id1">
-<h2>Hello,world!</h2>
-<p>代码之神的古老咒语，每每想起总是令人振奋不已。</p>
-<p>这是老逸的博客新家，原新浪博客停止更新。感谢大家的支持，你的访问就是最大的鼓励了 ^_^</p>
-<p>本博客挂载github，使用Pelican生成静态网页，在此感谢开源社区的丰富资源。</p>
-<p>好记的玉米是不会吝惜多次提起的:
-scutlaoyi.github.com</p>
-<p>欢迎常来做客哦～</p>
-<p>~~~~~~~~~~~~~正文完~~~~~~~~~~~~~~~~~</p>
-<p>由于技术问题暂时无法支持评论，接下来将继续拓展完善博客功能。</p>
-</div>
 
-            </div><!-- /.entry-content -->
-            
+								<div class="row tag-row">
+																			<span>Tagged as : </span>
+																					<a class="danger label" href="/tag/network.html">network</a>
+																											</div>
+
+
+
+				        </article></li>
+								</ol><!-- /#posts-list -->
 
         </div><!-- /.eleven.columns -->
         
@@ -132,8 +145,7 @@ scutlaoyi.github.com</p>
 
 </div> </div><!-- /.row -->
 
-
-</section>
+</section><!-- /#content -->
 
        </div><!-- /.row -->
     </div><!-- /.container -->
