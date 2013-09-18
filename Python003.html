@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+        
+        <title>Python笔记（三）</title>
+        <meta charset="utf-8" />
+                                                                
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+	<!-- google analyse -->
+          <script type="text/javascript">
+
+ 		var _gaq = _gaq || [];
+ 		 _gaq.push(['_setAccount', 'UA-43833562-1']);
+ 		 _gaq.push(['_trackPageview']);
+
+ 		 (function() {
+  			  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   			 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  			})();
+
+	</script>
+	<!-- end of google analyse -->
+
+
+
+        </head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="">老逸的个人站 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://scutlaoyi.github.com">Home</a></li>
+
+                            <li><a href="studioIndex.html">our studio</a></li>
+                                                  
+              </ul>
+            </div>
+
+          <section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/Python003.html" rel="bookmark"
+                   title="Permalink to Python笔记（三）">Python笔记（三）</a></h2>
+                      
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2013-09-18T15:30:00">
+                三 18 九月 2013
+              </abbr>
+                            <address class="vcard author">
+                By <a class="url fn" href="/author/lao-yi.html">老逸</a>
+              </address>
+                          </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3，</strong>
+<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>函数</h2>
+<p><strong>定义函数</strong></p>
+<p>关键词def，类似于C++，由函数名、参数列表、函数体和返回语句构成。</p>
+<p>在def的下一行可添加字符串作为文档字符串。
+文档字符串描述了函数的功能作用。
+文档字符串作为函数的一部分存在。
+可通过调用函数的__doc__属性返回文档字符串。</p>
+<p>参数列表中的参数后可添加赋值语句，相当于C++中的默认参数。</p>
+<p>调用函数时，默认通过位置复制，亦可指定参数名称赋值，称为关键字参数赋值。</p>
+<p>基本例子如下：</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">sayHello</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
+        <span class="s">&quot;This is a function to say hello!&quot;</span>
+        <span class="k">print</span> <span class="s">&quot;a is&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="s">&quot;b is&quot;</span><span class="p">,</span> <span class="n">b</span>
+        <span class="k">return</span> <span class="s">&quot;hello&quot;</span>
+
+<span class="k">print</span> <span class="n">sayHello</span><span class="o">.</span><span class="n">__doc__</span>
+<span class="c">#This is a function to say hello!</span>
+<span class="n">sayHello</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+<span class="c">#a is 15 b is 100</span>
+<span class="n">sayHello</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+<span class="c">#a is 100 b is 50</span>
+<span class="k">print</span> <span class="n">sayHello</span><span class="p">(</span><span class="n">b</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">60</span><span class="p">)</span>
+<span class="c">#a is 60 b is 50</span>
+<span class="c">#hello</span>
+</pre></div>
+<p>与C++类似，基本类型（数字、字符串等）参数在函数内作为局部变量存在，改变其值或引用不影响外部实参。</p>
+<p><strong>传入列表实参</strong></p>
+<p>由于Python的鸭子类型，函数并不保证外部传入参数的类型，因此可传入列表，当传入的是列表或字典时，由于参数是列表或字典的引用，因此改变引用的列表的数据时，相当于改变了外部实参指向的列表，因此外部数据也会发生变化。</p>
+<p>与上文函数不同，当不显式返回某个值时，函数会返回None值</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">funcOne</span><span class="p">(</span><span class="n">listA</span><span class="p">):</span>
+        <span class="s">&quot;This is a function to try the list parameter&quot;</span>
+        <span class="n">listA</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">25</span>
+        <span class="k">return</span>
+
+<span class="k">print</span> <span class="n">funcOne</span><span class="o">.</span><span class="n">__doc__</span>
+<span class="c">#This is a function to try the list parameter</span>
+<span class="n">listB</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="k">print</span> <span class="n">listB</span>
+<span class="c">#[1, 2, 3, 4]</span>
+<span class="k">print</span> <span class="n">funcOne</span><span class="p">(</span><span class="n">listB</span><span class="p">)</span>
+<span class="c">#None</span>
+<span class="k">print</span> <span class="n">listB</span>
+<span class="c">#[1, 25, 3, 4]</span>
+</pre></div>
+<p><strong>参数收集</strong></p>
+<p>通过在参数前加入一个星号，参数自动转换为元组，接受外部调用时传入的所有剩余参数。具体见例子：</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">funcTwo</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="s">&quot;This is a function using a tuple collecting parameters&quot;</span>
+        <span class="k">print</span> <span class="n">arg1</span><span class="p">,</span>
+        <span class="k">print</span> <span class="n">args</span>
+        <span class="k">return</span>
+
+<span class="k">print</span> <span class="n">funcTwo</span><span class="o">.</span><span class="n">__doc__</span>
+<span class="c">#This is a function using a tuple collecting parameters</span>
+<span class="n">funcTwo</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="c">#1 ()</span>
+<span class="n">funcTwo</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="c">#1 (2, 3)</span>
+</pre></div>
+<p>上文例子中，调用funcTwo(1,2,3)，参数1传入arg1,剩余参数全部进入参数args，args本身作为元组出现。</p>
+<p>类似的，在参数前加入两个星号可将参数变为字典，可接受任意数量的关键字参数</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">funcThree</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="o">*</span><span class="n">arg2</span><span class="p">,</span> <span class="o">**</span><span class="n">argMap</span><span class="p">):</span>
+        <span class="s">&quot;This is a function using a tuple and a map to collect parameters&quot;</span>
+        <span class="k">print</span> <span class="n">arg1</span><span class="p">,</span>
+        <span class="k">print</span> <span class="n">arg2</span><span class="p">,</span>
+        <span class="k">print</span> <span class="n">argMap</span>
+        <span class="k">return</span>
+
+<span class="k">print</span> <span class="n">funcThree</span><span class="o">.</span><span class="n">__doc__</span>
+<span class="c">#This is a function using a tuple and a map to collect parameters</span>
+<span class="n">funcThree</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="c">#1 () {}</span>
+<span class="n">funcThree</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="c">#1 (2, 3, 4) {}</span>
+<span class="n">funcThree</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
+<span class="c">#1 () {&#39;y&#39;: 3, &#39;x&#39;: 2, &#39;z&#39;: 4}</span>
+<span class="n">funcThree</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="mi">7</span><span class="p">)</span>
+<span class="c">#1 (2, 3, 4) {&#39;y&#39;: 6, &#39;x&#39;: 5, &#39;z&#39;: 7}</span>
+</pre></div>
+<p>一目了然</p>
+<p><strong>反向操作</strong></p>
+<p>构建元组、列表或字典后，可通过在实参前添加一个或两个星号将单个实参拆分为多个参数传入函数中。</p>
+<p>例如：</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">funcFour</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="s">&quot;a normal function which needs two parameters&quot;</span>
+        <span class="k">print</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+
+<span class="n">paraMap</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;x&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#39;y&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">}</span>
+<span class="n">paraList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="k">print</span> <span class="n">funcFour</span><span class="o">.</span><span class="n">__doc__</span>
+<span class="c">#a normal function which needs two parameters</span>
+<span class="n">funcFour</span><span class="p">(</span><span class="o">**</span><span class="n">paraMap</span><span class="p">)</span>
+<span class="c">#1 2</span>
+<span class="n">funcFour</span><span class="p">(</span><span class="o">*</span><span class="n">paraList</span><span class="p">)</span>
+<span class="c">#3 4</span>
+</pre></div>
+<p><strong>闭包</strong></p>
+<p>在Python中函数的作用域可以嵌套，在函数内可定义另一个函数，并将其作为返回值。</p>
+<p>例如下文的例子，在外层函数中定义了一个内层函数，内层函数返回外层函数的参数arg1与内层函数的参数arg2的乘积，外层函数返回该函数。</p>
+<p>简单分析之，里外层函数均拥有自己的数据作用域，外层函数调用结束后自身的作用域应该被释放。然而，调用外层函数获取一个包含了自身作用域的函数，其中拥有外层函数的部分变量数据，这种情况称为闭包。</p>
+<p>其实自己还不是很懂，这货有待深究。</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">funcCreator</span><span class="p">(</span><span class="n">arg1</span><span class="p">):</span>
+        <span class="s">&quot;Function to create another function&quot;</span>
+        <span class="k">def</span> <span class="nf">funcT</span><span class="p">(</span><span class="n">arg2</span><span class="p">):</span>
+                <span class="s">&quot;Function created by creator&quot;</span>
+                <span class="k">return</span> <span class="n">arg1</span> <span class="o">*</span> <span class="n">arg2</span>
+        <span class="k">return</span> <span class="n">funcT</span>
+
+<span class="k">print</span> <span class="n">funcCreator</span><span class="o">.</span><span class="n">__doc__</span>
+<span class="c">#Function to create another function</span>
+<span class="n">func1</span> <span class="o">=</span> <span class="n">funcCreator</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">func1</span><span class="o">.</span><span class="n">__doc__</span>
+<span class="c">#Function created by creator</span>
+<span class="k">print</span> <span class="s">&quot;result of 123 * 5:&quot;</span><span class="p">,</span> <span class="n">func1</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="c">#result of 123 * 5: 615</span>
+</pre></div>
+<p><strong>scope</strong></p>
+<p>scope函数可获取当前状态下的数据空间，包含了变量和函数等基本信息。
+要注意的是返回的字典不能随意更改，可能会造成未定义行为。</p>
+<div class="highlight"><pre><span class="n">scope</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">scope</span>
+</pre></div>
+<p>结果比较长：</p>
+<p>{'funcFour': &lt;function funcFour at 0x1cf67d0&gt;, 'func1': &lt;function funcT at 0x1cf68c0&gt;, '__builtins__': &lt;module '__builtin__' (built-in)&gt;, '__file__': 'func.py', 'funcThree': &lt;function funcThree at 0x1cf6758&gt;, 'funcCreator': &lt;function funcCreator at 0x1cf6848&gt;, 'funcOne': &lt;function funcOne at 0x1cf6668&gt;, '__package__': None, 'sayHello': &lt;function sayHello at 0x1cf65f0&gt;, 'scope': {...}, 'paraMap': {'y': 2, 'x': 1}, '__name__': '__main__', 'funcTwo': &lt;function funcTwo at 0x1cf66e0&gt;, '__doc__': None, 'paraList': [3, 4], 'listB': [1, 25, 3, 4]}</p>
+<hr class="docutils" />
+<p>更多Python学习，推荐：</p>
+<blockquote>
+<p>简明Python教程： <a class="reference external" href="http://www.2cto.com/shouce/pythonjc/index.html">http://www.2cto.com/shouce/pythonjc/index.html</a></p>
+<p>《Python基础教程》</p>
+</blockquote>
+</div>
+
+            </div><!-- /.entry-content -->
+            
+
+        </div><!-- /.eleven.columns -->
+        
+     <div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+        <li><a href="studioIndex.html">our studio</a></li>
+            </ul>
+
+<h4>Categories</h4>
+<ul>
+			<li><a href="/category/itpm.html">ITPM</a></li>
+			<li><a href="/category/python.html">Python</a></li>
+			<li><a href="/category/git.html">git</a></li>
+			<li><a href="/category/network.html">network</a></li>
+			<li><a href="/category/others.html">others</a></li>
+	</ul>
+
+
+<h4>Tags</h4>
+	<ul>
+		    <li class="tag-4"><a href="/tag/itpm.html">ITPM</a></li>
+		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
+		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
+		    <li class="tag-2"><a href="/tag/gitgithub.html">git/github</a></li>
+		    <li class="tag-4"><a href="/tag/network.html">network</a></li>
+	</ul>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul>
+      <li><a href="http://blog.sina.com/scutLaoYi">sina blog</a></li>
+    </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Contact scutLaoYi: HelloWorld636596@126.com <br />
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+                                <li><div class="btn primary"><a href="https://github.com/scutLaoYi" target="_blank">Github</a></div></li>
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+
+</body>
+</html>
