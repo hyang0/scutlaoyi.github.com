@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+        
+        <title>Python 笔记（四）</title>
+        <meta charset="utf-8" />
+                                                                
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+	<!-- google analyse -->
+          <script type="text/javascript">
+
+ 		var _gaq = _gaq || [];
+ 		 _gaq.push(['_setAccount', 'UA-43833562-1']);
+ 		 _gaq.push(['_trackPageview']);
+
+ 		 (function() {
+  			  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   			 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  			})();
+
+	</script>
+	<!-- end of google analyse -->
+
+
+
+        </head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="">老逸的个人站 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://scutlaoyi.github.com">Home</a></li>
+
+                            <li><a href="studioIndex.html">our studio</a></li>
+                                                  
+              </ul>
+            </div>
+
+          <section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/Python004.html" rel="bookmark"
+                   title="Permalink to Python 笔记（四）">Python 笔记（四）</a></h2>
+                      
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2013-09-23T15:30:00">
+                一 23 九月 2013
+              </abbr>
+                            <address class="vcard author">
+                By <a class="url fn" href="/author/lao-yi.html">老逸</a>
+              </address>
+                          </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3，</strong>
+<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>类的初识</h2>
+<p><strong>关于称呼的一些声明</strong></p>
+<p>本文以&lt;Python基础教程&gt;为基础，沿用了其中的部分称呼，一般的函数通称函数，类的成员函数称为方法。</p>
+<p>但由于C++的一些思想比较根深蒂固，有时会混用两种称呼。</p>
+<p><strong>类的定义及创建对象</strong></p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">SimpleClass</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">funcA</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">print</span> <span class="s">&quot;Hey!Function A called!&quot;</span>
+        <span class="k">def</span> <span class="nf">funcB</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">print</span> <span class="s">&quot;Hey!Function B called!&quot;</span>
+        <span class="k">def</span> <span class="nf">funcC</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+                <span class="k">print</span> <span class="s">&quot;Name is set as </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">name</span>
+
+<span class="n">sc1</span> <span class="o">=</span> <span class="n">SimpleClass</span><span class="p">()</span>
+<span class="n">sc1</span><span class="o">.</span><span class="n">funcA</span><span class="p">()</span>
+<span class="c">#Hey!Function A called!</span>
+<span class="n">sc1</span><span class="o">.</span><span class="n">funcC</span><span class="p">(</span><span class="s">&quot;szy&quot;</span><span class="p">)</span>
+<span class="c">#Name is set as szy</span>
+</pre></div>
+<p><strong>一般方法</strong></p>
+<p>定义一般方法时需要将self作为第一个参数传入，在方法中调用self可以获得调用该方法的对象本身。</p>
+<p>尝试过不添加self，发现可以运行，但通过对象或者通过类名均无法调用该方法。</p>
+<p>调用一般方法可通过对象加方法名加参数列表，亦可通过调用类名加方法名并将对象作为第一个参数传入：</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">SimpleClass</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">funcA</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">print</span> <span class="s">&quot;FuncA&quot;</span>
+
+<span class="n">sc1</span> <span class="o">=</span> <span class="n">SimpleClass</span><span class="p">()</span>
+<span class="n">sc1</span><span class="o">.</span><span class="n">funcA</span><span class="p">()</span>
+<span class="c">#FuncA</span>
+<span class="n">SimpleClass</span><span class="o">.</span><span class="n">funcA</span><span class="p">(</span><span class="n">sc1</span><span class="p">)</span>
+        <span class="c">#FuncA</span>
+</pre></div>
+<p><strong>对象的特性（数据成员）</strong></p>
+<p>对象的数据成员（C++说法）直接通过赋值产生，如上文的self.name</p>
+<p>每个对象拥有自己的作用域，因此一个对象的数据不影响其他对象</p>
+<p>可在类定义的外部直接赋值新的数据成员</p>
+<div class="highlight"><pre><span class="n">sc1</span><span class="o">.</span><span class="n">anotherArg</span> <span class="o">=</span> <span class="s">&#39;scutLaoYi&#39;</span>
+<span class="k">print</span> <span class="n">sc1</span><span class="o">.</span><span class="n">anotherArg</span>
+<span class="c">#scutLaoYi</span>
+</pre></div>
+<p>Python没有真正的私有成员，所有成员均可在类外被调用，但可通过将成员名称改为 “__name__ ” 的风格隐藏该数据成员，通过这种方法类的外部无法直接调用 “__name__” 获取该数据成员。</p>
+<p><strong>类的静态数据成员</strong></p>
+<p>在类定义中不仅可以定义方法，还可直接在类作用域中声明变量</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">SimpleClass</span><span class="p">:</span>
+        <span class="n">number</span> <span class="o">=</span> <span class="mi">14</span>
+        <span class="k">def</span> <span class="nf">funcA</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">print</span> <span class="s">&quot;Hey!Function A called!&quot;</span>
+</pre></div>
+<p>此处声明的number在类的作用域中，因此所有类成员共享一个number变量。调用类的静态数据成员可通过对象调用，亦可通过类名调用。</p>
+<div class="highlight"><pre><span class="n">sc1</span> <span class="o">=</span> <span class="n">SimpleClass</span><span class="p">()</span>
+<span class="n">sc2</span> <span class="o">=</span> <span class="n">SimpleClass</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">sc1</span><span class="o">.</span><span class="n">number</span><span class="p">,</span> <span class="n">SimpleClass</span><span class="o">.</span><span class="n">number</span>
+<span class="c">#14 14</span>
+</pre></div>
+<p>通过在对象上赋值同名变量，可覆盖类的静态数据成员</p>
+<div class="highlight"><pre><span class="n">sc2</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="k">print</span> <span class="n">sc1</span><span class="o">.</span><span class="n">number</span><span class="p">,</span> <span class="n">sc2</span><span class="o">.</span><span class="n">number</span>
+<span class="c">#14 15</span>
+<span class="n">SimpleClass</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="c">#修改的是静态成员的值</span>
+<span class="k">print</span> <span class="n">sc1</span><span class="o">.</span><span class="n">number</span><span class="p">,</span> <span class="n">sc2</span><span class="o">.</span><span class="n">number</span>
+<span class="c">#16 15</span>
+</pre></div>
+<p><strong>父类</strong></p>
+<p>声明父类的方法是在类名之后加入父类的名称，Python支持多继承，因此可以加入多个父类。子类继承父类的所有成员。</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">SimpleClass</span><span class="p">:</span>
+        <span class="n">number</span> <span class="o">=</span> <span class="mi">14</span>
+        <span class="k">def</span> <span class="nf">funcA</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">print</span> <span class="s">&quot;FuncA&quot;</span>
+
+<span class="k">class</span> <span class="nc">AnotherSimpleClass</span><span class="p">(</span><span class="n">SimpleClass</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<span class="n">asc1</span> <span class="o">=</span> <span class="n">AnotherSimpleClass</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">asc1</span><span class="o">.</span><span class="n">number</span>
+<span class="c">#14</span>
+<span class="n">asc1</span><span class="o">.</span><span class="n">funcA</span><span class="p">()</span>
+<span class="c">#FuncA</span>
+</pre></div>
+<hr class="docutils" />
+<p>更多Python学习，推荐：</p>
+<blockquote>
+<p>简明Python教程： <a class="reference external" href="http://www.2cto.com/shouce/pythonjc/index.html">http://www.2cto.com/shouce/pythonjc/index.html</a></p>
+<p>《Python基础教程》</p>
+</blockquote>
+</div>
+
+            </div><!-- /.entry-content -->
+            
+
+        </div><!-- /.eleven.columns -->
+        
+     <div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+        <li><a href="studioIndex.html">our studio</a></li>
+            </ul>
+
+<h4>Categories</h4>
+<ul>
+			<li><a href="/category/itpm.html">ITPM</a></li>
+			<li><a href="/category/python.html">Python</a></li>
+			<li><a href="/category/git.html">git</a></li>
+			<li><a href="/category/network.html">network</a></li>
+			<li><a href="/category/others.html">others</a></li>
+	</ul>
+
+
+<h4>Tags</h4>
+	<ul>
+		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
+		    <li class="tag-2"><a href="/tag/gitgithub.html">git/github</a></li>
+		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
+		    <li class="tag-4"><a href="/tag/network.html">network</a></li>
+		    <li class="tag-4"><a href="/tag/itpm.html">ITPM</a></li>
+	</ul>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul>
+      <li><a href="http://blog.sina.com/scutLaoYi">sina blog</a></li>
+    </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Contact scutLaoYi: HelloWorld636596@126.com <br />
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+                                <li><div class="btn primary"><a href="https://github.com/scutLaoYi" target="_blank">Github</a></div></li>
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+
+</body>
+</html>
