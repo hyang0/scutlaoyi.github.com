@@ -67,6 +67,43 @@
         <div class="eleven columns">
 		         <ol id="post-list">
 								        <li><article class="hentry">
+				                <header> <h2 class="entry-title"><a href="/network002.html" rel="bookmark" title="Permalink to socket编程(2):单线程udp服务器/客户端">socket编程(2):单线程udp服务器/客户端</a></h2> </header>
+				                <footer class="post-info">
+				                    <abbr class="published" title="2013-09-24T10:00:00"> 二 24 九月 2013 </abbr>
+				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
+				                <div class="entry-content"> <p><strong>基本流程</strong></p>
+<p>与tcp的通讯非常类似，不同之处在于udp是无连接的，因此没有创建连接这种操作，服务器开启端口后接受数据并直接返回。
+设置时将socket类型设置为SOCK_DGRAM即可创建udp通讯。</p>
+<p><strong>C++版本：</strong></p>
+<p>服务器：</p>
+<div class="highlight"><pre><span class="c1">//filename:udpServer.cpp</span>
+
+<span class="cp">#include &lt;cstdio&gt;</span>
+<span class="cp">#include &lt;cstring&gt;</span>
+<span class="cp">#include &lt;sys/types.h&gt;</span>
+<span class="cp">#include &lt;sys/socket.h&gt;</span>
+<span class="cp">#include &lt;netinet/in.h&gt;</span>
+<span class="cp">#include &lt;arpa/inet.h&gt;</span>
+<span class="cp">#include &lt;unistd.h&gt;</span>
+<span class="cp">#include &lt;errno.h&gt;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">BUF_SIZE</span> <span class="o">=</span> <span class="mi">512</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">SOCKET_PORT</span> <span class="o">=</span> <span class="mi">9999</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc ...</span></pre></div> </div><!-- /.entry-content -->
+
+								<div class="medium primary btn"><a href="/network002.html" rel="bookmark" title="Permalink to socket编程(2):单线程udp服务器/客户端">Read more <i class="icon-arrow-right"></i></a></div>
+
+
+
+								<div class="row tag-row">
+																			<span>Tagged as : </span>
+																					<a class="danger label" href="/tag/network.html">network</a>
+																											</div>
+
+
+
+				        </article></li>
+								        <li><article class="hentry">
 				                <header> <h2 class="entry-title"><a href="/network001.html" rel="bookmark" title="Permalink to socket编程(1):单线程tcp服务器/客户端">socket编程(1):单线程tcp服务器/客户端</a></h2> </header>
 				                <footer class="post-info">
 				                    <abbr class="published" title="2013-09-17T15:30:00"> 二 17 九月 2013 </abbr>
@@ -129,11 +166,11 @@
 
 <h4>Tags</h4>
 	<ul>
-		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
-		    <li class="tag-2"><a href="/tag/gitgithub.html">git/github</a></li>
-		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
-		    <li class="tag-4"><a href="/tag/network.html">network</a></li>
 		    <li class="tag-4"><a href="/tag/itpm.html">ITPM</a></li>
+		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
+		    <li class="tag-2"><a href="/tag/gitgithub.html">git/github</a></li>
+		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
+		    <li class="tag-2"><a href="/tag/network.html">network</a></li>
 	</ul>
 
 

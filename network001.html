@@ -291,6 +291,9 @@
 <span class="k">print</span> <span class="n">s</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
 </pre></div>
 <p>至此，socket单线程tcp服务器和客户机就出来了。</p>
+<p>服务器启动后监听端口，直到有客户机请求连接，开启正常通讯。</p>
+<p>当服务器未启动的情况下启动客户机，客户机直接抛异常，显示连接失败。</p>
+<hr class="docutils" />
 <p><strong>下一篇：socket单线程udp服务器和客户机</strong></p>
 </div>
 
@@ -319,11 +322,11 @@
 
 <h4>Tags</h4>
 	<ul>
-		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
-		    <li class="tag-2"><a href="/tag/gitgithub.html">git/github</a></li>
-		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
-		    <li class="tag-4"><a href="/tag/network.html">network</a></li>
 		    <li class="tag-4"><a href="/tag/itpm.html">ITPM</a></li>
+		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
+		    <li class="tag-2"><a href="/tag/gitgithub.html">git/github</a></li>
+		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
+		    <li class="tag-2"><a href="/tag/network.html">network</a></li>
 	</ul>
 
 
