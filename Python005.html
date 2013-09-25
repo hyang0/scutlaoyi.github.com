@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+        
+        <title>Python 笔记（五）</title>
+        <meta charset="utf-8" />
+                                                                
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+	<!-- google analyse -->
+          <script type="text/javascript">
+
+ 		var _gaq = _gaq || [];
+ 		 _gaq.push(['_setAccount', 'UA-43833562-1']);
+ 		 _gaq.push(['_trackPageview']);
+
+ 		 (function() {
+  			  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   			 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  			})();
+
+	</script>
+	<!-- end of google analyse -->
+
+
+
+        </head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="">老逸的个人站 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://scutlaoyi.github.com">Home</a></li>
+
+                            <li><a href="studioIndex.html">our studio</a></li>
+                                                  
+              </ul>
+            </div>
+
+          <section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/Python005.html" rel="bookmark"
+                   title="Permalink to Python 笔记（五）">Python 笔记（五）</a></h2>
+                      
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2013-09-25T09:30:00">
+                三 25 九月 2013
+              </abbr>
+                            <address class="vcard author">
+                By <a class="url fn" href="/author/lao-yi.html">老逸</a>
+              </address>
+                          </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3，</strong>
+<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>类的进阶玩法</h2>
+<p><strong>构造函数：</strong></p>
+<p>构造函数的名称为 &quot;__init__&quot;，在对象被生成时自动调用：</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">ComplexClass</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="n">number</span>
+</pre></div>
+<p><strong>继承状态下的构造函数：</strong></p>
+<p>如果一个类继承了某基类，且没有重写构造函数，则基类构造函数被自动调用：</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">ComplexClass</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="n">number</span>
+
+<span class="k">class</span> <span class="nc">AnotherClass</span><span class="p">(</span><span class="n">ComplexClass</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<span class="n">cc</span> <span class="o">=</span> <span class="n">ComplexClass</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">ac</span> <span class="o">=</span> <span class="n">AnotherClass</span><span class="p">()</span>
+<span class="c">#错误！构造函数需要两个参数</span>
+<span class="n">ac</span> <span class="o">=</span> <span class="n">AnotherClass</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+<span class="c">#正确的做法</span>
+</pre></div>
+<p><strong>调用父类构造函数：</strong></p>
+<p>方法一：调用父类的非绑定构造函数：</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">ComplexClass</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="n">number</span>
+
+<span class="k">class</span> <span class="nc">AnotherClass</span><span class="p">(</span><span class="n">ComplexClass</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="n">ComplexClass</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="mi">123</span><span class="p">)</span>
+
+<span class="n">cc</span> <span class="o">=</span> <span class="n">ComplexClass</span><span class="p">(</span><span class="n">number</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="n">ac</span> <span class="o">=</span> <span class="n">AnotherClass</span><span class="p">()</span>
+</pre></div>
+<p>在子类的构造函数中调用了父类的非绑定版本构造函数，并将自身作为参数传入。</p>
+<p>方法二：使用super函数</p>
+<p>使用super函数需要将类定义为新式类，方法是加入'__metaclass__ = type'一行</p>
+<p>super函数可自动调用父类的构造函数的绑定版本，具体方法参见示例：</p>
+<div class="highlight"><pre><span class="n">__metaclass__</span> <span class="o">=</span> <span class="nb">type</span>
+
+<span class="k">class</span> <span class="nc">ComplexClass</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="n">number</span>
+
+<span class="k">class</span> <span class="nc">AnotherClass</span><span class="p">(</span><span class="n">ComplexClass</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="nb">super</span><span class="p">(</span><span class="n">AnotherClass</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+
+<span class="n">cc</span> <span class="o">=</span> <span class="n">ComplexClass</span><span class="p">(</span><span class="n">number</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="n">ac</span> <span class="o">=</span> <span class="n">AnotherClass</span><span class="p">()</span>
+</pre></div>
+<p>经测试，在多继承的情况下super函数只会调用被继承的第一个基类的构造函数（继承列表最左），这个问题有待深究。</p>
+<p><strong>魔法方法：</strong></p>
+<p>基本的魔法方法有四个，__len__, __getitem__, __setitem__ 以及 __delitem__</p>
+<p>分别用于获取对象长度，获取对应键的值，设置对应键的值，以及删除对应键的值</p>
+<p>定义了上述的方法后分别可通过如下函数调用对应功能：</p>
+<p>获取长度可使用len(object), 获取对应键的值可用object[index], 设置值可下标操作后直接赋值，删除可使用del object[index]</p>
+<p><strong>property：</strong></p>
+<p>property用于创建类的属性，适用于某些依赖其他几个数据成员的属性的创建，应用property可以简化存储过程。</p>
+<p>假设有一个程序员类，程序员类有工作时长和单位工资，假设总工资为时长乘以单位工资，那么可以利用property定义一个总工资属性：</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Coder</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">salary</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">time</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">salary</span> <span class="o">=</span> <span class="n">salary</span>
+        <span class="k">def</span> <span class="nf">getTotalSalary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">salary</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">getTotalSalary</span><span class="p">)</span>
+
+<span class="n">coder</span> <span class="o">=</span> <span class="n">Coder</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">coder</span><span class="o">.</span><span class="n">total</span>
+<span class="c">#4000</span>
+</pre></div>
+<p>property最多接受四个参数，分别为fget, fset, fdel, doc，设定对应的方法便可绑定功能，若不设定对应的方法则调用时会抛异常。（如上文例子，给total赋值会引发异常）</p>
+<p><strong>静态方法和类方法：</strong></p>
+<p>声明静态方法或者类方法的简单方式是使用装饰器，例子：</p>
+<div class="highlight"><pre><span class="n">__metaclass__</span> <span class="o">=</span> <span class="nb">type</span>
+
+<span class="k">class</span> <span class="nc">ComplexClass</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="mi">100</span>
+        <span class="nd">@staticmethod</span>
+        <span class="k">def</span> <span class="nf">staticFuncA</span><span class="p">():</span>
+                <span class="k">print</span> <span class="s">&quot;static function called!&quot;</span>
+        <span class="nd">@classmethod</span>
+        <span class="k">def</span> <span class="nf">classFuncA</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+                <span class="k">print</span> <span class="s">&quot;class function called by &quot;</span><span class="p">,</span><span class="n">cls</span>
+
+<span class="n">ComplexClass</span><span class="o">.</span><span class="n">staticFuncA</span><span class="p">()</span>
+<span class="c">#static function called!</span>
+<span class="n">ComplexClass</span><span class="o">.</span><span class="n">classFuncA</span><span class="p">()</span>
+<span class="c">#class function called by  &lt;class &#39;__main__.ComplexClass&#39;&gt;</span>
+
+<span class="n">cc</span> <span class="o">=</span> <span class="n">ComplexClass</span><span class="p">()</span>
+<span class="n">cc</span><span class="o">.</span><span class="n">staticFuncA</span><span class="p">()</span>
+<span class="c">#static function called!</span>
+<span class="n">cc</span><span class="o">.</span><span class="n">classFuncA</span><span class="p">()</span>
+<span class="c">#class function called by  &lt;class &#39;__main__.ComplexClass&#39;&gt;</span>
+</pre></div>
+<p>类的静态方法基本上跟普通的函数没有区别。可通过类或者对象加以调用。调用静态方法不传入self参数，因此也就无法调用对象的数据成员。</p>
+<p>类方法是比较特别的东西，传入的参数是类，而不是对象，这种在工厂模式的情况下非常有用，可以对调用方法的类进行区别。</p>
+<p><strong>__getattr__等方法：</strong></p>
+<p>四个方法： __getattr__ __setattr__ __getattribute__ 以及 __delattr__</p>
+<p>分别在特性被访问且不存在、设置特性值、特性被访问以及特性被删除的时候被调用。</p>
+<p>使用上述方法可拦截并自定义对特性的访问。</p>
+<p>抄个例子就一目了然了：</p>
+<div class="highlight"><pre><span class="c">#usr/bin/env python</span>
+<span class="c"># -*- coding:gb2312 -*-</span>
+
+<span class="k">class</span> <span class="nc">Rectangle</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">def</span> <span class="nf">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s">&#39;size&#39;</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">value</span>
+                <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s">&#39;size&#39;</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span>
+                <span class="k">else</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">AttributeError</span>
+
+<span class="n">rc</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&quot;size&quot;</span><span class="p">,</span> <span class="n">rc</span><span class="o">.</span><span class="n">size</span>
+<span class="c">#(0,0)</span>
+<span class="n">rc</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&quot;size after setting:&quot;</span><span class="p">,</span> <span class="n">rc</span><span class="o">.</span><span class="n">size</span>
+<span class="c">#(100, 50)</span>
+<span class="n">rc</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="k">print</span> <span class="s">&quot;change width to 50:&quot;</span><span class="p">,</span> <span class="n">rc</span><span class="o">.</span><span class="n">size</span>
+<span class="c">#(50,50)</span>
+<span class="k">print</span> <span class="s">&quot;width&quot;</span><span class="p">,</span> <span class="n">rc</span><span class="o">.</span><span class="n">width</span>
+<span class="c">#50</span>
+</pre></div>
+<p>注意的是这里定义了__getattr__方法，该方法是在特性被访问且不存在的时候被触发，因此对width和height特性的访问不会被拦截。</p>
+<p><strong>迭代器：</strong></p>
+<p>__iter__方法返回一个迭代器，具有next方法的对象称为迭代器。每次调用迭代器的next方法返回下一个值，当迭代结束时引发一个StopIteration异常。</p>
+<p>比较生猛的做法是类本身实现了__iter__方法和next方法，这样就能通过返回其自身进行迭代操作。</p>
+<p>迭代器的方便之处在于处理列表无法储存的无限长序列，通过迭代器可以逐个返回处理。</p>
+<p>搞一个无限长的步进列表：</p>
+<div class="highlight"><pre><span class="c">#usr/bin/env python</span>
+<span class="c"># -*- coding:gb2312 -*-</span>
+
+<span class="k">class</span> <span class="nc">StepList</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">begin</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">begin</span> <span class="o">=</span> <span class="n">begin</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">step</span> <span class="o">=</span> <span class="n">step</span>
+        <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="n">now</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">begin</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">begin</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span>
+                <span class="k">return</span> <span class="n">now</span>
+
+<span class="n">sl</span> <span class="o">=</span> <span class="n">StepList</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">sl</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">elem</span> <span class="o">&gt;</span> <span class="mi">500</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="k">print</span> <span class="n">elem</span><span class="p">,</span>
+<span class="c">#15 35 55 75 95 115 135 155 175 195 215 235 255 275 295 315 335 355 375 395 415 435 455 475 495</span>
+</pre></div>
+<p>如果没有指定终止条件（elem &gt; 500)，那么循环会永远进行下去。</p>
+<p>稍做修改我们就得到了自动终止的迭代器：</p>
+<div class="highlight"><pre><span class="c">#usr/bin/env python</span>
+<span class="c"># -*- coding:gb2312 -*-</span>
+
+<span class="k">class</span> <span class="nc">StepList</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">begin</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">begin</span> <span class="o">=</span> <span class="n">begin</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">step</span> <span class="o">=</span> <span class="n">step</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">end</span>
+        <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="n">now</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">begin</span>
+                <span class="k">if</span> <span class="n">now</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">StopIteration</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">begin</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span>
+                <span class="k">return</span> <span class="n">now</span>
+
+<span class="n">sl</span> <span class="o">=</span> <span class="n">StepList</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">sl</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">elem</span><span class="p">,</span>
+<span class="c">#15 35 55 75 95 115 135 155 175 195</span>
+</pre></div>
+<p><strong>生成器：</strong></p>
+<p>有点麻烦，暂且不写。</p>
+<hr class="docutils" />
+<p>更多Python学习，推荐：</p>
+<blockquote>
+<p>简明Python教程： <a class="reference external" href="http://www.2cto.com/shouce/pythonjc/index.html">http://www.2cto.com/shouce/pythonjc/index.html</a></p>
+<p>《Python基础教程》</p>
+</blockquote>
+</div>
+
+            </div><!-- /.entry-content -->
+            
+
+        </div><!-- /.eleven.columns -->
+        
+     <div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+        <li><a href="studioIndex.html">our studio</a></li>
+            </ul>
+
+<h4>Categories</h4>
+<ul>
+			<li><a href="/category/itpm.html">ITPM</a></li>
+			<li><a href="/category/python.html">Python</a></li>
+			<li><a href="/category/git.html">git</a></li>
+			<li><a href="/category/network.html">network</a></li>
+			<li><a href="/category/others.html">others</a></li>
+	</ul>
+
+
+<h4>Tags</h4>
+	<ul>
+		    <li class="tag-4"><a href="/tag/itpm.html">ITPM</a></li>
+		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
+		    <li class="tag-2"><a href="/tag/gitgithub.html">git/github</a></li>
+		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
+		    <li class="tag-2"><a href="/tag/network.html">network</a></li>
+	</ul>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul>
+      <li><a href="http://blog.sina.com/scutLaoYi">sina blog</a></li>
+    </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Contact scutLaoYi: HelloWorld636596@126.com <br />
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+                                <li><div class="btn primary"><a href="https://github.com/scutLaoYi" target="_blank">Github</a></div></li>
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+
+</body>
+</html>

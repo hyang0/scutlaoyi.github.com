@@ -265,6 +265,48 @@
 
 				        </article></li>
 								        <li><article class="hentry">
+				                <header> <h2 class="entry-title"><a href="/Python005.html" rel="bookmark" title="Permalink to Python 笔记（五）">Python 笔记（五）</a></h2> </header>
+				                <footer class="post-info">
+				                    <abbr class="published" title="2013-09-25T09:30:00"> 三 25 九月 2013 </abbr>
+				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
+				                <div class="entry-content"> <p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3，</strong>
+<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>类的进阶玩法</h2>
+<p><strong>构造函数：</strong></p>
+<p>构造函数的名称为 &quot;__init__&quot;，在对象被生成时自动调用：</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">ComplexClass</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="n">number</span>
+</pre></div>
+<p><strong>继承状态下的构造函数：</strong></p>
+<p>如果一个类继承了某基类，且没有重写构造函数，则基类构造函数被自动调用：</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">ComplexClass</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="n">number</span>
+
+<span class="k">class</span> <span class="nc">AnotherClass</span><span class="p">(</span><span class="n">ComplexClass</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<span class="n">cc</span> <span class="o">=</span> <span class="n">ComplexClass</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">ac</span> <span class="o">=</span> <span class="n">AnotherClass</span><span class="p">()</span>
+<span class="c">#错误！构造函数需要两个参数 ...</span></pre></div></div> </div><!-- /.entry-content -->
+
+								<div class="medium primary btn"><a href="/Python005.html" rel="bookmark" title="Permalink to Python 笔记（五）">Read more <i class="icon-arrow-right"></i></a></div>
+
+
+
+								<div class="row tag-row">
+																			<span>Tagged as : </span>
+																					<a class="danger label" href="/tag/python.html">Python</a>
+																											</div>
+
+
+
+				        </article></li>
+								        <li><article class="hentry">
 				                <header> <h2 class="entry-title"><a href="/first article.html" rel="bookmark" title="Permalink to Hello,world!">Hello,world!</a></h2> </header>
 				                <footer class="post-info">
 				                    <abbr class="published" title="2023-09-07T13:00:00"> 四 07 九月 2023 </abbr>
