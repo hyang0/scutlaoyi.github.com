@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+        
+        <title>socket编程(3):多线程socket服务器/客户端</title>
+        <meta charset="utf-8" />
+                                                                
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+	<!-- google analyse -->
+          <script type="text/javascript">
+
+ 		var _gaq = _gaq || [];
+ 		 _gaq.push(['_setAccount', 'UA-43833562-1']);
+ 		 _gaq.push(['_trackPageview']);
+
+ 		 (function() {
+  			  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   			 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  			})();
+
+	</script>
+	<!-- end of google analyse -->
+
+
+
+        </head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="">老逸的个人站 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://scutlaoyi.github.com">Home</a></li>
+
+                            <li><a href="studioIndex.html">our studio</a></li>
+                                                  
+              </ul>
+            </div>
+
+          <section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/network003.html" rel="bookmark"
+                   title="Permalink to socket编程(3):多线程socket服务器/客户端">socket编程(3):多线程socket服务器/客户端</a></h2>
+                      
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2013-09-28T16:00:00">
+                六 28 九月 2013
+              </abbr>
+                            <address class="vcard author">
+                By <a class="url fn" href="/author/lao-yi.html">老逸</a>
+              </address>
+                          </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <hr class="docutils" />
+<p>多线程的tcp服务器与单线程的差别不大，主要差别在于服务器接受一个请求后创建一个新线程处理请求，主线程继续等待连接，因此可以在同一个时间处理多个请求。单线程的服务器每次都只有主线程接受并处理请求，这种情况下其他连接就必须等待。</p>
+<p>在GNU/Linux操作系统下可以使用pthread创建并管理线程。</p>
+<p>应该注意的一点是pthread不是Linux默认库的一部分，因此在编译时需要添加参数 -lpthread ，否则会报错(找不到文件：undefined reference to 'pthread_create')。</p>
+<p>由于本代码只为测试多线程，编写时没有考虑长的时延，因此在主线程退出前仅等待最后一个子线程的退出，这在实际操作中八成会出问题。</p>
+<p>另外在创建线程时传入的函数参数为指针，需要注意对内存的管理，防止多个线程的指针变量指向同一个地址。</p>
+<p><strong>C++版本服务器代码：</strong></p>
+<div class="highlight"><pre><span class="cp">#include &lt;cstdio&gt;</span>
+<span class="cp">#include &lt;cstring&gt;</span>
+<span class="cp">#include &lt;cstdlib&gt;</span>
+<span class="cp">#include &lt;cerrno&gt;</span>
+<span class="cp">#include &lt;unistd.h&gt;</span>
+<span class="cp">#include &lt;sys/types.h&gt;</span>
+<span class="cp">#include &lt;sys/socket.h&gt;</span>
+<span class="cp">#include &lt;netinet/in.h&gt;</span>
+<span class="cp">#include &lt;arpa/inet.h&gt;</span>
+<span class="cp">#include &lt;pthread.h&gt;</span>
+
+<span class="k">const</span> <span class="kt">int</span> <span class="n">BUF_SIZE</span> <span class="o">=</span> <span class="mi">4096</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">SERVER_PORT</span> <span class="o">=</span> <span class="mi">9876</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAX_CONNECTION</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">TIME_INTERVAL</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+<span class="c1">//recvData 为新线程调用函数，传入参数为客户端的ID</span>
+<span class="kt">void</span> <span class="o">*</span><span class="nf">recvData</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span> <span class="n">args</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="n">BUF_SIZE</span><span class="p">];</span>
+        <span class="c1">//获取客户端ID</span>
+        <span class="kt">int</span> <span class="o">*</span><span class="n">clientDes</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">args</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+        <span class="p">{</span>
+                <span class="c1">//接收数据</span>
+                <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">recv</span><span class="p">(</span><span class="o">*</span><span class="n">clientDes</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">BUF_SIZE</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">len</span> <span class="o">&gt;=</span> <span class="n">BUF_SIZE</span><span class="p">)</span>
+                <span class="p">{</span>
+                        <span class="n">len</span> <span class="o">=</span> <span class="n">BUF_SIZE</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="n">buf</span><span class="p">[</span><span class="n">len</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+
+                <span class="n">printf</span><span class="p">(</span><span class="s">&quot;from thread id:%u</span><span class="se">\n</span><span class="s"> recieved:%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">pthread_self</span><span class="p">(),</span> <span class="n">buf</span><span class="p">);</span>
+                <span class="c1">//当接收到&#39;bye&#39;信号时退出</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">buf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span><span class="sc">&#39;b&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">buf</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;y&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">buf</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;e&#39;</span><span class="p">)</span>
+                <span class="p">{</span>
+                        <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="n">sleep</span><span class="p">(</span><span class="n">TIME_INTERVAL</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="c1">//关闭连接并释放内存</span>
+        <span class="n">close</span><span class="p">(</span><span class="o">*</span><span class="n">clientDes</span><span class="p">);</span>
+        <span class="n">delete</span> <span class="n">clientDes</span><span class="p">;</span>
+        <span class="c1">//线程退出</span>
+        <span class="n">pthread_exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">args</span><span class="p">[])</span>
+<span class="p">{</span>
+        <span class="kt">int</span> <span class="n">serverDes</span><span class="p">;</span>
+        <span class="k">struct</span> <span class="n">sockaddr_in</span> <span class="n">serverAddr</span><span class="p">;</span>
+
+        <span class="n">serverDes</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">serverDes</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">{</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">&quot;socket creating failed!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">try</span>
+        <span class="p">{</span>
+                <span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">serverAddr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">serverAddr</span><span class="p">));</span>
+                <span class="n">serverAddr</span><span class="p">.</span><span class="n">sin_family</span> <span class="o">=</span> <span class="n">AF_INET</span><span class="p">;</span>
+                <span class="n">serverAddr</span><span class="p">.</span><span class="n">sin_addr</span><span class="p">.</span><span class="n">s_addr</span> <span class="o">=</span> <span class="n">htonl</span><span class="p">(</span><span class="n">INADDR_ANY</span><span class="p">);</span>
+                <span class="n">serverAddr</span><span class="p">.</span><span class="n">sin_port</span> <span class="o">=</span> <span class="n">htons</span><span class="p">(</span><span class="n">SERVER_PORT</span><span class="p">);</span>
+
+                <span class="k">if</span><span class="p">(</span><span class="n">bind</span><span class="p">(</span><span class="n">serverDes</span><span class="p">,</span> <span class="p">(</span><span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">serverAddr</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">sockaddr</span><span class="p">))</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                        <span class="n">throw</span> <span class="s">&quot;binding socket failed!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+                <span class="k">if</span><span class="p">(</span><span class="n">listen</span><span class="p">(</span><span class="n">serverDes</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                        <span class="n">throw</span> <span class="s">&quot;listening socket failed!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+                <span class="kt">pthread_t</span> <span class="n">tid</span><span class="p">;</span>
+                <span class="kt">int</span> <span class="n">rtnStatus</span><span class="p">;</span>
+                <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">MAX_CONNECTION</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+                <span class="p">{</span>
+                        <span class="c1">//申请一个int空间储存客户端ID</span>
+                        <span class="kt">int</span> <span class="o">*</span><span class="n">clientDes</span> <span class="o">=</span> <span class="n">new</span> <span class="kt">int</span><span class="p">;</span>
+                        <span class="c1">//接受连接</span>
+                        <span class="o">*</span><span class="n">clientDes</span> <span class="o">=</span> <span class="n">accept</span><span class="p">(</span><span class="n">serverDes</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+                        <span class="k">if</span><span class="p">(</span><span class="o">*</span><span class="n">clientDes</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                                <span class="n">throw</span> <span class="s">&quot;accepting socket failed!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+                        <span class="c1">//创建线程处理连接，主线程继续接受新的连接</span>
+                        <span class="kt">int</span> <span class="n">rtn</span> <span class="o">=</span> <span class="n">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tid</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">recvData</span><span class="p">,</span> <span class="n">clientDes</span><span class="p">);</span>
+                        <span class="k">if</span><span class="p">(</span><span class="n">rtn</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+                                <span class="n">throw</span> <span class="s">&quot;creating thread failed!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+                <span class="p">}</span>
+                <span class="c1">//等待线程结束</span>
+                <span class="n">pthread_join</span><span class="p">(</span><span class="n">tid</span><span class="p">,</span> <span class="p">(</span><span class="kt">void</span> <span class="o">**</span><span class="p">)</span><span class="o">&amp;</span><span class="n">rtnStatus</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">catch</span><span class="p">(</span><span class="kt">char</span> <span class="k">const</span> <span class="o">*</span> <span class="n">mes</span><span class="p">)</span>
+        <span class="p">{</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s&quot;</span><span class="p">,</span> <span class="n">mes</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Server quit!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+        <span class="n">close</span><span class="p">(</span><span class="n">serverDes</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+<p>客户端的代码与之前的单线程代码基本相同，唯一的区别在于发送的内容，为了显示服务器多线程的能力特意延长了连接的时间</p>
+<p><strong>C++版本客户端代码：</strong></p>
+<div class="highlight"><pre><span class="cp">#include &lt;cstdio&gt;</span>
+<span class="cp">#include &lt;cstdlib&gt;</span>
+<span class="cp">#include &lt;iostream&gt;</span>
+<span class="cp">#include &lt;unistd.h&gt;</span>
+<span class="cp">#include &lt;cstring&gt;</span>
+<span class="cp">#include &lt;errno.h&gt;</span>
+<span class="cp">#include &lt;sys/types.h&gt;</span>
+<span class="cp">#include &lt;sys/socket.h&gt;</span>
+<span class="cp">#include &lt;netinet/in.h&gt;</span>
+<span class="cp">#include &lt;arpa/inet.h&gt;</span>
+
+<span class="n">using</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="p">;</span>
+<span class="n">using</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">BUF_SIZE</span> <span class="o">=</span> <span class="mi">4096</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">PORT</span> <span class="o">=</span> <span class="mi">9876</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">host</span> <span class="o">=</span> <span class="s">&quot;127.0.0.1&quot;</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAX_COUNTER</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">TIME_INTERVAL</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">args</span><span class="p">[])</span>
+<span class="p">{</span>
+        <span class="kt">int</span> <span class="n">clientDes</span><span class="p">;</span>
+        <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="n">BUF_SIZE</span><span class="p">];</span>
+        <span class="k">struct</span> <span class="n">sockaddr_in</span> <span class="n">serverAddr</span><span class="p">;</span>
+
+        <span class="n">clientDes</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">clientDes</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">{</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">&quot;creating socket failed!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">try</span>
+        <span class="p">{</span>
+                <span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">serverAddr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">serverAddr</span><span class="p">));</span>
+                <span class="n">serverAddr</span><span class="p">.</span><span class="n">sin_family</span> <span class="o">=</span> <span class="n">AF_INET</span><span class="p">;</span>
+                <span class="n">serverAddr</span><span class="p">.</span><span class="n">sin_port</span> <span class="o">=</span> <span class="n">htons</span><span class="p">(</span><span class="n">PORT</span><span class="p">);</span>
+                <span class="n">serverAddr</span><span class="p">.</span><span class="n">sin_addr</span><span class="p">.</span><span class="n">s_addr</span> <span class="o">=</span> <span class="n">inet_addr</span><span class="p">(</span><span class="n">host</span><span class="p">);</span>
+
+                <span class="k">if</span><span class="p">(</span><span class="n">connect</span><span class="p">(</span><span class="n">clientDes</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">serverAddr</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+                        <span class="n">throw</span> <span class="s">&quot;connecting socket failed!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+                <span class="n">printf</span><span class="p">(</span><span class="s">&quot;sending counter...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+                <span class="c1">//隔一秒发送一个数据，持续五秒，发送bye信号</span>
+                <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">MAX_COUNTER</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+                <span class="p">{</span>
+                        <span class="n">strcpy</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">&quot;counter now:&quot;</span><span class="p">);</span>
+                        <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+                        <span class="n">buf</span><span class="p">[</span><span class="n">length</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span> <span class="o">+</span> <span class="n">i</span><span class="p">;</span>
+                        <span class="n">buf</span><span class="p">[</span><span class="n">length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+                        <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;sending message:&quot;</span><span class="o">&lt;&lt;</span><span class="n">buf</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+
+                        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">send</span><span class="p">(</span><span class="n">clientDes</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">buf</span><span class="p">),</span> <span class="mi">0</span><span class="p">);</span>
+                        <span class="k">if</span><span class="p">(</span><span class="n">len</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+                                <span class="n">throw</span> <span class="s">&quot;sending message failed!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+                        <span class="n">sleep</span><span class="p">(</span><span class="n">TIME_INTERVAL</span><span class="p">);</span>
+                <span class="p">}</span>
+
+                <span class="n">printf</span><span class="p">(</span><span class="s">&quot;end the connection!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+                <span class="n">strcpy</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">&quot;bye&quot;</span><span class="p">);</span>
+                <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">send</span><span class="p">(</span><span class="n">clientDes</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">buf</span><span class="p">),</span> <span class="mi">0</span><span class="p">);</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">len</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+                        <span class="n">throw</span> <span class="s">&quot;sending end message failed!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">catch</span><span class="p">(</span><span class="kt">char</span> <span class="k">const</span> <span class="o">*</span><span class="n">mes</span><span class="p">)</span>
+        <span class="p">{</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">&quot;error:%s&quot;</span><span class="p">,</span> <span class="n">mes</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">close</span><span class="p">(</span><span class="n">clientDes</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+<p>在使用linux的sleep()函数时，发现printf函数存在显示问题，总是要等到所有的sleep完成后再一次性显示所有的内容。因此替换为cout并每次使用endl刷新缓冲区解决该问题。</p>
+<p>Python版本就不挂上来了，因为我还没写 ^_^</p>
+<hr class="docutils" />
+<p>下一篇：可能会是邮件服务器或者代理服务器神马的</p>
+
+            </div><!-- /.entry-content -->
+            
+
+        </div><!-- /.eleven.columns -->
+        
+     <div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+        <li><a href="studioIndex.html">our studio</a></li>
+            </ul>
+
+<h4>Categories</h4>
+<ul>
+			<li><a href="/category/itpm.html">ITPM</a></li>
+			<li><a href="/category/python.html">Python</a></li>
+			<li><a href="/category/git.html">git</a></li>
+			<li><a href="/category/network.html">network</a></li>
+			<li><a href="/category/others.html">others</a></li>
+	</ul>
+
+
+<h4>Tags</h4>
+	<ul>
+		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
+		    <li class="tag-1"><a href="/tag/itpm.html">ITPM</a></li>
+		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
+		    <li class="tag-2"><a href="/tag/gitgithub.html">git/github</a></li>
+		    <li class="tag-1"><a href="/tag/network.html">network</a></li>
+	</ul>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul>
+      <li><a href="http://blog.sina.com/scutLaoYi">sina blog</a></li>
+    </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Contact scutLaoYi: HelloWorld636596@126.com <br />
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+                                <li><div class="btn primary"><a href="https://github.com/scutLaoYi" target="_blank">Github</a></div></li>
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+
+</body>
+</html>

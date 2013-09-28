@@ -97,6 +97,40 @@ scutlaoyi.github.com</p>
 
 				        </article></li>
 								        <li><article class="hentry">
+				                <header> <h2 class="entry-title"><a href="/network003.html" rel="bookmark" title="Permalink to socket编程(3):多线程socket服务器/客户端">socket编程(3):多线程socket服务器/客户端</a></h2> </header>
+				                <footer class="post-info">
+				                    <abbr class="published" title="2013-09-28T16:00:00"> 六 28 九月 2013 </abbr>
+				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
+				                <div class="entry-content"> <hr class="docutils" />
+<p>多线程的tcp服务器与单线程的差别不大，主要差别在于服务器接受一个请求后创建一个新线程处理请求，主线程继续等待连接，因此可以在同一个时间处理多个请求。单线程的服务器每次都只有主线程接受并处理请求，这种情况下其他连接就必须等待。</p>
+<p>在GNU/Linux操作系统下可以使用pthread创建并管理线程。</p>
+<p>应该注意的一点是pthread不是Linux默认库的一部分，因此在编译时需要添加参数 -lpthread ，否则会报错(找不到文件：undefined reference to 'pthread_create')。</p>
+<p>由于本代码只为测试多线程，编写时没有考虑长的时延，因此在主线程退出前仅等待最后一个子线程的退出，这在实际操作中八成会出问题。</p>
+<p>另外在创建线程时传入的函数参数为指针，需要注意对内存的管理，防止多个线程的指针变量指向同一个地址。</p>
+<p><strong>C++版本服务器代码：</strong></p>
+<div class="highlight"><pre><span class="cp">#include &lt;cstdio&gt;</span>
+<span class="cp">#include &lt;cstring&gt;</span>
+<span class="cp">#include &lt;cstdlib&gt;</span>
+<span class="cp">#include &lt;cerrno&gt;</span>
+<span class="cp">#include &lt;unistd.h&gt;</span>
+<span class="cp">#include &lt;sys/types.h&gt;</span>
+<span class="cp">#include &lt;sys/socket.h&gt;</span>
+<span class="cp">#include &lt;netinet/in.h&gt;</span>
+<span class="cp">#include ...</span></pre></div> </div><!-- /.entry-content -->
+
+								<div class="medium primary btn"><a href="/network003.html" rel="bookmark" title="Permalink to socket编程(3):多线程socket服务器/客户端">Read more <i class="icon-arrow-right"></i></a></div>
+
+
+
+								<div class="row tag-row">
+																			<span>Tagged as : </span>
+																					<a class="danger label" href="/tag/network.html">network</a>
+																											</div>
+
+
+
+				        </article></li>
+								        <li><article class="hentry">
 				                <header> <h2 class="entry-title"><a href="/ITPM project plan.html" rel="bookmark" title="Permalink to IT项目管理工程项目计划文档">IT项目管理工程项目计划文档</a></h2> </header>
 				                <footer class="post-info">
 				                    <abbr class="published" title="2013-09-27T16:30:00"> 五 27 九月 2013 </abbr>
@@ -117,7 +151,7 @@ scutlaoyi.github.com</p>
 <p>后台架构组：标神、院长，为后台的数据架构开发人员，负责网站的后台数据处理实现和编码</p>
 <p>前台呈现组：蒋委员长、孙少，为网站前台的开发人员，负责前端界面代码的编写及页面的实现</p>
 <p>界面设计组：朱哥，为网站的界面设计原型，并交付前台呈现组进行开发，后期协助测试工作</p>
-<p>文档管理组：懿云妹子，负责文档的管理和配置管理等工作。</p>
+<p>文档管理组：懿云妹子，负责文档的管理和配置管理等工作</p>
 <p><strong>角色安排如下：</strong></p>
 <p>老逸：项目经理</p>
 <p>标神、院长：系统设计及编码人员</p>
@@ -169,10 +203,8 @@ scutlaoyi.github.com</p>
 </blockquote>
 <p><strong>2.2目标</strong></p>
 <blockquote>
-<p>a．将人员合理分工</p>
-<ol class="loweralpha simple" start="2">
-<li>按时分布完成任务</li>
-<li>高效沟通 ...</li></ol></blockquote></div> </div><!-- /.entry-content -->
+<p>a.将人员合理分工</p>
+<p>b.按时分布完成任务 ...</p></blockquote></div> </div><!-- /.entry-content -->
 
 								<div class="medium primary btn"><a href="/ITPM analyse.html" rel="bookmark" title="Permalink to IT项目管理工程可行性分析">Read more <i class="icon-arrow-right"></i></a></div>
 
@@ -609,11 +641,11 @@ sudo apt-get install git
 
 <h4>Tags</h4>
 	<ul>
-		    <li class="tag-2"><a href="/tag/network.html">network</a></li>
-		    <li class="tag-2"><a href="/tag/gitgithub.html">git/github</a></li>
-		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
 		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
 		    <li class="tag-1"><a href="/tag/itpm.html">ITPM</a></li>
+		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
+		    <li class="tag-2"><a href="/tag/gitgithub.html">git/github</a></li>
+		    <li class="tag-1"><a href="/tag/network.html">network</a></li>
 	</ul>
 
 
