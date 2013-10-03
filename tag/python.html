@@ -67,6 +67,42 @@
         <div class="eleven columns">
 		         <ol id="post-list">
 								        <li><article class="hentry">
+				                <header> <h2 class="entry-title"><a href="/Python006.html" rel="bookmark" title="Permalink to Python 笔记（六）">Python 笔记（六）</a></h2> </header>
+				                <footer class="post-info">
+				                    <abbr class="published" title="2013-10-03T10:30:00"> 四 03 十月 2013 </abbr>
+				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
+				                <div class="entry-content"> <p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3，</strong>
+<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>模块</h2>
+<p><strong>模块的定义:</strong></p>
+<p>最简单的，一个文件(*.py)便是一个模块，文件名为模块名，模块可以单独运行也可以被其他模块所包含。</p>
+<p>使用import指令便可以包含其他模块</p>
+<p>使用条件判断：if __name__ == '__main__' 可判定当前模块是否独立运行，True为独立运行，False为被其他模块import</p>
+<p>当模块被其他模块import时，模块内的代码（类定义、函数定义、变量定义）均会被执行一次</p>
+<p>因此添加上述的条件判断可避免某些独立运行的代码在模块被包含时运行，这种机制有利于代码重用</p>
+<p>类似但更加强大的概念是包，包可以将若干模块封装在一起，成为一个程序组。</p>
+<p><strong>获取标准库中的一些常用模块及功能介绍:</strong></p>
+<p>通过dir()函数可获取某个模块中的所有命名，包括函数、变量等</p>
+<p>通过print某个模块或模块中成员的__doc__文档字符串，可获取文档介绍</p>
+<p>例如sys模块中的sys.exit能够退出程序，并指定返回值</p>
+<p>sys ...</p></div> </div><!-- /.entry-content -->
+
+								<div class="medium primary btn"><a href="/Python006.html" rel="bookmark" title="Permalink to Python 笔记（六）">Read more <i class="icon-arrow-right"></i></a></div>
+
+
+
+								<div class="row tag-row">
+																			<span>Tagged as : </span>
+																					<a class="danger label" href="/tag/python.html">Python</a>
+																											</div>
+
+
+
+				        </article></li>
+								        <li><article class="hentry">
 				                <header> <h2 class="entry-title"><a href="/Python005.html" rel="bookmark" title="Permalink to Python 笔记（五）">Python 笔记（五）</a></h2> </header>
 				                <footer class="post-info">
 				                    <abbr class="published" title="2013-09-25T09:30:00"> 三 25 九月 2013 </abbr>
@@ -285,11 +321,11 @@
 
 <h4>Tags</h4>
 	<ul>
+		    <li class="tag-2"><a href="/tag/network.html">network</a></li>
 		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
-		    <li class="tag-1"><a href="/tag/itpm.html">ITPM</a></li>
-		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
 		    <li class="tag-2"><a href="/tag/gitgithub.html">git/github</a></li>
-		    <li class="tag-1"><a href="/tag/network.html">network</a></li>
+		    <li class="tag-2"><a href="/tag/itpm.html">ITPM</a></li>
+		    <li class="tag-0"><a href="/tag/python.html">Python</a></li>
 	</ul>
 
 

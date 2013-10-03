@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+        
+        <title>Python 笔记（六）</title>
+        <meta charset="utf-8" />
+                                                                
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+	<!-- google analyse -->
+          <script type="text/javascript">
+
+ 		var _gaq = _gaq || [];
+ 		 _gaq.push(['_setAccount', 'UA-43833562-1']);
+ 		 _gaq.push(['_trackPageview']);
+
+ 		 (function() {
+  			  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   			 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  			})();
+
+	</script>
+	<!-- end of google analyse -->
+
+
+
+        </head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="">老逸的个人站 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://scutlaoyi.github.com">Home</a></li>
+
+                            <li><a href="studioIndex.html">our studio</a></li>
+                                                  
+              </ul>
+            </div>
+
+          <section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/Python006.html" rel="bookmark"
+                   title="Permalink to Python 笔记（六）">Python 笔记（六）</a></h2>
+                      
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2013-10-03T10:30:00">
+                四 03 十月 2013
+              </abbr>
+                            <address class="vcard author">
+                By <a class="url fn" href="/author/lao-yi.html">老逸</a>
+              </address>
+                          </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3，</strong>
+<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>模块</h2>
+<p><strong>模块的定义:</strong></p>
+<p>最简单的，一个文件(*.py)便是一个模块，文件名为模块名，模块可以单独运行也可以被其他模块所包含。</p>
+<p>使用import指令便可以包含其他模块</p>
+<p>使用条件判断：if __name__ == '__main__' 可判定当前模块是否独立运行，True为独立运行，False为被其他模块import</p>
+<p>当模块被其他模块import时，模块内的代码（类定义、函数定义、变量定义）均会被执行一次</p>
+<p>因此添加上述的条件判断可避免某些独立运行的代码在模块被包含时运行，这种机制有利于代码重用</p>
+<p>类似但更加强大的概念是包，包可以将若干模块封装在一起，成为一个程序组。</p>
+<p><strong>获取标准库中的一些常用模块及功能介绍:</strong></p>
+<p>通过dir()函数可获取某个模块中的所有命名，包括函数、变量等</p>
+<p>通过print某个模块或模块中成员的__doc__文档字符串，可获取文档介绍</p>
+<p>例如sys模块中的sys.exit能够退出程序，并指定返回值</p>
+<p>sys.argv获取命令行参数</p>
+<p>os.system(&quot;...&quot;)调用终端执行参数中的命令</p>
+<div class="highlight"><pre><span class="c">#!/usr/bin/python</span>
+<span class="c">#Filename:ModelOne.py</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">pprint</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+      <span class="k">print</span> <span class="s">&quot;argv:&quot;</span>
+      <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">:</span>
+              <span class="k">print</span> <span class="n">i</span><span class="p">,</span>
+
+      <span class="k">print</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">path of python:&quot;</span>
+      <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+      <span class="k">print</span> <span class="s">&quot;dir of sys:&quot;</span>
+      <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">sys</span><span class="p">))</span>
+      <span class="k">print</span> <span class="s">&quot;document of sys model:&quot;</span>
+      <span class="k">print</span> <span class="n">sys</span><span class="o">.</span><span class="n">__doc__</span>
+      <span class="k">print</span> <span class="s">&quot;document of sys.exit function:&quot;</span>
+      <span class="k">print</span> <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="o">.</span><span class="n">__doc__</span>
+
+      <span class="k">print</span> <span class="s">&quot;execute some command in terminal:&quot;</span>
+      <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;echo Hey!This is an echo by terminal!&quot;</span><span class="p">)</span>
+
+      <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="section" id="id2">
+<h2>标准库的常用数据结构和其他功能</h2>
+<p><strong>所需要的若干模块:</strong></p>
+<div class="highlight"><pre><span class="c">#!usr/bin/python</span>
+<span class="c"># -*- coding=gb2312 -*-</span>
+<span class="kn">import</span> <span class="nn">heapq</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">shelve</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span> <span class="k">as</span> <span class="n">deque</span>
+</pre></div>
+<p><strong>集合</strong></p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">testingSet</span><span class="p">():</span>
+      <span class="k">print</span> <span class="s">&quot;creating two sets with lists:&quot;</span>
+      <span class="c">#创建集合</span>
+      <span class="n">setA</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+      <span class="n">setB</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+      <span class="k">print</span> <span class="n">setA</span><span class="p">,</span> <span class="n">setB</span>
+      <span class="c">#set([0, 1, 2, 3, 4]) set([2, 3, 4])</span>
+
+      <span class="c">#集合的常用功能，并集、判断子集、交集、差、及其他</span>
+      <span class="k">print</span> <span class="s">&quot;union of two set:&quot;</span><span class="p">,</span> <span class="n">setA</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">setB</span><span class="p">)</span>
+      <span class="c">#union of two set: set([0, 1, 2, 3, 4])</span>
+      <span class="k">print</span> <span class="s">r&quot;setA.issubset(setB):&quot;</span><span class="p">,</span> <span class="n">setA</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">setB</span><span class="p">)</span>
+      <span class="c">#setA.issubset(setB): False</span>
+      <span class="k">print</span> <span class="s">r&quot;setA &gt; setB?&quot;</span><span class="p">,</span> <span class="n">setA</span> <span class="o">&gt;</span> <span class="n">setB</span>
+      <span class="c">#setA &gt; setB? True</span>
+      <span class="k">print</span> <span class="s">r&quot;setA.intersection(setB):&quot;</span><span class="p">,</span> <span class="n">setA</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">setB</span><span class="p">)</span>
+      <span class="c">#setA.intersection(setB): set([2, 3, 4])</span>
+      <span class="k">print</span> <span class="s">r&quot;setA.difference(setB):&quot;</span><span class="p">,</span> <span class="n">setA</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">setB</span><span class="p">)</span>
+      <span class="c">#setA.difference(setB): set([0, 1])</span>
+      <span class="n">setB</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+      <span class="k">print</span> <span class="s">r&quot;setB.add(6):&quot;</span><span class="p">,</span> <span class="n">setB</span>
+      <span class="c">#setB.add(6): set([2, 3, 4, 6])</span>
+      <span class="k">print</span> <span class="s">r&quot;setA ^ setB:&quot;</span><span class="p">,</span> <span class="n">setA</span><span class="o">^</span><span class="n">setB</span>
+      <span class="c">#setA ^ setB: set([0, 1, 6])</span>
+</pre></div>
+<p><strong>最小堆</strong></p>
+<p>通过空列表直接堆添加或者在现有列表上构建</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">testingHeap</span><span class="p">():</span>
+      <span class="c">#空列表堆添加方式</span>
+      <span class="n">myHeap</span> <span class="o">=</span> <span class="p">[]</span>
+      <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+              <span class="c">#装入一个元素</span>
+              <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">myHeap</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+      <span class="k">print</span> <span class="n">myHeap</span>
+      <span class="c">#[0, 2, 4, 6, 8]</span>
+      <span class="k">print</span> <span class="s">&quot;heap replace:15&quot;</span><span class="p">,</span> <span class="n">heapq</span><span class="o">.</span><span class="n">heapreplace</span><span class="p">(</span><span class="n">myHeap</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+      <span class="c">#heap replace:15 0 替换并返回最小元素0</span>
+      <span class="k">try</span><span class="p">:</span>
+              <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+                      <span class="c">#弹出一个元素</span>
+                      <span class="k">print</span> <span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">myHeap</span><span class="p">)</span>
+      <span class="k">except</span><span class="p">:</span>
+              <span class="k">print</span> <span class="s">&quot;the end.&quot;</span>
+      <span class="c">#2 4 6 8 15</span>
+      <span class="c">#the end.</span>
+      <span class="c">#直接构建方式</span>
+      <span class="n">myHeap</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+      <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">myHeap</span><span class="p">)</span>
+      <span class="k">print</span> <span class="n">myHeap</span>
+      <span class="c">#[2, 9, 5, 6, 4, 7, 3, 1, 8]</span>
+      <span class="n">heapq</span><span class="o">.</span><span class="n">heapify</span><span class="p">(</span><span class="n">myHeap</span><span class="p">)</span>
+      <span class="k">print</span> <span class="n">myHeap</span>
+      <span class="c">#[1, 2, 3, 6, 4, 7, 5, 9, 8]</span>
+</pre></div>
+<p><strong>双端队列</strong></p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">testingDeque</span><span class="p">():</span>
+      <span class="n">myDeque</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+      <span class="k">print</span> <span class="n">myDeque</span>
+      <span class="c">#deque([1, 2, 3, 4])</span>
+      <span class="n">myDeque</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+      <span class="k">print</span> <span class="s">&quot;append 10:&quot;</span><span class="p">,</span><span class="n">myDeque</span>
+      <span class="c">#append 10: deque([1, 2, 3, 4, 10])</span>
+      <span class="n">myDeque</span><span class="o">.</span><span class="n">appendleft</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+      <span class="k">print</span> <span class="s">&quot;appendleft 9:&quot;</span><span class="p">,</span> <span class="n">myDeque</span>
+      <span class="c">#appendleft 9: deque([9, 1, 2, 3, 4, 10])</span>
+      <span class="k">print</span> <span class="s">&quot;pop:&quot;</span><span class="p">,</span> <span class="n">myDeque</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+      <span class="c">#pop: 10</span>
+      <span class="k">print</span> <span class="s">&quot;popleft:&quot;</span><span class="p">,</span><span class="n">myDeque</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+      <span class="c">#popleft: 9</span>
+      <span class="k">print</span> <span class="s">&quot;now queue:&quot;</span><span class="p">,</span> <span class="n">myDeque</span>
+      <span class="c">#now queue: deque([1, 2, 3, 4])</span>
+
+      <span class="c">#rotate用于旋转队列</span>
+      <span class="n">myDeque</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+      <span class="k">print</span> <span class="s">&quot;after rotate(2):&quot;</span><span class="p">,</span> <span class="n">myDeque</span>
+      <span class="c">#after rotate(2): deque([3, 4, 1, 2])</span>
+      <span class="n">myDeque</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+      <span class="k">print</span> <span class="s">&quot;after rotate(-3):&quot;</span><span class="p">,</span> <span class="n">myDeque</span>
+      <span class="c">#after rotate(-3): deque([2, 3, 4, 1])</span>
+</pre></div>
+<p><strong>时间模块</strong></p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">testingTime</span><span class="p">():</span>
+      <span class="k">print</span> <span class="s">&quot;testing time model&quot;</span>
+      <span class="k">print</span> <span class="s">&quot;time():&quot;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+      <span class="c">#time(): 1380772215.3 获取时间(1970那货)</span>
+      <span class="k">print</span> <span class="s">&quot;asctime():&quot;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">asctime</span><span class="p">()</span>
+      <span class="c">#asctime(): Thu Oct  3 11:50:15 2013</span>
+      <span class="k">print</span> <span class="s">&quot;sleep(1):&quot;</span>
+      <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+      <span class="c">#睡眠一秒</span>
+      <span class="k">print</span> <span class="s">&quot;localtime(time):&quot;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
+      <span class="c">#localtime(time): time.struct_time(tm_year=2013, tm_mon=10, tm_mday=3, tm_hour=11,              #tm_min=50, tm_sec=16, tm_wday=3, tm_yday=276, tm_isdst=0)</span>
+      <span class="c">#localtime获取时间元组，包含若干信息</span>
+</pre></div>
+<p><strong>随机模块</strong></p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">testingRandom</span><span class="p">():</span>
+      <span class="k">print</span> <span class="s">&quot;random():&quot;</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+      <span class="c">#random(): 0.103084395737 返回0-1之间的随机实数一枚</span>
+      <span class="k">print</span> <span class="s">&quot;uniform(1,5):&quot;</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+      <span class="c">#uniform(1,5): 2.36136935196 范围从1-5</span>
+      <span class="k">print</span> <span class="s">&quot;randrange(1, 10, 2):&quot;</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+      <span class="c">#randrange(1, 10, 2): 3 从列表中随机一个值</span>
+      <span class="k">print</span> <span class="s">&quot;choice(range(1, 10)):&quot;</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+      <span class="c">#choice(range(1, 10)): 7 相同，不过列表可自己设定</span>
+      <span class="n">listForShuffle</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+      <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">listForShuffle</span><span class="p">)</span>
+      <span class="k">print</span> <span class="s">&quot;shuffle a range(5, 20, 2):&quot;</span><span class="p">,</span> <span class="n">listForShuffle</span>
+      <span class="c">#shuffle a range(5, 20, 2): [9, 19, 5, 17, 11, 13, 15, 7] 将给定的列表打散</span>
+      <span class="k">print</span> <span class="s">&quot;sample(randomList, 5):&quot;</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">listForShuffle</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+      <span class="c">#sample(randomList, 5): [11, 17, 7, 13, 9] 列表中随机抽取5个元素</span>
+</pre></div>
+<p><strong>Shelve</strong></p>
+<p>可作为方便的小型数据库，使用方式非常简单</p>
+<p>首先用Shelve打开(open)一个文件，该文件自动成为数据储存的地方，open函数返回Shelve对象</p>
+<p>通过对该对象的操作可以操作数据，实际操作时直接把该对象当作字典即可</p>
+<p>完成后对该对象调用close关闭并保存数据到文件里去</p>
+<p>鸭子类型在这里表现的非常牛逼</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">testingShelve</span><span class="p">():</span>
+      <span class="n">db</span> <span class="o">=</span> <span class="n">shelve</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;db.txt&quot;</span><span class="p">)</span>
+      <span class="k">try</span><span class="p">:</span>
+              <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+                      <span class="n">db</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span> <span class="o">=</span> <span class="s">&quot;hey!&quot;</span>
+              <span class="n">innerMap</span> <span class="o">=</span> <span class="p">{}</span>
+              <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+                      <span class="n">innerMap</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span> <span class="o">=</span> <span class="s">&quot;hey!&quot;</span>
+              <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">):</span>
+                      <span class="n">db</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span> <span class="o">=</span> <span class="n">innerMap</span>
+      <span class="k">finally</span><span class="p">:</span>
+              <span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+      <span class="n">db</span> <span class="o">=</span> <span class="n">shelve</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;db.txt&quot;</span><span class="p">)</span>
+      <span class="k">try</span><span class="p">:</span>
+              <span class="k">print</span> <span class="s">&quot;now testing reading data from db&quot;</span>
+              <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+                      <span class="k">print</span> <span class="n">db</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)],</span>
+              <span class="k">print</span> <span class="s">&#39; &#39;</span>
+              <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">):</span>
+                      <span class="k">print</span> <span class="n">db</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)],</span>
+              <span class="k">print</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">now testing making some exception:&quot;</span>
+              <span class="k">print</span> <span class="n">db</span><span class="p">[</span><span class="s">&#39;100&#39;</span><span class="p">]</span>
+      <span class="k">except</span><span class="p">:</span>
+              <span class="k">print</span> <span class="s">&quot;exception occurs!&quot;</span>
+      <span class="k">finally</span><span class="p">:</span>
+              <span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+<p><strong>正则表达式</strong></p>
+<p>Python的另外一个牛逼的功能，通过正则表达式可以获得非常强大的字符串处理能力</p>
+<p>包括构建，搜索，替换等。</p>
+<p>正则表达式的基本要点有以下：</p>
+<p>. :通配符，指代一个字符</p>
+<p>字符集</p>
+<blockquote>
+<p>[a-z]:字符集，a到z均可，取一个</p>
+<p>[^abc]:反转字符集，除了a,b,c之外的所有字符，取一个</p>
+</blockquote>
+<p>子模式</p>
+<blockquote>
+<p>单个字符均为子模式</p>
+<p>(abc|cba):多个字符的子模式，匹配abc或者cba</p>
+</blockquote>
+<p>子模式之后可添加重复运算符定义匹配的数量</p>
+<blockquote>
+<p>?:0或1个</p>
+<p>+:1个或多个</p>
+<p>*:0个1个或多个</p>
+<p>{a, b}:a到b个</p>
+</blockquote>
+<p>重复运算符默认为贪婪模式，即匹配最多的字符</p>
+<p>在重复运算符后添加?可将其转变为非贪婪模式，匹配最少的字符</p>
+<p>匹配位置</p>
+<blockquote>
+<p>^:只在字符串开头匹配</p>
+<p>$:只在字符串结尾匹配</p>
+</blockquote>
+<p>组</p>
+<blockquote>
+<p>每一对匹配的小括号定义了一个组，最大的组为整个串，根据左括号出现的次序决定组的编号</p>
+<p>外层的组包含了内层的组，整体作为一个组</p>
+</blockquote>
+<p>在re模块中包含了如下几个常用函数：</p>
+<blockquote>
+<p>compile:编译，将正则表达式编译为匹配模式对象</p>
+<blockquote>
+匹配模式对象可用于实现正则表达式的功能，
+在需要匹配的次数比较多的情况下使用模式对象可以让Python不用每次都从正则表达式开始处理，
+有点类似pyc文件</blockquote>
+<p>search:搜索并返回第一个匹配成功的对象，失败返回None</p>
+<blockquote>
+该对象包含了匹配的基本信息，包括匹配的位置，匹配的长度等，可用于后续的操作</blockquote>
+<p>match：从头开始匹配</p>
+<blockquote>
+若字符串开头满足正则表达式则返回True，否则False</blockquote>
+<p>split：通过正则表达式对字符串进行分割</p>
+<blockquote>
+类似str的split,但str的split只能用某个字符进行分割，这货可以用匹配的字符串作为分隔符，
+还能设定最大的分隔数，超过部分直接作为整体返回</blockquote>
+<p>findall：搜索整个字符串的所有匹配字符串，返回列表</p>
+<p>sub:将所有匹配字符串替换</p>
+<p>escape:自动给字符串添加转义符使字符串可作为正则表达式使用</p>
+</blockquote>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">testingRe</span><span class="p">():</span>
+      <span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">r&quot;[0-9]+&quot;</span><span class="p">)</span>
+      <span class="n">timeStr</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">asctime</span><span class="p">()</span>
+      <span class="k">print</span> <span class="n">timeStr</span>
+      <span class="c">#Thu Oct  3 12:17:58 2013</span>
+      <span class="n">numObject</span> <span class="o">=</span> <span class="n">pattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">timeStr</span><span class="p">)</span>
+      <span class="k">print</span> <span class="n">numObject</span>
+      <span class="c">#&lt;_sre.SRE_Match object at 0x7f9966eba7e8&gt;</span>
+      <span class="k">if</span> <span class="n">pattern</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">timeStr</span><span class="p">):</span>
+              <span class="k">print</span> <span class="s">&quot;it begins with number&quot;</span>
+      <span class="k">else</span><span class="p">:</span>
+              <span class="k">print</span> <span class="s">&quot;it doesn&#39;t begin with number&quot;</span>
+      <span class="c">#it doesn&#39;t begin with number</span>
+      <span class="k">print</span> <span class="s">&quot;split with number:&quot;</span><span class="p">,</span> <span class="n">pattern</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">timeStr</span><span class="p">)</span>
+      <span class="c">#split with number: [&#39;Thu Oct  &#39;, &#39; &#39;, &#39;:&#39;, &#39;:&#39;, &#39; &#39;, &#39;&#39;]</span>
+      <span class="k">print</span> <span class="s">&quot;setting maxsplit 3:&quot;</span><span class="p">,</span> <span class="n">pattern</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">timeStr</span><span class="p">,</span> <span class="n">maxsplit</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+      <span class="c">#setting maxsplit 3: [&#39;Thu Oct  &#39;, &#39; &#39;, &#39;:&#39;, &#39;:58 2013&#39;]</span>
+      <span class="k">print</span> <span class="s">&quot;find all number:&quot;</span><span class="p">,</span> <span class="n">pattern</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">timeStr</span><span class="p">)</span>
+      <span class="c">#find all number: [&#39;3&#39;, &#39;12&#39;, &#39;17&#39;, &#39;58&#39;, &#39;2013&#39;]</span>
+      <span class="k">print</span> <span class="s">&quot;replace all number with a string(&#39;number&#39;)&quot;</span>
+      <span class="c">#replace all number with a string(&#39;number&#39;)</span>
+      <span class="k">print</span> <span class="n">pattern</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">&#39;number&#39;</span><span class="p">,</span> <span class="n">timeStr</span><span class="p">)</span>
+      <span class="c">#Thu Oct  number number:number:number number</span>
+      <span class="k">print</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">timeStr</span><span class="p">)</span>
+      <span class="c">#Thu\ Oct\ \ 3\ 12\:17\:58\ 2013</span>
+
+      <span class="n">webStr</span> <span class="o">=</span> <span class="s">&quot;scutlaoyi.github.com&quot;</span>
+      <span class="n">webPattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">r&#39;[^\.]+\.(github)\.[^.]{3}&#39;</span><span class="p">)</span>
+      <span class="n">m</span> <span class="o">=</span> <span class="n">webPattern</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">webStr</span><span class="p">)</span>
+      <span class="k">print</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+      <span class="c">#github 获取一号组</span>
+      <span class="k">print</span> <span class="n">m</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+      <span class="c">#10 一号组的起始为位置</span>
+      <span class="k">print</span> <span class="n">m</span><span class="o">.</span><span class="n">end</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+      <span class="c">#16 一号组的终止位置+1</span>
+      <span class="k">print</span> <span class="n">m</span><span class="o">.</span><span class="n">span</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+      <span class="c">#(10, 16) 起始和终止位置</span>
+      <span class="k">print</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">webPattern</span><span class="p">,</span> <span class="s">r&#39;https://\1.com&#39;</span><span class="p">,</span> <span class="n">webStr</span><span class="p">)</span>
+      <span class="c">#使用被匹配字符串的一号组替换并构造新的字符串</span>
+      <span class="c">#https://github.com</span>
+</pre></div>
+<p>这篇卡了很久，主要是因为基础教程第十章内容太多了，每次写一半就感觉没欲望写下去.</p>
+<p>今天硬着头皮愣是把它弄出来，了却一桩小事。完成了将近二分之一，过了这章后面的貌似就没多少困难的东西了，即将进入实战。</p>
+<hr class="docutils" />
+<p>更多Python学习，推荐：</p>
+<blockquote>
+<p>简明Python教程： <a class="reference external" href="http://www.2cto.com/shouce/pythonjc/index.html">http://www.2cto.com/shouce/pythonjc/index.html</a></p>
+<p>《Python基础教程》</p>
+</blockquote>
+</div>
+
+            </div><!-- /.entry-content -->
+            
+
+        </div><!-- /.eleven.columns -->
+        
+     <div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+        <li><a href="studioIndex.html">our studio</a></li>
+            </ul>
+
+<h4>Categories</h4>
+<ul>
+			<li><a href="/category/itpm.html">ITPM</a></li>
+			<li><a href="/category/python.html">Python</a></li>
+			<li><a href="/category/git.html">git</a></li>
+			<li><a href="/category/network.html">network</a></li>
+			<li><a href="/category/others.html">others</a></li>
+	</ul>
+
+
+<h4>Tags</h4>
+	<ul>
+		    <li class="tag-2"><a href="/tag/network.html">network</a></li>
+		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
+		    <li class="tag-2"><a href="/tag/gitgithub.html">git/github</a></li>
+		    <li class="tag-2"><a href="/tag/itpm.html">ITPM</a></li>
+		    <li class="tag-0"><a href="/tag/python.html">Python</a></li>
+	</ul>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul>
+      <li><a href="http://blog.sina.com/scutLaoYi">sina blog</a></li>
+    </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Contact scutLaoYi: HelloWorld636596@126.com <br />
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+                                <li><div class="btn primary"><a href="https://github.com/scutLaoYi" target="_blank">Github</a></div></li>
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+
+</body>
+</html>
