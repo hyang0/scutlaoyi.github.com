@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
         
-        <title>IT项目管理工程可行性分析</title>
+        <title>Python 笔记（七）</title>
         <meta charset="utf-8" />
                                                                 
 
@@ -65,95 +65,105 @@
 
             <header>
               <h2 class="entry-title">
-                <a href="/ITPM analyse.html" rel="bookmark"
-                   title="Permalink to IT项目管理工程可行性分析">IT项目管理工程可行性分析</a></h2>
+                <a href="/Python007.html" rel="bookmark"
+                   title="Permalink to Python 笔记（七）">Python 笔记（七）</a></h2>
                       
             </header>
             <footer class="post-info">
-              <abbr class="published" title="2013-09-27T15:30:00">
-                五 27 九月 2013
+              <abbr class="published" title="2013-10-04T10:30:00">
+                五 04 十月 2013
               </abbr>
                             <address class="vcard author">
                 By <a class="url fn" href="/author/lao-yi.html">老逸</a>
               </address>
                           </footer><!-- /.post-info -->
             <div class="entry-content">
-              <p>～～～～～～～～～～～～～～～～～～～～～～～～～～～</p>
-<p>修订日期：2013-09-27 15：30</p>
-<p>修订内容：初始版本</p>
-<p>修订人员：孙少、老逸</p>
-<p>～～～～～～～～～～～～～～～～～～～～～～～～～～～</p>
+              <p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3，</strong>
+<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
 <div class="section" id="id1">
-<h2>1、引言</h2>
-<p><strong>1.1编写目的</strong></p>
+<h2>文件和流</h2>
+<p><strong>打开文件</strong></p>
+<p>使用open函数打开文件，参数一为文件名，参数二为打开方式，参数三为缓冲区设置</p>
+<p>最简单的打开文件代码如下：</p>
+<div class="highlight"><pre><span class="n">myFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;myFile.txt&quot;</span><span class="p">)</span>
+</pre></div>
+<p>程序自动以读取方式打开文件，如果文件不存在会引发IOError异常</p>
+<p>以写入方式打开文件：</p>
+<div class="highlight"><pre><span class="n">myFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;myFile.txt&quot;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+</pre></div>
+<p>'b'属性以二进制方式打开文件</p>
+<p>'a'属性以追加方式打开文件</p>
+<p>'+'属性以读写方式打开文件</p>
+<p>缓冲区设置：</p>
 <blockquote>
-用于项目可行性分析</blockquote>
-<p><strong>1.2项目背景</strong></p>
-<blockquote>
-<p>a.软件名：博客平台</p>
-<p>b.项目开发团队：QFire</p>
-<p>c.当前网络已存在类似系统，效果良好</p>
+<p>0(False) 不设置缓冲区，直接写入硬盘;</p>
+<p>1(True) 开启缓冲区;</p>
+<p>&gt;1 设置缓冲区大小;</p>
+<p>-1 使用默认缓冲区大小</p>
 </blockquote>
-</div>
-<div class="section" id="id2">
-<h2>2、可行性研究的前提</h2>
-<p><strong>2.1要求</strong></p>
+<p><strong>读写文件（单字符）</strong></p>
+<p>read():</p>
 <blockquote>
-<p>a.功能：完成博客的相关功能（浏览、注册登录、博客的发布和编辑、评论、关注）</p>
-<p>b.性能：能较好的运行在http服务器上，支持基本的功能使用</p>
-<p>c.完成期限：15周</p>
+read函数可用于读取任意字节的字符串，添加参数可设定字节长，留空则会读取至文件结束</blockquote>
+<p>write():</p>
+<blockquote>
+write用于写入数据，参数中设定写入的字符串</blockquote>
+<p>sys.stdin:</p>
+<blockquote>
+可通过管道读取数据，类似于文件的一个东西，可调用它的read和write等读写函数进行数据处理</blockquote>
+<p>seek():</p>
+<blockquote>
+<p>同C++的seek,移动文件指针，参数一为偏移量，参数二为相对位置</p>
+<p>相对位置有如下可选参数：</p>
+<blockquote>
+<p>0，默认参数，从文件起始处开始</p>
+<p>1，从当前位置开始</p>
+<p>2，从文件结束处</p>
 </blockquote>
-<p><strong>2.2目标</strong></p>
-<blockquote>
-<p>a.将人员合理分工</p>
-<p>b.按时分布完成任务</p>
-<p>c.高效沟通</p>
 </blockquote>
-<p><strong>2.3决定可行性的主要因素</strong></p>
+<p>tell():</p>
 <blockquote>
-时间（按时完成任务）</blockquote>
-</div>
-<div class="section" id="id3">
-<h2>3、对现有系统的分析</h2>
-<p><strong>3.1费用支出</strong></p>
+返回当前文件指针位置</blockquote>
+<p><strong>文件读写（行操作）</strong></p>
+<p>readline():</p>
 <blockquote>
-无费用支出</blockquote>
-<p><strong>3.2人员</strong></p>
+读取一行内容，设定参数可限制一行的最长字符数，超过部分被忽略</blockquote>
+<p>readlines():</p>
 <blockquote>
-人员充足</blockquote>
-<p><strong>3.3设备</strong></p>
+读取所有行并保存到列表中</blockquote>
+<p>writelines():</p>
 <blockquote>
-个人电脑</blockquote>
-</div>
-<div class="section" id="id4">
-<h2>4、所建议技术可行性分析</h2>
-<p><strong>4.1对系统的简要描述</strong></p>
+参数中传入字符串列表，直接将整个列表写入文件</blockquote>
+<p><strong>文件关闭和缓冲区刷新</strong></p>
+<p>close():</p>
 <blockquote>
-该系统提供博客内容的统一管理和维护，并提供用户注册登录、博客的浏览、发布、编辑、评论、关注的相关功能</blockquote>
-<p><strong>4.2与现有系统比较的优越性</strong></p>
+额...就是关闭文件，程序正常退出时文件会自动关闭，但最好写一下</blockquote>
+<p>flush():</p>
 <blockquote>
-可逐步扩展，如程序语法高亮等功能</blockquote>
-<p><strong>4.3技术可行性评价</strong></p>
+刷新缓冲区</blockquote>
+<p><strong>文件迭代器</strong></p>
+<p>简单、方便又好用的功能。</p>
+<p>所有文件对象（文件、标准输入流等）均可直接参与迭代操作，因此上述的按行处理的代码可简化为：</p>
+<div class="highlight"><pre><span class="n">myFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;somefile.txt&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">myFile</span><span class="p">:</span>
+    <span class="n">doSomething</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="n">myFile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+<p>依靠程序自动退出关闭文件，可创建匿名文件对象，再次简化代码：</p>
+<div class="highlight"><pre><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;somefile.txt&quot;</span><span class="p">):</span>
+    <span class="n">doSomething</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</pre></div>
+<p>这一节确实没多少东西。感觉基础教程对二进制文件操作的讲解不多，过几天找些别的资料补充一下。</p>
+<hr class="docutils" />
+<p>更多Python学习，推荐：</p>
 <blockquote>
-<ol class="loweralpha simple">
-<li>功能目标较为简单，并鉴于网上有较多开源代码，功能目标可以达到</li>
-<li>开发人员充足，具有一定的技术及学习能力，满总系统开发要求</li>
-<li>时间较为紧张，有一定风险，但在合理安排下可以完成</li>
-</ol>
+<p>简明Python教程： <a class="reference external" href="http://www.2cto.com/shouce/pythonjc/index.html">http://www.2cto.com/shouce/pythonjc/index.html</a></p>
+<p>《Python基础教程》</p>
 </blockquote>
-</div>
-<div class="section" id="id5">
-<h2>5、社会因素可行性分析</h2>
-<p><strong>5.1法律因素</strong></p>
-<blockquote>
-该项目无侵权行为</blockquote>
-<p><strong>5.2用户使用可行性</strong></p>
-<blockquote>
-由于互联网大行其道，博客用户极其充足，使用可行性较高。</blockquote>
-</div>
-<div class="section" id="id6">
-<h2>6、结论意见</h2>
-<p>由于技术不成熟，该系统为初步尝试，随后可对其进行扩展及维护，提供更多功能。但由于其无花费压力，且较为简单，人力资源充足，设备较为完备，该项目可行性较高。</p>
 </div>
 
             </div><!-- /.entry-content -->

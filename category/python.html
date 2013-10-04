@@ -67,6 +67,50 @@
         <div class="eleven columns">
 		         <ol id="post-list">
 								        <li><article class="hentry">
+				                <header> <h2 class="entry-title"><a href="/Python007.html" rel="bookmark" title="Permalink to Python 笔记（七）">Python 笔记（七）</a></h2> </header>
+				                <footer class="post-info">
+				                    <abbr class="published" title="2013-10-04T10:30:00"> 五 04 十月 2013 </abbr>
+				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
+				                <div class="entry-content"> <p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3，</strong>
+<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>文件和流</h2>
+<p><strong>打开文件</strong></p>
+<p>使用open函数打开文件，参数一为文件名，参数二为打开方式，参数三为缓冲区设置</p>
+<p>最简单的打开文件代码如下：</p>
+<div class="highlight"><pre><span class="n">myFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;myFile.txt&quot;</span><span class="p">)</span>
+</pre></div>
+<p>程序自动以读取方式打开文件，如果文件不存在会引发IOError异常</p>
+<p>以写入方式打开文件：</p>
+<div class="highlight"><pre><span class="n">myFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;myFile.txt&quot;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+</pre></div>
+<p>'b'属性以二进制方式打开文件</p>
+<p>'a'属性以追加方式打开文件</p>
+<p>'+'属性以读写方式打开文件</p>
+<p>缓冲区设置：</p>
+<blockquote>
+<p>0(False) 不设置缓冲区，直接写入硬盘;</p>
+<p>1(True) 开启缓冲区;</p>
+<p>&gt;1 设置缓冲区大小;</p>
+<p>-1 使用默认缓冲区大小</p>
+</blockquote>
+<p><strong>读写文件（单字符 ...</strong></p></div> </div><!-- /.entry-content -->
+
+								<div class="medium primary btn"><a href="/Python007.html" rel="bookmark" title="Permalink to Python 笔记（七）">Read more <i class="icon-arrow-right"></i></a></div>
+
+
+
+								<div class="row tag-row">
+																			<span>Tagged as : </span>
+																					<a class="danger label" href="/tag/python.html">Python</a>
+																											</div>
+
+
+
+				        </article></li>
+								        <li><article class="hentry">
 				                <header> <h2 class="entry-title"><a href="/Python006.html" rel="bookmark" title="Permalink to Python 笔记（六）">Python 笔记（六）</a></h2> </header>
 				                <footer class="post-info">
 				                    <abbr class="published" title="2013-10-03T10:30:00"> 四 03 十月 2013 </abbr>
@@ -321,11 +365,11 @@
 
 <h4>Tags</h4>
 	<ul>
-		    <li class="tag-2"><a href="/tag/network.html">network</a></li>
-		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
+		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
 		    <li class="tag-2"><a href="/tag/gitgithub.html">git/github</a></li>
 		    <li class="tag-2"><a href="/tag/itpm.html">ITPM</a></li>
-		    <li class="tag-0"><a href="/tag/python.html">Python</a></li>
+		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
+		    <li class="tag-2"><a href="/tag/network.html">network</a></li>
 	</ul>
 
 
