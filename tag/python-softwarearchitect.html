@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
         
-        <title>老逸的个人站</title>
+        <title>老逸的个人站 - Python SoftwareArchitect</title>
         <meta charset="utf-8" />
                                                                 
 
@@ -58,7 +58,7 @@
             </div>
 
           <section id="content">
-<h2>Articles in the others category</h2>
+
 
 
    <div class="row">
@@ -67,30 +67,30 @@
         <div class="eleven columns">
 		         <ol id="post-list">
 								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/first article.html" rel="bookmark" title="Permalink to Hello,world!">Hello,world!</a></h2> </header>
+				                <header> <h2 class="entry-title"><a href="/PythonExpe001.html" rel="bookmark" title="Permalink to 软件体系结构：八皇后问题系列之回溯法">软件体系结构：八皇后问题系列之回溯法</a></h2> </header>
 				                <footer class="post-info">
-				                    <abbr class="published" title="2023-09-07T13:00:00"> 四 07 九月 2023 </abbr>
+				                    <abbr class="published" title="2013-11-02T22:30:00"> 六 02 十一月 2013 </abbr>
 				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <div class="section" id="id1">
-<h2>Hello,world!</h2>
-<p>代码之神的古老咒语，每每想起总是令人振奋不已。</p>
-<p>这是老逸的博客新家，原新浪博客停止更新。感谢大家的支持，你的访问就是最大的鼓励了 ^_^</p>
-<p>本博客挂载github，使用Pelican生成静态网页，在此感谢开源社区的丰富资源。</p>
-<p>好记的玉米是不会吝惜多次提起的:
-scutlaoyi.github.com</p>
-<p>欢迎常来做客哦～</p>
-<p>~~~~~~~~~~~~~正文完~~~~~~~~~~~~~~~~~</p>
-<p>由于技术问题暂时无法支持评论，接下来将继续拓展完善博客功能。</p>
-</div>
- </div><!-- /.entry-content -->
+				                <div class="entry-content"> <p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3</strong></p>
+<p><strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<p>最近学习搞得有点杂，一怒之下一个月没打理个人主页了，有些事情就是这样，你越不管，时间越长，就越不想管。</p>
+<p>软件体系结构是本学期的课程之一，大作业是用几种奇怪的风格构造一个八皇后问题的求解器。</p>
+<p>由于没有限定语言，咱自然是Python搞起。正发愁前些日子学习了那么多的理论知识没地方实践，正好，这货拿来下菜！</p>
+<p><strong>风格一：回溯法</strong></p>
+<p>其实我真的研究了很久这个神乎其神的名字，有点文言文的味道。然而半晌发现这货说到底就是深搜。
+于是敲了一个递归的函数处理之，不加任何剪枝优化，回溯法原型就基本出来了。</p>
+<p>我们将棋盘横向切分为多个单独的层，显而易见，每一层只能放置一个皇后，且每一层都应该放置皇后。于是可以递归搜索每一层，找出所有可能位置。</p>
+<p>使用深度优先搜索算法，遍历每一层的所有位置，检查当前位置是否符合要求。如果不符合要求，继续搜索下一个位置；如果符合要求，则依据深度优先原则，递归调用函数自身搜索下一层所有位置，依此类推。算法的终止条件为搜索到达了棋盘的最底层，这时候如果找到了符合条件的位置 ...</p> </div><!-- /.entry-content -->
 
-								<div class="medium primary btn"><a href="/first article.html" rel="bookmark" title="Permalink to Hello,world!">Read more <i class="icon-arrow-right"></i></a></div>
+								<div class="medium primary btn"><a href="/PythonExpe001.html" rel="bookmark" title="Permalink to 软件体系结构：八皇后问题系列之回溯法">Read more <i class="icon-arrow-right"></i></a></div>
 
 
 
 								<div class="row tag-row">
 																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/hello.html">hello</a>
+																					<a class="danger label" href="/tag/python-softwarearchitect.html">Python SoftwareArchitect</a>
 																											</div>
 
 
