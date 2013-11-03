@@ -97,16 +97,44 @@ scutlaoyi.github.com</p>
 
 				        </article></li>
 								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/PythonExpe001.html" rel="bookmark" title="Permalink to 软件体系结构：八皇后问题系列之回溯法">软件体系结构：八皇后问题系列之回溯法</a></h2> </header>
+				                <header> <h2 class="entry-title"><a href="/PythonExpe002.html" rel="bookmark" title="Permalink to 软件体系结构：N皇后问题系列之管道风格">软件体系结构：N皇后问题系列之管道风格</a></h2> </header>
 				                <footer class="post-info">
-				                    <abbr class="published" title="2013-11-02T22:30:00"> 六 02 十一月 2013 </abbr>
+				                    <abbr class="published" title="2013-11-03T22:30:00"> 日 03 十一月 2013 </abbr>
+				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
+				                <div class="entry-content"> <p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3</strong></p>
+<p><strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<p><strong>风格二:管道风格</strong></p>
+<p>管道风格的主要思想是，将问题产生的输入作为流，从程序的入口输入，构造若干个过滤器，每个过滤器负责一部分过滤功能，将不符合结果的输入筛选掉，最终剩下完全符合要求的便是问题所需要的输出。</p>
+<p>考虑到N皇后问题，还是将棋盘分割为单独的层，为每个层构造一个过滤器，这样便可以从棋盘的顶部将所有可能解输入，层层筛选，直到棋盘底部依然符合要求的解集便是答案了。</p>
+<p>这里运用了一点剪枝以优化性能。显而易见，如果在第i层的某个解不符合要求，则没有必要为这个解构造所有i层以下的解，因为在第i层必然是不能通过过滤器的。因此，我的实现方法没有在最开始便构造所有层的所有解，而是只构造了第一层的所有解。在过滤第一层之后，从剩下的那些可能解的基础上，再次构造下一层的所有可能解，并传入下一层的过滤器。这样便省去了大量无效的解。</p>
+<p>那么这些解集放在哪里呢？初试Python，用了恶心的办法实现了，便是List。由于每个解都是由一个或若干个数字形成的列表组成（保存每一层的皇后位置），因此将每一层的每个可能解List存为一个大List，并再存入总List作为管道的输入流。这样在管道的另一端便获得筛选完成后的结果List。若有n皇后 ...</p> </div><!-- /.entry-content -->
+
+								<div class="medium primary btn"><a href="/PythonExpe002.html" rel="bookmark" title="Permalink to 软件体系结构：N皇后问题系列之管道风格">Read more <i class="icon-arrow-right"></i></a></div>
+
+
+
+								<div class="row tag-row">
+																			<span>Tagged as : </span>
+																					<a class="danger label" href="/tag/python.html">Python</a>
+																					<a class="danger label" href="/tag/softwarearchitect.html">SoftwareArchitect</a>
+																											</div>
+
+
+
+				        </article></li>
+								        <li><article class="hentry">
+				                <header> <h2 class="entry-title"><a href="/PythonExpe001.html" rel="bookmark" title="Permalink to 软件体系结构：N皇后问题系列之回溯法">软件体系结构：N皇后问题系列之回溯法</a></h2> </header>
+				                <footer class="post-info">
+				                    <abbr class="published" title="2013-10-31T22:30:00"> 四 31 十月 2013 </abbr>
 				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
 				                <div class="entry-content"> <p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
 <p><strong>使用的Python版本为2.7.3</strong></p>
 <p><strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
 <hr class="docutils" />
 <p>最近学习搞得有点杂，一怒之下一个月没打理个人主页了，有些事情就是这样，你越不管，时间越长，就越不想管。</p>
-<p>软件体系结构是本学期的课程之一，大作业是用几种奇怪的风格构造一个八皇后问题的求解器。</p>
+<p>软件体系结构是本学期的课程之一，大作业是用几种奇怪的风格构造一个N皇后问题的求解器。</p>
 <p>由于没有限定语言，咱自然是Python搞起。正发愁前些日子学习了那么多的理论知识没地方实践，正好，这货拿来下菜！</p>
 <p><strong>风格一：回溯法</strong></p>
 <p>其实我真的研究了很久这个神乎其神的名字，有点文言文的味道。然而半晌发现这货说到底就是深搜。
@@ -114,13 +142,14 @@ scutlaoyi.github.com</p>
 <p>我们将棋盘横向切分为多个单独的层，显而易见，每一层只能放置一个皇后，且每一层都应该放置皇后。于是可以递归搜索每一层，找出所有可能位置。</p>
 <p>使用深度优先搜索算法，遍历每一层的所有位置，检查当前位置是否符合要求。如果不符合要求，继续搜索下一个位置；如果符合要求，则依据深度优先原则，递归调用函数自身搜索下一层所有位置，依此类推。算法的终止条件为搜索到达了棋盘的最底层，这时候如果找到了符合条件的位置 ...</p> </div><!-- /.entry-content -->
 
-								<div class="medium primary btn"><a href="/PythonExpe001.html" rel="bookmark" title="Permalink to 软件体系结构：八皇后问题系列之回溯法">Read more <i class="icon-arrow-right"></i></a></div>
+								<div class="medium primary btn"><a href="/PythonExpe001.html" rel="bookmark" title="Permalink to 软件体系结构：N皇后问题系列之回溯法">Read more <i class="icon-arrow-right"></i></a></div>
 
 
 
 								<div class="row tag-row">
 																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/python-softwarearchitect.html">Python SoftwareArchitect</a>
+																					<a class="danger label" href="/tag/python.html">Python</a>
+																					<a class="danger label" href="/tag/softwarearchitect.html">SoftwareArchitect</a>
 																											</div>
 
 
@@ -751,12 +780,12 @@ sudo apt-get install git
 
 <h4>Tags</h4>
 	<ul>
-		    <li class="tag-2"><a href="/tag/itpm.html">ITPM</a></li>
 		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
-		    <li class="tag-2"><a href="/tag/network.html">network</a></li>
+		    <li class="tag-3"><a href="/tag/softwarearchitect.html">SoftwareArchitect</a></li>
 		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
-		    <li class="tag-4"><a href="/tag/python-softwarearchitect.html">Python SoftwareArchitect</a></li>
-		    <li class="tag-2"><a href="/tag/gitgithub.html">git/github</a></li>
+		    <li class="tag-2"><a href="/tag/itpm.html">ITPM</a></li>
+		    <li class="tag-2"><a href="/tag/network.html">network</a></li>
+		    <li class="tag-3"><a href="/tag/gitgithub.html">git/github</a></li>
 	</ul>
 
 
