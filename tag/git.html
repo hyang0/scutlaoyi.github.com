@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
         
-        <title>scutLaoYi's site - git</title>
+        <title>老逸的个人站 - git</title>
         <meta charset="utf-8" />
                                                                 
 
@@ -15,18 +15,21 @@
 
         <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
 
+	<!-- google analyse -->
+          <script type="text/javascript">
 
-                        <script>
-                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ 		var _gaq = _gaq || [];
+ 		 _gaq.push(['_setAccount', 'UA-43833562-1']);
+ 		 _gaq.push(['_trackPageview']);
 
-                ga('create', 'UA-43833562-1', 'my website');
-                ga('send', 'pageview');
+ 		 (function() {
+  			  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   			 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  			})();
 
-              </script>
-          
+	</script>
+	<!-- end of google analyse -->
 
 
 
@@ -40,7 +43,7 @@
         <div class="row">
 
           <header id="banner" class="body">
-                  <h1><a href="">scutLaoYi's site <strong></strong></a></h1>
+                  <h1><a href="">老逸的个人站 <strong></strong></a></h1>
           </header><!-- /#banner -->
 
             <div id="navigation" class="navbar row">
@@ -49,6 +52,7 @@
               <ul class="columns">
                 <li><a href="http://scutlaoyi.github.com">Home</a></li>
 
+                            <li><a href="studioIndex.html">our studio</a></li>
                                                   
               </ul>
             </div>
@@ -63,10 +67,79 @@
         <div class="eleven columns">
 		         <ol id="post-list">
 								        <li><article class="hentry">
+				                <header> <h2 class="entry-title"><a href="/learning Git 3.html" rel="bookmark" title="Permalink to Git 与 GitHub 实践经验谈（一）">Git 与 GitHub 实践经验谈（一）</a></h2> </header>
+				                <footer class="post-info">
+				                    <abbr class="published" title="2013-11-07T22:10:00"> 四 07 十一月 2013 </abbr>
+				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
+				                <div class="entry-content"> <p>自从上次聊完git的基本使用之后到现在已经两个多月了，一直都没有机会真的把它用在多人配合的项目开发之中。
+主要是因为手头的小型实验项目都是自己在玩，所以很多时候用的是本地的仓库，写完commit一下基本就完事，连checkout都很少用。</p>
+<p>这个月开始接手了一个小型的团队合作项目，于是核心代码组（我，标神，院长）才算真正成立了一个小组团队开发。</p>
+<p>核心代码组负责的主要是系统后台的搭建和配置。所以我们搭建了一个小型的服务器，挂载Apache+mySQL+php+cakePHP，使用GitHub进行源码托管。</p>
+<p>这个过程中真正逐渐熟悉了git的操作，也碰到了大量实践中遇上的问题。在此写一个未知篇幅的实践经验收集帖，既有利于总结归纳开发过程中遇到的问题，理清思路，也有利于来日翻阅加深印象。</p>
+<hr class="docutils" />
+<p>首先是基本的操作回顾，这是实际开发过程中用到的一些方法，可能非常曲折，让高手看来简直就是瞎搞，不过不管质量，先记录下来，以后有更优的方案也可供对比。</p>
+<p><strong>一：</strong></p>
+<p>本地仓库的创建自然是git init，这里我们被坑了一下，理论上我们总以为git init之后会默认创建一个仓库并产生一个默认分支叫做master，结果在实际操作中发现问题，git init只负责创建仓库，但在这个时候调用git branch会发现根本没有分支。</p>
+<p>这就导致了几天前以标神为主角的惊悚一幕。话说当天标神连敲八个小时代码完成了一个基本模块的创建，正当其修养生息吞云吐雾之际，我主动提出让其提交代码到远端仓库中。然而当时远端仓库已有更新，push操作之前必须pull下最新版本代码，然而该操作却死活无法成功完成 ...</p> </div><!-- /.entry-content -->
+
+								<div class="medium primary btn"><a href="/learning Git 3.html" rel="bookmark" title="Permalink to Git 与 GitHub 实践经验谈（一）">Read more <i class="icon-arrow-right"></i></a></div>
+
+
+
+								<div class="row tag-row">
+																			<span>Tagged as : </span>
+																					<a class="danger label" href="/tag/git.html">git</a>
+																					<a class="danger label" href="/tag/github.html">github</a>
+																											</div>
+
+
+
+				        </article></li>
+								        <li><article class="hentry">
+				                <header> <h2 class="entry-title"><a href="/learning Git 2.html" rel="bookmark" title="Permalink to Git 与 GitHub 不完全教程（二）">Git 与 GitHub 不完全教程（二）</a></h2> </header>
+				                <footer class="post-info">
+				                    <abbr class="published" title="2013-09-07T16:10:00"> 六 07 九月 2013 </abbr>
+				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
+				                <div class="entry-content"> <div class="section" id="id1">
+<h2>分支</h2>
+<p>分支(branch)是Git的一个强大功能，它可以在不改变现有仓库、不新增仓库的情况下，通过新建一个分支以建立当前文档一模一样的支线版本，在支线版本的修改不影响主线文档的内容。</p>
+<p>分支的一个重要的功能是能够在同一个时间点上保存多份不同版本的代码，并且均为随时可用的状态，根据官方的一个示例，你可以保持一份稳定的发布版，在发布版内的代码都是可运行的，之后，你可以再拥有一个分支专门用于开发，在这上面的代码用于任意修改和处理，不对外，还能再有一个分支用于测试开发新的功能。这三个分支都可以随时切换随时合并，应变自如。</p>
+<p>当支线任务成功完成时，可通过命令简单地将支线版本合并到主线上，若由于手潮不幸把事情搞砸了，可直接删除支线，回到主线上，则原有的文档内容不受任何影响。这种功能特别适合在当前状态下需要测试开发一些新的功能，但又想要与主线的开发有所并行的情况。</p>
+<p>默认情况下，git创建完仓库后会生成一个主分支master，所有的操作均在主分支上进行，这就相当于文档的主线版本。而我们可以按自己的需要增删改查新的分支。</p>
+<p><strong>分支的创建和切换</strong></p>
+<p>显示当前仓库的分支状态:</p>
+<pre class="literal-block">
+git branch
+</pre>
+<p>Git会列表显示当前的所有分支，并在当前所在分支上作相应标记。
+新建分支（假设需要新建的分支名字为:newBranch）:</p>
+<pre class="literal-block">
+git branch newBranch
+</pre>
+<p>此时再次检查branch状态就会发现新的分支已经出现了。
+新的分支和现有的分支内容完全相同，相当于当前分支的一个副本。
+跳转到某个分支:</p>
+<pre class="literal-block">
+git ...</pre></div> </div><!-- /.entry-content -->
+
+								<div class="medium primary btn"><a href="/learning Git 2.html" rel="bookmark" title="Permalink to Git 与 GitHub 不完全教程（二）">Read more <i class="icon-arrow-right"></i></a></div>
+
+
+
+								<div class="row tag-row">
+																			<span>Tagged as : </span>
+																					<a class="danger label" href="/tag/git.html">git</a>
+																					<a class="danger label" href="/tag/github.html">github</a>
+																											</div>
+
+
+
+				        </article></li>
+								        <li><article class="hentry">
 				                <header> <h2 class="entry-title"><a href="/learning Git 1.html" rel="bookmark" title="Permalink to Git 与 GitHub 不完全教程（一）">Git 与 GitHub 不完全教程（一）</a></h2> </header>
 				                <footer class="post-info">
 				                    <abbr class="published" title="2013-09-07T16:00:00"> 六 07 九月 2013 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/scutlaoyi.html">scutLaoYi</a></address>				                </footer><!-- /.post-info -->
+				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
 				                <div class="entry-content"> <p>git是常用的配置管理工具，关于Git的介绍请见维基百科（维基百科关于Git的介绍），Github是常用的代码托管服务（维基百科关于GitHub的介绍），在此敲一份扫盲和不完全配置帖，留待日后自己可查看，顺带给大家方便学习。</p>
 <p>由于时间有限，仅记录最简单的终端界面下Git的使用，自认为已经足够，如更喜欢GUI界面风格请自行脑补。</p>
 <p>本文档操作环境为GNU/Linux Ubuntu 12.04 LTS x64，为方便windows用户，在配置时添加了windows下的安装配置过程，不保证万无一失。</p>
@@ -116,31 +189,35 @@ sudo apt-get install git
 <h4>Pages</h4>
 
  <ul>
+        <li><a href="studioIndex.html">our studio</a></li>
             </ul>
 
 <h4>Categories</h4>
 <ul>
-			<li><a href="/category/anothercategory.html">anotherCategory</a></li>
+			<li><a href="/category/itpm.html">ITPM</a></li>
+			<li><a href="/category/python.html">Python</a></li>
 			<li><a href="/category/git.html">git</a></li>
-			<li><a href="/category/yeah.html">yeah</a></li>
+			<li><a href="/category/network.html">network</a></li>
+			<li><a href="/category/others.html">others</a></li>
 	</ul>
 
 
 <h4>Tags</h4>
 	<ul>
-		    <li class="tag-4"><a href="/tag/testing4.html">testing4</a></li>
-		    <li class="tag-4"><a href="/tag/testing3.html">testing3</a></li>
-		    <li class="tag-4"><a href="/tag/github.html">github</a></li>
-		    <li class="tag-4"><a href="/tag/testing1.html">testing1</a></li>
-		    <li class="tag-4"><a href="/tag/git.html">git</a></li>
-		    <li class="tag-4"><a href="/tag/testing2.html">testing2</a></li>
+		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
+		    <li class="tag-2"><a href="/tag/network.html">network</a></li>
+		    <li class="tag-2"><a href="/tag/git.html">git</a></li>
+		    <li class="tag-3"><a href="/tag/softwarearchitect.html">SoftwareArchitect</a></li>
+		    <li class="tag-2"><a href="/tag/github.html">github</a></li>
+		    <li class="tag-2"><a href="/tag/itpm.html">ITPM</a></li>
+		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
 	</ul>
 
 
 <nav class="widget">
   <h4>Social</h4>
   <ul>
-      <li><a href="sina blog">http://blog.sina.com/scutLaoYi</a></li>
+      <li><a href="http://blog.sina.com/scutLaoYi">sina blog</a></li>
     </ul>
 </nav>
 
@@ -159,6 +236,7 @@ sudo apt-get install git
           <div class="seven columns left-center">
 
                    <address id="about" class="vcard body">
+                    Contact scutLaoYi: HelloWorld636596@126.com <br />
                     Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
                     which takes great advantage of <a href="http://python.org">Python</a>.
                     <br />
