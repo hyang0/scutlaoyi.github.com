@@ -52,7 +52,7 @@
               <ul class="columns">
                 <li><a href="http://scutlaoyi.github.com">Home</a></li>
 
-                            <li><a href="studioIndex.html">our studio</a></li>
+                            <li><a href="first article.html">about</a></li>
                                                   
               </ul>
             </div>
@@ -66,6 +66,70 @@
 
         <div class="eleven columns">
 		         <ol id="post-list">
+								        <li><article class="hentry">
+				                <header> <h2 class="entry-title"><a href="/PythonExpe004.html" rel="bookmark" title="Permalink to 软件体系结构：N皇后问题系列整体实现方案">软件体系结构：N皇后问题系列整体实现方案</a></h2> </header>
+				                <footer class="post-info">
+				                    <abbr class="published" title="2013-11-29T22:40:00"> 五 29 十一月 2013 </abbr>
+				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
+				                <div class="entry-content"> <p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3</strong></p>
+<p><strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<p>前面三篇博文粗略描述了N皇后问题的主要解决方案，由于四种风格（包括调用返回）归属同一个作业，因此将其整合在一个文件夹中并提取了部分共有模块。</p>
+<p><strong>main.py</strong></p>
+<p>此程序作为用户交互接口，接收用户输入参数，检测合法性并调用对应程序实现计算。</p>
+<p>通过构造命令行参数将N的值、重复计算的次数等数据传入对应模块中。</p>
+<p>使用os.system()系统函数直接调用其他运算程序。</p>
+<p><strong>checkOk.py</strong></p>
+<p>此模块作为公用模块存在，用于检测当前状态是否合法。</p>
+<p>内部是一个isOk函数，接收当前的棋盘状态，当前尝试摆放的位置，以及当前的层数。</p>
+<p>若当前位置可以摆放皇后，则返回True；若检测到冲突，则返回False。</p>
+<p><strong>pipe.py/blackboard.py/callReturn.py/traceback.py</strong></p>
+<p>分别是四个风格的主程序，接收命令行参数定义N以及测试的次数。</p>
+<p>内部调用了Python库的timeit模块 ...</p> </div><!-- /.entry-content -->
+
+								<div class="medium primary btn"><a href="/PythonExpe004.html" rel="bookmark" title="Permalink to 软件体系结构：N皇后问题系列整体实现方案">Read more <i class="icon-arrow-right"></i></a></div>
+
+
+
+								<div class="row tag-row">
+																			<span>Tagged as : </span>
+																					<a class="danger label" href="/tag/python.html">Python</a>
+																					<a class="danger label" href="/tag/softwarearchitect.html">SoftwareArchitect</a>
+																											</div>
+
+
+
+				        </article></li>
+								        <li><article class="hentry">
+				                <header> <h2 class="entry-title"><a href="/PythonExpe003.html" rel="bookmark" title="Permalink to 软件体系结构：N皇后问题之黑板风格">软件体系结构：N皇后问题之黑板风格</a></h2> </header>
+				                <footer class="post-info">
+				                    <abbr class="published" title="2013-11-29T22:30:00"> 五 29 十一月 2013 </abbr>
+				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
+				                <div class="entry-content"> <p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3</strong></p>
+<p><strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<p><strong>风格三：黑板风格</strong></p>
+<p>据传黑板风格的主要思想是利用一种数据结构模拟现实生活中的黑板，开启多个线程模拟现实生活中的多个人。黑板的数据对所有人是共享可见的，因此大家可以通通在黑板上交换各自的数据，起到一个数据中心的作用。</p>
+<p>而转换到我们这个N皇后问题，貌似黑板的作用有所变化。我的理解是这样的，首先将整个棋盘当成一个大黑板，对所有的线程可见并可读写。至于线程呢?则可以当成一帮无聊的玩家。每个玩家控制一个皇后，并且给每个玩家分配棋盘中的一行，每个玩家只能在分配到的行上移动皇后。玩家的任务是通过合作找到所有可能的皇后摆放位置。</p>
+<p>那么最简单的方法便是让所有玩家进行有序的查找。方便起见，我设定了玩家都从棋盘左方开始移动皇后，直到所有的玩家都将皇后移动到最右方的位置，那么整个棋盘的搜索便结束了。</p>
+<p>而鉴于需要找到所有不重复的皇后摆放位置（可行解），显而易见，让最上方的玩家开始移动一格，暂停，等待下面的所有玩家尝试当前状态下（第一层玩家在第一格）所有方案，再继续移动一格，等待所有玩家尝试当前状态下（第一层玩家在第二格）的所有方案...直到最上方的玩家走过所有格子，便可搜索到所有的可行解。</p>
+<p>对于每一行的玩家 ...</p> </div><!-- /.entry-content -->
+
+								<div class="medium primary btn"><a href="/PythonExpe003.html" rel="bookmark" title="Permalink to 软件体系结构：N皇后问题之黑板风格">Read more <i class="icon-arrow-right"></i></a></div>
+
+
+
+								<div class="row tag-row">
+																			<span>Tagged as : </span>
+																					<a class="danger label" href="/tag/python.html">Python</a>
+																					<a class="danger label" href="/tag/softwarearchitect.html">SoftwareArchitect</a>
+																											</div>
+
+
+
+				        </article></li>
 								        <li><article class="hentry">
 				                <header> <h2 class="entry-title"><a href="/PythonExpe002.html" rel="bookmark" title="Permalink to 软件体系结构：N皇后问题系列之管道风格">软件体系结构：N皇后问题系列之管道风格</a></h2> </header>
 				                <footer class="post-info">
@@ -134,12 +198,11 @@
 <h4>Pages</h4>
 
  <ul>
-        <li><a href="studioIndex.html">our studio</a></li>
+        <li><a href="first article.html">about</a></li>
             </ul>
 
 <h4>Categories</h4>
 <ul>
-			<li><a href="/category/itpm.html">ITPM</a></li>
 			<li><a href="/category/python.html">Python</a></li>
 			<li><a href="/category/git.html">git</a></li>
 			<li><a href="/category/network.html">network</a></li>
@@ -149,13 +212,12 @@
 
 <h4>Tags</h4>
 	<ul>
-		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
 		    <li class="tag-2"><a href="/tag/network.html">network</a></li>
-		    <li class="tag-2"><a href="/tag/git.html">git</a></li>
-		    <li class="tag-3"><a href="/tag/softwarearchitect.html">SoftwareArchitect</a></li>
 		    <li class="tag-2"><a href="/tag/github.html">github</a></li>
-		    <li class="tag-2"><a href="/tag/itpm.html">ITPM</a></li>
+		    <li class="tag-2"><a href="/tag/softwarearchitect.html">SoftwareArchitect</a></li>
+		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
 		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
+		    <li class="tag-2"><a href="/tag/git.html">git</a></li>
 	</ul>
 
 
@@ -181,7 +243,7 @@
           <div class="seven columns left-center">
 
                    <address id="about" class="vcard body">
-                    Contact scutLaoYi: HelloWorld636596@126.com <br />
+                    Contact scutLaoYi: scutLaoYi@gmail.com <br />
                     Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
                     which takes great advantage of <a href="http://python.org">Python</a>.
                     <br />
