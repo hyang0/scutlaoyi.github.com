@@ -1,0 +1,27 @@
+<html>
+<head>
+	<title>md5 creator</title>
+	<script src="md5-min.js"></script>
+	<script>
+		function getHash()
+		{
+			source = document.getElementById("strInput");
+			result = hex_md5(source.value);
+			document.getElementById("result").innerHTML = result;
+		}
+	</script>
+</head>
+
+<body>
+	<input type="password" id="strInput"></input>
+	<br/>
+	<button onclick="getHash()">hash dear, hash!</button>
+	<br/>
+	<h4>Result:</h4>
+	<label id="result">No result.</label>
+	<br/>
+	<label>1234567890</label>
+	<br/>
+	<a href="index.html">Return</a>
+</body>
+</html>
