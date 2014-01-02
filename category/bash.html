@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
         
-        <title>老逸的个人站 - hello</title>
+        <title>老逸的个人站</title>
         <meta charset="utf-8" />
                                                                 
 
@@ -59,7 +59,7 @@
             </div>
 
           <section id="content">
-
+<h2>Articles in the Bash category</h2>
 
 
    <div class="row">
@@ -68,54 +68,44 @@
         <div class="eleven columns">
 		         <ol id="post-list">
 								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/first article.html" rel="bookmark" title="Permalink to Hello,world!">Hello,world!</a></h2> </header>
+				                <header> <h2 class="entry-title"><a href="/Bash001.html" rel="bookmark" title="Permalink to Bash笔记">Bash笔记</a></h2> </header>
 				                <footer class="post-info">
-				                    <abbr class="published" title="2023-09-07T13:00:00"> 四 07 九月 2023 </abbr>
+				                    <abbr class="published" title="2014-01-02T22:30:00"> 四 02 一月 2014 </abbr>
 				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p>代码之神的古老咒语，每每想起总是令人振奋不已。</p>
-<p><strong>About me：</strong></p>
-<blockquote>
-scutLaoYi</blockquote>
-<p><strong>From:</strong></p>
-<blockquote>
-South China University of Technology(scut)</blockquote>
-<p><strong>Language:</strong></p>
-<blockquote>
-<p>Chinese</p>
-<p>English</p>
-</blockquote>
-<p><strong>Interest:</strong></p>
-<blockquote>
-<p>C++</p>
-<p>Python</p>
-<p>Unix/Linux</p>
-<p>computer network</p>
-<p>git</p>
-<p>reading</p>
-<p>music</p>
-<p>sport</p>
-<p>and so on~</p>
-</blockquote>
-<p><strong>Goal of future:</strong></p>
-<blockquote>
-Works Applications!</blockquote>
-<p><strong>Contact:</strong></p>
-<blockquote>
-<a class="reference external" href="mailto:scutLaoYi&#64;gmail.com">scutLaoYi&#64;gmail.com</a></blockquote>
+				                <div class="entry-content"> <p><strong>本系列博文记录学习Linux终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录，方便日后再次查看。</strong></p>
 <hr class="docutils" />
-<p>本博客挂载github，使用Pelican生成静态网页，在此感谢开源社区的丰富资源。</p>
-<p>好记的玉米是不会吝惜多次提起的:</p>
-<p>www.scutlaoyi.tk</p>
-<p>欢迎常来做客哦～</p>
- </div><!-- /.entry-content -->
+<div class="section" id="id1">
+<h2>基础知识</h2>
+<p>以echo为例，bash的基本命令及结构如下：</p>
+<p>显示命令后的所有参数</p>
+<p>echo [option] [arg0] [arg1] [arg2] [...]</p>
+<p>命令、参数之间用空格区分，空格数量差异没有作用,
+在单引号或双引号之间的所有字符被当成同一个参数</p>
+<p>echo &quot;Hey, this is a single argument.&quot;</p>
+<p>设定option使echo解析字符操作符</p>
+<p>echo -e &quot;A line with n a newline.&quot;</p>
+<p>命令执行成功返回0，否则返回非0值,
+返回值的意义可查命令的man</p>
+</div>
+<div class="section" id="id2">
+<h2>命令的帮助文档</h2>
+<p>type</p>
+<blockquote>
+<p>命令有两种类型，内部和外部命令
+显示命令的类型</p>
+<p>type [command]</p>
+<p>某些命令有两种类型，显示所有类型</p>
+<p>type -a [command]</p>
+<p>当执行同名命令时内置命令优先，
+执行外部命令必须指定命令路径，如echo ...</p></blockquote></div> </div><!-- /.entry-content -->
 
-								<div class="medium primary btn"><a href="/first article.html" rel="bookmark" title="Permalink to Hello,world!">Read more <i class="icon-arrow-right"></i></a></div>
+								<div class="medium primary btn"><a href="/Bash001.html" rel="bookmark" title="Permalink to Bash笔记">Read more <i class="icon-arrow-right"></i></a></div>
 
 
 
 								<div class="row tag-row">
 																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/hello.html">hello</a>
+																					<a class="danger label" href="/tag/bash.html">Bash</a>
 																											</div>
 
 

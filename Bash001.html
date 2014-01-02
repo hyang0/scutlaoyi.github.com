@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+        
+        <title>Bash笔记</title>
+        <meta charset="utf-8" />
+                                                                
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+	<!-- google analyse -->
+          <script type="text/javascript">
+
+ 		var _gaq = _gaq || [];
+ 		 _gaq.push(['_setAccount', 'UA-43833562-1']);
+ 		 _gaq.push(['_trackPageview']);
+
+ 		 (function() {
+  			  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   			 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  			})();
+
+	</script>
+	<!-- end of google analyse -->
+
+
+
+        </head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="">老逸的个人站 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://scutlaoyi.github.com">Home</a></li>
+
+                            <li><a href="md5.html">md5 generator</a></li>
+                            <li><a href="first article.html">about</a></li>
+                                                  
+              </ul>
+            </div>
+
+          <section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/Bash001.html" rel="bookmark"
+                   title="Permalink to Bash笔记">Bash笔记</a></h2>
+                      
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2014-01-02T22:30:00">
+                四 02 一月 2014
+              </abbr>
+                            <address class="vcard author">
+                By <a class="url fn" href="/author/lao-yi.html">老逸</a>
+              </address>
+                          </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p><strong>本系列博文记录学习Linux终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录，方便日后再次查看。</strong></p>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>基础知识</h2>
+<p>以echo为例，bash的基本命令及结构如下：</p>
+<p>显示命令后的所有参数</p>
+<p>echo [option] [arg0] [arg1] [arg2] [...]</p>
+<p>命令、参数之间用空格区分，空格数量差异没有作用,
+在单引号或双引号之间的所有字符被当成同一个参数</p>
+<p>echo &quot;Hey, this is a single argument.&quot;</p>
+<p>设定option使echo解析字符操作符</p>
+<p>echo -e &quot;A line with n a newline.&quot;</p>
+<p>命令执行成功返回0，否则返回非0值,
+返回值的意义可查命令的man</p>
+</div>
+<div class="section" id="id2">
+<h2>命令的帮助文档</h2>
+<p>type</p>
+<blockquote>
+<p>命令有两种类型，内部和外部命令
+显示命令的类型</p>
+<p>type [command]</p>
+<p>某些命令有两种类型，显示所有类型</p>
+<p>type -a [command]</p>
+<p>当执行同名命令时内置命令优先，
+执行外部命令必须指定命令路径，如echo:</p>
+<p>/bin/echo Hello</p>
+</blockquote>
+<p>man</p>
+<blockquote>
+<p>查找某个命令的手册页</p>
+<p>man [command]</p>
+<p>查找某个配置文件的手册页</p>
+<p>man [configuration file name]</p>
+<p>模糊搜索:查找带string的命令列表</p>
+<p>man -k [string]</p>
+<p>匹配某个section的命令,关于section的解释在man man中有</p>
+<p>man [section] [command]</p>
+<p>查看当前系统的文件系统结构树</p>
+<p>man hier</p>
+</blockquote>
+<p>whatis</p>
+<blockquote>
+<p>一句话描述命令</p>
+<p>whatis [command]</p>
+</blockquote>
+<p>whereis</p>
+<blockquote>
+<p>查找命令的所在目录列表</p>
+<p>whereis [command]</p>
+</blockquote>
+<p>which</p>
+<blockquote>
+<p>which查找命令的路径并确定命令所在目录</p>
+<p>which [command]</p>
+</blockquote>
+</div>
+<div class="section" id="id3">
+<h2>目录操作</h2>
+<p>pwd</p>
+<blockquote>
+<p>显示当前所在的工作目录</p>
+<p>pwd</p>
+</blockquote>
+<p>cd</p>
+<blockquote>
+<p>进入某目录,可使用相对路径或绝对路径</p>
+<p>cd [location]</p>
+<p>进入home目录</p>
+<p>cd ~</p>
+<p>进入上一次的目录(方便！)</p>
+<p>cd -</p>
+</blockquote>
+<p>ls</p>
+<blockquote>
+<p>显示当前文件夹内容</p>
+<p>ls [location]</p>
+<p>显示所有文件（包括隐藏文件）</p>
+<p>ls -a [location]</p>
+<p>显示详细信息</p>
+<p>ls -l [location]</p>
+<p>显示详细信息并令文件大小显示更人性化(-_-||)</p>
+<p>ls -lh [location]</p>
+</blockquote>
+<p>mkdir</p>
+<blockquote>
+<p>创建目录</p>
+<p>mkdir [dir_name]</p>
+<p>一个命令创建多层目录</p>
+<p>mkdir -p [dir_name/dir_name/......]</p>
+</blockquote>
+<p>rmdir</p>
+<blockquote>
+<p>当目录为空时删除该目录</p>
+<p>rmdir [dir_name]</p>
+<p>一个命令删除目录树</p>
+<p>rmdir -p [dir_name/dir_name/......]</p>
+</blockquote>
+</div>
+<div class="section" id="id4">
+<h2>文件操作</h2>
+<p>file</p>
+<blockquote>
+<p>显示文件类型</p>
+<p>file [filename]</p>
+</blockquote>
+<p>touch</p>
+<blockquote>
+<p>创建一个新文件</p>
+<p>touch [filename]</p>
+<p>创建文件并指定时间</p>
+<p>touch -t [time] [filename] //touch -t 201312291830 test</p>
+</blockquote>
+<p>rm</p>
+<blockquote>
+<p>删除文件(没了就没了啵...)</p>
+<p>rm [filename]</p>
+<p>删除前确认</p>
+<p>rm -i [filename]</p>
+<p>最牛逼的删除操作,强力递归删除目录及目录中的文件</p>
+<p>rm -rf [dirname]</p>
+</blockquote>
+<p>cp</p>
+<blockquote>
+<p>复制文件,从原文件到目标文件</p>
+<p>cp [source_filename] [destination_filename]</p>
+<p>复制文件夹及其中的文件</p>
+<p>cp -r [source_dir] [destination_dir]</p>
+<p>同时复制多个文件到同一个文件夹(最后一个参数务必为一个文件夹)</p>
+<p>cp [file1] [file2] [......] [destination_dir]</p>
+<p>防止复制时的现有文件覆盖</p>
+<p>cp -i [......]</p>
+<p>复制时保留原文件的权限和时间信息</p>
+<p>cp -p [......]</p>
+</blockquote>
+<p>mv</p>
+<blockquote>
+<p>移动文件（或者将文件改名）</p>
+<p>mv [source_filename] [destination_filename]</p>
+</blockquote>
+</div>
+<div class="section" id="id5">
+<h2>文件内容操作</h2>
+<p>head</p>
+<blockquote>
+<p>默认显示文件的前十行</p>
+<p>head [filename]</p>
+<p>可以设定显示的行数</p>
+<p>head -[number] [filename] //head -4 test.txt</p>
+</blockquote>
+<p>tail</p>
+<blockquote>
+<p>默认显示文件最后十行</p>
+<p>tail [filename]</p>
+<p>同上，设置显示的行数</p>
+<p>tail -[number] [filename]</p>
+</blockquote>
+<p>cat</p>
+<blockquote>
+<p>输出文件内容到标准输出中</p>
+<p>cat [filename]</p>
+<p>可同时输出多个文件</p>
+<p>cat [file1] [file2] [file3] [...]</p>
+<p>不指定文件，则从标准输入中读取数据，直到EOF,
+可用这个特性创建新文件（利用输出重定向）</p>
+<p>cat &gt; out.txt</p>
+<p>复制文件</p>
+<p>cat in.txt &gt; out.txt</p>
+</blockquote>
+<p>tac</p>
+<blockquote>
+与cat相反的输出</blockquote>
+<p>less/more</p>
+<blockquote>
+<p>翻页显示文件内容
+//更推荐用less,可以使用类似vim的翻页操作，并且支持搜索</p>
+<p>less [filename]</p>
+<p>可将其他命令的输出管道输入到less中</p>
+<p>ls | less</p>
+<p>//关于管道后面有详细说明</p>
+</blockquote>
+<p>strings</p>
+<blockquote>
+<p>将某个二进制文件中的可读ASCII字符输出
+//有点憋屈的命令...</p>
+<p>strings /bin/ls</p>
+</blockquote>
+</div>
+<div class="section" id="id6">
+<h2>命令的执行与控制</h2>
+<p>alias</p>
+<blockquote>
+<p>可为某个常用的命令设置别名，别名与原名等同</p>
+<p>alias dog=cat</p>
+<p>同样，可设定带option甚至arguments的别名，需要用引号包含</p>
+<p>alias la='ls -a'</p>
+<p>显示当前所有别名</p>
+<p>alias</p>
+<p>去除别名</p>
+<p>unalias [command]</p>
+</blockquote>
+<p>set -x</p>
+<blockquote>
+开启命令回显</blockquote>
+<p>set +x</p>
+<blockquote>
+关闭命令回显</blockquote>
+<p>semicolon</p>
+<blockquote>
+<p>命令与命令之间用分号分隔</p>
+<p>echo Hello; echo Hey</p>
+</blockquote>
+<p>ampersand</p>
+<blockquote>
+<p>单个与符号让当前命令在后台执行</p>
+<p>sleep 20 &amp;</p>
+</blockquote>
+<p>dollar question</p>
+<blockquote>
+<p>钱+问号获取前一个命令的返回值</p>
+<p>echo Hey ; echo $?</p>
+<p>//Hey 0</p>
+</blockquote>
+<p>double ampersand</p>
+<blockquote>
+<p>双与符号连接两个命令，第二个命令只在第一个命令执行成功时才执行</p>
+<p>echo first &amp;&amp; echo second</p>
+</blockquote>
+<p>double vertical bar</p>
+<blockquote>
+<p>双竖直分割符连接两个命令，第二个命令只在第一个命令失败(返回非0值)时执行</p>
+<p>echo first || echo second</p>
+</blockquote>
+<p>combination</p>
+<blockquote>
+<p>组合使用&amp;&amp;和||可以做逻辑处理</p>
+<p>rm file &amp;&amp; echo ok || echo failed</p>
+</blockquote>
+<p>pound sign</p>
+<blockquote>
+注释使用#号</blockquote>
+<p>escape character</p>
+<blockquote>
+<p>使用反斜杠作为逃逸符</p>
+<p>echo hello ; world</p>
+<p>也可使用反斜杠作为隔行命令</p>
+<p>echo hello world</p>
+</blockquote>
+</div>
+
+            </div><!-- /.entry-content -->
+            
+
+        </div><!-- /.eleven.columns -->
+        
+     <div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+        <li><a href="md5.html">md5 generator</a></li>
+        <li><a href="first article.html">about</a></li>
+            </ul>
+
+<h4>Categories</h4>
+<ul>
+			<li><a href="/category/bash.html">Bash</a></li>
+			<li><a href="/category/python.html">Python</a></li>
+			<li><a href="/category/git.html">git</a></li>
+			<li><a href="/category/network.html">network</a></li>
+			<li><a href="/category/others.html">others</a></li>
+	</ul>
+
+
+<h4>Tags</h4>
+	<ul>
+		    <li class="tag-2"><a href="/tag/github.html">github</a></li>
+		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
+		    <li class="tag-4"><a href="/tag/bash.html">Bash</a></li>
+		    <li class="tag-2"><a href="/tag/softwarearchitect.html">SoftwareArchitect</a></li>
+		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
+		    <li class="tag-2"><a href="/tag/git.html">git</a></li>
+		    <li class="tag-2"><a href="/tag/network.html">network</a></li>
+	</ul>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul>
+      <li><a href="http://blog.sina.com/scutLaoYi">sina blog</a></li>
+    </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Contact scutLaoYi: scutLaoYi@gmail.com <br />
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+                                <li><div class="btn primary"><a href="https://github.com/scutLaoYi" target="_blank">Github</a></div></li>
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+
+</body>
+</html>
