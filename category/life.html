@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
         
-        <title>软件体系结构：N皇后问题系列整体实现方案</title>
+        <title>老逸的个人站</title>
         <meta charset="utf-8" />
                                                                 
 
@@ -58,56 +58,69 @@
               </ul>
             </div>
 
-          <section id="content" class="body">
+          <section id="content">
+<h2>Articles in the life category</h2>
+
 
    <div class="row">
+
+
         <div class="eleven columns">
-
-
-            <header>
-              <h2 class="entry-title">
-                <a href="/PythonExpe004.html" rel="bookmark"
-                   title="Permalink to 软件体系结构：N皇后问题系列整体实现方案">软件体系结构：N皇后问题系列整体实现方案</a></h2>
-                      
-            </header>
-            <footer class="post-info">
-              <abbr class="published" title="2013-11-29T22:40:00">
-                五 29 十一月 2013
-              </abbr>
-                            <address class="vcard author">
-                By <a class="url fn" href="/author/lao-yi.html">老逸</a>
-              </address>
-                          </footer><!-- /.post-info -->
-            <div class="entry-content">
-              <p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
-<p><strong>使用的Python版本为2.7.3</strong></p>
-<p><strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
-<hr class="docutils" />
-<p>前面三篇博文粗略描述了N皇后问题的主要解决方案，由于四种风格（包括调用返回）归属同一个作业，因此将其整合在一个文件夹中并提取了部分共有模块。</p>
-<p><strong>main.py</strong></p>
-<p>此程序作为用户交互接口，接收用户输入参数，检测合法性并调用对应程序实现计算。</p>
-<p>通过构造命令行参数将N的值、重复计算的次数等数据传入对应模块中。</p>
-<p>使用os.system()系统函数直接调用其他运算程序。</p>
-<p><strong>checkOk.py</strong></p>
-<p>此模块作为公用模块存在，用于检测当前状态是否合法。</p>
-<p>内部是一个isOk函数，接收当前的棋盘状态，当前尝试摆放的位置，以及当前的层数。</p>
-<p>若当前位置可以摆放皇后，则返回True；若检测到冲突，则返回False。</p>
-<p><strong>pipe.py/blackboard.py/callReturn.py/traceback.py</strong></p>
-<p>分别是四个风格的主程序，接收命令行参数定义N以及测试的次数。</p>
-<p>内部调用了Python库的timeit模块，用于记录运行时间。</p>
-<p>另外调用返回风格使用了据传世界上最快的二进制法进行运算。</p>
-<p>本系列代码（上述六个源文件）在GNU/GPL v2协议下开放源代码以供交流学习。</p>
-<p>完整代码可在以下Github仓库获取：</p>
-<p><a class="reference external" href="https://github.com/scutLaoYi/software_architect">https://github.com/scutLaoYi/software_architect</a></p>
-<hr class="docutils" />
-<p>更多Python学习，推荐：</p>
+		         <ol id="post-list">
+								        <li><article class="hentry">
+				                <header> <h2 class="entry-title"><a href="/first article.html" rel="bookmark" title="Permalink to Hello,world!">Hello,world!</a></h2> </header>
+				                <footer class="post-info">
+				                    <abbr class="published" title="2013-09-01T00:00:00"> 日 01 九月 2013 </abbr>
+				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
+				                <div class="entry-content"> <p>代码之神的古老咒语，每每想起总是令人振奋不已。</p>
+<p><strong>About me：</strong></p>
 <blockquote>
-<p>简明Python教程： <a class="reference external" href="http://www.2cto.com/shouce/pythonjc/index.html">http://www.2cto.com/shouce/pythonjc/index.html</a></p>
-<p>《Python基础教程》</p>
+scutLaoYi</blockquote>
+<p><strong>From:</strong></p>
+<blockquote>
+<p>School of Software Engineering</p>
+<p>South China University of Technology</p>
 </blockquote>
+<p><strong>Language:</strong></p>
+<blockquote>
+<p>Chinese</p>
+<p>English</p>
+</blockquote>
+<p><strong>Interest:</strong></p>
+<blockquote>
+<p>C/C++</p>
+<p>Python</p>
+<p>Unix/Linux</p>
+<p>computer network</p>
+<p>git</p>
+<p>reading</p>
+<p>music</p>
+<p>sport</p>
+<p>and so on~</p>
+</blockquote>
+<p><strong>Contact:</strong></p>
+<blockquote>
+<a class="reference external" href="mailto:scutLaoYi&#64;gmail.com">scutLaoYi&#64;gmail.com</a></blockquote>
+<p>Create my own world,</p>
+<p>and enjoy everyday life!</p>
+<hr class="docutils" />
+<p>本博客挂载github，使用Pelican生成静态网页，在此感谢开源社区的丰富资源。</p>
+<p>好记的玉米是不会吝惜多次提起的:</p>
+<p>www ...</p> </div><!-- /.entry-content -->
 
-            </div><!-- /.entry-content -->
-            
+								<div class="medium primary btn"><a href="/first article.html" rel="bookmark" title="Permalink to Hello,world!">Read more <i class="icon-arrow-right"></i></a></div>
+
+
+
+								<div class="row tag-row">
+																			<span>Tagged as : </span>
+																					<a class="danger label" href="/tag/hello.html">hello</a>
+																											</div>
+
+
+
+				        </article></li>
+								</ol><!-- /#posts-list -->
 
         </div><!-- /.eleven.columns -->
         
@@ -151,8 +164,7 @@
 
 </div> </div><!-- /.row -->
 
-
-</section>
+</section><!-- /#content -->
 
        </div><!-- /.row -->
     </div><!-- /.container -->
