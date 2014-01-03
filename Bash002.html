@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+        
+        <title>Bash笔记(二)</title>
+        <meta charset="utf-8" />
+                                                                
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+	<!-- google analyse -->
+          <script type="text/javascript">
+
+ 		var _gaq = _gaq || [];
+ 		 _gaq.push(['_setAccount', 'UA-43833562-1']);
+ 		 _gaq.push(['_trackPageview']);
+
+ 		 (function() {
+  			  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   			 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  			})();
+
+	</script>
+	<!-- end of google analyse -->
+
+
+
+        </head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="">老逸的个人站 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://scutlaoyi.github.com">Home</a></li>
+
+                            <li><a href="md5.html">md5 generator</a></li>
+                            <li><a href="first article.html">about</a></li>
+                                                  
+              </ul>
+            </div>
+
+          <section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/Bash002.html" rel="bookmark"
+                   title="Permalink to Bash笔记(二)">Bash笔记(二)</a></h2>
+                      
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2014-01-03T22:30:00">
+                五 03 一月 2014
+              </abbr>
+                            <address class="vcard author">
+                By <a class="url fn" href="/author/lao-yi.html">老逸</a>
+              </address>
+                          </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p><strong>本系列博文记录学习Linux终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录，方便日后再次查看。</strong></p>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>变量</h2>
+<p>dollar sign</p>
+<blockquote>
+<p>使用美元符标记变量,
+变量大小写敏感。
+常用的系统变量有：</p>
+<p>$HOSTNAME, $USER, $UID, $HOME</p>
+</blockquote>
+<p>$PS1</p>
+<blockquote>
+<p>变量定义终端的提示符,
+可通过设置该变量改变提示符的内容：</p>
+<p><a class="reference external" href="mailto:$PS1='u&#64;h">$PS1='u&#64;h</a>:W$'</p>
+<p>显示内容：用户&#64;主机:当前目录$</p>
+</blockquote>
+<p>$PATH</p>
+<blockquote>
+设定系统搜索执行命令的路径</blockquote>
+<p>使用自定义变量</p>
+<blockquote>
+<p>直接对变量名赋值即可</p>
+<p>MyVar=123</p>
+<p>使用时加上美元符</p>
+<p>echo $MyVar</p>
+</blockquote>
+<p>使用变量时引号的差异</p>
+<blockquote>
+<p>简单说来就是这样：</p>
+<p>echo '$MyVar' // $MyVar</p>
+<p>echo &quot;$MyVar&quot; // 123</p>
+</blockquote>
+<p>set</p>
+<blockquote>
+<p>查看当前所有变量</p>
+<p>set</p>
+</blockquote>
+<p>env</p>
+<blockquote>
+<p>查看当前exported的变量</p>
+<p>env</p>
+</blockquote>
+<p>unset</p>
+<blockquote>
+<p>取消设置某个变量</p>
+<p>unset [variable]</p>
+</blockquote>
+<p>export</p>
+<blockquote>
+<p>对某个变量操作使其在子bash中亦可使用,
+该操作引入变量对父bash无效</p>
+<p>export [var_name]</p>
+</blockquote>
+<p>变量使用的另外一种方式</p>
+<blockquote>
+<p>有时候直接使用$var会有问题，这种情况下可以这样获取变量</p>
+<p>tree=&quot;A big tree &quot; #注意最后空格</p>
+<p>echo ${tree}on the load. #连接处没有空格</p>
+</blockquote>
+<p>Bash的options</p>
+<blockquote>
+<blockquote>
+<p>设置在使用未绑定变量时显示错误</p>
+<p>set -u</p>
+<p>echo $a_variable_not_exist #显示错误信息，而不是显示空</p>
+</blockquote>
+<p>恢复显示空内容</p>
+<blockquote>
+<p>set +u</p>
+<p>显示当前bash的所有options</p>
+<p>echo $-</p>
+<p>对于每个option的功能可查看man bash</p>
+</blockquote>
+</blockquote>
+</div>
+<div class="section" id="id2">
+<h2>嵌套Bash</h2>
+<blockquote>
+<p>例子</p>
+<blockquote>
+<p>echo $(var=1; echo $var)</p>
+<p>var1在内层的Bash中被声明并显示,
+在外层的Bash中没有被绑定</p>
+</blockquote>
+<p>另外一种使用方式</p>
+<blockquote>
+<p>echo <cite>var=1; echo $var</cite></p>
+<p>使用反引号替代美元符和括号</p>
+</blockquote>
+<p>一个好用的地方在于，可以临时改变工作目录</p>
+<p>echo <cite>cd /bin/; ls</cite></p>
+<p>命令执行后当前外层的Bash工作目录没有变化</p>
+</blockquote>
+</div>
+<div class="section" id="id3">
+<h2>历史记录</h2>
+<p>bang bang</p>
+<blockquote>
+<p>显示并执行最近的一次操作</p>
+<p>！！</p>
+</blockquote>
+<p>![string]</p>
+<blockquote>
+<p>使用感叹号后接字符串，Bash自动搜索匹配最后一个符合条件的命令，
+显示并执行</p>
+<p>echo Hey</p>
+<p>!ec #echo Hey</p>
+</blockquote>
+<p>history</p>
+<blockquote>
+<p>显示最近的number条命令</p>
+<p>history [number]</p>
+</blockquote>
+<p>![number]</p>
+<blockquote>
+<p>通过history获取命令记录后，使用感叹号加数字，
+Bash显示并执行对应索引值的命令</p>
+<p>![number]</p>
+</blockquote>
+<p>Ctrl-r</p>
+<blockquote>
+最方便的历史命令恢复操作，
+按Ctrl-r，逐个输入字符串，Bash自动搜索并显示符合条件的记录。
+找到需要的命令按回车即可执行</blockquote>
+<p>历史文件</p>
+<blockquote>
+<p>Bash记录当前环境的历史命令。
+当退出时，
+Bash将命令操作存在历史文件中。
+一般是在~/.bash_history中。</p>
+<p>显示当前环境历史记录的最大长度</p>
+<p>echo $HISTSIZE</p>
+<p>显示历史记录文件的位置</p>
+<p>echo $HISTFILE</p>
+<p>显示历史记录文件的最大长度</p>
+<p>echo $HISTFILESIZE</p>
+</blockquote>
+</div>
+<div class="section" id="id4">
+<h2>文件匹配</h2>
+<p>asterisk</p>
+<blockquote>
+<p>匹配任意长度任意字符</p>
+<p>ls <a href="#id5"><span class="problematic" id="id6">*</span></a>.txt #显示所有后缀为txt的文件</p>
+<div class="system-message" id="id5">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">/home/laoyi/myPage/pelican/mySite/content/bash/Bash002.rst</tt>, line 191); <em><a href="#id6">backlink</a></em></p>
+Inline emphasis start-string without end-string.</div>
+</blockquote>
+<p>question mark</p>
+<blockquote>
+<p>匹配一个任意字符</p>
+<p>ls ?.txt #显示所有名称为一个字符后缀为txt的文件</p>
+</blockquote>
+<p>square brackets</p>
+<blockquote>
+<p>匹配一个中括号中的字符</p>
+<p>ls [ABC].txt #A.txt/B.txt/C.txt</p>
+<p>也可以设定范围，数字或字符</p>
+<p>ls [0-9a-zA-Z].txt #匹配一个数字或大小写字符</p>
+<p>可以用！表示没有</p>
+<p>ls [!4].txt #去掉4.txt</p>
+</blockquote>
+<p>echo的一个神奇作用</p>
+<blockquote>
+<p>在空目录下</p>
+<p>echo *</p>
+<p>显示一个菊花</p>
+<p>在有文件的目录下</p>
+<p>echo *</p>
+<p>显示所有文件（不包含隐藏文件）</p>
+<p>在使用时如果要显示*可使用逃逸符或引号将菊花包括起来</p>
+</blockquote>
+</div>
+<div class="section" id="id7">
+<h2>重定向与管道</h2>
+<p>输出重定向</p>
+<blockquote>
+<p>将标准输出(1)重定向到文件</p>
+<p>[command...] &gt; [filename] #同：[command...] 1&gt; [filename]</p>
+<p>上述操作会覆盖原有文件,
+可设置Bash的set -C拒绝写入原有文件。</p>
+<p>标准输出(1)追加至文件末尾</p>
+<p>[command...] &gt;&gt; [filename] # [command...] 1&gt;&gt; [filename]</p>
+<p>标准错误流(2)的重定向</p>
+<p>[command...] 2&gt; [destination]</p>
+<p>标准错误流(2)重定向至标准输出流</p>
+<p>[command...] 2&gt;&amp;1</p>
+</blockquote>
+<p>输入重定向</p>
+<blockquote>
+<p>标准输入流(0)的重定向</p>
+<p>[command...] &lt; [source] # [command] 0&lt; [source]</p>
+<p>输入流结束符的定义</p>
+<p>[command...] &lt;&lt; [sign]</p>
+<blockquote>
+<p>例子</p>
+<p>cat &lt;&lt; Hey #读取输入直到遇到Hey结束</p>
+</blockquote>
+</blockquote>
+<p>管道</p>
+<blockquote>
+<p>管道将一个命令的标准输出作为下一个命令的标准输入</p>
+<p>例子：显示/etc目录文件的末四个</p>
+<p>ls /etc | tail -4</p>
+<p>管道可嵌套</p>
+<p>ls /etc | tail -4 | tac</p>
+<p>关于管道没多少内容，不过发挥想象力可以利用管道和过滤器创造整个世界。</p>
+<p>下一篇将记录过滤器的若干资料。</p>
+</blockquote>
+</div>
+
+            </div><!-- /.entry-content -->
+            
+
+        </div><!-- /.eleven.columns -->
+        
+     <div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+        <li><a href="md5.html">md5 generator</a></li>
+        <li><a href="first article.html">about</a></li>
+            </ul>
+
+<h4>Categories</h4>
+<ul>
+			<li><a href="/category/bash.html">Bash</a></li>
+			<li><a href="/category/python.html">Python</a></li>
+			<li><a href="/category/git.html">git</a></li>
+			<li><a href="/category/life.html">life</a></li>
+			<li><a href="/category/network.html">network</a></li>
+	</ul>
+
+
+<h4>Tags</h4>
+	<ul>
+		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
+		    <li class="tag-2"><a href="/tag/softwarearchitect.html">SoftwareArchitect</a></li>
+		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
+		    <li class="tag-3"><a href="/tag/bash.html">Bash</a></li>
+		    <li class="tag-2"><a href="/tag/git.html">git</a></li>
+		    <li class="tag-2"><a href="/tag/network.html">network</a></li>
+		    <li class="tag-2"><a href="/tag/github.html">github</a></li>
+	</ul>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul>
+      <li><a href=""></a></li>
+    </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Contact scutLaoYi: scutLaoYi@gmail.com <br />
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+                                <li><div class="btn primary"><a href="https://github.com/scutLaoYi" target="_blank">Github</a></div></li>
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+
+</body>
+</html>
