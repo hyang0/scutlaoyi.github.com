@@ -94,7 +94,7 @@
 <blockquote>
 <p>变量定义终端的提示符,
 可通过设置该变量改变提示符的内容：</p>
-<p><a class="reference external" href="mailto:$PS1='u&#64;h">$PS1='u&#64;h</a>:W$'</p>
+<p>$PS1='\u&#64;\h:\W$'</p>
 <p>显示内容：用户&#64;主机:当前目录$</p>
 </blockquote>
 <p>$PATH</p>
@@ -167,11 +167,11 @@
 </blockquote>
 <p>另外一种使用方式</p>
 <blockquote>
-<p>echo <cite>var=1; echo $var</cite></p>
+<p>echo `var=1; echo $var`</p>
 <p>使用反引号替代美元符和括号</p>
 </blockquote>
 <p>一个好用的地方在于，可以临时改变工作目录</p>
-<p>echo <cite>cd /bin/; ls</cite></p>
+<p>echo `cd /bin/; ls`</p>
 <p>命令执行后当前外层的Bash工作目录没有变化</p>
 </blockquote>
 </div>
@@ -224,10 +224,7 @@ Bash将命令操作存在历史文件中。
 <p>asterisk</p>
 <blockquote>
 <p>匹配任意长度任意字符</p>
-<p>ls <a href="#id5"><span class="problematic" id="id6">*</span></a>.txt #显示所有后缀为txt的文件</p>
-<div class="system-message" id="id5">
-<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">/home/laoyi/myPage/pelican/mySite/content/bash/Bash002.rst</tt>, line 191); <em><a href="#id6">backlink</a></em></p>
-Inline emphasis start-string without end-string.</div>
+<p>ls *.txt #显示所有后缀为txt的文件</p>
 </blockquote>
 <p>question mark</p>
 <blockquote>
@@ -254,7 +251,7 @@ Inline emphasis start-string without end-string.</div>
 <p>在使用时如果要显示*可使用逃逸符或引号将菊花包括起来</p>
 </blockquote>
 </div>
-<div class="section" id="id7">
+<div class="section" id="id5">
 <h2>重定向与管道</h2>
 <p>输出重定向</p>
 <blockquote>
@@ -319,11 +316,11 @@ Inline emphasis start-string without end-string.</div>
 <h4>Tags</h4>
 	<ul>
 		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
-		    <li class="tag-2"><a href="/tag/softwarearchitect.html">SoftwareArchitect</a></li>
-		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
-		    <li class="tag-3"><a href="/tag/bash.html">Bash</a></li>
-		    <li class="tag-2"><a href="/tag/git.html">git</a></li>
 		    <li class="tag-2"><a href="/tag/network.html">network</a></li>
+		    <li class="tag-2"><a href="/tag/softwarearchitect.html">SoftwareArchitect</a></li>
+		    <li class="tag-3"><a href="/tag/bash.html">Bash</a></li>
+		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
+		    <li class="tag-2"><a href="/tag/git.html">git</a></li>
 		    <li class="tag-2"><a href="/tag/github.html">github</a></li>
 	</ul>
 
