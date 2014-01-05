@@ -68,6 +68,57 @@
         <div class="eleven columns">
 		         <ol id="post-list">
 								        <li><article class="hentry">
+				                <header> <h2 class="entry-title"><a href="/Bash004.html" rel="bookmark" title="Permalink to Bash笔记(四)">Bash笔记(四)</a></h2> </header>
+				                <footer class="post-info">
+				                    <abbr class="published" title="2014-01-05T22:30:00"> 日 05 一月 2014 </abbr>
+				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
+				                <div class="entry-content"> <p><strong>本系列博文记录学习Linux终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录，方便日后再次查看。</strong></p>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>用户管理</h2>
+<p>Unix的用户列表在/etc/passwd中，
+该文件为每个用户保存了一行信息，
+包括用户名、用户id、组id、用户描述、用户的home目录及默认的shell信息</p>
+<p>用户密码加密后保存在/etc/shadow文件中，
+包含用户名、用户密码、最小密码修改间隔时间、最大密码修改间隔时间、密码无效前提醒时间等。
+时间的单位是天。</p>
+<p>用户的密码管理默认设置在/etc/login.defs中。
+设置了包含上述几个时间在内的多个参数。</p>
+<p><strong>识别用户</strong></p>
+<p>whoami</p>
+<blockquote>
+查看当前用户名</blockquote>
+<p>who</p>
+<blockquote>
+列表显示当前所有登录用户相关信息</blockquote>
+<p>who am i</p>
+<blockquote>
+这货是空格分开的，相当于who，只显示当前用户</blockquote>
+<p>w</p>
+<blockquote>
+这个能显示当前所有用户正在执行的工作</blockquote>
+<p>id</p>
+<blockquote>
+显示当前用户的用户id，组id等</blockquote>
+<p><strong>用户管理</strong></p>
+<p>useradd</p>
+<blockquote>
+<p>创建一个新用户scutlaoyi，设置home目录及用户描述</p>
+<p>useradd -m -d ...</p></blockquote></div> </div><!-- /.entry-content -->
+
+								<div class="medium primary btn"><a href="/Bash004.html" rel="bookmark" title="Permalink to Bash笔记(四)">Read more <i class="icon-arrow-right"></i></a></div>
+
+
+
+								<div class="row tag-row">
+																			<span>Tagged as : </span>
+																					<a class="danger label" href="/tag/bash.html">Bash</a>
+																											</div>
+
+
+
+				        </article></li>
+								        <li><article class="hentry">
 				                <header> <h2 class="entry-title"><a href="/Bash003.html" rel="bookmark" title="Permalink to Bash笔记(三)">Bash笔记(三)</a></h2> </header>
 				                <footer class="post-info">
 				                    <abbr class="published" title="2014-01-04T22:00:00"> 六 04 一月 2014 </abbr>
@@ -929,12 +980,12 @@ scutLaoYi</blockquote>
 <h4>Tags</h4>
 	<ul>
 		    <li class="tag-2"><a href="/tag/github.html">github</a></li>
-		    <li class="tag-2"><a href="/tag/softwarearchitect.html">SoftwareArchitect</a></li>
-		    <li class="tag-2"><a href="/tag/network.html">network</a></li>
-		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
 		    <li class="tag-2"><a href="/tag/git.html">git</a></li>
 		    <li class="tag-2"><a href="/tag/bash.html">Bash</a></li>
+		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
+		    <li class="tag-2"><a href="/tag/network.html">network</a></li>
 		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
+		    <li class="tag-2"><a href="/tag/softwarearchitect.html">SoftwareArchitect</a></li>
 	</ul>
 
 

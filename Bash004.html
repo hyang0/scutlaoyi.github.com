@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+        
+        <title>Bash笔记(四)</title>
+        <meta charset="utf-8" />
+                                                                
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+	<!-- google analyse -->
+          <script type="text/javascript">
+
+ 		var _gaq = _gaq || [];
+ 		 _gaq.push(['_setAccount', 'UA-43833562-1']);
+ 		 _gaq.push(['_trackPageview']);
+
+ 		 (function() {
+  			  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   			 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  			})();
+
+	</script>
+	<!-- end of google analyse -->
+
+
+
+        </head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="">老逸的个人站 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://scutlaoyi.github.com">Home</a></li>
+
+                            <li><a href="md5.html">md5 generator</a></li>
+                            <li><a href="first article.html">about</a></li>
+                                                  
+              </ul>
+            </div>
+
+          <section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/Bash004.html" rel="bookmark"
+                   title="Permalink to Bash笔记(四)">Bash笔记(四)</a></h2>
+                      
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2014-01-05T22:30:00">
+                日 05 一月 2014
+              </abbr>
+                            <address class="vcard author">
+                By <a class="url fn" href="/author/lao-yi.html">老逸</a>
+              </address>
+                          </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p><strong>本系列博文记录学习Linux终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录，方便日后再次查看。</strong></p>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>用户管理</h2>
+<p>Unix的用户列表在/etc/passwd中，
+该文件为每个用户保存了一行信息，
+包括用户名、用户id、组id、用户描述、用户的home目录及默认的shell信息</p>
+<p>用户密码加密后保存在/etc/shadow文件中，
+包含用户名、用户密码、最小密码修改间隔时间、最大密码修改间隔时间、密码无效前提醒时间等。
+时间的单位是天。</p>
+<p>用户的密码管理默认设置在/etc/login.defs中。
+设置了包含上述几个时间在内的多个参数。</p>
+<p><strong>识别用户</strong></p>
+<p>whoami</p>
+<blockquote>
+查看当前用户名</blockquote>
+<p>who</p>
+<blockquote>
+列表显示当前所有登录用户相关信息</blockquote>
+<p>who am i</p>
+<blockquote>
+这货是空格分开的，相当于who，只显示当前用户</blockquote>
+<p>w</p>
+<blockquote>
+这个能显示当前所有用户正在执行的工作</blockquote>
+<p>id</p>
+<blockquote>
+显示当前用户的用户id，组id等</blockquote>
+<p><strong>用户管理</strong></p>
+<p>useradd</p>
+<blockquote>
+<p>创建一个新用户scutlaoyi，设置home目录及用户描述</p>
+<p>useradd -m -d /home/scutlaoyi -c &quot;new user&quot; scutlaoyi</p>
+<p>系统默认给新用户一个独立的用户id和组id.</p>
+</blockquote>
+<p>userdel</p>
+<blockquote>
+<p>删除用户，-r设置连带删除对应的home目录</p>
+<p>userdel -r [username]</p>
+</blockquote>
+<p>usermod</p>
+<blockquote>
+<p>编辑用户信息，例如，修改用户描述</p>
+<p>usermod -c &quot;just a user&quot; [username]</p>
+<p>锁定某个用户的密码，使其不能正常登录</p>
+<p>usermod -L [username]</p>
+<p>解锁</p>
+<p>usermod -U [username]</p>
+<p>设置默认登录的shell</p>
+<p>usermod -s /bin/bash [username]</p>
+<p>设定用户归属的组(注意这个操作会清除用户原有的组归属数据)</p>
+<p>usermod -G [groupname] [username]</p>
+</blockquote>
+<p>passwd</p>
+<blockquote>
+<p>不带参数输入可修改当前用户密码</p>
+<p>passwd</p>
+<p>对某个用户设置密码</p>
+<p>passwd [username]</p>
+</blockquote>
+<p><strong>用户切换</strong></p>
+<p>su</p>
+<blockquote>
+<p>快速切换到某个用户,包括root也行，如果你有密码</p>
+<p>su [username]</p>
+</blockquote>
+<p>sudo</p>
+<blockquote>
+<p>sudo命令可以让当前用户以root权限执行程序。</p>
+<p>sudo [command]</p>
+<p>sudo命令可以在不交出root密码的前提下给某些用户root权限管理系统。</p>
+<p>sudo命令成功的前提是当前用户在/etc/sudoers文件中存在对应的权限。
+没有权限而执行sudo的话，在我的Ubuntu里会显示错误信息，
+并威胁道:&quot;此事件将被报告。&quot; -_-\</p>
+</blockquote>
+<p>visudo</p>
+<blockquote>
+<p>sudoers文件的专用编辑器，可防止多种安全问题。</p>
+<p>关于该命令的具体信息可查man。</p>
+<p>不推荐直接编辑/etc/sudoers文件。
+（虽然上次糊里糊涂用vim编辑了一次，还好没死。-_-\）</p>
+</blockquote>
+</div>
+<div class="section" id="id2">
+<h2>组管理</h2>
+<p>用户组的信息保存在/etc/group文件中。
+其格式为：组名:组密码(可能为空):组id:组内成员列表</p>
+<p>groupadd</p>
+<blockquote>
+添加一个组
+groupadd [groupname]</blockquote>
+<p>添加用户到某个组中</p>
+<blockquote>
+<p>使用usermod，-a为保持原有组信息并追加新组</p>
+<p>usermod -a -G [groupname] [username]</p>
+</blockquote>
+<p>groupmod</p>
+<blockquote>
+<p>编辑组名称</p>
+<p>groupmod -n [new_groupname] [groupname]</p>
+</blockquote>
+<p>groupdel</p>
+<blockquote>
+<p>删除组</p>
+<p>groupdel [groupname]</p>
+</blockquote>
+<p>groups</p>
+<blockquote>
+查看当前用户所属的组信息</blockquote>
+<p>gpasswd</p>
+<blockquote>
+<p>赋予某些用户管理组的权限</p>
+<p>设定某个组的管理员</p>
+<p>gpasswd -A [user1],[user2],[...] [groupname]</p>
+<p>使某个用户加入组</p>
+<p>gpasswd -a [username] [groupname]</p>
+<p>从组中清除某个用户</p>
+<p>gpasswd -d [username] [groupname]</p>
+<p>设定某个组的成员</p>
+<p>gpasswd -M [user1],[user2],[...]</p>
+</blockquote>
+</div>
+<div class="section" id="id3">
+<h2>文件权限</h2>
+<p>Unix类系统的文件权限分为三种：
+文件所有者权限、文件所属组权限、其他人权限。
+文件的权限有三款：读(r)、写(w)、执行(x)。</p>
+<p>当使用ls -l命令时，可以看到列表中每个文件的最左方即文件的权限设置</p>
+<p>第一个字符为文件类型，文件类型有：</p>
+<blockquote>
+<p>-:普通文件</p>
+<p>d:目录</p>
+<p>l:符号链接文件</p>
+<p>p:命名管道</p>
+<p>b:块设备</p>
+<p>c:字符设备</p>
+<p>s:socket</p>
+</blockquote>
+<p>接着每三个字符依次指定了对应的权限：所有者、组、其他人。
+r、w、x分别说明拥有该项权限，横杆-说明无此权限。</p>
+<p>如：</p>
+<p>drwxr-xr-x 2 laoyi laoyi    4096 12月 23 20:28 desktop</p>
+<p>该文件是一个目录，
+所有者拥有读写执行权限，
+组用户拥有读和执行权限，
+而其他人也拥有读和执行权限</p>
+<p>后面的依次是所有者、所有组，大小，时间和名称等信息。</p>
+<p>chgrp</p>
+<blockquote>
+<p>修改一个文件的组</p>
+<p>chgrp [groupname] [filename]</p>
+</blockquote>
+<p>chown</p>
+<blockquote>
+<p>修改一个文件的所有者</p>
+<p>chown [username] [filename]</p>
+<p>同时修改所有者和组</p>
+<p>chown [username]:[groupname] [filename]</p>
+</blockquote>
+<p>chmod</p>
+<blockquote>
+<p><strong>代号方式管理权限</strong></p>
+<p>u为所有者，g为组用户，o为其他人，a对上述三者同时操作</p>
+<p>+为增加权限， 相反， -为去除权限</p>
+<p>r读，w写，x执行</p>
+<p>权限配置可以多个组合</p>
+<p>chmod u+w [filename]</p>
+<p><strong>数字方式管理权限</strong></p>
+<p>读的数值为4， 写的数值为2， 执行的数值为1</p>
+<p>对应权限的数字求和得到最终的权限数值</p>
+<p>因此下述例子分配所有者读写执行权限，组用户读和执行权限，其他人读取的权限</p>
+<p>chmod 754 [filename]</p>
+</blockquote>
+<hr class="docutils" />
+<p>简单的Bash命令就到此为止了，
+后面的一些比较复杂我就不记了，
+像ACL之类的，
+现在学一下过几天也会忘，
+以后用到我再搞上来。</p>
+<p><strong>明天开始搞Arch Linux!</strong></p>
+</div>
+
+            </div><!-- /.entry-content -->
+            
+
+        </div><!-- /.eleven.columns -->
+        
+     <div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+        <li><a href="md5.html">md5 generator</a></li>
+        <li><a href="first article.html">about</a></li>
+            </ul>
+
+<h4>Categories</h4>
+<ul>
+			<li><a href="/category/bash.html">Bash</a></li>
+			<li><a href="/category/python.html">Python</a></li>
+			<li><a href="/category/git.html">git</a></li>
+			<li><a href="/category/life.html">life</a></li>
+			<li><a href="/category/network.html">network</a></li>
+	</ul>
+
+
+<h4>Tags</h4>
+	<ul>
+		    <li class="tag-2"><a href="/tag/github.html">github</a></li>
+		    <li class="tag-2"><a href="/tag/git.html">git</a></li>
+		    <li class="tag-2"><a href="/tag/bash.html">Bash</a></li>
+		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
+		    <li class="tag-2"><a href="/tag/network.html">network</a></li>
+		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
+		    <li class="tag-2"><a href="/tag/softwarearchitect.html">SoftwareArchitect</a></li>
+	</ul>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul>
+      <li><a href=""></a></li>
+    </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Contact scutLaoYi: scutLaoYi@gmail.com <br />
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+                                <li><div class="btn primary"><a href="https://github.com/scutLaoYi" target="_blank">Github</a></div></li>
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+
+</body>
+</html>
