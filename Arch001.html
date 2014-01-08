@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+        
+        <title>Arch Linux学习：安装篇(一)</title>
+        <meta charset="utf-8" />
+                                                                
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+	<!-- google analyse -->
+          <script type="text/javascript">
+
+ 		var _gaq = _gaq || [];
+ 		 _gaq.push(['_setAccount', 'UA-43833562-1']);
+ 		 _gaq.push(['_trackPageview']);
+
+ 		 (function() {
+  			  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   			 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  			})();
+
+	</script>
+	<!-- end of google analyse -->
+
+
+
+        </head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="">老逸的个人站 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://scutlaoyi.github.com">Home</a></li>
+
+                            <li><a href="md5.html">md5 generator</a></li>
+                            <li><a href="first article.html">about</a></li>
+                                                  
+              </ul>
+            </div>
+
+          <section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/Arch001.html" rel="bookmark"
+                   title="Permalink to Arch Linux学习：安装篇(一)">Arch Linux学习：安装篇(一)</a></h2>
+                      
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2014-01-08T19:30:00">
+                三 08 一月 2014
+              </abbr>
+                            <address class="vcard author">
+                By <a class="url fn" href="/author/lao-yi.html">老逸</a>
+              </address>
+                          </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。</p>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>关于Arch Linux</h2>
+<p>Arch Linux是一个现在较为流行的Linux发行版，
+支持32/64位处理器,
+以Rolling Releases方式发布新版本。</p>
+<p>官方站点：</p>
+<p><a class="reference external" href="https://www.archlinux.org">https://www.archlinux.org</a></p>
+<p>Arch Linux的哲学是简洁、保证代码的正确性、用户为中心、开放性及自由性。
+因此据称Arch Linux的一个非常重要的特点是轻量级，
+让用户自行选择所需的组件构建属于自己的系统，
+当然这都以系统的开放性作为前提，
+Arch Linux提供了非常大的自由度和开放度供用户完全控制自己的系统。</p>
+<p><a class="reference external" href="https://wiki.archlinux.org/index.php/The_Arch_Way">https://wiki.archlinux.org/index.php/The_Arch_Way</a></p>
+<p>Arch Linux支持syslinux或GRUB两种bootloader，
+包管理器为Pacman(package manager)，
+使用systemd作为系统的服务管理器(这货还没弄清楚)</p>
+<p>在下列资源的帮助下我顺利完成了系统的安装:</p>
+<p>一个是Arch官方的Beginners' Guide:</p>
+<p><a class="reference external" href="https://wiki.archlinux.org/index.php/Beginners%27_Guide">https://wiki.archlinux.org/index.php/Beginners%27_Guide</a></p>
+<p>一个是某牛人写的手把手教程(虽然略微显老，不过参考价值很大)：</p>
+<p><a class="reference external" href="http://wideaperture.net/blog/?p=3851">http://wideaperture.net/blog/?p=3851</a></p>
+<p>个人推荐先用牛人的教程研究一遍整体流程，
+再以官方教程为主着手操作，
+因为有些命令的参数可能由于版本更新发生变化，
+以官方版本为参考可有效避免产生问题。</p>
+</div>
+<div class="section" id="id2">
+<h2>环境</h2>
+<p>由于初次尝试安装Arch Linux，
+我选择在虚拟机里练手，
+熟悉了流程之后再将自己的系统完整转移到Arch上。</p>
+<p>宿主操作系统为Ubuntu 12.04 x64 桌面版</p>
+<p>VirtualBox 的版本为4.1.12</p>
+<p>选择的Arch Linux安装镜像为2012.12.01版本。</p>
+<p>没有使用最新版是因为在VirtualBox里最新版本启动失败，
+感觉VB(VirtualBox)对较新版本的系统支持都不是特别好，
+之前也有试过在Windows下用VB安装Ubuntu 13.04，
+结果以失败告终，
+后来换Ubuntu 12.04就解决了问题。</p>
+</div>
+<div class="section" id="id3">
+<h2>基本步骤总结</h2>
+<p>假设是全新安装，
+不考虑windows系统的双引导问题，
+Arch Linux系统的主要安装步骤有如下几步：</p>
+<blockquote>
+<ol class="arabic simple">
+<li>硬盘分区</li>
+<li>分区格式化</li>
+<li>基本系统安装</li>
+<li>fstab的生成和系统的配置</li>
+<li>bootloader的安装和配置</li>
+</ol>
+</blockquote>
+<p>在安装过程中需要保证网络连接，
+以让系统自动从镜像网站中获取所需的资源。
+另一种搞法是将Arch的核心库下载储存到本地的存储介质上并设定系统从中读取资源。</p>
+</div>
+<div class="section" id="id4">
+<h2>详细记录</h2>
+<div class="section" id="id5">
+<h3>0)准备阶段</h3>
+<p>首先需要有一份完整的光盘镜像，
+建议在使用镜像之前检查一下md5和sha1的散列值，
+防止由于数据丢失导致的问题。</p>
+<p>Ubuntu下可以使用md5sum和sha1sum命令计算文件的散列值</p>
+<p>关于硬盘大小有几种说法，
+官方说的貌似只要500M的空间便可完成基本安装,
+而大牛的教程直接搞了40G的空间。
+反正现在空间都是白菜价，
+搞大一点也好。</p>
+<p>内存方面能有个512M就能跑得很欢了。</p>
+<p>此外大牛的教程里还开启了VirtualBox的显卡3D加速，
+调大了显存容量。</p>
+</div>
+<div class="section" id="id6">
+<h3>1)光盘引导和硬盘分区</h3>
+<p><strong>引导系统</strong></p>
+<p>Arch Linux的光盘镜像中包含了32位和64位两个版本的系统。
+如果是正式安装的话，
+由于现在主流的硬件都支持64位，
+因此推荐选用较新的64位系统。</p>
+<p>而如果是虚拟机则推荐使用较好的兼容性和低硬件需求的32位系统。</p>
+<p>正常的话，
+光盘镜像会被引导，
+选择所需的系统版本,
+系统自动载入并自动登录为root。</p>
+<p>在一大堆输出之后应该出现一个终端窗口等待命令：</p>
+<blockquote>
+root&#64;archiso ~ #</blockquote>
+<p>这说明光盘的系统进入成功了。</p>
+<p>如果过程中死了，可参考Arch官方的troubleshooting:</p>
+<blockquote>
+<a class="reference external" href="https://wiki.archlinux.org/index.php/Beginners%27_Guide#Troubleshooting_boot_problems">https://wiki.archlinux.org/index.php/Beginners%27_Guide#Troubleshooting_boot_problems</a></blockquote>
+<p>另外，
+如果上述方案无法解决问题，
+并且是在虚拟机中安装的话，
+可以观察一下自己所用的系统版本，
+选择较老的版本以换取较好的兼容性。</p>
+<p><strong>语言选择</strong></p>
+<p>官方的说法是选择自己的语言版本并去除对应的注释，
+然后启用相应的语言。</p>
+<p>个人推荐保持English较好，
+我尝试过选择中文，
+可能是字体没有设置正确，
+导致后面的操作中文字符都无法显示。</p>
+<p>另外一个好处是English的错误直接贴进Google里搜可以得到很多的结果。</p>
+<p><strong>网络配置</strong></p>
+<p>Arch Linux会自动配置网络连接，
+通过Ping一下Google查看网络是否正常。
+如果有问题的话再尝试自行设置网络：</p>
+<blockquote>
+<a class="reference external" href="https://wiki.archlinux.org/index.php/Beginners%27_Guide#Establish_an_internet_connection">https://wiki.archlinux.org/index.php/Beginners%27_Guide#Establish_an_internet_connection</a></blockquote>
+<p><strong>硬盘分区</strong></p>
+<p>首先需要选择分区表。</p>
+<p>一种是常见的MBR主引导记录，
+windows便是使用该分区表。
+糟糕的是MBR比较旧，
+最多只能有三个主分区和一个拓展分区，
+在拓展分区上继续划分逻辑分区。
+分区的大小也有限，
+最多只支持2T的空间，
+超过部分无法识别。
+而且需要设定某个分区为活动分区才可引导系统。
+不过某些老的BIOS只支持MBR，
+另外如果有windows的话只能使用MBR。</p>
+<p>不考虑老BIOS兼容性和windows的兼容性的话，
+应该尽量使用更新的GPT分区表，
+不仅分区数量提高到128个，
+空间限制也加大到2Z。
+没有活动分区限制。
+某些新款的UEFI类型的主板只支持GPT分区表。</p>
+<p>关于分区表的选择可参考：</p>
+<blockquote>
+<p><a class="reference external" href="https://wiki.archlinux.org/index.php/GUID_Partition_Table">https://wiki.archlinux.org/index.php/GUID_Partition_Table</a></p>
+<p><a class="reference external" href="https://wiki.archlinux.org/index.php/Master_Boot_Record">https://wiki.archlinux.org/index.php/Master_Boot_Record</a></p>
+</blockquote>
+<p>针对不同的分区表Arch Linux提供了不同的分区工具，
+我选择的是GPT分区表，
+下面使用cgdisk进行分区操作。</p>
+<p>如果有多个硬盘的话要区分好需要在哪个硬盘上操作，
+避免因为选错硬盘导致的数据丢失。</p>
+<p>假设在sda硬盘上进行分区：</p>
+<blockquote>
+cgdisk /dev/sda</blockquote>
+<p>进入cgdisk后有界面，
+选择新建啦分配大小啦，
+就不废话了。</p>
+<p>注意的是swap分区的代号是8200，
+新建分区的默认代号是8300，
+因此在创建swap分区时要注意不能选择默认设置。</p>
+<p>另外一点是要在底端的空白空间上新建分区，
+最上方的空白空间貌似是给分区表用的，
+需要留空。</p>
+<p>至于分区大小，
+可参考这里：</p>
+<blockquote>
+<a class="reference external" href="https://wiki.archlinux.org/index.php/Partitioning#How_big_should_my_partitions_be.3F">https://wiki.archlinux.org/index.php/Partitioning#How_big_should_my_partitions_be.3F</a></blockquote>
+<p>分区完成后要写入更改。</p>
+<p>最后退出cgdisk回到终端。</p>
+</div>
+<div class="section" id="id7">
+<h3>2) 分区格式化</h3>
+<p>在硬盘分区完成后，
+每个分区被赋予一个数值表示该分区的编号。</p>
+<p>因此假设sda硬盘分区完成，
+那么/dev/中会出现若干个sda开头的设备。</p>
+<p>sda1表示sda硬盘的第一个分区，
+sda2表示sda硬盘的第二个分区。</p>
+<p>查看某个硬盘的情况可以用这个：</p>
+<blockquote>
+lsblk /dev/sda</blockquote>
+<p>结果以树状结构呈现硬盘的分区情况。</p>
+<p>格式化是非常方便的，
+安装Arch Linux要求分区格式为ext4。
+用下面的命令格式化sda1:</p>
+<blockquote>
+mkfs.ext4 /dev/sda1</blockquote>
+<p>记得对其他分区也要做一遍。</p>
+<p>对于swap分区，使用下面的命令(假设是第三个分区)：</p>
+<blockquote>
+mkswap /dev/sda3</blockquote>
+<p>还要启用这个swap分区：</p>
+<blockquote>
+swapon /dev/sda3</blockquote>
+</div>
+<div class="section" id="id8">
+<h3>3) 基本系统安装</h3>
+<p><strong>挂载分区</strong></p>
+<p>分区完成之后就要在新划分的分区里面安装系统了，
+因此首先要做的是把分区挂载到当前运行的光盘系统中。</p>
+<p>挂载的顺序非常重要，
+我们直到Unix类型系统都是以根目录作为整个系统文件树的起点，
+因此首先把作为root的分区挂载到当前系统的/mnt里去。</p>
+<p>假设作为root的分区是sda1:</p>
+<blockquote>
+mount /dev/sda1 /mnt</blockquote>
+<p>接着在挂载后的root目录(也就是当前的/mnt)下新建相应的文件夹挂载其余的分区。
+假设需要挂载boot分区(sda2)：</p>
+<blockquote>
+<p>mkdir /mnt/boot</p>
+<p>mount /dev/sda2 /mnt/boot</p>
+</blockquote>
+<p>依次搞定剩余的分区就可以了。</p>
+<p><strong>镜像站点选择</strong></p>
+<p>这个一定要搞一下，
+本人第一次安装时因为没有更改镜像站点导致下载速度超慢，
+本以为pacman应该有什么内置的功能自动选择最优的站点下载，
+后来感觉好像没有这个功能，
+它只是扫了一遍配置文件从头到尾一个个尝试连接并下载需要的资源而已。</p>
+<p>首先要在以下的地址选择并生成在自己的地区最合适的镜像站点：</p>
+<blockquote>
+<a class="reference external" href="https://www.archlinux.org/mirrorlist/">https://www.archlinux.org/mirrorlist/</a></blockquote>
+<p>然后编辑文件/etc/pacman.d/mirrorlist，
+教程里用的是nano，我不太习惯，
+换成vi也是可以的(没有vim，将就着用吧)</p>
+<p><strong>系统安装</strong></p>
+<p>到了正题反而简单得很，
+如果网络配置正常、
+镜像站点正常、
+硬盘分区和挂载正确的话，
+敲下面这个命令就ok了：</p>
+<blockquote>
+pacstrap -i /mnt base</blockquote>
+<p>去掉-i参数的话会默认安装所有基础的组件。
+其实就算加了-i，看到白花花的列表里那么多东西，
+也没什么欲望一个个去考虑要不要了。
+既然都是基础的组件，
+就全部安装好了。
+反正相比windows，
+再多也不多~</p>
+<p>大牛的教程说到这一步可以去喝杯咖啡，
+也可以坐在屏幕前面欣赏（如果觉得进度的变化能让自己感觉很high的话）</p>
+<p>反正就是等......</p>
+<p><strong>关于系统安装的补充说明</strong></p>
+<p>虽然上面的一个命令就可以搞定基础系统的安装，
+但仍然有很多不确定因素会导致安装的中断。
+就像我第一次安装的时候等到五点要去吃饭了它资源还没有下载完毕，
+于是一狠心就把它Ctrl+C了...-_-|||</p>
+<p>令人欣喜的是等到我吃完饭回来，
+重新光盘引导并挂载分区(文件夹什么的都在了，挂载分区开启swap就可以了)，
+并且还改了mirrorlist，
+重新pacstrap，
+发现它依然能够继续之前的下载，
+最终正常完成系统安装。</p>
+<p>观察它的安装过程，应该是这样的，
+首先是将所有需要的文件下载到本地，
+然后一次性执行所有程序的安装。
+由于我在下载的中途中断了，
+下一次进入pacman会自动扫描现有的文件，
+继续所有未完成的下载，
+最终才开始安装。</p>
+<p>至于安装的过程中断会怎么样呢？</p>
+<p>感觉有点恐怖...哪个兄弟试过的烦请告知...</p>
+<p>此外，
+官方文档的Note有如下的说明：</p>
+<blockquote>
+Whenever in the future you change your list of mirrors,
+always remember to force pacman to refresh all package lists with 'pacman -Syy'.
+This is considered to be good practice and will avoid possible headaches.
+See Mirrors for more information.</blockquote>
+<p>所以，</p>
+<p><em>修改了mirrorlist记得要 pacman -Syy</em></p>
+</div>
+<div class="section" id="fstab">
+<h3>4) fstab的生成和系统的配置</h3>
+<p><strong>fstab文件生成</strong></p>
+<p>这一步生成一份fstab文件，
+这个文件的作用在于配置当前系统的分区状况，
+使得每次启动系统的时候自动挂载分区。
+相当于静态的文件系统信息。</p>
+<blockquote>
+genfstab -U -p /mnt &gt;&gt; /mnt/etc/fstab</blockquote>
+<p>完成后要检查文件内容是否正确，
+直接cat或者more或者less或者vi、nano都可以。
+类似的内容在大牛的文章中有截图。</p>
+<p>完成了前面的步骤，
+Arch Linux的基础系统就算是安装到本地的磁盘上了。
+接下来要做一些简单的配置工作。</p>
+<p><strong>切换系统并配置</strong></p>
+<p>首先是要切换到新安装的系统里。
+没有错，系统已经可以运行，
+现在要切换到新的系统里去。</p>
+<blockquote>
+arch-chroot /mnt /bin/bash</blockquote>
+<p>这句切换到新系统里并让默认的shell为Bash。
+去掉后面的第二个参数则会使用sh的shell。</p>
+<p>执行成功的话现在就在新系统里运行了，
+会发现终端的提示符中主机已经不再是archiso，
+而是当前的系统。</p>
+<p>区域、语言、主机名称什么的就不多说了，
+照着教程搞即可。</p>
+</div>
+<div class="section" id="bootloader">
+<h3>5) bootloader的安装和配置</h3>
+<p>最后一步是安装bootloader。
+bootloader用于在系统启动时引导进入系统。</p>
+<p>设想系统硬件启动完成，
+BIOS(UEFI)按引导顺序将系统的引导权传递到硬盘中，
+那么硬盘怎么能够知道去哪里找对应的系统启动呢？
+靠的就是bootloader。
+bootloader储存在磁盘的开始部分，
+当系统启动时，自动到磁盘的开始位置搜索bootloader，
+并由其完成剩余的启动工作。</p>
+<p>大牛的文章里有一个非常精妙的类比，
+这货就像高度近视的人每天醒来第一件事是伸手去拿放在固定位置的眼镜，
+没有眼镜的话人将没有办法做任何事情（无法进入系统），
+而眼镜总是放在固定的位置（床头啊什么的，就像磁盘的开始处一样），
+因此不用花功夫思考去哪里找眼睛（BIOS也一样，只会在磁盘的开始处搜索），
+直接伸手去拿即可。</p>
+<p>一解释就显得罗嗦...</p>
+<p>但其实安装bootloader是非常便捷的，
+照着教程做就可以了。
+一个注意的地方是要确定自己的主板是BIOS还是UEFI，
+此外安装完成后（需要的话）记得要把引导的位置修改为root所在的分区代号。</p>
+<p>完成后退出当前系统（回到光盘系统），
+umount所有挂载的分区，
+reboot并让硬盘引导，
+正常的话会出现bootloader的界面，
+选择合适的选项进入即可。</p>
+<blockquote>
+<p><strong>关于bootloader的补充说明</strong></p>
+<p>安装错误或者配置错误什么的都会导致bootloader引导失败，
+可参考官方的troubleshooting。</p>
+<p>弄死了是没有关系的，
+重新光盘引导，
+挂载分区和swap分区（别忘了swap分区），
+哪里错了就从哪里重新开始。
+肯定有一天能够安装正确配置成功并进入系统的。(^_^)</p>
+</blockquote>
+<p>一旦配置正确，系统引导成功，
+一堆输出过后会出现一个终端并等待命令，
+没有错</p>
+<p>这说明</p>
+<p><strong>Arch Linux 安装完成了！</strong></p>
+<p>啥？没有图形界面？</p>
+<p>自己装X-server啊，
+喜欢哪个窗口管理器（Gnome,xfce，KDE什么的）自己再弄上去。
+( 参考：<a class="reference external" href="https://wiki.archlinux.org/index.php/Beginners%27_Guide#Graphical_User_Interface">https://wiki.archlinux.org/index.php/Beginners%27_Guide#Graphical_User_Interface</a> )</p>
+<p>我觉得光是这一点就充分体现了Arch Linux的简介性和高度的可定制性了。</p>
+</div>
+</div>
+
+            </div><!-- /.entry-content -->
+            
+
+        </div><!-- /.eleven.columns -->
+        
+     <div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+        <li><a href="md5.html">md5 generator</a></li>
+        <li><a href="first article.html">about</a></li>
+            </ul>
+
+<h4>Categories</h4>
+<ul>
+			<li><a href="/category/linux.html">Linux</a></li>
+			<li><a href="/category/python.html">Python</a></li>
+			<li><a href="/category/git.html">git</a></li>
+			<li><a href="/category/life.html">life</a></li>
+			<li><a href="/category/network.html">network</a></li>
+	</ul>
+
+
+<h4>Tags</h4>
+	<ul>
+		    <li class="tag-4"><a href="/tag/arch.html">Arch</a></li>
+		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
+		    <li class="tag-2"><a href="/tag/network.html">network</a></li>
+		    <li class="tag-2"><a href="/tag/softwarearchitect.html">SoftwareArchitect</a></li>
+		    <li class="tag-2"><a href="/tag/bash.html">Bash</a></li>
+		    <li class="tag-2"><a href="/tag/github.html">github</a></li>
+		    <li class="tag-2"><a href="/tag/git.html">git</a></li>
+		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
+	</ul>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul>
+      <li><a href=""></a></li>
+    </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Contact scutLaoYi: scutLaoYi@gmail.com <br />
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+                                <li><div class="btn primary"><a href="https://github.com/scutLaoYi" target="_blank">Github</a></div></li>
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+
+</body>
+</html>

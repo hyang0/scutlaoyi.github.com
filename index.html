@@ -68,11 +68,50 @@
         <div class="eleven columns">
 		         <ol id="post-list">
 								        <li><article class="hentry">
+				                <header> <h2 class="entry-title"><a href="/Arch001.html" rel="bookmark" title="Permalink to Arch Linux学习：安装篇(一)">Arch Linux学习：安装篇(一)</a></h2> </header>
+				                <footer class="post-info">
+				                    <abbr class="published" title="2014-01-08T19:30:00"> 三 08 一月 2014 </abbr>
+				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
+				                <div class="entry-content"> <p>本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。</p>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>关于Arch Linux</h2>
+<p>Arch Linux是一个现在较为流行的Linux发行版，
+支持32/64位处理器,
+以Rolling Releases方式发布新版本。</p>
+<p>官方站点：</p>
+<p><a class="reference external" href="https://www.archlinux.org">https://www.archlinux.org</a></p>
+<p>Arch Linux的哲学是简洁、保证代码的正确性、用户为中心、开放性及自由性。
+因此据称Arch Linux的一个非常重要的特点是轻量级，
+让用户自行选择所需的组件构建属于自己的系统，
+当然这都以系统的开放性作为前提，
+Arch Linux提供了非常大的自由度和开放度供用户完全控制自己的系统。</p>
+<p><a class="reference external" href="https://wiki.archlinux.org/index.php/The_Arch_Way">https://wiki.archlinux.org/index.php/The_Arch_Way</a></p>
+<p>Arch Linux支持syslinux或GRUB两种bootloader，
+包管理器为Pacman(package manager)，
+使用systemd作为系统的服务管理器(这货还没弄清楚)</p>
+<p>在下列资源的帮助下我顺利完成了系统的安装:</p>
+<p>一个是Arch官方的Beginners' Guide:</p>
+<p><a class="reference external" href="https://wiki.archlinux.org/index.php/Beginners%27_Guide">https://wiki.archlinux.org/index.php/Beginners ...</a></p></div> </div><!-- /.entry-content -->
+
+								<div class="medium primary btn"><a href="/Arch001.html" rel="bookmark" title="Permalink to Arch Linux学习：安装篇(一)">Read more <i class="icon-arrow-right"></i></a></div>
+
+
+
+								<div class="row tag-row">
+																			<span>Tagged as : </span>
+																					<a class="danger label" href="/tag/arch.html">Arch</a>
+																											</div>
+
+
+
+				        </article></li>
+								        <li><article class="hentry">
 				                <header> <h2 class="entry-title"><a href="/Bash004.html" rel="bookmark" title="Permalink to Bash笔记(四)">Bash笔记(四)</a></h2> </header>
 				                <footer class="post-info">
 				                    <abbr class="published" title="2014-01-05T22:30:00"> 日 05 一月 2014 </abbr>
 				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p><strong>本系列博文记录学习Linux终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录，方便日后再次查看。</strong></p>
+				                <div class="entry-content"> <p><strong>本系列博文记录学习Shell终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录。</strong></p>
 <hr class="docutils" />
 <div class="section" id="id1">
 <h2>用户管理</h2>
@@ -104,7 +143,7 @@
 <p>useradd</p>
 <blockquote>
 <p>创建一个新用户scutlaoyi，设置home目录及用户描述</p>
-<p>useradd -m -d ...</p></blockquote></div> </div><!-- /.entry-content -->
+<p>useradd -m -d /home ...</p></blockquote></div> </div><!-- /.entry-content -->
 
 								<div class="medium primary btn"><a href="/Bash004.html" rel="bookmark" title="Permalink to Bash笔记(四)">Read more <i class="icon-arrow-right"></i></a></div>
 
@@ -123,7 +162,7 @@
 				                <footer class="post-info">
 				                    <abbr class="published" title="2014-01-04T22:00:00"> 六 04 一月 2014 </abbr>
 				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p><strong>本系列博文记录学习Linux终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录，方便日后再次查看。</strong></p>
+				                <div class="entry-content"> <p><strong>本系列博文记录学习Shell终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录。</strong></p>
 <hr class="docutils" />
 <div class="section" id="id1">
 <h2>常用过滤器</h2>
@@ -155,7 +194,8 @@
 <p>设置连带输出目标行后的4行（数字可变）</p>
 <p>grep -A4 ......</p>
 <p>设置连带输出目标行前的3行</p>
-<p>grep -B3 ...</p></blockquote></div> </div><!-- /.entry-content -->
+<p>grep -B3 ......</p>
+<p>设置连带输出目标行前后的2行 ...</p></blockquote></div> </div><!-- /.entry-content -->
 
 								<div class="medium primary btn"><a href="/Bash003.html" rel="bookmark" title="Permalink to Bash笔记(三)">Read more <i class="icon-arrow-right"></i></a></div>
 
@@ -174,7 +214,7 @@
 				                <footer class="post-info">
 				                    <abbr class="published" title="2014-01-03T22:30:00"> 五 03 一月 2014 </abbr>
 				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p><strong>本系列博文记录学习Linux终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录，方便日后再次查看。</strong></p>
+				                <div class="entry-content"> <p><strong>本系列博文记录学习Shell终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录。</strong></p>
 <hr class="docutils" />
 <div class="section" id="id1">
 <h2>变量</h2>
@@ -221,7 +261,7 @@
 <p>unset</p>
 <blockquote>
 <p>取消设置某个变量</p>
-<p>unset ...</p></blockquote></div> </div><!-- /.entry-content -->
+<p>unset [variable ...</p></blockquote></div> </div><!-- /.entry-content -->
 
 								<div class="medium primary btn"><a href="/Bash002.html" rel="bookmark" title="Permalink to Bash笔记(二)">Read more <i class="icon-arrow-right"></i></a></div>
 
@@ -240,7 +280,7 @@
 				                <footer class="post-info">
 				                    <abbr class="published" title="2014-01-02T22:30:00"> 四 02 一月 2014 </abbr>
 				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p><strong>本系列博文记录学习Linux终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录，方便日后再次查看。</strong></p>
+				                <div class="entry-content"> <p><strong>本系列博文记录学习Shell终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录。</strong></p>
 <hr class="docutils" />
 <div class="section" id="id1">
 <h2>基础知识</h2>
@@ -265,7 +305,8 @@
 <p>某些命令有两种类型，显示所有类型</p>
 <p>type -a [command]</p>
 <p>当执行同名命令时内置命令优先，
-执行外部命令必须指定命令路径，如echo ...</p></blockquote></div> </div><!-- /.entry-content -->
+执行外部命令必须指定命令路径，如echo:</p>
+<p>/bin ...</p></blockquote></div> </div><!-- /.entry-content -->
 
 								<div class="medium primary btn"><a href="/Bash001.html" rel="bookmark" title="Permalink to Bash笔记(一)">Read more <i class="icon-arrow-right"></i></a></div>
 
@@ -969,7 +1010,7 @@ scutLaoYi</blockquote>
 
 <h4>Categories</h4>
 <ul>
-			<li><a href="/category/bash.html">Bash</a></li>
+			<li><a href="/category/linux.html">Linux</a></li>
 			<li><a href="/category/python.html">Python</a></li>
 			<li><a href="/category/git.html">git</a></li>
 			<li><a href="/category/life.html">life</a></li>
@@ -979,13 +1020,14 @@ scutLaoYi</blockquote>
 
 <h4>Tags</h4>
 	<ul>
+		    <li class="tag-4"><a href="/tag/arch.html">Arch</a></li>
+		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
+		    <li class="tag-2"><a href="/tag/network.html">network</a></li>
+		    <li class="tag-2"><a href="/tag/softwarearchitect.html">SoftwareArchitect</a></li>
+		    <li class="tag-2"><a href="/tag/bash.html">Bash</a></li>
 		    <li class="tag-2"><a href="/tag/github.html">github</a></li>
 		    <li class="tag-2"><a href="/tag/git.html">git</a></li>
-		    <li class="tag-2"><a href="/tag/bash.html">Bash</a></li>
 		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
-		    <li class="tag-2"><a href="/tag/network.html">network</a></li>
-		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
-		    <li class="tag-2"><a href="/tag/softwarearchitect.html">SoftwareArchitect</a></li>
 	</ul>
 
 
