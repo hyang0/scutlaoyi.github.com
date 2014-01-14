@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>老逸的个人站</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="laoyi">
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="/theme/css/font-awesome.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/theme/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/theme/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/theme/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/theme/images/apple-touch-icon-114x114.png">
+
+    <link href="/" type="application/atom+xml" rel="alternate" title="老逸的个人站 ATOM Feed" />
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">老逸的个人站 </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                <li><a href="/pages/first article.html">About</a></li>
+                          <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/git.html">
+						<i class="icon-folder-open icon-large"></i>git
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/linux.html">
+						<i class="icon-folder-open icon-large"></i>Linux
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/network.html">
+						<i class="icon-folder-open icon-large"></i>network
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/python.html">
+						<i class="icon-folder-open icon-large"></i>Python
+					</a>
+                  </li>
+
+                          <ul class="nav pull-right">
+                                <li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+                          </ul>
+
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="span9" id="content">
+        <div class="article">
+                <h1><a href="/PythonExpe001.html">软件体系结构：N皇后问题系列之回溯法</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-10-31T22:30:00">
+        <i class="icon-calendar"></i>Thu 31 October 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+	<a href="/tag/softwarearchitect.html"><i class="icon-tag"></i>SoftwareArchitect</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3</strong></p>
+<p><strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<p>最近学习搞得有点杂，一怒之下一个月没打理个人主页了，有些事情就是这样，你越不管，时间越长，就越不想管。</p>
+<p>软件体系结构是本学期的课程之一，大作业是用几种奇怪的风格构造一个N皇后问题的求解器。</p>
+<p>由于没有限定语言，咱自然是Python搞起。正发愁前些日子学习了那么多的理论知识没地方实践，正好，这货拿来下菜！</p>
+<p><strong>风格一：回溯法</strong></p>
+<p>其实我真的研究了很久这个神乎其神的名字，有点文言文的味道。然而半晌发现这货说到底就是深搜。
+于是敲了一个递归的函数处理之，不加任何剪枝优化，回溯法原型就基本出来了。</p>
+<p>我们将棋盘横向切分为多个单独的层，显而易见，每一层只能放置一个皇后，且每一层都应该放置皇后。于是可以递归搜索每一层，找出所有可能位置。</p>
+<p>使用深度优先搜索算法，遍历每一层的所有位置，检查当前位置是否符合要求。如果不符合要求，继续搜索下一个位置；如果符合要求，则依据深度优先原则，递归调用函数自身搜索下一层所有位置，依此类推。算法的终止条件为搜索到达了棋盘的最底层，这时候如果找到了符合条件的位置 ...</p>
+                        <a class="btn primary xsmall" href="/PythonExpe001.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Python007.html">Python 笔记（七）</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-10-04T10:30:00">
+        <i class="icon-calendar"></i>Fri 04 October 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3，</strong>
+<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>文件和流</h2>
+<p><strong>打开文件</strong></p>
+<p>使用open函数打开文件，参数一为文件名，参数二为打开方式，参数三为缓冲区设置</p>
+<p>最简单的打开文件代码如下：</p>
+<div class="highlight"><pre><span class="n">myFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;myFile.txt&quot;</span><span class="p">)</span>
+</pre></div>
+<p>程序自动以读取方式打开文件，如果文件不存在会引发IOError异常</p>
+<p>以写入方式打开文件：</p>
+<div class="highlight"><pre><span class="n">myFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;myFile.txt&quot;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+</pre></div>
+<p>'b'属性以二进制方式打开文件</p>
+<p>'a'属性以追加方式打开文件</p>
+<p>'+'属性以读写方式打开文件</p>
+<p>缓冲区设置：</p>
+<blockquote>
+<p>0(False) 不设置缓冲区，直接写入硬盘;</p>
+<p>1(True) 开启缓冲区;</p>
+<p>&gt;1 设置缓冲区大小;</p>
+<p>-1 使用默认缓冲区大小</p>
+</blockquote>
+<p><strong>读写文件（单字符 ...</strong></p></div>
+                        <a class="btn primary xsmall" href="/Python007.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Python006.html">Python 笔记（六）</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-10-03T10:30:00">
+        <i class="icon-calendar"></i>Thu 03 October 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3，</strong>
+<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>模块</h2>
+<p><strong>模块的定义:</strong></p>
+<p>最简单的，一个文件(*.py)便是一个模块，文件名为模块名，模块可以单独运行也可以被其他模块所包含。</p>
+<p>使用import指令便可以包含其他模块</p>
+<p>使用条件判断：if __name__ == '__main__' 可判定当前模块是否独立运行，True为独立运行，False为被其他模块import</p>
+<p>当模块被其他模块import时，模块内的代码（类定义、函数定义、变量定义）均会被执行一次</p>
+<p>因此添加上述的条件判断可避免某些独立运行的代码在模块被包含时运行，这种机制有利于代码重用</p>
+<p>类似但更加强大的概念是包，包可以将若干模块封装在一起，成为一个程序组。</p>
+<p><strong>获取标准库中的一些常用模块及功能介绍:</strong></p>
+<p>通过dir()函数可获取某个模块中的所有命名，包括函数、变量等</p>
+<p>通过print某个模块或模块中成员的__doc__文档字符串，可获取文档介绍</p>
+<p>例如sys模块中的sys.exit能够退出程序，并指定返回值</p>
+<p>sys ...</p></div>
+                        <a class="btn primary xsmall" href="/Python006.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/network003.html">socket编程(3):多线程socket服务器/客户端</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-09-28T16:00:00">
+        <i class="icon-calendar"></i>Sat 28 September 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/network.html"><i class="icon-folder-open"></i>network</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/network.html"><i class="icon-tag"></i>network</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><hr class="docutils" />
+<p>多线程的tcp服务器与单线程的差别不大，主要差别在于服务器接受一个请求后创建一个新线程处理请求，主线程继续等待连接，因此可以在同一个时间处理多个请求。单线程的服务器每次都只有主线程接受并处理请求，这种情况下其他连接就必须等待。</p>
+<p>在GNU/Linux操作系统下可以使用pthread创建并管理线程。</p>
+<p>应该注意的一点是pthread不是Linux默认库的一部分，因此在编译时需要添加参数 -lpthread ，否则会报错(找不到文件：undefined reference to 'pthread_create')。</p>
+<p>由于本代码只为测试多线程，编写时没有考虑长的时延，因此在主线程退出前仅等待最后一个子线程的退出，这在实际操作中八成会出问题。</p>
+<p>另外在创建线程时传入的函数参数为指针，需要注意对内存的管理，防止多个线程的指针变量指向同一个地址。</p>
+<p><strong>C++版本服务器代码：</strong></p>
+<div class="highlight"><pre><span class="cp">#include &lt;cstdio&gt;</span>
+<span class="cp">#include &lt;cstring&gt;</span>
+<span class="cp">#include &lt;cstdlib&gt;</span>
+<span class="cp">#include &lt;cerrno&gt;</span>
+<span class="cp">#include &lt;unistd.h&gt;</span>
+<span class="cp">#include &lt;sys/types.h&gt;</span>
+<span class="cp">#include &lt;sys/socket.h&gt;</span>
+<span class="cp">#include &lt;netinet/in.h&gt;</span>
+<span class="cp">#include ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/network003.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Python005.html">Python 笔记（五）</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-09-25T09:30:00">
+        <i class="icon-calendar"></i>Wed 25 September 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3，</strong>
+<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>类的进阶玩法</h2>
+<p><strong>构造函数：</strong></p>
+<p>构造函数的名称为 &quot;__init__&quot;，在对象被生成时自动调用：</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">ComplexClass</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="n">number</span>
+</pre></div>
+<p><strong>继承状态下的构造函数：</strong></p>
+<p>如果一个类继承了某基类，且没有重写构造函数，则基类构造函数被自动调用：</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">ComplexClass</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="n">number</span>
+
+<span class="k">class</span> <span class="nc">AnotherClass</span><span class="p">(</span><span class="n">ComplexClass</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<span class="n">cc</span> <span class="o">=</span> <span class="n">ComplexClass</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">ac</span> <span class="o">=</span> <span class="n">AnotherClass</span><span class="p">()</span>
+<span class="c">#错误！构造函数需要两个参数 ...</span></pre></div></div>
+                        <a class="btn primary xsmall" href="/Python005.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/network002.html">socket编程(2):单线程udp服务器/客户端</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-09-24T10:00:00">
+        <i class="icon-calendar"></i>Tue 24 September 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/network.html"><i class="icon-folder-open"></i>network</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/network.html"><i class="icon-tag"></i>network</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>基本流程</strong></p>
+<p>与tcp的通讯非常类似，不同之处在于udp是无连接的，因此没有创建连接这种操作，服务器开启端口后接受数据并直接返回。
+设置时将socket类型设置为SOCK_DGRAM即可创建udp通讯。</p>
+<p><strong>C++版本：</strong></p>
+<p>服务器：</p>
+<div class="highlight"><pre><span class="c1">//filename:udpServer.cpp</span>
+
+<span class="cp">#include &lt;cstdio&gt;</span>
+<span class="cp">#include &lt;cstring&gt;</span>
+<span class="cp">#include &lt;sys/types.h&gt;</span>
+<span class="cp">#include &lt;sys/socket.h&gt;</span>
+<span class="cp">#include &lt;netinet/in.h&gt;</span>
+<span class="cp">#include &lt;arpa/inet.h&gt;</span>
+<span class="cp">#include &lt;unistd.h&gt;</span>
+<span class="cp">#include &lt;errno.h&gt;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">BUF_SIZE</span> <span class="o">=</span> <span class="mi">512</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">SOCKET_PORT</span> <span class="o">=</span> <span class="mi">9999</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/network002.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Python004.html">Python 笔记（四）</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-09-23T15:30:00">
+        <i class="icon-calendar"></i>Mon 23 September 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3，</strong>
+<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>类的初识</h2>
+<p><strong>关于称呼的一些声明</strong></p>
+<p>本文以&lt;Python基础教程&gt;为基础，沿用了其中的部分称呼，一般的函数通称函数，类的成员函数称为方法。</p>
+<p>但由于C++的一些思想比较根深蒂固，有时会混用两种称呼。</p>
+<p><strong>类的定义及创建对象</strong></p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">SimpleClass</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">funcA</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">print</span> <span class="s">&quot;Hey!Function A called!&quot;</span>
+        <span class="k">def</span> <span class="nf">funcB</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">print</span> <span class="s">&quot;Hey!Function B called!&quot;</span>
+        <span class="k">def</span> <span class="nf">funcC</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+                <span class="k">print ...</span></pre></div></div>
+                        <a class="btn primary xsmall" href="/Python004.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Python003.html">Python笔记（三）</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-09-18T15:30:00">
+        <i class="icon-calendar"></i>Wed 18 September 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3，</strong>
+<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>函数</h2>
+<p><strong>定义函数</strong></p>
+<p>关键词def，类似于C++，由函数名、参数列表、函数体和返回语句构成。</p>
+<p>在def的下一行可添加字符串作为文档字符串。
+文档字符串描述了函数的功能作用。
+文档字符串作为函数的一部分存在。
+可通过调用函数的__doc__属性返回文档字符串。</p>
+<p>参数列表中的参数后可添加赋值语句，相当于C++中的默认参数。</p>
+<p>调用函数时，默认通过位置复制，亦可指定参数名称赋值，称为关键字参数赋值。</p>
+<p>基本例子如下：</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">sayHello</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
+        <span class="s">&quot;This is a function to say hello!&quot;</span>
+        <span class="k">print</span> <span class="s">&quot;a is&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="s">&quot;b is&quot;</span><span class="p">,</span> <span class="n">b ...</span></pre></div></div>
+                        <a class="btn primary xsmall" href="/Python003.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/network001.html">socket编程(1):单线程tcp服务器/客户端</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-09-17T15:30:00">
+        <i class="icon-calendar"></i>Tue 17 September 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/network.html"><i class="icon-folder-open"></i>network</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/network.html"><i class="icon-tag"></i>network</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>tcp的单线程socket比较简单，以下是GNU/Linux环境下socket通讯的测试，分为C++版本和Python版本。</strong></p>
+<div class="section" id="id1">
+<h2>服务器：</h2>
+<p>流程：创建socket-绑定端口-监听-获取连接-读写操作-关闭连接并结束</p>
+<p><strong>C++版本：</strong></p>
+<div class="highlight"><pre><span class="cp">#include &lt;cstdio&gt;</span>
+<span class="cp">#include &lt;cstdlib&gt;</span>
+<span class="cp">#include &lt;cstring&gt;</span>
+<span class="cp">#include &lt;cerrno&gt;</span>
+<span class="cp">#include &lt;unistd.h&gt;</span>
+<span class="cp">#include &lt;sys/types.h&gt;</span>
+<span class="cp">#include &lt;sys/socket.h&gt;</span>
+<span class="cp">#include &lt;netinet/in.h&gt;</span>
+<span class="cp">#include &lt;arpa/inet.h&gt;</span>
+
+<span class="c1">//定义缓冲区的大小</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXBUF</span> <span class="o">=</span> <span class="mi">4096</span><span class="p">;</span>
+<span class="c1">//定义端口号</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">SERVER_PORT</span> <span class="o">=</span> <span class="mi">9876</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int ...</span></pre></div></div>
+                        <a class="btn primary xsmall" href="/network001.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Python002.html">Python 笔记（二）</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-09-13T22:30:00">
+        <i class="icon-calendar"></i>Fri 13 September 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3，</strong>
+<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<p><strong>字典</strong></p>
+<p>字典类似C++中STL的map，可保存键/值映射关系。但Python的字典比C++的简便得多。</p>
+<p>创建字典的几种方法</p>
+<div class="highlight"><pre><span class="n">mapOne</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;name&#39;</span><span class="p">:</span><span class="s">&#39;szy&#39;</span><span class="p">,</span> <span class="s">&#39;age&#39;</span><span class="p">:</span><span class="mi">85</span><span class="p">}</span> <span class="c">#创建有俩映射的字典</span>
+<span class="n">mapTwo</span> <span class="o">=</span> <span class="p">{}</span> <span class="c">#空字典</span>
+<span class="c">#dict函数创建字典</span>
+<span class="n">mapThree</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;szy&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">85</span><span class="p">)</span>
+</pre></div>
+<p>关于字典的基本函数</p>
+<div class="highlight"><pre><span class="c">#键/值对的数量</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">mapOne</span><span class="p">)</span>
+<span class="c">#2</span>
+<span class="c">#取值</span>
+<span class="n">mapOne</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span>
+<span class="c">#&#39;szy&#39;</span>
+<span class="c">#赋值</span>
+<span class="n">mapOne</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;scutLaoYi&#39;</span>
+<span class="n">mapOne ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/Python002.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+
+        <div class="pagination">
+        <ul>
+                        <li class="prev"><a href="/index.html">&larr; Previous</a></li>
+                        <li class=""><a href="/index.html">1</a></li>
+                        <li class="active"><a href="/index2.html">2</a></li>
+                        <li class=""><a href="/index3.html">3</a></li>
+                        <li class="next"><a href="/index3.html">Next &rarr;</a></li>
+        </ul>
+        </div>
+
+        </div><!--/span-->
+
+                <div class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+<li class="nav-header"><h4><i class="icon-external-link"></i>link</h4></li>
+    <li><a href="http://github.com/scutlaoyi"><i class="icon-external-link"></i>my github</a></li>
+    <li><a href="md5.html"><i class="icon-external-link"></i>md5 generator</a></li>
+<li class="nav-header"><h4><i class="icon-home icon-large"></i> social</h4></li>
+<li><a href="/" rel="alternate"><i class="icon-bookmark icon-large"></i>atom feed</a></li>
+    <li><a href=""><i class="icon--sign icon-large"></i></a></li>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>Categories</h4></li>
+<li>
+<a href="/category/git.html">
+    <i class="icon-folder-open icon-large"></i>git
+</a>
+</li>
+<li>
+<a href="/category/linux.html">
+    <i class="icon-folder-open icon-large"></i>Linux
+</a>
+</li>
+<li>
+<a href="/category/network.html">
+    <i class="icon-folder-open icon-large"></i>network
+</a>
+</li>
+<li>
+<a href="/category/python.html">
+    <i class="icon-folder-open icon-large"></i>Python
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/arch.html">
+        <i class="icon-tag icon-large"></i>Arch
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/network.html">
+        <i class="icon-tag icon-large"></i>network
+    </a>
+</li>
+
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <address id="about">
+                Proudly powered by <a href="http://pelican.notmyidea.org/">Pelican <i class="icon-external-link"></i></a>,
+                                which takes great advantage of <a href="http://python.org">Python <i class="icon-external-link"></i></a>.
+        </address><!-- /#about -->
+
+        <p>The theme is from <a href="http://twitter.github.com/bootstrap/">Bootstrap from Twitter <i class="icon-external-link"></i></a>,
+                   and <a href="http://fortawesome.github.com/Font-Awesome/">Font-Awesome <i class="icon-external-link"></i></a>, thanks!</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="/theme/js/bootstrap.min.js"></script>
+  </body>
+</html>

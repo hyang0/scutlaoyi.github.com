@@ -1,78 +1,123 @@
 <!DOCTYPE html>
-<html lang="zh">
-<head>
-        
-        <title>老逸的个人站 - SoftwareArchitect</title>
-        <meta charset="utf-8" />
-                                                                
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>老逸的个人站 - SoftwareArchitect</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="laoyi">
 
-        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
-        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+    <!-- Le styles -->
+    <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="/theme/css/font-awesome.css" rel="stylesheet">
 
-        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
-        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
-        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+    <link href="/theme/css/pygments.css" rel="stylesheet">
 
-        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-	<!-- google analyse -->
-          <script type="text/javascript">
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/theme/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/theme/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/theme/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/theme/images/apple-touch-icon-114x114.png">
 
- 		var _gaq = _gaq || [];
- 		 _gaq.push(['_setAccount', 'UA-43833562-1']);
- 		 _gaq.push(['_trackPageview']);
+    <link href="/" type="application/atom+xml" rel="alternate" title="老逸的个人站 ATOM Feed" />
 
- 		 (function() {
-  			  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-   			 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  			})();
+  </head>
 
-	</script>
-	<!-- end of google analyse -->
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">老逸的个人站 </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                <li><a href="/pages/first article.html">About</a></li>
+                          <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/git.html">
+						<i class="icon-folder-open icon-large"></i>git
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/linux.html">
+						<i class="icon-folder-open icon-large"></i>Linux
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/network.html">
+						<i class="icon-folder-open icon-large"></i>network
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/python.html">
+						<i class="icon-folder-open icon-large"></i>Python
+					</a>
+                  </li>
+
+                          <ul class="nav pull-right">
+                                <li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+                          </ul>
+
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="span9" id="content">
+        <div class="article">
+                <h1><a href="/PythonExpe004.html">软件体系结构：N皇后问题系列整体实现方案</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-11-29T22:40:00">
+        <i class="icon-calendar"></i>Fri 29 November 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
 
 
-
-        </head>
-
-<body id="index" class="home">
-
-
-    <div class="container">
-
-        <div class="row">
-
-          <header id="banner" class="body">
-                  <h1><a href="">老逸的个人站 <strong></strong></a></h1>
-          </header><!-- /#banner -->
-
-            <div id="navigation" class="navbar row">
-              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
-             
-              <ul class="columns">
-                <li><a href="http://scutlaoyi.github.com">Home</a></li>
-
-                            <li><a href="md5.html">md5 generator</a></li>
-                            <li><a href="first article.html">about</a></li>
-                                                  
-              </ul>
-            </div>
-
-          <section id="content">
-
-
-
-   <div class="row">
-
-
-        <div class="eleven columns">
-		         <ol id="post-list">
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/PythonExpe004.html" rel="bookmark" title="Permalink to 软件体系结构：N皇后问题系列整体实现方案">软件体系结构：N皇后问题系列整体实现方案</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2013-11-29T22:40:00"> 五 29 十一月 2013 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+	<a href="/tag/softwarearchitect.html"><i class="icon-tag"></i>SoftwareArchitect</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
 <p><strong>使用的Python版本为2.7.3</strong></p>
 <p><strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
 <hr class="docutils" />
@@ -87,27 +132,29 @@
 <p>若当前位置可以摆放皇后，则返回True；若检测到冲突，则返回False。</p>
 <p><strong>pipe.py/blackboard.py/callReturn.py/traceback.py</strong></p>
 <p>分别是四个风格的主程序，接收命令行参数定义N以及测试的次数。</p>
-<p>内部调用了Python库的timeit模块 ...</p> </div><!-- /.entry-content -->
+<p>内部调用了Python库的timeit模块 ...</p>
+                        <a class="btn primary xsmall" href="/PythonExpe004.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/PythonExpe003.html">软件体系结构：N皇后问题之黑板风格</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-11-29T22:30:00">
+        <i class="icon-calendar"></i>Fri 29 November 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
 
-								<div class="medium primary btn"><a href="/PythonExpe004.html" rel="bookmark" title="Permalink to 软件体系结构：N皇后问题系列整体实现方案">Read more <i class="icon-arrow-right"></i></a></div>
 
-
-
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/python.html">Python</a>
-																					<a class="danger label" href="/tag/softwarearchitect.html">SoftwareArchitect</a>
-																											</div>
-
-
-
-				        </article></li>
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/PythonExpe003.html" rel="bookmark" title="Permalink to 软件体系结构：N皇后问题之黑板风格">软件体系结构：N皇后问题之黑板风格</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2013-11-29T22:30:00"> 五 29 十一月 2013 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+	<a href="/tag/softwarearchitect.html"><i class="icon-tag"></i>SoftwareArchitect</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
 <p><strong>使用的Python版本为2.7.3</strong></p>
 <p><strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
 <hr class="docutils" />
@@ -116,27 +163,29 @@
 <p>而转换到我们这个N皇后问题，貌似黑板的作用有所变化。我的理解是这样的，首先将整个棋盘当成一个大黑板，对所有的线程可见并可读写。至于线程呢?则可以当成一帮无聊的玩家。每个玩家控制一个皇后，并且给每个玩家分配棋盘中的一行，每个玩家只能在分配到的行上移动皇后。玩家的任务是通过合作找到所有可能的皇后摆放位置。</p>
 <p>那么最简单的方法便是让所有玩家进行有序的查找。方便起见，我设定了玩家都从棋盘左方开始移动皇后，直到所有的玩家都将皇后移动到最右方的位置，那么整个棋盘的搜索便结束了。</p>
 <p>而鉴于需要找到所有不重复的皇后摆放位置（可行解），显而易见，让最上方的玩家开始移动一格，暂停，等待下面的所有玩家尝试当前状态下（第一层玩家在第一格）所有方案，再继续移动一格，等待所有玩家尝试当前状态下（第一层玩家在第二格）的所有方案...直到最上方的玩家走过所有格子，便可搜索到所有的可行解。</p>
-<p>对于每一行的玩家 ...</p> </div><!-- /.entry-content -->
+<p>对于每一行的玩家 ...</p>
+                        <a class="btn primary xsmall" href="/PythonExpe003.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/PythonExpe002.html">软件体系结构：N皇后问题系列之管道风格</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-11-03T22:30:00">
+        <i class="icon-calendar"></i>Sun 03 November 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
 
-								<div class="medium primary btn"><a href="/PythonExpe003.html" rel="bookmark" title="Permalink to 软件体系结构：N皇后问题之黑板风格">Read more <i class="icon-arrow-right"></i></a></div>
 
-
-
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/python.html">Python</a>
-																					<a class="danger label" href="/tag/softwarearchitect.html">SoftwareArchitect</a>
-																											</div>
-
-
-
-				        </article></li>
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/PythonExpe002.html" rel="bookmark" title="Permalink to 软件体系结构：N皇后问题系列之管道风格">软件体系结构：N皇后问题系列之管道风格</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2013-11-03T22:30:00"> 日 03 十一月 2013 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+	<a href="/tag/softwarearchitect.html"><i class="icon-tag"></i>SoftwareArchitect</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
 <p><strong>使用的Python版本为2.7.3</strong></p>
 <p><strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
 <hr class="docutils" />
@@ -144,27 +193,29 @@
 <p>管道风格的主要思想是，将问题产生的输入作为流，从程序的入口输入，构造若干个过滤器，每个过滤器负责一部分过滤功能，将不符合结果的输入筛选掉，最终剩下完全符合要求的便是问题所需要的输出。</p>
 <p>考虑到N皇后问题，还是将棋盘分割为单独的层，为每个层构造一个过滤器，这样便可以从棋盘的顶部将所有可能解输入，层层筛选，直到棋盘底部依然符合要求的解集便是答案了。</p>
 <p>这里运用了一点剪枝以优化性能。显而易见，如果在第i层的某个解不符合要求，则没有必要为这个解构造所有i层以下的解，因为在第i层必然是不能通过过滤器的。因此，我的实现方法没有在最开始便构造所有层的所有解，而是只构造了第一层的所有解。在过滤第一层之后，从剩下的那些可能解的基础上，再次构造下一层的所有可能解，并传入下一层的过滤器。这样便省去了大量无效的解。</p>
-<p>那么这些解集放在哪里呢？初试Python，用了恶心的办法实现了，便是List。由于每个解都是由一个或若干个数字形成的列表组成（保存每一层的皇后位置），因此将每一层的每个可能解List存为一个大List，并再存入总List作为管道的输入流。这样在管道的另一端便获得筛选完成后的结果List。若有n皇后 ...</p> </div><!-- /.entry-content -->
+<p>那么这些解集放在哪里呢？初试Python，用了恶心的办法实现了，便是List。由于每个解都是由一个或若干个数字形成的列表组成（保存每一层的皇后位置），因此将每一层的每个可能解List存为一个大List，并再存入总List作为管道的输入流。这样在管道的另一端便获得筛选完成后的结果List。若有n皇后 ...</p>
+                        <a class="btn primary xsmall" href="/PythonExpe002.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/PythonExpe001.html">软件体系结构：N皇后问题系列之回溯法</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-10-31T22:30:00">
+        <i class="icon-calendar"></i>Thu 31 October 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
 
-								<div class="medium primary btn"><a href="/PythonExpe002.html" rel="bookmark" title="Permalink to 软件体系结构：N皇后问题系列之管道风格">Read more <i class="icon-arrow-right"></i></a></div>
 
-
-
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/python.html">Python</a>
-																					<a class="danger label" href="/tag/softwarearchitect.html">SoftwareArchitect</a>
-																											</div>
-
-
-
-				        </article></li>
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/PythonExpe001.html" rel="bookmark" title="Permalink to 软件体系结构：N皇后问题系列之回溯法">软件体系结构：N皇后问题系列之回溯法</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2013-10-31T22:30:00"> 四 31 十月 2013 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+	<a href="/tag/softwarearchitect.html"><i class="icon-tag"></i>SoftwareArchitect</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
 <p><strong>使用的Python版本为2.7.3</strong></p>
 <p><strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
 <hr class="docutils" />
@@ -175,108 +226,110 @@
 <p>其实我真的研究了很久这个神乎其神的名字，有点文言文的味道。然而半晌发现这货说到底就是深搜。
 于是敲了一个递归的函数处理之，不加任何剪枝优化，回溯法原型就基本出来了。</p>
 <p>我们将棋盘横向切分为多个单独的层，显而易见，每一层只能放置一个皇后，且每一层都应该放置皇后。于是可以递归搜索每一层，找出所有可能位置。</p>
-<p>使用深度优先搜索算法，遍历每一层的所有位置，检查当前位置是否符合要求。如果不符合要求，继续搜索下一个位置；如果符合要求，则依据深度优先原则，递归调用函数自身搜索下一层所有位置，依此类推。算法的终止条件为搜索到达了棋盘的最底层，这时候如果找到了符合条件的位置 ...</p> </div><!-- /.entry-content -->
+<p>使用深度优先搜索算法，遍历每一层的所有位置，检查当前位置是否符合要求。如果不符合要求，继续搜索下一个位置；如果符合要求，则依据深度优先原则，递归调用函数自身搜索下一层所有位置，依此类推。算法的终止条件为搜索到达了棋盘的最底层，这时候如果找到了符合条件的位置 ...</p>
+                        <a class="btn primary xsmall" href="/PythonExpe001.html">more ...</a>
+                </div>
+        </div>
+        <hr />
 
-								<div class="medium primary btn"><a href="/PythonExpe001.html" rel="bookmark" title="Permalink to 软件体系结构：N皇后问题系列之回溯法">Read more <i class="icon-arrow-right"></i></a></div>
+                <section id="content" class="body">
+                <h1>Pages</h1>
+                        <li><a href="/pages/first article.html">About</a></li>
+                </section>
+        </div><!--/span-->
 
+                <div class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+<li class="nav-header"><h4><i class="icon-external-link"></i>link</h4></li>
+    <li><a href="http://github.com/scutlaoyi"><i class="icon-external-link"></i>my github</a></li>
+    <li><a href="md5.html"><i class="icon-external-link"></i>md5 generator</a></li>
+<li class="nav-header"><h4><i class="icon-home icon-large"></i> social</h4></li>
+<li><a href="/" rel="alternate"><i class="icon-bookmark icon-large"></i>atom feed</a></li>
+    <li><a href=""><i class="icon--sign icon-large"></i></a></li>
 
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>Categories</h4></li>
+<li>
+<a href="/category/git.html">
+    <i class="icon-folder-open icon-large"></i>git
+</a>
+</li>
+<li>
+<a href="/category/linux.html">
+    <i class="icon-folder-open icon-large"></i>Linux
+</a>
+</li>
+<li>
+<a href="/category/network.html">
+    <i class="icon-folder-open icon-large"></i>network
+</a>
+</li>
+<li>
+<a href="/category/python.html">
+    <i class="icon-folder-open icon-large"></i>Python
+</a>
+</li>
 
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/python.html">Python</a>
-																					<a class="danger label" href="/tag/softwarearchitect.html">SoftwareArchitect</a>
-																											</div>
-
-
-
-				        </article></li>
-								</ol><!-- /#posts-list -->
-
-        </div><!-- /.eleven.columns -->
-        
-     <div class="three columns">
-
-<h4>Pages</h4>
-
- <ul>
-        <li><a href="md5.html">md5 generator</a></li>
-        <li><a href="first article.html">about</a></li>
-            </ul>
-
-<h4>Categories</h4>
-<ul>
-			<li><a href="/category/linux.html">Linux</a></li>
-			<li><a href="/category/python.html">Python</a></li>
-			<li><a href="/category/git.html">git</a></li>
-			<li><a href="/category/life.html">life</a></li>
-			<li><a href="/category/network.html">network</a></li>
-	</ul>
-
-
-<h4>Tags</h4>
-	<ul>
-		    <li class="tag-4"><a href="/tag/arch.html">Arch</a></li>
-		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
-		    <li class="tag-2"><a href="/tag/network.html">network</a></li>
-		    <li class="tag-2"><a href="/tag/softwarearchitect.html">SoftwareArchitect</a></li>
-		    <li class="tag-2"><a href="/tag/bash.html">Bash</a></li>
-		    <li class="tag-2"><a href="/tag/github.html">github</a></li>
-		    <li class="tag-2"><a href="/tag/git.html">git</a></li>
-		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
-	</ul>
-
-
-<nav class="widget">
-  <h4>Social</h4>
-  <ul>
-      <li><a href=""></a></li>
-    </ul>
-</nav>
-
-</div> </div><!-- /.row -->
-
-</section><!-- /#content -->
-
-       </div><!-- /.row -->
-    </div><!-- /.container -->
-
-
-       <div class="container.nopad bg">
-
-    
-        <footer id="credits" class="row">
-          <div class="seven columns left-center">
-
-                   <address id="about" class="vcard body">
-                    Contact scutLaoYi: scutLaoYi@gmail.com <br />
-                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
-                    which takes great advantage of <a href="http://python.org">Python</a>.
-                    <br />
-                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
-                    </address>
-          </div>
-
-
-          <div class="seven columns">
-            <div class="row">
-              <ul class="socbtns">
-
-                                <li><div class="btn primary"><a href="https://github.com/scutLaoYi" target="_blank">Github</a></div></li>
-                
-                
-                
-                
-              </ul>
-            </div>
-          </div>
-        </footer>
-
-    </div>
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/arch.html">
+        <i class="icon-tag icon-large"></i>Arch
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/network.html">
+        <i class="icon-tag icon-large"></i>network
+    </a>
+</li>
 
 
-  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
-  <script src="/theme/js/libs/gumby.min.js"></script>
-  <script src="/theme/js/plugins.js"></script>
+</ul>        </div><!--/.well -->
 
-</body>
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <address id="about">
+                Proudly powered by <a href="http://pelican.notmyidea.org/">Pelican <i class="icon-external-link"></i></a>,
+                                which takes great advantage of <a href="http://python.org">Python <i class="icon-external-link"></i></a>.
+        </address><!-- /#about -->
+
+        <p>The theme is from <a href="http://twitter.github.com/bootstrap/">Bootstrap from Twitter <i class="icon-external-link"></i></a>,
+                   and <a href="http://fortawesome.github.com/Font-Awesome/">Font-Awesome <i class="icon-external-link"></i></a>, thanks!</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="/theme/js/bootstrap.min.js"></script>
+  </body>
 </html>

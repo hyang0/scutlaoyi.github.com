@@ -1,78 +1,156 @@
 <!DOCTYPE html>
-<html lang="zh">
-<head>
-        
-        <title>老逸的个人站 - Arch</title>
-        <meta charset="utf-8" />
-                                                                
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>老逸的个人站 - Arch</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="laoyi">
 
-        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
-        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+    <!-- Le styles -->
+    <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="/theme/css/font-awesome.css" rel="stylesheet">
 
-        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
-        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
-        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+    <link href="/theme/css/pygments.css" rel="stylesheet">
 
-        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-	<!-- google analyse -->
-          <script type="text/javascript">
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/theme/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/theme/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/theme/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/theme/images/apple-touch-icon-114x114.png">
 
- 		var _gaq = _gaq || [];
- 		 _gaq.push(['_setAccount', 'UA-43833562-1']);
- 		 _gaq.push(['_trackPageview']);
+    <link href="/" type="application/atom+xml" rel="alternate" title="老逸的个人站 ATOM Feed" />
 
- 		 (function() {
-  			  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-   			 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  			})();
+  </head>
 
-	</script>
-	<!-- end of google analyse -->
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">老逸的个人站 </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                <li><a href="/pages/first article.html">About</a></li>
+                          <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/git.html">
+						<i class="icon-folder-open icon-large"></i>git
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/linux.html">
+						<i class="icon-folder-open icon-large"></i>Linux
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/network.html">
+						<i class="icon-folder-open icon-large"></i>network
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/python.html">
+						<i class="icon-folder-open icon-large"></i>Python
+					</a>
+                  </li>
+
+                          <ul class="nav pull-right">
+                                <li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+                          </ul>
+
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="span9" id="content">
+        <div class="article">
+                <h1><a href="/Arch002.html">Arch Linux学习：安装篇(二)</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-01-14T19:30:00">
+        <i class="icon-calendar"></i>Tue 14 January 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
 
 
+<span class="label">Tags</span>
+	<a href="/tag/arch.html"><i class="icon-tag"></i>Arch</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。</p>
+<hr class="docutils" />
+<p>当你看到这篇博文的时候，
+老逸的新系统已安装完毕，
+弹冠相庆！^_^</p>
+<p>替换掉原来恶心的win7+Ubuntu双系统，
+现在直接将整个硬盘重新分区并安装Arch Linux.</p>
+<p>分区如下:</p>
+<pre class="literal-block">
+NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+sda      8:0    0 298.1G  0 disk
+├─sda1   8:1    0   500M  0 part /boot
+├─sda2   8:2    0    50G  0 part /
+├─sda3   8:3    0     2G  0 part [SWAP ...</pre>
+                        <a class="btn primary xsmall" href="/Arch002.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Arch001.html">Arch Linux学习：安装篇(一)</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-01-08T19:30:00">
+        <i class="icon-calendar"></i>Wed 08 January 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
 
-        </head>
 
-<body id="index" class="home">
-
-
-    <div class="container">
-
-        <div class="row">
-
-          <header id="banner" class="body">
-                  <h1><a href="">老逸的个人站 <strong></strong></a></h1>
-          </header><!-- /#banner -->
-
-            <div id="navigation" class="navbar row">
-              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
-             
-              <ul class="columns">
-                <li><a href="http://scutlaoyi.github.com">Home</a></li>
-
-                            <li><a href="md5.html">md5 generator</a></li>
-                            <li><a href="first article.html">about</a></li>
-                                                  
-              </ul>
-            </div>
-
-          <section id="content">
-
-
-
-   <div class="row">
-
-
-        <div class="eleven columns">
-		         <ol id="post-list">
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/Arch001.html" rel="bookmark" title="Permalink to Arch Linux学习：安装篇(一)">Arch Linux学习：安装篇(一)</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2014-01-08T19:30:00"> 三 08 一月 2014 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p>本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。</p>
+<span class="label">Tags</span>
+	<a href="/tag/arch.html"><i class="icon-tag"></i>Arch</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。</p>
 <hr class="docutils" />
 <div class="section" id="id1">
 <h2>关于Arch Linux</h2>
@@ -92,107 +170,110 @@ Arch Linux提供了非常大的自由度和开放度供用户完全控制自己�
 使用systemd作为系统的服务管理器(这货还没弄清楚)</p>
 <p>在下列资源的帮助下我顺利完成了系统的安装:</p>
 <p>一个是Arch官方的Beginners' Guide:</p>
-<p><a class="reference external" href="https://wiki.archlinux.org/index.php/Beginners%27_Guide">https://wiki.archlinux.org/index.php/Beginners ...</a></p></div> </div><!-- /.entry-content -->
+<p><a class="reference external" href="https://wiki.archlinux.org/index.php/Beginners%27_Guide">https://wiki.archlinux.org/index.php/Beginners ...</a></p></div>
+                        <a class="btn primary xsmall" href="/Arch001.html">more ...</a>
+                </div>
+        </div>
+        <hr />
 
-								<div class="medium primary btn"><a href="/Arch001.html" rel="bookmark" title="Permalink to Arch Linux学习：安装篇(一)">Read more <i class="icon-arrow-right"></i></a></div>
+                <section id="content" class="body">
+                <h1>Pages</h1>
+                        <li><a href="/pages/first article.html">About</a></li>
+                </section>
+        </div><!--/span-->
 
+                <div class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+<li class="nav-header"><h4><i class="icon-external-link"></i>link</h4></li>
+    <li><a href="http://github.com/scutlaoyi"><i class="icon-external-link"></i>my github</a></li>
+    <li><a href="md5.html"><i class="icon-external-link"></i>md5 generator</a></li>
+<li class="nav-header"><h4><i class="icon-home icon-large"></i> social</h4></li>
+<li><a href="/" rel="alternate"><i class="icon-bookmark icon-large"></i>atom feed</a></li>
+    <li><a href=""><i class="icon--sign icon-large"></i></a></li>
 
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>Categories</h4></li>
+<li>
+<a href="/category/git.html">
+    <i class="icon-folder-open icon-large"></i>git
+</a>
+</li>
+<li>
+<a href="/category/linux.html">
+    <i class="icon-folder-open icon-large"></i>Linux
+</a>
+</li>
+<li>
+<a href="/category/network.html">
+    <i class="icon-folder-open icon-large"></i>network
+</a>
+</li>
+<li>
+<a href="/category/python.html">
+    <i class="icon-folder-open icon-large"></i>Python
+</a>
+</li>
 
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/arch.html">Arch</a>
-																											</div>
-
-
-
-				        </article></li>
-								</ol><!-- /#posts-list -->
-
-        </div><!-- /.eleven.columns -->
-        
-     <div class="three columns">
-
-<h4>Pages</h4>
-
- <ul>
-        <li><a href="md5.html">md5 generator</a></li>
-        <li><a href="first article.html">about</a></li>
-            </ul>
-
-<h4>Categories</h4>
-<ul>
-			<li><a href="/category/linux.html">Linux</a></li>
-			<li><a href="/category/python.html">Python</a></li>
-			<li><a href="/category/git.html">git</a></li>
-			<li><a href="/category/life.html">life</a></li>
-			<li><a href="/category/network.html">network</a></li>
-	</ul>
-
-
-<h4>Tags</h4>
-	<ul>
-		    <li class="tag-4"><a href="/tag/arch.html">Arch</a></li>
-		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
-		    <li class="tag-2"><a href="/tag/network.html">network</a></li>
-		    <li class="tag-2"><a href="/tag/softwarearchitect.html">SoftwareArchitect</a></li>
-		    <li class="tag-2"><a href="/tag/bash.html">Bash</a></li>
-		    <li class="tag-2"><a href="/tag/github.html">github</a></li>
-		    <li class="tag-2"><a href="/tag/git.html">git</a></li>
-		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
-	</ul>
-
-
-<nav class="widget">
-  <h4>Social</h4>
-  <ul>
-      <li><a href=""></a></li>
-    </ul>
-</nav>
-
-</div> </div><!-- /.row -->
-
-</section><!-- /#content -->
-
-       </div><!-- /.row -->
-    </div><!-- /.container -->
-
-
-       <div class="container.nopad bg">
-
-    
-        <footer id="credits" class="row">
-          <div class="seven columns left-center">
-
-                   <address id="about" class="vcard body">
-                    Contact scutLaoYi: scutLaoYi@gmail.com <br />
-                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
-                    which takes great advantage of <a href="http://python.org">Python</a>.
-                    <br />
-                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
-                    </address>
-          </div>
-
-
-          <div class="seven columns">
-            <div class="row">
-              <ul class="socbtns">
-
-                                <li><div class="btn primary"><a href="https://github.com/scutLaoYi" target="_blank">Github</a></div></li>
-                
-                
-                
-                
-              </ul>
-            </div>
-          </div>
-        </footer>
-
-    </div>
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/arch.html">
+        <i class="icon-tag icon-large"></i>Arch
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/network.html">
+        <i class="icon-tag icon-large"></i>network
+    </a>
+</li>
 
 
-  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
-  <script src="/theme/js/libs/gumby.min.js"></script>
-  <script src="/theme/js/plugins.js"></script>
+</ul>        </div><!--/.well -->
 
-</body>
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <address id="about">
+                Proudly powered by <a href="http://pelican.notmyidea.org/">Pelican <i class="icon-external-link"></i></a>,
+                                which takes great advantage of <a href="http://python.org">Python <i class="icon-external-link"></i></a>.
+        </address><!-- /#about -->
+
+        <p>The theme is from <a href="http://twitter.github.com/bootstrap/">Bootstrap from Twitter <i class="icon-external-link"></i></a>,
+                   and <a href="http://fortawesome.github.com/Font-Awesome/">Font-Awesome <i class="icon-external-link"></i></a>, thanks!</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="/theme/js/bootstrap.min.js"></script>
+  </body>
 </html>

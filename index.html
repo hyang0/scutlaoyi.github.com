@@ -1,78 +1,156 @@
 <!DOCTYPE html>
-<html lang="zh">
-<head>
-        
-        <title>老逸的个人站</title>
-        <meta charset="utf-8" />
-                                                                
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>老逸的个人站</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="laoyi">
 
-        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
-        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+    <!-- Le styles -->
+    <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="/theme/css/font-awesome.css" rel="stylesheet">
 
-        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
-        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
-        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+    <link href="/theme/css/pygments.css" rel="stylesheet">
 
-        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-	<!-- google analyse -->
-          <script type="text/javascript">
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/theme/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/theme/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/theme/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/theme/images/apple-touch-icon-114x114.png">
 
- 		var _gaq = _gaq || [];
- 		 _gaq.push(['_setAccount', 'UA-43833562-1']);
- 		 _gaq.push(['_trackPageview']);
+    <link href="/" type="application/atom+xml" rel="alternate" title="老逸的个人站 ATOM Feed" />
 
- 		 (function() {
-  			  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-   			 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  			})();
+  </head>
 
-	</script>
-	<!-- end of google analyse -->
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">老逸的个人站 </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                <li><a href="/pages/first article.html">About</a></li>
+                          <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/git.html">
+						<i class="icon-folder-open icon-large"></i>git
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/linux.html">
+						<i class="icon-folder-open icon-large"></i>Linux
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/network.html">
+						<i class="icon-folder-open icon-large"></i>network
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/python.html">
+						<i class="icon-folder-open icon-large"></i>Python
+					</a>
+                  </li>
+
+                          <ul class="nav pull-right">
+                                <li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+                          </ul>
+
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="span9" id="content">
+        <div class="article">
+                <h1><a href="/Arch002.html">Arch Linux学习：安装篇(二)</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-01-14T19:30:00">
+        <i class="icon-calendar"></i>Tue 14 January 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
 
 
+<span class="label">Tags</span>
+	<a href="/tag/arch.html"><i class="icon-tag"></i>Arch</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。</p>
+<hr class="docutils" />
+<p>当你看到这篇博文的时候，
+老逸的新系统已安装完毕，
+弹冠相庆！^_^</p>
+<p>替换掉原来恶心的win7+Ubuntu双系统，
+现在直接将整个硬盘重新分区并安装Arch Linux.</p>
+<p>分区如下:</p>
+<pre class="literal-block">
+NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+sda      8:0    0 298.1G  0 disk
+├─sda1   8:1    0   500M  0 part /boot
+├─sda2   8:2    0    50G  0 part /
+├─sda3   8:3    0     2G  0 part [SWAP ...</pre>
+                        <a class="btn primary xsmall" href="/Arch002.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Arch001.html">Arch Linux学习：安装篇(一)</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-01-08T19:30:00">
+        <i class="icon-calendar"></i>Wed 08 January 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
 
-        </head>
 
-<body id="index" class="home">
-
-
-    <div class="container">
-
-        <div class="row">
-
-          <header id="banner" class="body">
-                  <h1><a href="">老逸的个人站 <strong></strong></a></h1>
-          </header><!-- /#banner -->
-
-            <div id="navigation" class="navbar row">
-              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
-             
-              <ul class="columns">
-                <li><a href="http://scutlaoyi.github.com">Home</a></li>
-
-                            <li><a href="md5.html">md5 generator</a></li>
-                            <li><a href="first article.html">about</a></li>
-                                                  
-              </ul>
-            </div>
-
-          <section id="content">
-
-
-
-   <div class="row">
-
-
-        <div class="eleven columns">
-		         <ol id="post-list">
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/Arch001.html" rel="bookmark" title="Permalink to Arch Linux学习：安装篇(一)">Arch Linux学习：安装篇(一)</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2014-01-08T19:30:00"> 三 08 一月 2014 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p>本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。</p>
+<span class="label">Tags</span>
+	<a href="/tag/arch.html"><i class="icon-tag"></i>Arch</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。</p>
 <hr class="docutils" />
 <div class="section" id="id1">
 <h2>关于Arch Linux</h2>
@@ -92,26 +170,28 @@ Arch Linux提供了非常大的自由度和开放度供用户完全控制自己�
 使用systemd作为系统的服务管理器(这货还没弄清楚)</p>
 <p>在下列资源的帮助下我顺利完成了系统的安装:</p>
 <p>一个是Arch官方的Beginners' Guide:</p>
-<p><a class="reference external" href="https://wiki.archlinux.org/index.php/Beginners%27_Guide">https://wiki.archlinux.org/index.php/Beginners ...</a></p></div> </div><!-- /.entry-content -->
+<p><a class="reference external" href="https://wiki.archlinux.org/index.php/Beginners%27_Guide">https://wiki.archlinux.org/index.php/Beginners ...</a></p></div>
+                        <a class="btn primary xsmall" href="/Arch001.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Bash004.html">Bash笔记(四)</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-01-05T22:30:00">
+        <i class="icon-calendar"></i>Sun 05 January 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
 
-								<div class="medium primary btn"><a href="/Arch001.html" rel="bookmark" title="Permalink to Arch Linux学习：安装篇(一)">Read more <i class="icon-arrow-right"></i></a></div>
 
-
-
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/arch.html">Arch</a>
-																											</div>
-
-
-
-				        </article></li>
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/Bash004.html" rel="bookmark" title="Permalink to Bash笔记(四)">Bash笔记(四)</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2014-01-05T22:30:00"> 日 05 一月 2014 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p><strong>本系列博文记录学习Shell终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录。</strong></p>
+<span class="label">Tags</span>
+	<a href="/tag/bash.html"><i class="icon-tag"></i>Bash</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Shell终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录。</strong></p>
 <hr class="docutils" />
 <div class="section" id="id1">
 <h2>用户管理</h2>
@@ -143,26 +223,28 @@ Arch Linux提供了非常大的自由度和开放度供用户完全控制自己�
 <p>useradd</p>
 <blockquote>
 <p>创建一个新用户scutlaoyi，设置home目录及用户描述</p>
-<p>useradd -m -d /home ...</p></blockquote></div> </div><!-- /.entry-content -->
+<p>useradd -m -d /home ...</p></blockquote></div>
+                        <a class="btn primary xsmall" href="/Bash004.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Bash003.html">Bash笔记(三)</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-01-04T22:00:00">
+        <i class="icon-calendar"></i>Sat 04 January 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
 
-								<div class="medium primary btn"><a href="/Bash004.html" rel="bookmark" title="Permalink to Bash笔记(四)">Read more <i class="icon-arrow-right"></i></a></div>
 
-
-
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/bash.html">Bash</a>
-																											</div>
-
-
-
-				        </article></li>
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/Bash003.html" rel="bookmark" title="Permalink to Bash笔记(三)">Bash笔记(三)</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2014-01-04T22:00:00"> 六 04 一月 2014 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p><strong>本系列博文记录学习Shell终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录。</strong></p>
+<span class="label">Tags</span>
+	<a href="/tag/bash.html"><i class="icon-tag"></i>Bash</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Shell终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录。</strong></p>
 <hr class="docutils" />
 <div class="section" id="id1">
 <h2>常用过滤器</h2>
@@ -195,26 +277,28 @@ Arch Linux提供了非常大的自由度和开放度供用户完全控制自己�
 <p>grep -A4 ......</p>
 <p>设置连带输出目标行前的3行</p>
 <p>grep -B3 ......</p>
-<p>设置连带输出目标行前后的2行 ...</p></blockquote></div> </div><!-- /.entry-content -->
+<p>设置连带输出目标行前后的2行 ...</p></blockquote></div>
+                        <a class="btn primary xsmall" href="/Bash003.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Bash002.html">Bash笔记(二)</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-01-03T22:30:00">
+        <i class="icon-calendar"></i>Fri 03 January 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
 
-								<div class="medium primary btn"><a href="/Bash003.html" rel="bookmark" title="Permalink to Bash笔记(三)">Read more <i class="icon-arrow-right"></i></a></div>
 
-
-
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/bash.html">Bash</a>
-																											</div>
-
-
-
-				        </article></li>
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/Bash002.html" rel="bookmark" title="Permalink to Bash笔记(二)">Bash笔记(二)</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2014-01-03T22:30:00"> 五 03 一月 2014 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p><strong>本系列博文记录学习Shell终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录。</strong></p>
+<span class="label">Tags</span>
+	<a href="/tag/bash.html"><i class="icon-tag"></i>Bash</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Shell终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录。</strong></p>
 <hr class="docutils" />
 <div class="section" id="id1">
 <h2>变量</h2>
@@ -261,26 +345,28 @@ Arch Linux提供了非常大的自由度和开放度供用户完全控制自己�
 <p>unset</p>
 <blockquote>
 <p>取消设置某个变量</p>
-<p>unset [variable ...</p></blockquote></div> </div><!-- /.entry-content -->
+<p>unset [variable ...</p></blockquote></div>
+                        <a class="btn primary xsmall" href="/Bash002.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Bash001.html">Bash笔记(一)</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-01-02T22:30:00">
+        <i class="icon-calendar"></i>Thu 02 January 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
 
-								<div class="medium primary btn"><a href="/Bash002.html" rel="bookmark" title="Permalink to Bash笔记(二)">Read more <i class="icon-arrow-right"></i></a></div>
 
-
-
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/bash.html">Bash</a>
-																											</div>
-
-
-
-				        </article></li>
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/Bash001.html" rel="bookmark" title="Permalink to Bash笔记(一)">Bash笔记(一)</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2014-01-02T22:30:00"> 四 02 一月 2014 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p><strong>本系列博文记录学习Shell终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录。</strong></p>
+<span class="label">Tags</span>
+	<a href="/tag/bash.html"><i class="icon-tag"></i>Bash</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Shell终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录。</strong></p>
 <hr class="docutils" />
 <div class="section" id="id1">
 <h2>基础知识</h2>
@@ -306,26 +392,29 @@ Arch Linux提供了非常大的自由度和开放度供用户完全控制自己�
 <p>type -a [command]</p>
 <p>当执行同名命令时内置命令优先，
 执行外部命令必须指定命令路径，如echo:</p>
-<p>/bin ...</p></blockquote></div> </div><!-- /.entry-content -->
+<p>/bin ...</p></blockquote></div>
+                        <a class="btn primary xsmall" href="/Bash001.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/PythonExpe004.html">软件体系结构：N皇后问题系列整体实现方案</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-11-29T22:40:00">
+        <i class="icon-calendar"></i>Fri 29 November 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
 
-								<div class="medium primary btn"><a href="/Bash001.html" rel="bookmark" title="Permalink to Bash笔记(一)">Read more <i class="icon-arrow-right"></i></a></div>
 
-
-
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/bash.html">Bash</a>
-																											</div>
-
-
-
-				        </article></li>
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/PythonExpe004.html" rel="bookmark" title="Permalink to 软件体系结构：N皇后问题系列整体实现方案">软件体系结构：N皇后问题系列整体实现方案</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2013-11-29T22:40:00"> 五 29 十一月 2013 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+	<a href="/tag/softwarearchitect.html"><i class="icon-tag"></i>SoftwareArchitect</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
 <p><strong>使用的Python版本为2.7.3</strong></p>
 <p><strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
 <hr class="docutils" />
@@ -340,27 +429,29 @@ Arch Linux提供了非常大的自由度和开放度供用户完全控制自己�
 <p>若当前位置可以摆放皇后，则返回True；若检测到冲突，则返回False。</p>
 <p><strong>pipe.py/blackboard.py/callReturn.py/traceback.py</strong></p>
 <p>分别是四个风格的主程序，接收命令行参数定义N以及测试的次数。</p>
-<p>内部调用了Python库的timeit模块 ...</p> </div><!-- /.entry-content -->
+<p>内部调用了Python库的timeit模块 ...</p>
+                        <a class="btn primary xsmall" href="/PythonExpe004.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/PythonExpe003.html">软件体系结构：N皇后问题之黑板风格</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-11-29T22:30:00">
+        <i class="icon-calendar"></i>Fri 29 November 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
 
-								<div class="medium primary btn"><a href="/PythonExpe004.html" rel="bookmark" title="Permalink to 软件体系结构：N皇后问题系列整体实现方案">Read more <i class="icon-arrow-right"></i></a></div>
 
-
-
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/python.html">Python</a>
-																					<a class="danger label" href="/tag/softwarearchitect.html">SoftwareArchitect</a>
-																											</div>
-
-
-
-				        </article></li>
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/PythonExpe003.html" rel="bookmark" title="Permalink to 软件体系结构：N皇后问题之黑板风格">软件体系结构：N皇后问题之黑板风格</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2013-11-29T22:30:00"> 五 29 十一月 2013 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+	<a href="/tag/softwarearchitect.html"><i class="icon-tag"></i>SoftwareArchitect</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
 <p><strong>使用的Python版本为2.7.3</strong></p>
 <p><strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
 <hr class="docutils" />
@@ -369,27 +460,29 @@ Arch Linux提供了非常大的自由度和开放度供用户完全控制自己�
 <p>而转换到我们这个N皇后问题，貌似黑板的作用有所变化。我的理解是这样的，首先将整个棋盘当成一个大黑板，对所有的线程可见并可读写。至于线程呢?则可以当成一帮无聊的玩家。每个玩家控制一个皇后，并且给每个玩家分配棋盘中的一行，每个玩家只能在分配到的行上移动皇后。玩家的任务是通过合作找到所有可能的皇后摆放位置。</p>
 <p>那么最简单的方法便是让所有玩家进行有序的查找。方便起见，我设定了玩家都从棋盘左方开始移动皇后，直到所有的玩家都将皇后移动到最右方的位置，那么整个棋盘的搜索便结束了。</p>
 <p>而鉴于需要找到所有不重复的皇后摆放位置（可行解），显而易见，让最上方的玩家开始移动一格，暂停，等待下面的所有玩家尝试当前状态下（第一层玩家在第一格）所有方案，再继续移动一格，等待所有玩家尝试当前状态下（第一层玩家在第二格）的所有方案...直到最上方的玩家走过所有格子，便可搜索到所有的可行解。</p>
-<p>对于每一行的玩家 ...</p> </div><!-- /.entry-content -->
+<p>对于每一行的玩家 ...</p>
+                        <a class="btn primary xsmall" href="/PythonExpe003.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/learning Git 3.html">Git 与 GitHub 实践经验谈（一）</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-11-07T22:10:00">
+        <i class="icon-calendar"></i>Thu 07 November 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/git.html"><i class="icon-folder-open"></i>git</a>.
 
-								<div class="medium primary btn"><a href="/PythonExpe003.html" rel="bookmark" title="Permalink to 软件体系结构：N皇后问题之黑板风格">Read more <i class="icon-arrow-right"></i></a></div>
 
-
-
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/python.html">Python</a>
-																					<a class="danger label" href="/tag/softwarearchitect.html">SoftwareArchitect</a>
-																											</div>
-
-
-
-				        </article></li>
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/learning Git 3.html" rel="bookmark" title="Permalink to Git 与 GitHub 实践经验谈（一）">Git 与 GitHub 实践经验谈（一）</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2013-11-07T22:10:00"> 四 07 十一月 2013 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p>自从上次聊完git的基本使用之后到现在已经两个多月了，一直都没有机会真的把它用在多人配合的项目开发之中。
+<span class="label">Tags</span>
+	<a href="/tag/git.html"><i class="icon-tag"></i>git</a>
+	<a href="/tag/github.html"><i class="icon-tag"></i>github</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>自从上次聊完git的基本使用之后到现在已经两个多月了，一直都没有机会真的把它用在多人配合的项目开发之中。
 主要是因为手头的小型实验项目都是自己在玩，所以很多时候用的是本地的仓库，写完commit一下基本就完事，连checkout都很少用。</p>
 <p>这个月开始接手了一个小型的团队合作项目，于是核心代码组（我，标神，院长）才算真正成立了一个小组团队开发。</p>
 <p>核心代码组负责的主要是系统后台的搭建和配置。所以我们搭建了一个小型的服务器，挂载Apache+mySQL+php+cakePHP，使用GitHub进行源码托管。</p>
@@ -398,27 +491,29 @@ Arch Linux提供了非常大的自由度和开放度供用户完全控制自己�
 <p>首先是基本的操作回顾，这是实际开发过程中用到的一些方法，可能非常曲折，让高手看来简直就是瞎搞，不过不管质量，先记录下来，以后有更优的方案也可供对比。</p>
 <p><strong>一：</strong></p>
 <p>本地仓库的创建自然是git init，这里我们被坑了一下，理论上我们总以为git init之后会默认创建一个仓库并产生一个默认分支叫做master，结果在实际操作中发现问题，git init只负责创建仓库，但在这个时候调用git branch会发现根本没有分支。</p>
-<p>这就导致了几天前以标神为主角的惊悚一幕。话说当天标神连敲八个小时代码完成了一个基本模块的创建，正当其修养生息吞云吐雾之际，我主动提出让其提交代码到远端仓库中。然而当时远端仓库已有更新，push操作之前必须pull下最新版本代码，然而该操作却死活无法成功完成 ...</p> </div><!-- /.entry-content -->
+<p>这就导致了几天前以标神为主角的惊悚一幕。话说当天标神连敲八个小时代码完成了一个基本模块的创建，正当其修养生息吞云吐雾之际，我主动提出让其提交代码到远端仓库中。然而当时远端仓库已有更新，push操作之前必须pull下最新版本代码，然而该操作却死活无法成功完成 ...</p>
+                        <a class="btn primary xsmall" href="/learning Git 3.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/PythonExpe002.html">软件体系结构：N皇后问题系列之管道风格</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-11-03T22:30:00">
+        <i class="icon-calendar"></i>Sun 03 November 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
 
-								<div class="medium primary btn"><a href="/learning Git 3.html" rel="bookmark" title="Permalink to Git 与 GitHub 实践经验谈（一）">Read more <i class="icon-arrow-right"></i></a></div>
 
-
-
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/git.html">git</a>
-																					<a class="danger label" href="/tag/github.html">github</a>
-																											</div>
-
-
-
-				        </article></li>
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/PythonExpe002.html" rel="bookmark" title="Permalink to 软件体系结构：N皇后问题系列之管道风格">软件体系结构：N皇后问题系列之管道风格</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2013-11-03T22:30:00"> 日 03 十一月 2013 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+	<a href="/tag/softwarearchitect.html"><i class="icon-tag"></i>SoftwareArchitect</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
 <p><strong>使用的Python版本为2.7.3</strong></p>
 <p><strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
 <hr class="docutils" />
@@ -426,662 +521,116 @@ Arch Linux提供了非常大的自由度和开放度供用户完全控制自己�
 <p>管道风格的主要思想是，将问题产生的输入作为流，从程序的入口输入，构造若干个过滤器，每个过滤器负责一部分过滤功能，将不符合结果的输入筛选掉，最终剩下完全符合要求的便是问题所需要的输出。</p>
 <p>考虑到N皇后问题，还是将棋盘分割为单独的层，为每个层构造一个过滤器，这样便可以从棋盘的顶部将所有可能解输入，层层筛选，直到棋盘底部依然符合要求的解集便是答案了。</p>
 <p>这里运用了一点剪枝以优化性能。显而易见，如果在第i层的某个解不符合要求，则没有必要为这个解构造所有i层以下的解，因为在第i层必然是不能通过过滤器的。因此，我的实现方法没有在最开始便构造所有层的所有解，而是只构造了第一层的所有解。在过滤第一层之后，从剩下的那些可能解的基础上，再次构造下一层的所有可能解，并传入下一层的过滤器。这样便省去了大量无效的解。</p>
-<p>那么这些解集放在哪里呢？初试Python，用了恶心的办法实现了，便是List。由于每个解都是由一个或若干个数字形成的列表组成（保存每一层的皇后位置），因此将每一层的每个可能解List存为一个大List，并再存入总List作为管道的输入流。这样在管道的另一端便获得筛选完成后的结果List。若有n皇后 ...</p> </div><!-- /.entry-content -->
+<p>那么这些解集放在哪里呢？初试Python，用了恶心的办法实现了，便是List。由于每个解都是由一个或若干个数字形成的列表组成（保存每一层的皇后位置），因此将每一层的每个可能解List存为一个大List，并再存入总List作为管道的输入流。这样在管道的另一端便获得筛选完成后的结果List。若有n皇后 ...</p>
+                        <a class="btn primary xsmall" href="/PythonExpe002.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+
+        <div class="pagination">
+        <ul>
+                        <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+                        <li class="active"><a href="/index.html">1</a></li>
+                        <li class=""><a href="/index2.html">2</a></li>
+                        <li class=""><a href="/index3.html">3</a></li>
+                        <li class="next"><a href="/index2.html">Next &rarr;</a></li>
+        </ul>
+        </div>
+
+        </div><!--/span-->
+
+                <div class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+<li class="nav-header"><h4><i class="icon-external-link"></i>link</h4></li>
+    <li><a href="http://github.com/scutlaoyi"><i class="icon-external-link"></i>my github</a></li>
+    <li><a href="md5.html"><i class="icon-external-link"></i>md5 generator</a></li>
+<li class="nav-header"><h4><i class="icon-home icon-large"></i> social</h4></li>
+<li><a href="/" rel="alternate"><i class="icon-bookmark icon-large"></i>atom feed</a></li>
+    <li><a href=""><i class="icon--sign icon-large"></i></a></li>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>Categories</h4></li>
+<li>
+<a href="/category/git.html">
+    <i class="icon-folder-open icon-large"></i>git
+</a>
+</li>
+<li>
+<a href="/category/linux.html">
+    <i class="icon-folder-open icon-large"></i>Linux
+</a>
+</li>
+<li>
+<a href="/category/network.html">
+    <i class="icon-folder-open icon-large"></i>network
+</a>
+</li>
+<li>
+<a href="/category/python.html">
+    <i class="icon-folder-open icon-large"></i>Python
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/arch.html">
+        <i class="icon-tag icon-large"></i>Arch
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/network.html">
+        <i class="icon-tag icon-large"></i>network
+    </a>
+</li>
+
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <address id="about">
+                Proudly powered by <a href="http://pelican.notmyidea.org/">Pelican <i class="icon-external-link"></i></a>,
+                                which takes great advantage of <a href="http://python.org">Python <i class="icon-external-link"></i></a>.
+        </address><!-- /#about -->
+
+        <p>The theme is from <a href="http://twitter.github.com/bootstrap/">Bootstrap from Twitter <i class="icon-external-link"></i></a>,
+                   and <a href="http://fortawesome.github.com/Font-Awesome/">Font-Awesome <i class="icon-external-link"></i></a>, thanks!</p>
+      </footer>
 
-								<div class="medium primary btn"><a href="/PythonExpe002.html" rel="bookmark" title="Permalink to 软件体系结构：N皇后问题系列之管道风格">Read more <i class="icon-arrow-right"></i></a></div>
+    </div><!--/.fluid-container-->
 
 
 
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/python.html">Python</a>
-																					<a class="danger label" href="/tag/softwarearchitect.html">SoftwareArchitect</a>
-																											</div>
-
-
-
-				        </article></li>
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/PythonExpe001.html" rel="bookmark" title="Permalink to 软件体系结构：N皇后问题系列之回溯法">软件体系结构：N皇后问题系列之回溯法</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2013-10-31T22:30:00"> 四 31 十月 2013 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
-<p><strong>使用的Python版本为2.7.3</strong></p>
-<p><strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
-<hr class="docutils" />
-<p>最近学习搞得有点杂，一怒之下一个月没打理个人主页了，有些事情就是这样，你越不管，时间越长，就越不想管。</p>
-<p>软件体系结构是本学期的课程之一，大作业是用几种奇怪的风格构造一个N皇后问题的求解器。</p>
-<p>由于没有限定语言，咱自然是Python搞起。正发愁前些日子学习了那么多的理论知识没地方实践，正好，这货拿来下菜！</p>
-<p><strong>风格一：回溯法</strong></p>
-<p>其实我真的研究了很久这个神乎其神的名字，有点文言文的味道。然而半晌发现这货说到底就是深搜。
-于是敲了一个递归的函数处理之，不加任何剪枝优化，回溯法原型就基本出来了。</p>
-<p>我们将棋盘横向切分为多个单独的层，显而易见，每一层只能放置一个皇后，且每一层都应该放置皇后。于是可以递归搜索每一层，找出所有可能位置。</p>
-<p>使用深度优先搜索算法，遍历每一层的所有位置，检查当前位置是否符合要求。如果不符合要求，继续搜索下一个位置；如果符合要求，则依据深度优先原则，递归调用函数自身搜索下一层所有位置，依此类推。算法的终止条件为搜索到达了棋盘的最底层，这时候如果找到了符合条件的位置 ...</p> </div><!-- /.entry-content -->
-
-								<div class="medium primary btn"><a href="/PythonExpe001.html" rel="bookmark" title="Permalink to 软件体系结构：N皇后问题系列之回溯法">Read more <i class="icon-arrow-right"></i></a></div>
-
-
-
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/python.html">Python</a>
-																					<a class="danger label" href="/tag/softwarearchitect.html">SoftwareArchitect</a>
-																											</div>
-
-
-
-				        </article></li>
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/Python007.html" rel="bookmark" title="Permalink to Python 笔记（七）">Python 笔记（七）</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2013-10-04T10:30:00"> 五 04 十月 2013 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
-<p><strong>使用的Python版本为2.7.3，</strong>
-<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
-<hr class="docutils" />
-<div class="section" id="id1">
-<h2>文件和流</h2>
-<p><strong>打开文件</strong></p>
-<p>使用open函数打开文件，参数一为文件名，参数二为打开方式，参数三为缓冲区设置</p>
-<p>最简单的打开文件代码如下：</p>
-<div class="highlight"><pre><span class="n">myFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;myFile.txt&quot;</span><span class="p">)</span>
-</pre></div>
-<p>程序自动以读取方式打开文件，如果文件不存在会引发IOError异常</p>
-<p>以写入方式打开文件：</p>
-<div class="highlight"><pre><span class="n">myFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;myFile.txt&quot;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
-</pre></div>
-<p>'b'属性以二进制方式打开文件</p>
-<p>'a'属性以追加方式打开文件</p>
-<p>'+'属性以读写方式打开文件</p>
-<p>缓冲区设置：</p>
-<blockquote>
-<p>0(False) 不设置缓冲区，直接写入硬盘;</p>
-<p>1(True) 开启缓冲区;</p>
-<p>&gt;1 设置缓冲区大小;</p>
-<p>-1 使用默认缓冲区大小</p>
-</blockquote>
-<p><strong>读写文件（单字符 ...</strong></p></div> </div><!-- /.entry-content -->
-
-								<div class="medium primary btn"><a href="/Python007.html" rel="bookmark" title="Permalink to Python 笔记（七）">Read more <i class="icon-arrow-right"></i></a></div>
-
-
-
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/python.html">Python</a>
-																											</div>
-
-
-
-				        </article></li>
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/Python006.html" rel="bookmark" title="Permalink to Python 笔记（六）">Python 笔记（六）</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2013-10-03T10:30:00"> 四 03 十月 2013 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
-<p><strong>使用的Python版本为2.7.3，</strong>
-<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
-<hr class="docutils" />
-<div class="section" id="id1">
-<h2>模块</h2>
-<p><strong>模块的定义:</strong></p>
-<p>最简单的，一个文件(*.py)便是一个模块，文件名为模块名，模块可以单独运行也可以被其他模块所包含。</p>
-<p>使用import指令便可以包含其他模块</p>
-<p>使用条件判断：if __name__ == '__main__' 可判定当前模块是否独立运行，True为独立运行，False为被其他模块import</p>
-<p>当模块被其他模块import时，模块内的代码（类定义、函数定义、变量定义）均会被执行一次</p>
-<p>因此添加上述的条件判断可避免某些独立运行的代码在模块被包含时运行，这种机制有利于代码重用</p>
-<p>类似但更加强大的概念是包，包可以将若干模块封装在一起，成为一个程序组。</p>
-<p><strong>获取标准库中的一些常用模块及功能介绍:</strong></p>
-<p>通过dir()函数可获取某个模块中的所有命名，包括函数、变量等</p>
-<p>通过print某个模块或模块中成员的__doc__文档字符串，可获取文档介绍</p>
-<p>例如sys模块中的sys.exit能够退出程序，并指定返回值</p>
-<p>sys ...</p></div> </div><!-- /.entry-content -->
-
-								<div class="medium primary btn"><a href="/Python006.html" rel="bookmark" title="Permalink to Python 笔记（六）">Read more <i class="icon-arrow-right"></i></a></div>
-
-
-
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/python.html">Python</a>
-																											</div>
-
-
-
-				        </article></li>
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/network003.html" rel="bookmark" title="Permalink to socket编程(3):多线程socket服务器/客户端">socket编程(3):多线程socket服务器/客户端</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2013-09-28T16:00:00"> 六 28 九月 2013 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <hr class="docutils" />
-<p>多线程的tcp服务器与单线程的差别不大，主要差别在于服务器接受一个请求后创建一个新线程处理请求，主线程继续等待连接，因此可以在同一个时间处理多个请求。单线程的服务器每次都只有主线程接受并处理请求，这种情况下其他连接就必须等待。</p>
-<p>在GNU/Linux操作系统下可以使用pthread创建并管理线程。</p>
-<p>应该注意的一点是pthread不是Linux默认库的一部分，因此在编译时需要添加参数 -lpthread ，否则会报错(找不到文件：undefined reference to 'pthread_create')。</p>
-<p>由于本代码只为测试多线程，编写时没有考虑长的时延，因此在主线程退出前仅等待最后一个子线程的退出，这在实际操作中八成会出问题。</p>
-<p>另外在创建线程时传入的函数参数为指针，需要注意对内存的管理，防止多个线程的指针变量指向同一个地址。</p>
-<p><strong>C++版本服务器代码：</strong></p>
-<div class="highlight"><pre><span class="cp">#include &lt;cstdio&gt;</span>
-<span class="cp">#include &lt;cstring&gt;</span>
-<span class="cp">#include &lt;cstdlib&gt;</span>
-<span class="cp">#include &lt;cerrno&gt;</span>
-<span class="cp">#include &lt;unistd.h&gt;</span>
-<span class="cp">#include &lt;sys/types.h&gt;</span>
-<span class="cp">#include &lt;sys/socket.h&gt;</span>
-<span class="cp">#include &lt;netinet/in.h&gt;</span>
-<span class="cp">#include ...</span></pre></div> </div><!-- /.entry-content -->
-
-								<div class="medium primary btn"><a href="/network003.html" rel="bookmark" title="Permalink to socket编程(3):多线程socket服务器/客户端">Read more <i class="icon-arrow-right"></i></a></div>
-
-
-
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/network.html">network</a>
-																											</div>
-
-
-
-				        </article></li>
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/Python005.html" rel="bookmark" title="Permalink to Python 笔记（五）">Python 笔记（五）</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2013-09-25T09:30:00"> 三 25 九月 2013 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
-<p><strong>使用的Python版本为2.7.3，</strong>
-<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
-<hr class="docutils" />
-<div class="section" id="id1">
-<h2>类的进阶玩法</h2>
-<p><strong>构造函数：</strong></p>
-<p>构造函数的名称为 &quot;__init__&quot;，在对象被生成时自动调用：</p>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">ComplexClass</span><span class="p">:</span>
-        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="n">number</span>
-</pre></div>
-<p><strong>继承状态下的构造函数：</strong></p>
-<p>如果一个类继承了某基类，且没有重写构造函数，则基类构造函数被自动调用：</p>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">ComplexClass</span><span class="p">:</span>
-        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="n">number</span>
-
-<span class="k">class</span> <span class="nc">AnotherClass</span><span class="p">(</span><span class="n">ComplexClass</span><span class="p">):</span>
-        <span class="k">pass</span>
-
-<span class="n">cc</span> <span class="o">=</span> <span class="n">ComplexClass</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">ac</span> <span class="o">=</span> <span class="n">AnotherClass</span><span class="p">()</span>
-<span class="c">#错误！构造函数需要两个参数 ...</span></pre></div></div> </div><!-- /.entry-content -->
-
-								<div class="medium primary btn"><a href="/Python005.html" rel="bookmark" title="Permalink to Python 笔记（五）">Read more <i class="icon-arrow-right"></i></a></div>
-
-
-
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/python.html">Python</a>
-																											</div>
-
-
-
-				        </article></li>
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/network002.html" rel="bookmark" title="Permalink to socket编程(2):单线程udp服务器/客户端">socket编程(2):单线程udp服务器/客户端</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2013-09-24T10:00:00"> 二 24 九月 2013 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p><strong>基本流程</strong></p>
-<p>与tcp的通讯非常类似，不同之处在于udp是无连接的，因此没有创建连接这种操作，服务器开启端口后接受数据并直接返回。
-设置时将socket类型设置为SOCK_DGRAM即可创建udp通讯。</p>
-<p><strong>C++版本：</strong></p>
-<p>服务器：</p>
-<div class="highlight"><pre><span class="c1">//filename:udpServer.cpp</span>
-
-<span class="cp">#include &lt;cstdio&gt;</span>
-<span class="cp">#include &lt;cstring&gt;</span>
-<span class="cp">#include &lt;sys/types.h&gt;</span>
-<span class="cp">#include &lt;sys/socket.h&gt;</span>
-<span class="cp">#include &lt;netinet/in.h&gt;</span>
-<span class="cp">#include &lt;arpa/inet.h&gt;</span>
-<span class="cp">#include &lt;unistd.h&gt;</span>
-<span class="cp">#include &lt;errno.h&gt;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">BUF_SIZE</span> <span class="o">=</span> <span class="mi">512</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">SOCKET_PORT</span> <span class="o">=</span> <span class="mi">9999</span><span class="p">;</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc ...</span></pre></div> </div><!-- /.entry-content -->
-
-								<div class="medium primary btn"><a href="/network002.html" rel="bookmark" title="Permalink to socket编程(2):单线程udp服务器/客户端">Read more <i class="icon-arrow-right"></i></a></div>
-
-
-
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/network.html">network</a>
-																											</div>
-
-
-
-				        </article></li>
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/Python004.html" rel="bookmark" title="Permalink to Python 笔记（四）">Python 笔记（四）</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2013-09-23T15:30:00"> 一 23 九月 2013 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
-<p><strong>使用的Python版本为2.7.3，</strong>
-<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
-<hr class="docutils" />
-<div class="section" id="id1">
-<h2>类的初识</h2>
-<p><strong>关于称呼的一些声明</strong></p>
-<p>本文以&lt;Python基础教程&gt;为基础，沿用了其中的部分称呼，一般的函数通称函数，类的成员函数称为方法。</p>
-<p>但由于C++的一些思想比较根深蒂固，有时会混用两种称呼。</p>
-<p><strong>类的定义及创建对象</strong></p>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">SimpleClass</span><span class="p">:</span>
-        <span class="k">def</span> <span class="nf">funcA</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-                <span class="k">print</span> <span class="s">&quot;Hey!Function A called!&quot;</span>
-        <span class="k">def</span> <span class="nf">funcB</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-                <span class="k">print</span> <span class="s">&quot;Hey!Function B called!&quot;</span>
-        <span class="k">def</span> <span class="nf">funcC</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-                <span class="k">print ...</span></pre></div></div> </div><!-- /.entry-content -->
-
-								<div class="medium primary btn"><a href="/Python004.html" rel="bookmark" title="Permalink to Python 笔记（四）">Read more <i class="icon-arrow-right"></i></a></div>
-
-
-
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/python.html">Python</a>
-																											</div>
-
-
-
-				        </article></li>
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/Python003.html" rel="bookmark" title="Permalink to Python笔记（三）">Python笔记（三）</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2013-09-18T15:30:00"> 三 18 九月 2013 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
-<p><strong>使用的Python版本为2.7.3，</strong>
-<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
-<hr class="docutils" />
-<div class="section" id="id1">
-<h2>函数</h2>
-<p><strong>定义函数</strong></p>
-<p>关键词def，类似于C++，由函数名、参数列表、函数体和返回语句构成。</p>
-<p>在def的下一行可添加字符串作为文档字符串。
-文档字符串描述了函数的功能作用。
-文档字符串作为函数的一部分存在。
-可通过调用函数的__doc__属性返回文档字符串。</p>
-<p>参数列表中的参数后可添加赋值语句，相当于C++中的默认参数。</p>
-<p>调用函数时，默认通过位置复制，亦可指定参数名称赋值，称为关键字参数赋值。</p>
-<p>基本例子如下：</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">sayHello</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
-        <span class="s">&quot;This is a function to say hello!&quot;</span>
-        <span class="k">print</span> <span class="s">&quot;a is&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="s">&quot;b is&quot;</span><span class="p">,</span> <span class="n">b ...</span></pre></div></div> </div><!-- /.entry-content -->
-
-								<div class="medium primary btn"><a href="/Python003.html" rel="bookmark" title="Permalink to Python笔记（三）">Read more <i class="icon-arrow-right"></i></a></div>
-
-
-
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/python.html">Python</a>
-																											</div>
-
-
-
-				        </article></li>
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/network001.html" rel="bookmark" title="Permalink to socket编程(1):单线程tcp服务器/客户端">socket编程(1):单线程tcp服务器/客户端</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2013-09-17T15:30:00"> 二 17 九月 2013 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p><strong>tcp的单线程socket比较简单，以下是GNU/Linux环境下socket通讯的测试，分为C++版本和Python版本。</strong></p>
-<div class="section" id="id1">
-<h2>服务器：</h2>
-<p>流程：创建socket-绑定端口-监听-获取连接-读写操作-关闭连接并结束</p>
-<p><strong>C++版本：</strong></p>
-<div class="highlight"><pre><span class="cp">#include &lt;cstdio&gt;</span>
-<span class="cp">#include &lt;cstdlib&gt;</span>
-<span class="cp">#include &lt;cstring&gt;</span>
-<span class="cp">#include &lt;cerrno&gt;</span>
-<span class="cp">#include &lt;unistd.h&gt;</span>
-<span class="cp">#include &lt;sys/types.h&gt;</span>
-<span class="cp">#include &lt;sys/socket.h&gt;</span>
-<span class="cp">#include &lt;netinet/in.h&gt;</span>
-<span class="cp">#include &lt;arpa/inet.h&gt;</span>
-
-<span class="c1">//定义缓冲区的大小</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXBUF</span> <span class="o">=</span> <span class="mi">4096</span><span class="p">;</span>
-<span class="c1">//定义端口号</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">SERVER_PORT</span> <span class="o">=</span> <span class="mi">9876</span><span class="p">;</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int ...</span></pre></div></div> </div><!-- /.entry-content -->
-
-								<div class="medium primary btn"><a href="/network001.html" rel="bookmark" title="Permalink to socket编程(1):单线程tcp服务器/客户端">Read more <i class="icon-arrow-right"></i></a></div>
-
-
-
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/network.html">network</a>
-																											</div>
-
-
-
-				        </article></li>
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/Python002.html" rel="bookmark" title="Permalink to Python 笔记（二）">Python 笔记（二）</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2013-09-13T22:30:00"> 五 13 九月 2013 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
-<p><strong>使用的Python版本为2.7.3，</strong>
-<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
-<hr class="docutils" />
-<p><strong>字典</strong></p>
-<p>字典类似C++中STL的map，可保存键/值映射关系。但Python的字典比C++的简便得多。</p>
-<p>创建字典的几种方法</p>
-<div class="highlight"><pre><span class="n">mapOne</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;name&#39;</span><span class="p">:</span><span class="s">&#39;szy&#39;</span><span class="p">,</span> <span class="s">&#39;age&#39;</span><span class="p">:</span><span class="mi">85</span><span class="p">}</span> <span class="c">#创建有俩映射的字典</span>
-<span class="n">mapTwo</span> <span class="o">=</span> <span class="p">{}</span> <span class="c">#空字典</span>
-<span class="c">#dict函数创建字典</span>
-<span class="n">mapThree</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;szy&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">85</span><span class="p">)</span>
-</pre></div>
-<p>关于字典的基本函数</p>
-<div class="highlight"><pre><span class="c">#键/值对的数量</span>
-<span class="nb">len</span><span class="p">(</span><span class="n">mapOne</span><span class="p">)</span>
-<span class="c">#2</span>
-<span class="c">#取值</span>
-<span class="n">mapOne</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span>
-<span class="c">#&#39;szy&#39;</span>
-<span class="c">#赋值</span>
-<span class="n">mapOne</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;scutLaoYi&#39;</span>
-<span class="n">mapOne ...</span></pre></div> </div><!-- /.entry-content -->
-
-								<div class="medium primary btn"><a href="/Python002.html" rel="bookmark" title="Permalink to Python 笔记（二）">Read more <i class="icon-arrow-right"></i></a></div>
-
-
-
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/python.html">Python</a>
-																											</div>
-
-
-
-				        </article></li>
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/Python001.html" rel="bookmark" title="Permalink to Python 笔记（一）">Python 笔记（一）</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2013-09-11T15:30:00"> 三 11 九月 2013 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
-<p><strong>使用的Python版本为2.7.3，</strong>
-<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
-<hr class="docutils" />
-<p><strong>脚本声明和中文编码</strong></p>
-<p>在Python脚本的首行和次行添加以下命令可在命令行调用，并设置编码为中文gb2312：</p>
-<div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
-<span class="c"># -*- coding:gb2312 -*-</span>
-</pre></div>
-<p>Python的注释以#开始，单行注释</p>
-<p>单句Python语句占一行时结尾不用任何符号，多句时用分号分割，但极不推荐此种风格。</p>
-<p><strong>字符串</strong></p>
-<p>字符串有三种写法，单引号或双引号包围的单行字符串（可用反斜杠连接多行），或者三个单引号或双引号跨多行：</p>
-<div class="highlight"><pre><span class="c">#简单的输出语句，包含三种字符串形式</span>
-<span class="k">print</span> <span class="s">&#39;Hello,python!&#39;</span>
-<span class="k">print</span> <span class="s">u&quot;中文是可以支持的.&quot;</span>
-<span class="k">print</span> <span class="s">u&#39;&#39;&#39;字符串的第三种格式</span>
-<span class="s">跨行字符串:用三个单引号或双引号约束。</span>
-<span class="s">前方的u使该字符串作为unicode编码，正确处理中文。</span>
-<span class="s">&#39;&#39;&#39;</span>
-</pre></div>
-<p><strong>原始字符串</strong></p>
-<div class="highlight"><pre><span class="c">#普通字符串和原始字符串（r ...</span></pre></div> </div><!-- /.entry-content -->
-
-								<div class="medium primary btn"><a href="/Python001.html" rel="bookmark" title="Permalink to Python 笔记（一）">Read more <i class="icon-arrow-right"></i></a></div>
-
-
-
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/python.html">Python</a>
-																											</div>
-
-
-
-				        </article></li>
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/learning Git 2.html" rel="bookmark" title="Permalink to Git 与 GitHub 不完全教程（二）">Git 与 GitHub 不完全教程（二）</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2013-09-07T16:10:00"> 六 07 九月 2013 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <div class="section" id="id1">
-<h2>分支</h2>
-<p>分支(branch)是Git的一个强大功能，它可以在不改变现有仓库、不新增仓库的情况下，通过新建一个分支以建立当前文档一模一样的支线版本，在支线版本的修改不影响主线文档的内容。</p>
-<p>分支的一个重要的功能是能够在同一个时间点上保存多份不同版本的代码，并且均为随时可用的状态，根据官方的一个示例，你可以保持一份稳定的发布版，在发布版内的代码都是可运行的，之后，你可以再拥有一个分支专门用于开发，在这上面的代码用于任意修改和处理，不对外，还能再有一个分支用于测试开发新的功能。这三个分支都可以随时切换随时合并，应变自如。</p>
-<p>当支线任务成功完成时，可通过命令简单地将支线版本合并到主线上，若由于手潮不幸把事情搞砸了，可直接删除支线，回到主线上，则原有的文档内容不受任何影响。这种功能特别适合在当前状态下需要测试开发一些新的功能，但又想要与主线的开发有所并行的情况。</p>
-<p>默认情况下，git创建完仓库后会生成一个主分支master，所有的操作均在主分支上进行，这就相当于文档的主线版本。而我们可以按自己的需要增删改查新的分支。</p>
-<p><strong>分支的创建和切换</strong></p>
-<p>显示当前仓库的分支状态:</p>
-<pre class="literal-block">
-git branch
-</pre>
-<p>Git会列表显示当前的所有分支，并在当前所在分支上作相应标记。
-新建分支（假设需要新建的分支名字为:newBranch）:</p>
-<pre class="literal-block">
-git branch newBranch
-</pre>
-<p>此时再次检查branch状态就会发现新的分支已经出现了。
-新的分支和现有的分支内容完全相同，相当于当前分支的一个副本。
-跳转到某个分支:</p>
-<pre class="literal-block">
-git ...</pre></div> </div><!-- /.entry-content -->
-
-								<div class="medium primary btn"><a href="/learning Git 2.html" rel="bookmark" title="Permalink to Git 与 GitHub 不完全教程（二）">Read more <i class="icon-arrow-right"></i></a></div>
-
-
-
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/git.html">git</a>
-																					<a class="danger label" href="/tag/github.html">github</a>
-																											</div>
-
-
-
-				        </article></li>
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/learning Git 1.html" rel="bookmark" title="Permalink to Git 与 GitHub 不完全教程（一）">Git 与 GitHub 不完全教程（一）</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2013-09-07T16:00:00"> 六 07 九月 2013 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p>git是常用的配置管理工具，关于Git的介绍请见维基百科（维基百科关于Git的介绍），Github是常用的代码托管服务（维基百科关于GitHub的介绍），在此敲一份扫盲和不完全配置帖，留待日后自己可查看，顺带给大家方便学习。</p>
-<p>由于时间有限，仅记录最简单的终端界面下Git的使用，自认为已经足够，如更喜欢GUI界面风格请自行脑补。</p>
-<p>本文档操作环境为GNU/Linux Ubuntu 12.04 LTS x64，为方便windows用户，在配置时添加了windows下的安装配置过程，不保证万无一失。</p>
-<div class="section" id="git">
-<h2>Git篇：</h2>
-<div class="section" id="id1">
-<h3>安装与配置git</h3>
-<p>Ubuntu: 简单:</p>
-<pre class="literal-block">
-sudo apt-get install git
-</pre>
-<p>即可。</p>
-<p>以上代码没看懂的请别往下看了，扫盲Ubuntu先。</p>
-<p>windows:到这个网址下载:</p>
-<blockquote>
-<a class="reference external" href="http://msysgit.github.io/">http://msysgit.github.io/</a></blockquote>
-<dl class="docutils">
-<dt>或者git官网下载:</dt>
-<dd><a class="reference external" href="http://git-scm.com/download/win">http://git-scm.com/download/win</a></dd>
-</dl>
-<p>安装即可。</p>
-</div>
-<div class="section" id="id2">
-<h3>首次使用</h3>
-<p>windows下使用终端的Git需要启动Git自带的终端，而不是windows的命令行，
-一般在安装后有一个叫做Git ...</p></div></div> </div><!-- /.entry-content -->
-
-								<div class="medium primary btn"><a href="/learning Git 1.html" rel="bookmark" title="Permalink to Git 与 GitHub 不完全教程（一）">Read more <i class="icon-arrow-right"></i></a></div>
-
-
-
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/git.html">git</a>
-																					<a class="danger label" href="/tag/github.html">github</a>
-																											</div>
-
-
-
-				        </article></li>
-								        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/first article.html" rel="bookmark" title="Permalink to Hello,world!">Hello,world!</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2013-09-01T00:00:00"> 日 01 九月 2013 </abbr>
-				                    <address class="vcard author">By <a class="url fn" href="/author/lao-yi.html">老逸</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p>代码之神的古老咒语，每每想起总是令人振奋不已。</p>
-<p><strong>About me：</strong></p>
-<blockquote>
-scutLaoYi</blockquote>
-<p><strong>From:</strong></p>
-<blockquote>
-<p>School of Software Engineering</p>
-<p>South China University of Technology</p>
-</blockquote>
-<p><strong>Language:</strong></p>
-<blockquote>
-<p>Chinese</p>
-<p>English</p>
-</blockquote>
-<p><strong>Interest:</strong></p>
-<blockquote>
-<p>C/C++</p>
-<p>Python</p>
-<p>Unix/Linux</p>
-<p>computer network</p>
-<p>git</p>
-<p>reading</p>
-<p>music</p>
-<p>sport</p>
-<p>and so on~</p>
-</blockquote>
-<p><strong>Contact:</strong></p>
-<blockquote>
-<a class="reference external" href="mailto:scutLaoYi&#64;gmail.com">scutLaoYi&#64;gmail.com</a></blockquote>
-<p>Create my own world,</p>
-<p>and enjoy everyday life!</p>
-<hr class="docutils" />
-<p>本博客挂载github，使用Pelican生成静态网页，在此感谢开源社区的丰富资源。</p>
-<p>好记的玉米是不会吝惜多次提起的:</p>
-<p>www ...</p> </div><!-- /.entry-content -->
-
-								<div class="medium primary btn"><a href="/first article.html" rel="bookmark" title="Permalink to Hello,world!">Read more <i class="icon-arrow-right"></i></a></div>
-
-
-
-								<div class="row tag-row">
-																			<span>Tagged as : </span>
-																					<a class="danger label" href="/tag/hello.html">hello</a>
-																											</div>
-
-
-
-				        </article></li>
-								</ol><!-- /#posts-list -->
-
-        </div><!-- /.eleven.columns -->
-        
-     <div class="three columns">
-
-<h4>Pages</h4>
-
- <ul>
-        <li><a href="md5.html">md5 generator</a></li>
-        <li><a href="first article.html">about</a></li>
-            </ul>
-
-<h4>Categories</h4>
-<ul>
-			<li><a href="/category/linux.html">Linux</a></li>
-			<li><a href="/category/python.html">Python</a></li>
-			<li><a href="/category/git.html">git</a></li>
-			<li><a href="/category/life.html">life</a></li>
-			<li><a href="/category/network.html">network</a></li>
-	</ul>
-
-
-<h4>Tags</h4>
-	<ul>
-		    <li class="tag-4"><a href="/tag/arch.html">Arch</a></li>
-		    <li class="tag-4"><a href="/tag/hello.html">hello</a></li>
-		    <li class="tag-2"><a href="/tag/network.html">network</a></li>
-		    <li class="tag-2"><a href="/tag/softwarearchitect.html">SoftwareArchitect</a></li>
-		    <li class="tag-2"><a href="/tag/bash.html">Bash</a></li>
-		    <li class="tag-2"><a href="/tag/github.html">github</a></li>
-		    <li class="tag-2"><a href="/tag/git.html">git</a></li>
-		    <li class="tag-1"><a href="/tag/python.html">Python</a></li>
-	</ul>
-
-
-<nav class="widget">
-  <h4>Social</h4>
-  <ul>
-      <li><a href=""></a></li>
-    </ul>
-</nav>
-
-</div> </div><!-- /.row -->
-
-</section><!-- /#content -->
-
-       </div><!-- /.row -->
-    </div><!-- /.container -->
-
-
-       <div class="container.nopad bg">
-
-    
-        <footer id="credits" class="row">
-          <div class="seven columns left-center">
-
-                   <address id="about" class="vcard body">
-                    Contact scutLaoYi: scutLaoYi@gmail.com <br />
-                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
-                    which takes great advantage of <a href="http://python.org">Python</a>.
-                    <br />
-                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
-                    </address>
-          </div>
-
-
-          <div class="seven columns">
-            <div class="row">
-              <ul class="socbtns">
-
-                                <li><div class="btn primary"><a href="https://github.com/scutLaoYi" target="_blank">Github</a></div></li>
-                
-                
-                
-                
-              </ul>
-            </div>
-          </div>
-        </footer>
-
-    </div>
-
-
-  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
-  <script src="/theme/js/libs/gumby.min.js"></script>
-  <script src="/theme/js/plugins.js"></script>
-
-</body>
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="/theme/js/bootstrap.min.js"></script>
+  </body>
 </html>

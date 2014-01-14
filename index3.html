@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>老逸的个人站</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="laoyi">
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="/theme/css/font-awesome.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/theme/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/theme/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/theme/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/theme/images/apple-touch-icon-114x114.png">
+
+    <link href="/" type="application/atom+xml" rel="alternate" title="老逸的个人站 ATOM Feed" />
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">老逸的个人站 </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                <li><a href="/pages/first article.html">About</a></li>
+                          <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/git.html">
+						<i class="icon-folder-open icon-large"></i>git
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/linux.html">
+						<i class="icon-folder-open icon-large"></i>Linux
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/network.html">
+						<i class="icon-folder-open icon-large"></i>network
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/python.html">
+						<i class="icon-folder-open icon-large"></i>Python
+					</a>
+                  </li>
+
+                          <ul class="nav pull-right">
+                                <li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+                          </ul>
+
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="span9" id="content">
+        <div class="article">
+                <h1><a href="/Python001.html">Python 笔记（一）</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-09-11T15:30:00">
+        <i class="icon-calendar"></i>Wed 11 September 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3，</strong>
+<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<p><strong>脚本声明和中文编码</strong></p>
+<p>在Python脚本的首行和次行添加以下命令可在命令行调用，并设置编码为中文gb2312：</p>
+<div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<span class="c"># -*- coding:gb2312 -*-</span>
+</pre></div>
+<p>Python的注释以#开始，单行注释</p>
+<p>单句Python语句占一行时结尾不用任何符号，多句时用分号分割，但极不推荐此种风格。</p>
+<p><strong>字符串</strong></p>
+<p>字符串有三种写法，单引号或双引号包围的单行字符串（可用反斜杠连接多行），或者三个单引号或双引号跨多行：</p>
+<div class="highlight"><pre><span class="c">#简单的输出语句，包含三种字符串形式</span>
+<span class="k">print</span> <span class="s">&#39;Hello,python!&#39;</span>
+<span class="k">print</span> <span class="s">u&quot;中文是可以支持的.&quot;</span>
+<span class="k">print</span> <span class="s">u&#39;&#39;&#39;字符串的第三种格式</span>
+<span class="s">跨行字符串:用三个单引号或双引号约束。</span>
+<span class="s">前方的u使该字符串作为unicode编码，正确处理中文。</span>
+<span class="s">&#39;&#39;&#39;</span>
+</pre></div>
+<p><strong>原始字符串</strong></p>
+<div class="highlight"><pre><span class="c">#普通字符串和原始字符串（r ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/Python001.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/learning Git 2.html">Git 与 GitHub 不完全教程（二）</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-09-07T16:10:00">
+        <i class="icon-calendar"></i>Sat 07 September 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/git.html"><i class="icon-folder-open"></i>git</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/git.html"><i class="icon-tag"></i>git</a>
+	<a href="/tag/github.html"><i class="icon-tag"></i>github</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><div class="section" id="id1">
+<h2>分支</h2>
+<p>分支(branch)是Git的一个强大功能，它可以在不改变现有仓库、不新增仓库的情况下，通过新建一个分支以建立当前文档一模一样的支线版本，在支线版本的修改不影响主线文档的内容。</p>
+<p>分支的一个重要的功能是能够在同一个时间点上保存多份不同版本的代码，并且均为随时可用的状态，根据官方的一个示例，你可以保持一份稳定的发布版，在发布版内的代码都是可运行的，之后，你可以再拥有一个分支专门用于开发，在这上面的代码用于任意修改和处理，不对外，还能再有一个分支用于测试开发新的功能。这三个分支都可以随时切换随时合并，应变自如。</p>
+<p>当支线任务成功完成时，可通过命令简单地将支线版本合并到主线上，若由于手潮不幸把事情搞砸了，可直接删除支线，回到主线上，则原有的文档内容不受任何影响。这种功能特别适合在当前状态下需要测试开发一些新的功能，但又想要与主线的开发有所并行的情况。</p>
+<p>默认情况下，git创建完仓库后会生成一个主分支master，所有的操作均在主分支上进行，这就相当于文档的主线版本。而我们可以按自己的需要增删改查新的分支。</p>
+<p><strong>分支的创建和切换</strong></p>
+<p>显示当前仓库的分支状态:</p>
+<pre class="literal-block">
+git branch
+</pre>
+<p>Git会列表显示当前的所有分支，并在当前所在分支上作相应标记。
+新建分支（假设需要新建的分支名字为:newBranch）:</p>
+<pre class="literal-block">
+git branch newBranch
+</pre>
+<p>此时再次检查branch状态就会发现新的分支已经出现了。
+新的分支和现有的分支内容完全相同，相当于当前分支的一个副本。
+跳转到某个分支:</p>
+<pre class="literal-block">
+git ...</pre></div>
+                        <a class="btn primary xsmall" href="/learning Git 2.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/learning Git 1.html">Git 与 GitHub 不完全教程（一）</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-09-07T16:00:00">
+        <i class="icon-calendar"></i>Sat 07 September 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/git.html"><i class="icon-folder-open"></i>git</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/git.html"><i class="icon-tag"></i>git</a>
+	<a href="/tag/github.html"><i class="icon-tag"></i>github</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>git是常用的配置管理工具，关于Git的介绍请见维基百科（维基百科关于Git的介绍），Github是常用的代码托管服务（维基百科关于GitHub的介绍），在此敲一份扫盲和不完全配置帖，留待日后自己可查看，顺带给大家方便学习。</p>
+<p>由于时间有限，仅记录最简单的终端界面下Git的使用，自认为已经足够，如更喜欢GUI界面风格请自行脑补。</p>
+<p>本文档操作环境为GNU/Linux Ubuntu 12.04 LTS x64，为方便windows用户，在配置时添加了windows下的安装配置过程，不保证万无一失。</p>
+<div class="section" id="git">
+<h2>Git篇：</h2>
+<div class="section" id="id1">
+<h3>安装与配置git</h3>
+<p>Ubuntu: 简单:</p>
+<pre class="literal-block">
+sudo apt-get install git
+</pre>
+<p>即可。</p>
+<p>以上代码没看懂的请别往下看了，扫盲Ubuntu先。</p>
+<p>windows:到这个网址下载:</p>
+<blockquote>
+<a class="reference external" href="http://msysgit.github.io/">http://msysgit.github.io/</a></blockquote>
+<dl class="docutils">
+<dt>或者git官网下载:</dt>
+<dd><a class="reference external" href="http://git-scm.com/download/win">http://git-scm.com/download/win</a></dd>
+</dl>
+<p>安装即可。</p>
+</div>
+<div class="section" id="id2">
+<h3>首次使用</h3>
+<p>windows下使用终端的Git需要启动Git自带的终端，而不是windows的命令行，
+一般在安装后有一个叫做Git ...</p></div></div>
+                        <a class="btn primary xsmall" href="/learning Git 1.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+
+        <div class="pagination">
+        <ul>
+                        <li class="prev"><a href="/index2.html">&larr; Previous</a></li>
+                        <li class=""><a href="/index.html">1</a></li>
+                        <li class=""><a href="/index2.html">2</a></li>
+                        <li class="active"><a href="/index3.html">3</a></li>
+                        <li class="next disabled"><a href="#">&rarr; Next</a></li>
+        </ul>
+        </div>
+
+        </div><!--/span-->
+
+                <div class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+<li class="nav-header"><h4><i class="icon-external-link"></i>link</h4></li>
+    <li><a href="http://github.com/scutlaoyi"><i class="icon-external-link"></i>my github</a></li>
+    <li><a href="md5.html"><i class="icon-external-link"></i>md5 generator</a></li>
+<li class="nav-header"><h4><i class="icon-home icon-large"></i> social</h4></li>
+<li><a href="/" rel="alternate"><i class="icon-bookmark icon-large"></i>atom feed</a></li>
+    <li><a href=""><i class="icon--sign icon-large"></i></a></li>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>Categories</h4></li>
+<li>
+<a href="/category/git.html">
+    <i class="icon-folder-open icon-large"></i>git
+</a>
+</li>
+<li>
+<a href="/category/linux.html">
+    <i class="icon-folder-open icon-large"></i>Linux
+</a>
+</li>
+<li>
+<a href="/category/network.html">
+    <i class="icon-folder-open icon-large"></i>network
+</a>
+</li>
+<li>
+<a href="/category/python.html">
+    <i class="icon-folder-open icon-large"></i>Python
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/arch.html">
+        <i class="icon-tag icon-large"></i>Arch
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/network.html">
+        <i class="icon-tag icon-large"></i>network
+    </a>
+</li>
+
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <address id="about">
+                Proudly powered by <a href="http://pelican.notmyidea.org/">Pelican <i class="icon-external-link"></i></a>,
+                                which takes great advantage of <a href="http://python.org">Python <i class="icon-external-link"></i></a>.
+        </address><!-- /#about -->
+
+        <p>The theme is from <a href="http://twitter.github.com/bootstrap/">Bootstrap from Twitter <i class="icon-external-link"></i></a>,
+                   and <a href="http://fortawesome.github.com/Font-Awesome/">Font-Awesome <i class="icon-external-link"></i></a>, thanks!</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="/theme/js/bootstrap.min.js"></script>
+  </body>
+</html>
