@@ -101,6 +101,36 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/PythonExpe002.html">软件体系结构：N皇后问题系列之管道风格</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-11-03T22:30:00">
+        <i class="icon-calendar"></i>Sun 03 November 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+	<a href="/tag/softwarearchitect.html"><i class="icon-tag"></i>SoftwareArchitect</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3</strong></p>
+<p><strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<p><strong>风格二:管道风格</strong></p>
+<p>管道风格的主要思想是，将问题产生的输入作为流，从程序的入口输入，构造若干个过滤器，每个过滤器负责一部分过滤功能，将不符合结果的输入筛选掉，最终剩下完全符合要求的便是问题所需要的输出。</p>
+<p>考虑到N皇后问题，还是将棋盘分割为单独的层，为每个层构造一个过滤器，这样便可以从棋盘的顶部将所有可能解输入，层层筛选，直到棋盘底部依然符合要求的解集便是答案了。</p>
+<p>这里运用了一点剪枝以优化性能。显而易见，如果在第i层的某个解不符合要求，则没有必要为这个解构造所有i层以下的解，因为在第i层必然是不能通过过滤器的。因此，我的实现方法没有在最开始便构造所有层的所有解，而是只构造了第一层的所有解。在过滤第一层之后，从剩下的那些可能解的基础上，再次构造下一层的所有可能解，并传入下一层的过滤器。这样便省去了大量无效的解。</p>
+<p>那么这些解集放在哪里呢？初试Python，用了恶心的办法实现了，便是List。由于每个解都是由一个或若干个数字形成的列表组成（保存每一层的皇后位置），因此将每一层的每个可能解List存为一个大List，并再存入总List作为管道的输入流。这样在管道的另一端便获得筛选完成后的结果List。若有n皇后 ...</p>
+                        <a class="btn primary xsmall" href="/PythonExpe002.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/PythonExpe001.html">软件体系结构：N皇后问题系列之回溯法</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -453,48 +483,6 @@
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/Python002.html">Python 笔记（二）</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2013-09-13T22:30:00">
-        <i class="icon-calendar"></i>Fri 13 September 2013
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
-<p><strong>使用的Python版本为2.7.3，</strong>
-<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
-<hr class="docutils" />
-<p><strong>字典</strong></p>
-<p>字典类似C++中STL的map，可保存键/值映射关系。但Python的字典比C++的简便得多。</p>
-<p>创建字典的几种方法</p>
-<div class="highlight"><pre><span class="n">mapOne</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;name&#39;</span><span class="p">:</span><span class="s">&#39;szy&#39;</span><span class="p">,</span> <span class="s">&#39;age&#39;</span><span class="p">:</span><span class="mi">85</span><span class="p">}</span> <span class="c">#创建有俩映射的字典</span>
-<span class="n">mapTwo</span> <span class="o">=</span> <span class="p">{}</span> <span class="c">#空字典</span>
-<span class="c">#dict函数创建字典</span>
-<span class="n">mapThree</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;szy&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">85</span><span class="p">)</span>
-</pre></div>
-<p>关于字典的基本函数</p>
-<div class="highlight"><pre><span class="c">#键/值对的数量</span>
-<span class="nb">len</span><span class="p">(</span><span class="n">mapOne</span><span class="p">)</span>
-<span class="c">#2</span>
-<span class="c">#取值</span>
-<span class="n">mapOne</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span>
-<span class="c">#&#39;szy&#39;</span>
-<span class="c">#赋值</span>
-<span class="n">mapOne</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;scutLaoYi&#39;</span>
-<span class="n">mapOne ...</span></pre></div>
-                        <a class="btn primary xsmall" href="/Python002.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -541,8 +529,18 @@
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
 <li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-2">
     <a href="/tag/bash.html">
         <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/arch.html">
+        <i class="icon-tag icon-large"></i>Arch
     </a>
 </li>
 <li class="tag-1">
@@ -556,18 +554,8 @@
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
-    </a>
-</li>
-<li class="tag-2">
     <a href="/tag/git.html">
         <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/arch.html">
-        <i class="icon-tag icon-large"></i>Arch
     </a>
 </li>
 <li class="tag-2">
