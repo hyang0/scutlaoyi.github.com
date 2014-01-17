@@ -101,6 +101,37 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/learning Git 3.html">Git 与 GitHub 实践经验谈（一）</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-11-07T22:10:00">
+        <i class="icon-calendar"></i>Thu 07 November 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/git.html"><i class="icon-folder-open"></i>git</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/git.html"><i class="icon-tag"></i>git</a>
+	<a href="/tag/github.html"><i class="icon-tag"></i>github</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>自从上次聊完git的基本使用之后到现在已经两个多月了，一直都没有机会真的把它用在多人配合的项目开发之中。
+主要是因为手头的小型实验项目都是自己在玩，所以很多时候用的是本地的仓库，写完commit一下基本就完事，连checkout都很少用。</p>
+<p>这个月开始接手了一个小型的团队合作项目，于是核心代码组（我，标神，院长）才算真正成立了一个小组团队开发。</p>
+<p>核心代码组负责的主要是系统后台的搭建和配置。所以我们搭建了一个小型的服务器，挂载Apache+mySQL+php+cakePHP，使用GitHub进行源码托管。</p>
+<p>这个过程中真正逐渐熟悉了git的操作，也碰到了大量实践中遇上的问题。在此写一个未知篇幅的实践经验收集帖，既有利于总结归纳开发过程中遇到的问题，理清思路，也有利于来日翻阅加深印象。</p>
+<hr class="docutils" />
+<p>首先是基本的操作回顾，这是实际开发过程中用到的一些方法，可能非常曲折，让高手看来简直就是瞎搞，不过不管质量，先记录下来，以后有更优的方案也可供对比。</p>
+<p><strong>一：</strong></p>
+<p>本地仓库的创建自然是git init，这里我们被坑了一下，理论上我们总以为git init之后会默认创建一个仓库并产生一个默认分支叫做master，结果在实际操作中发现问题，git init只负责创建仓库，但在这个时候调用git branch会发现根本没有分支。</p>
+<p>这就导致了几天前以标神为主角的惊悚一幕。话说当天标神连敲八个小时代码完成了一个基本模块的创建，正当其修养生息吞云吐雾之际，我主动提出让其提交代码到远端仓库中。然而当时远端仓库已有更新，push操作之前必须pull下最新版本代码，然而该操作却死活无法成功完成 ...</p>
+                        <a class="btn primary xsmall" href="/learning Git 3.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/PythonExpe002.html">软件体系结构：N皇后问题系列之管道风格</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -442,47 +473,6 @@
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/network001.html">socket编程(1):单线程tcp服务器/客户端</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2013-09-17T15:30:00">
-        <i class="icon-calendar"></i>Tue 17 September 2013
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/network.html"><i class="icon-folder-open"></i>network</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/network.html"><i class="icon-tag"></i>network</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p><strong>tcp的单线程socket比较简单，以下是GNU/Linux环境下socket通讯的测试，分为C++版本和Python版本。</strong></p>
-<div class="section" id="id1">
-<h2>服务器：</h2>
-<p>流程：创建socket-绑定端口-监听-获取连接-读写操作-关闭连接并结束</p>
-<p><strong>C++版本：</strong></p>
-<div class="highlight"><pre><span class="cp">#include &lt;cstdio&gt;</span>
-<span class="cp">#include &lt;cstdlib&gt;</span>
-<span class="cp">#include &lt;cstring&gt;</span>
-<span class="cp">#include &lt;cerrno&gt;</span>
-<span class="cp">#include &lt;unistd.h&gt;</span>
-<span class="cp">#include &lt;sys/types.h&gt;</span>
-<span class="cp">#include &lt;sys/socket.h&gt;</span>
-<span class="cp">#include &lt;netinet/in.h&gt;</span>
-<span class="cp">#include &lt;arpa/inet.h&gt;</span>
-
-<span class="c1">//定义缓冲区的大小</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXBUF</span> <span class="o">=</span> <span class="mi">4096</span><span class="p">;</span>
-<span class="c1">//定义端口号</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">SERVER_PORT</span> <span class="o">=</span> <span class="mi">9876</span><span class="p">;</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int ...</span></pre></div></div>
-                        <a class="btn primary xsmall" href="/network001.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -528,6 +518,16 @@
 </li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
 <li class="tag-1">
     <a href="/tag/python.html">
         <i class="icon-tag icon-large"></i>Python
@@ -539,8 +539,8 @@
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
+    <a href="/tag/network.html">
+        <i class="icon-tag icon-large"></i>network
     </a>
 </li>
 <li class="tag-2">
@@ -549,18 +549,8 @@
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/network.html">
-        <i class="icon-tag icon-large"></i>network
-    </a>
-</li>
-<li class="tag-2">
     <a href="/tag/github.html">
         <i class="icon-tag icon-large"></i>github
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
     </a>
 </li>
 

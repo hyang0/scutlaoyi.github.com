@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>老逸的个人站 - Arch</title>
+    <title>Arch Linux学习：Repository与Pacman小记</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="laoyi">
@@ -70,7 +70,7 @@
 						<i class="icon-folder-open icon-large"></i>git
 					</a>
                   </li>
-                  <li >
+                  <li class="active">
                     <a href="/category/linux.html">
 						<i class="icon-folder-open icon-large"></i>Linux
 					</a>
@@ -100,9 +100,20 @@
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
-        <div class="article">
-                <h1><a href="/Arch004.html">Arch Linux学习：Repository与Pacman小记</a></h1>
-                <div class="well small"><footer class="post-info">
+<section id="content">
+        <article>
+                <header>
+                        <h1>
+                                <a href=""
+                                        rel="bookmark"
+                                        title="Permalink to Arch Linux学习：Repository与Pacman小记">
+                                        Arch Linux学习：Repository与Pacman小记
+                                </a>
+                        </h1>
+                </header>
+                <div class="entry-content">
+                <div class="well">
+<footer class="post-info">
 <span class="label">Date</span>
 <abbr class="published" title="2014-01-17T19:30:00">
         <i class="icon-calendar"></i>Fri 17 January 2014
@@ -115,8 +126,8 @@
 
 <span class="label">Tags</span>
 	<a href="/tag/arch.html"><i class="icon-tag"></i>Arch</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。</p>
+</footer><!-- /.post-info -->                </div>
+                <p>本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。</p>
 <hr class="docutils" />
 <div class="section" id="arch-linux">
 <h2>Arch Linux 仓库</h2>
@@ -155,158 +166,193 @@ AUR的东西需要自行下载安装。</p>
 <p>顾名思义，
 正在测试的包可以在这个仓库里找到。
 一个包被弄进testing的原因一种是可能会破坏当前的系统，因此需要测试；
-或者是正等待其他依赖的包重新构建 ...</p></div></div>
-                        <a class="btn primary xsmall" href="/Arch004.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/Arch003.html">Arch Linux学习：安装篇(三)</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-01-16T19:30:00">
-        <i class="icon-calendar"></i>Thu 16 January 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/arch.html"><i class="icon-tag"></i>Arch</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。</p>
+或者是正等待其他依赖的包重新构建。</p>
+<p>testing中的包最终会被弄进core或者extra里面去。</p>
 <hr class="docutils" />
-<div class="section" id="virtualbox">
-<h2>关于VirtualBox的安装</h2>
-<p>看了教程感觉很难搞，光是篇幅就吓死人。</p>
-<p>昨天看清楚才发现原来是自己搞错了，
-在Arch Linux里装VirtualBox是不难的，
-大概也就两页的篇幅。</p>
-<p>首先需要以下的包，
-用pacman装就可以了。</p>
-<blockquote>
-virtualbox</blockquote>
-<p>pacman会自动连带安装host-modules。</p>
-<p>别想不开用终端去操作，
-再装个Qt吧，
-装完就有熟悉的界面了，
-如果以前用过virtualbox的话。</p>
-<blockquote>
-qt4</blockquote>
-<p>我用的是默认的kernel，
-所以接下去就不用怎么配置了，
-如果想每次手动启动virtualbox的话，
-在启动之前敲这个就可以了：</p>
-<blockquote>
-modprobe vboxdrv</blockquote>
-<p>像我这种整天挂个win7当代理服务器的，
-把这个模块扔到启动配置文件里去比较方便。</p>
-<p>方法是在/etc/modules-load.d/里建立一个新的*.conf文件，
-起个好听的名字，比如virtualbox.conf，
-内容就加入这句即可：</p>
-<blockquote>
-vboxdrv</blockquote>
-<p>这样就能够在每次启动的时候自动启动这个模块。</p>
-<p>据称这个模块作为虚拟机的基础模块，
-必须在启动虚拟机前正确启动。
-自己测试的时候如果没有启动这货直接启动虚拟机，
-系统会报错并退出。</p>
-<p>然后，
-桌面环境里开启virtualbox，
-该干嘛干嘛。</p>
-<div class="section" id="troubleshooting">
-<h3>troubleshooting</h3>
-<p>虽然教程说的非常简单，
-博主在安装的时候还是出了很大的问题。</p>
-<p>在安装完启动vboxdrv的时候系统报错：</p>
-<blockquote>
-modprobe ...</blockquote></div></div>
-                        <a class="btn primary xsmall" href="/Arch003.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/Arch002.html">Arch Linux学习：安装篇(二)</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-01-14T19:30:00">
-        <i class="icon-calendar"></i>Tue 14 January 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/arch.html"><i class="icon-tag"></i>Arch</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。</p>
-<hr class="docutils" />
-<p>当你看到这篇博文的时候，
-老逸的新系统已安装完毕，
-弹冠相庆！^_^</p>
-<p>替换掉原来恶心的win7+Ubuntu双系统，
-现在直接将整个硬盘重新分区并安装Arch Linux.</p>
-<p>分区如下:</p>
+<p>博主查看了本地的pacman设置文件，
+默认情况下pacman只启用core,extra和community三个仓库。</p>
+</div>
+</div>
+<div class="section" id="pacman">
+<h2>Pacman的简介、配置与基本命令</h2>
+<p>Pacman是Arch Linux的包管理器，
+类似于Ubuntu的apt，
+提供了自动化的依赖关系管理维持、
+自动化的仓库更新和本地系统更新，
+以及本地的包管理。</p>
+<div class="section" id="id3">
+<h3>相关文件</h3>
 <pre class="literal-block">
-NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
-sda      8:0    0 298.1G  0 disk
-├─sda1   8:1    0   500M  0 part /boot
-├─sda2   8:2    0    50G  0 part /
-├─sda3   8:3    0     2G  0 part [SWAP ...</pre>
-                        <a class="btn primary xsmall" href="/Arch002.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/Arch001.html">Arch Linux学习：安装篇(一)</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-01-08T19:30:00">
-        <i class="icon-calendar"></i>Wed 08 January 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/arch.html"><i class="icon-tag"></i>Arch</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。</p>
+pacman的日志记录：/var/log/pacman.log
+pacman的配置文件：/etc/pacman/pacman.conf
+pacman的镜像列表：/etc/pacman.d/mirrorlist
+pacman的本地cache文件夹：/var/cache/pacman/pkg/
+</pre>
+</div>
+<div class="section" id="id4">
+<h3>配置</h3>
+<p>pacman的配置文件在这里: /etc/pacman.conf</p>
+<p>可以查man pacman.conf看到所有配置的字段。</p>
+<p>在Repository块中去掉对应的项前面的注释便可以启用相应的仓库，
+包括testing、multilib等。
+注意使用testing的时候需要把它放置在仓库列表的最上一项，
+因为testing中的包与其他仓库的包可能重名。</p>
+<p>没事还是别拿testing开玩笑的好。</p>
+<p>另外在IgnorePkg后面的包将会被pacman无视，不会自动更新。
+在IgnoreGroup后面的组也不会被更新。</p>
+<p>不推荐使用Ignore，
+因为连带的更新会让依赖的包版本变化，
+某些单独的包不被更新很容易出现依赖问题。</p>
+<p>这种事情在博主安装virtualbox的时候就出现过，
+由于kernel版本过旧导致依赖kernel的virtualbox出现问题无法启动。</p>
+<p>都是些不太常用的配置。</p>
+<p>下面这货才是主要的，
+镜像列表的编辑：</p>
+<p>从这里搞一份镜像列表：</p>
+<blockquote>
+<a class="reference external" href="https://www.archlinux.org/mirrorlist/">https://www.archlinux.org/mirrorlist/</a></blockquote>
+<p>贴到本地的mirrorlist文件中：</p>
+<blockquote>
+/etc/pacman.d/mirrorlist</blockquote>
+</div>
+<div class="section" id="id5">
+<h3>常用命令</h3>
+<p><strong>刷新包列表</strong></p>
+<p>如前面的博文说过的，
+更新过mirrorlist的话要用这货更新包的列表：</p>
+<blockquote>
+pacman -Syy</blockquote>
+<p><strong>安装</strong></p>
+<p>安装特定的若干个包敲这个命令：</p>
+<blockquote>
+pacman -S package1 package2 ......</blockquote>
+<p>也可以安装一个组，例如gnome：</p>
+<blockquote>
+pacman -S gnome</blockquote>
+<p>这种情况下pacman会出一个列表询问需要安装包组里面的哪些特定的包，或者是全部。</p>
+<p>有时候在多个仓库中存在相同的包，那么需要在名称前加入仓库名称指定：</p>
+<blockquote>
+pacman -S repo_name/package_name</blockquote>
+<p>跟apt一样，
+不用处理依赖关系，
+pacman会自动连带安装所有必须的依赖。</p>
+<p>另外博主在使用的时候发现，
+在安装好某些包后可选的依赖也会被列举出来，
+提醒用户可安装某些额外的功能。</p>
+<p>在某个包已被安装的情况下，
+pacman会尝试重新安装，
+不管当前的版本是否有差别。
+这种特性可以通过加入 --needed 选项去除。</p>
+<p><em>特殊的安装</em></p>
+<blockquote>
+pacman -U path/to/file.pkg.tar.xz</blockquote>
+<p>上面这货可以从本地安装不在镜像服务器中的包。
+用于从AUR中下载的包需要这种安装方式。
+此外上面的路径可以换成url。</p>
+<p><strong>删除</strong></p>
+<p>删除某个包（仅删除该包，没有处理依赖）：</p>
+<blockquote>
+pacman -R package</blockquote>
+<p>删除某个包并把它的依赖（如果没有被其他包依赖的话）连带删除：</p>
+<blockquote>
+pacman -Rs package</blockquote>
+<p>删除某个包、其依赖的包、以及依赖它的包： (-_-)</p>
+<blockquote>
+pacman -Rsc package</blockquote>
+<p>删除某个包并忽略所有依赖它的包：</p>
+<blockquote>
+pacman -Rdd package</blockquote>
+<p>/*这里有一个补充说明，
+默认情况下pacman是不允许删除被依赖的包的，
+博主在之前删除ibus的时候，
+ibus-googlepinyin还存在依赖关系，
+导致pacman 报错退出。*/</p>
+<p><strong>升级</strong></p>
+<p>全自动升级</p>
+<blockquote>
+pacman -Syu</blockquote>
+<p>官方的说法是升级的时候需要小心，
+需要确定pacman列出的升级列表，
+还要确定是否需要手动处理一些配置文件的替换工作。</p>
+<p>可供参考的有arch官方的RSS订阅，announce的邮件列表以及twitter账户。</p>
+<p><strong>查询数据库</strong></p>
+<p>数据库有两款，
+其一是本地local数据库，
+保存的是当前系统安装的包;
+其二是远端镜像sync仓库中当前的列表，
+保存所有最新的数据。</p>
+<p>可用-Q参数查询local库，
+用-S参数查询sync数据库。</p>
+<p>搜索包含某个关键词的包：</p>
+<blockquote>
+pacman -Ss string1 string2 string3 ...</blockquote>
+<p>搜索本地库就把S改成Q：</p>
+<blockquote>
+pacman -Qs string1 ...</blockquote>
+<p>加入i参数可查看某个包的详细信息(注意上面是字段搜索，这个是包名称)：</p>
+<blockquote>
+pacman -Si package</blockquote>
+<p>同样，查看本地：</p>
+<blockquote>
+pacman -Qi package</blockquote>
+<p>两个i的话可以查看连带的备份文件及编辑状态(啥...)</p>
+<blockquote>
+pacman -Qii package</blockquote>
+<p>列出所有该包安装的文件(拿kernel试了一发，效果不错)：</p>
+<blockquote>
+pacman -Ql package</blockquote>
+<p>反向查询某个文件属于的包：</p>
+<blockquote>
+pacman -Qo path/to/file</blockquote>
+<p>列出所有不再被依赖的包(一直在纠结能不能把搜出来的东西给删掉...)：</p>
+<blockquote>
+pacman -Qdt</blockquote>
+<p>还能树状列出某个包的依赖：</p>
+<blockquote>
+pactree package</blockquote>
+</div>
+<div class="section" id="id6">
+<h3>缓存的相关内容</h3>
+<p>pacman的安装机制是这样的，
+首先从mirrorlist中查询url，
+从url中搜索是否存在目标包，
+如果没有的话则返回404，
+继续搜索下一个url，
+找到的话则下载对应的包。</p>
+<p>下载完成放在cache目录里，
+也就是/var/cache/pacman/pkg</p>
+<p>最后从本地的cache中安装对应的包到系统里面，
+完成。</p>
+<p>升级也是一样的处理，
+下载并存放到cache里，
+再安装新版本的软件。</p>
+<p>于是ls一发cache目录可以找到所有之前安装过的包文件。</p>
+<p>根据Arch官方的说法，保留旧版本的包的好处在于如果新版本运行出现问题，
+可以使用手头的旧版本降级处理解决。</p>
+<p>但感觉咱这种循规蹈矩整天看着wiki安装extra仓库东西的人，
+应该不会手气太差，
+加上那么一堆安装包感觉很占地方。</p>
+<p>于是可以使用下面的命令清理一下：</p>
+<p>清除所有旧版本的包：</p>
+<blockquote>
+pacman -Sc</blockquote>
+<p>Arch的推荐是确定当前版本没有问题的情况下才执行这种操作，
+否则出现问题比较麻烦。</p>
+<p>清除缓存：</p>
+<blockquote>
+pacman -Scc</blockquote>
+<p>整个缓存清空。Arch官方不推荐这种操作。</p>
 <hr class="docutils" />
-<div class="section" id="id1">
-<h2>关于Arch Linux</h2>
-<p>Arch Linux是一个现在较为流行的Linux发行版，
-支持32/64位处理器,
-以Rolling Releases方式发布新版本。</p>
-<p>官方站点：</p>
-<p><a class="reference external" href="https://www.archlinux.org">https://www.archlinux.org</a></p>
-<p>Arch Linux的哲学是简洁、保证代码的正确性、用户为中心、开放性及自由性。
-因此据称Arch Linux的一个非常重要的特点是轻量级，
-让用户自行选择所需的组件构建属于自己的系统，
-当然这都以系统的开放性作为前提，
-Arch Linux提供了非常大的自由度和开放度供用户完全控制自己的系统。</p>
-<p><a class="reference external" href="https://wiki.archlinux.org/index.php/The_Arch_Way">https://wiki.archlinux.org/index.php/The_Arch_Way</a></p>
-<p>Arch Linux支持syslinux或GRUB两种bootloader，
-包管理器为Pacman(package manager)，
-使用systemd作为系统的服务管理器(这货还没弄清楚)</p>
-<p>在下列资源的帮助下我顺利完成了系统的安装:</p>
-<p>一个是Arch官方的Beginners' Guide:</p>
-<p><a class="reference external" href="https://wiki.archlinux.org/index.php/Beginners%27_Guide">https://wiki.archlinux.org/index.php/Beginners ...</a></p></div>
-                        <a class="btn primary xsmall" href="/Arch001.html">more ...</a>
-                </div>
-        </div>
-        <hr />
+<p>pacman的基本用法就这么多了，
+查询其他额外信息，找man是不错的选择，另外也可以去这里：</p>
+<blockquote>
+<a class="reference external" href="https://wiki.archlinux.org/index.php/Pacman">https://wiki.archlinux.org/index.php/Pacman</a></blockquote>
+</div>
+</div>
 
-                <section id="content" class="body">
-                <h1>Pages</h1>
-                        <li><a href="/pages/first article.html">About</a></li>
-                </section>
+                </div><!-- /.entry-content -->
+        </article>
+</section>
         </div><!--/span-->
 
                 <div class="span3 well sidebar-nav" id="sidebar">
