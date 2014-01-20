@@ -101,6 +101,47 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/Arch005.html">Arch Linux学习：Arch Linux启动二三事</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-01-20T11:30:00">
+        <i class="icon-calendar"></i>Mon 20 January 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/arch.html"><i class="icon-tag"></i>Arch</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。</p>
+<hr class="docutils" />
+<div class="section" id="arch">
+<h2>关于Arch的启动流程</h2>
+<div class="section" id="id1">
+<h3>基本流程</h3>
+<p>在BIOS主板下，
+Arch Linux的启动流程大致有以下几个步骤：</p>
+<pre class="literal-block">
+1. 电源接通，系统开机自检
+2. BIOS搜索并根据配置调用对应的硬件进行启动
+3. 假设装有Arch的硬盘作为优先启动项，则硬盘的MBR被BIOS读取执行
+4. MBR接管，读取数据启动bootloader
+5. bootloader启动，初始化数据及配置文件等
+6. bootloader启动完毕，载入linux kernel及initramfs，并启动kernel
+7. kernel启动，解包initramfs，初始化早期的用户空间，启动/init作为首个进程
+8. initramfs作为临时的根文件系统，载入所有运行系统必须的模块，用于启动引导系统的设备
+9. 相应的模块启动成功，系统继续引导，真实的根目录挂载并替换初始化根文件系统
+10./sbin/init替换/init继续引导过程，systemd启动
+11.进程调用getty，提供登录窗口等待用户登入
+12.getty获取用户输入 ...</pre></div></div>
+                        <a class="btn primary xsmall" href="/Arch005.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/Arch004.html">Arch Linux学习：Repository与Pacman小记</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -341,24 +382,9 @@ Arch Linux提供了非常大的自由度和开放度供用户完全控制自己�
 </li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
-<li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
 <li class="tag-1">
     <a href="/tag/python.html">
         <i class="icon-tag icon-large"></i>Python
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/arch.html">
-        <i class="icon-tag icon-large"></i>Arch
     </a>
 </li>
 <li class="tag-2">
@@ -367,13 +393,28 @@ Arch Linux提供了非常大的自由度和开放度供用户完全控制自己�
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/arch.html">
+        <i class="icon-tag icon-large"></i>Arch
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
     </a>
 </li>
 <li class="tag-2">
     <a href="/tag/github.html">
         <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
     </a>
 </li>
 

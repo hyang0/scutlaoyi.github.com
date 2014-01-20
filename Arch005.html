@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Arch Linux学习：安装篇(三)</title>
+    <title>Arch Linux学习：Arch Linux启动二三事</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="laoyi">
@@ -106,8 +106,8 @@
                         <h1>
                                 <a href=""
                                         rel="bookmark"
-                                        title="Permalink to Arch Linux学习：安装篇(三)">
-                                        Arch Linux学习：安装篇(三)
+                                        title="Permalink to Arch Linux学习：Arch Linux启动二三事">
+                                        Arch Linux学习：Arch Linux启动二三事
                                 </a>
                         </h1>
                 </header>
@@ -115,8 +115,8 @@
                 <div class="well">
 <footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2014-01-16T19:30:00">
-        <i class="icon-calendar"></i>Thu 16 January 2014
+<abbr class="published" title="2014-01-20T11:30:00">
+        <i class="icon-calendar"></i>Mon 20 January 2014
 </abbr>
 <span class="label">By</span>
 <a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
@@ -129,110 +129,163 @@
 </footer><!-- /.post-info -->                </div>
                 <p>本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。</p>
 <hr class="docutils" />
-<div class="section" id="virtualbox">
-<h2>关于VirtualBox的安装</h2>
-<p>看了教程感觉很难搞，光是篇幅就吓死人。</p>
-<p>昨天看清楚才发现原来是自己搞错了，
-在Arch Linux里装VirtualBox是不难的，
-大概也就两页的篇幅。</p>
-<p>首先需要以下的包，
-用pacman装就可以了。</p>
-<blockquote>
-virtualbox</blockquote>
-<p>pacman会自动连带安装host-modules。</p>
-<p>别想不开用终端去操作，
-再装个Qt吧，
-装完就有熟悉的界面了，
-如果以前用过virtualbox的话。</p>
-<blockquote>
-qt4</blockquote>
-<p>我用的是默认的kernel，
-所以接下去就不用怎么配置了，
-如果想每次手动启动virtualbox的话，
-在启动之前敲这个就可以了：</p>
-<blockquote>
-modprobe vboxdrv</blockquote>
-<p>像我这种整天挂个win7当代理服务器的，
-把这个模块扔到启动配置文件里去比较方便。</p>
-<p>方法是在/etc/modules-load.d/里建立一个新的*.conf文件，
-起个好听的名字，比如virtualbox.conf，
-内容就加入这句即可：</p>
-<blockquote>
-vboxdrv</blockquote>
-<p>这样就能够在每次启动的时候自动启动这个模块。</p>
-<p>据称这个模块作为虚拟机的基础模块，
-必须在启动虚拟机前正确启动。
-自己测试的时候如果没有启动这货直接启动虚拟机，
-系统会报错并退出。</p>
-<p>然后，
-桌面环境里开启virtualbox，
-该干嘛干嘛。</p>
-<div class="section" id="troubleshooting">
-<h3>troubleshooting</h3>
-<p>虽然教程说的非常简单，
-博主在安装的时候还是出了很大的问题。</p>
-<p>在安装完启动vboxdrv的时候系统报错：</p>
-<blockquote>
-modprobe: ERROR: could not insert 'vboxdrv': Exec format error.</blockquote>
-<p>搜了半天的google没有找到好的解决方案。
-一般遇到这种问题是自制的kernel或者非标准kernel在复杂模式下安装之后可能会出现的。</p>
-<p>可能的情况是virtualbox的编译针对的不是当前的kernel，
-导致模块执行失败。</p>
-<p>我就搞不懂了为何官方默认的kernel照着教程搞也会出这种问题。</p>
-<p>有一种解决方案是安装dkms(virtualbox-host-dkms)然后设置vboxhost指向当前版本的kernel。</p>
-<p>照着别人的建议安装了dkms，
-指向的时候还是报错，
-说没有kernel的header，
-貌似是头文件一类的东西。</p>
-<p>遂放弃。</p>
-<p>另有国外牛人的建议是重新编译virtualbox。
-先下载virtualbox的源文件，
-再下载kernel的header，
-最后用dkms编译...</p>
-<p>当时一看头就大了。</p>
-<p>后来结合多方的解决方案，
-查了一下发现自己的kernel是3.12.6-1，
-跟最新版本3.12.7-1有点差距。
-另外官方的virtualbox看样子是针对最新版本的kernel编译，
-于是升级了内核：</p>
-<blockquote>
-pacman -S linux</blockquote>
-<p>再重新安装了一下virtualbox，
-果然问题就解决了。</p>
-<p>经验在于：
-官方的仓库一般都是针对最新版本的kernel编译，
-所以对于有些对kernel版本非常敏感的程序来说，
-出问题的时候要关注一下自己的kernel是否兼容。</p>
+<div class="section" id="arch">
+<h2>关于Arch的启动流程</h2>
+<div class="section" id="id1">
+<h3>基本流程</h3>
+<p>在BIOS主板下，
+Arch Linux的启动流程大致有以下几个步骤：</p>
+<pre class="literal-block">
+1. 电源接通，系统开机自检
+2. BIOS搜索并根据配置调用对应的硬件进行启动
+3. 假设装有Arch的硬盘作为优先启动项，则硬盘的MBR被BIOS读取执行
+4. MBR接管，读取数据启动bootloader
+5. bootloader启动，初始化数据及配置文件等
+6. bootloader启动完毕，载入linux kernel及initramfs，并启动kernel
+7. kernel启动，解包initramfs，初始化早期的用户空间，启动/init作为首个进程
+8. initramfs作为临时的根文件系统，载入所有运行系统必须的模块，用于启动引导系统的设备
+9. 相应的模块启动成功，系统继续引导，真实的根目录挂载并替换初始化根文件系统
+10./sbin/init替换/init继续引导过程，systemd启动
+11.进程调用getty，提供登录窗口等待用户登入
+12.getty获取用户输入，与/etc/passwd匹配，并根据配置初始化用户的环境
+</pre>
+<p>至此，基本的系统启动流程就完成了，
+后续的用户登入后的图形界面启动等过程则因人而异。</p>
+<p>UEFI模式的主板由于没有接触，
+在此暂时不讨论。</p>
 </div>
-<div class="section" id="nat">
-<h3>NAT网络地址转换与端口转发</h3>
-<p><strong>NAT</strong></p>
-<p>学过计算机网络的兄弟对这货应该都不陌生。
-virtualbox自带模块能够将host系统作为类似路由的东西，
-将guest系统的包全部通过host系统转发出去。</p>
-<p>NAT的优势在于简单、方便、安全。
-virtualbox默认启动了NAT，不用配置便可以使用。
-在博主亲测下不论是arch linux的guest系统还是windows的guest系统都能够直接识别并自动连接网络。</p>
-<p>其次，host系统作为路由器存在，
-对外界隐藏了本地guest系统的存在，
-这也就大大降低了guest系统被入侵的几率。</p>
-<p>另外，多个guest虚拟主机之间也杜绝了数据泄漏的问题，因为guest系统之间也是无法互相识别的。</p>
-<p><strong>端口转发</strong></p>
-<p>NAT的一个缺陷在于，
-外界无法检测到guest系统的存在，
-因此如果有某些服务需要监听端口获取外界的连接（SSL、FTP、http服务器等），
-默认情况下NAT无法处理。</p>
-<p>因此就有了端口转发的机制解决这个问题。</p>
-<p>端口转发将host系统的某个端口（或者某个IP的端口）转发到guest系统的某个端口上，
-例如将host的80转发到guest的80，
-那么在guest上监听80端口的http服务器就可以对外服务了。
-而从外部看来就是连接了host的服务器。</p>
-<p>virtualbox里配置端口转发非常方便，
-在network里选advance添加端口转发规则即可。</p>
+<div class="section" id="mbr">
+<h3>MBR</h3>
+<p>存储设备的头440字节，
+储存特殊的启动数据，
+以及磁盘的相关信息。</p>
+<p>详细：</p>
+<blockquote>
+<a class="reference external" href="https://wiki.archlinux.org/index.php/Master_Boot_Record">https://wiki.archlinux.org/index.php/Master_Boot_Record</a></blockquote>
+</div>
+<div class="section" id="bootloader">
+<h3>Bootloader</h3>
+<p>根据IBM相关资料的说法，
+Bootloader紧跟在MBR之后，
+负责启动kernel并传入相应参数，
+以及initramfs的载入。</p>
+<blockquote>
+<a class="reference external" href="https://wiki.archlinux.org/index.php/Boot_Loaders">https://wiki.archlinux.org/index.php/Boot_Loaders</a></blockquote>
+</div>
+<div class="section" id="kernel">
+<h3>Kernel</h3>
+<p>操作系统的核心，
+沟通应用程序与系统硬件之间的桥梁，
+管理系统资源。</p>
+<blockquote>
+<a class="reference external" href="https://wiki.archlinux.org/index.php/Kernel">https://wiki.archlinux.org/index.php/Kernel</a></blockquote>
+</div>
+<div class="section" id="initramfs">
+<h3>Initramfs</h3>
+<p>支撑系统启动的一个重要的环节。
+这货据称用于创建一个早期的用户空间，
+启动所有必备的模块，
+包括但不限于IDE设备，SCSI设备，SATA设备及USB设备等。
+当系统被储存在USB等设备上时，
+支撑USB设备的模块必须首先被启动，否则系统没有办法从USB上读取接下去的数据。
+因此initramfs专门用于处理这种模块的启动。</p>
+<blockquote>
+<a class="reference external" href="https://wiki.archlinux.org/index.php/initramfs">https://wiki.archlinux.org/index.php/initramfs</a></blockquote>
+</div>
+<div class="section" id="getty">
+<h3>Getty</h3>
+<p>不是一个东西，
+是一类终端管理器的总称。
+提供了系统登录、用户验证等功能。</p>
+<blockquote>
+<a class="reference external" href="https://wiki.archlinux.org/index.php/Getty">https://wiki.archlinux.org/index.php/Getty</a></blockquote>
+</div>
+<div class="section" id="systemd">
+<h3>systemd</h3>
+<p>Linux系统的系统和服务管理器。
+提供一个抢占式的系统并行处理能力，
+同时还提供了多种系统快照和恢复的功能。</p>
+<p>systemd的终端控制命令为</p>
+<blockquote>
+systemctl</blockquote>
+<p>可以通过man详细了解一下。</p>
+<p>感觉这货什么东西都能够管理。</p>
+<blockquote>
+<a class="reference external" href="https://wiki.archlinux.org/index.php/systemd">https://wiki.archlinux.org/index.php/systemd</a></blockquote>
 <hr class="docutils" />
-<p>Arch Linux的基本安装和配置就都搞定了，
-下一回准备聊一下systemd或者pacman之类的知识和应用。</p>
+<p>概念一多有些都搞得有点乱。</p>
 </div>
+</div>
+<div class="section" id="id2">
+<h2>图形化启动界面</h2>
+<p>不知道grub的bootloader默认的启动界面是怎么样的，
+之前用ubuntu的时候还是挺好看的，
+背景是一个地球以及debian的logo。</p>
+<p>syslinux就有点难看了，
+蓝色的底色，白色的字，
+没有背景图。</p>
+<p>好在syslinux提供了启动界面的图形化显示，
+就像live cd默认的那种style。
+更换起来也非常简单。</p>
+<blockquote>
+<a class="reference external" href="https://wiki.archlinux.org/index.php/syslinux">https://wiki.archlinux.org/index.php/syslinux</a></blockquote>
+<p>教程中有详细的说明，
+基本的处理是改配置文件。</p>
+<p>首先需要一份vesamenu.c32，
+在我的系统里目录下本来就已经有了，
+因此这一步被我跳过。</p>
+<p>然后把配置文件/boot/syslinux/syslinux.cfg内容更换一下，
+主要的点在于UI那个部分，
+从原来的menu.c32更换成刚才复制的那个vesamenu.c32，
+还有设置了一些菜单的位置啊色彩啦之类的。</p>
+<p>接着要弄一张背景图片。
+博主太懒了，感觉live cd的那个图片还挺好看，
+就直接从live cd里相同文件夹里面的splash.png复制了过来，
+然后在配置文件里有一项设置背景图片：</p>
+<blockquote>
+MENU BACKGROUND splash.png</blockquote>
+<p>即可。</p>
+<p>最后博主还小小改动了一把，
+将menu的title换成自己的名字，
+效果不错。
+^_^</p>
+<p>建议在更改的时候备份一下原文件，
+在出问题进不了系统的时候可以用live cd引导，
+去相同目录里面把新的配置文件干掉，
+恢复原来的配置文件，
+即可解决问题。</p>
+<p>修改bootloader的启动界面，完毕。</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="id3">
+<h2>一些感受</h2>
+<p>这么些天的学习逐渐了解了一些unix哲学，
+像上述的配置文件风格，
+在自行geek系统的时候提供了非常大的方便。</p>
+<p>而简单、单一并且强大的程序设计风格也非常令人赏心悦目。
+接口定义良好、内部严谨的程序为多个程序的协作提供了非常方便的平台，
+很多时候我们需要的只是一个管道，
+便可完成非常复杂的处理。</p>
+<p>系统部件之间的耦合度降低也很有利于整体结构的清晰，
+通过强大的管理器（pacman之类），
+新增或者删除某些部件不会对其他无关的组件造成影响。
+同时这也让删除操作更加彻底，
+就像pacman，除了一些配置文件，
+系统能够自动分析并删除所有属于被删除组件的文件。
+不像某Xindows，
+藏污纳垢，程序之间一大堆错综复杂的关系，
+还需要专门的工具进行垃圾清理...
+最经典的实例来自同学安装SQL server的时候，
+由于Visual Studio的SQL server lite部件没有彻底删除导致新的SQL server无法安装，
+处理了好几天才搞定。</p>
+<p>在此之上的arch linux不仅传承了unix哲学的精华，
+还将simple的style更加发扬光大。</p>
+<p>基础性简单性的安装给用户提供了非常透明的基本系统，
+让用户随时掌握当前的状态并随时能够作出调整；
+同时，最大限度的自由选择和自由配置让用户能够随时geek属于自己的最适合的系统，
+相比某dows的系统结构，虽然给一般用户非常简单的上手，
+但在图形界面没有相关功能或者崩溃了的情况下用户许多时候却束手无策。
+所以博主经常被拉去帮忙重装系统...</p>
 </div>
 
                 </div><!-- /.entry-content -->
