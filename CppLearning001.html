@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Bash笔记(四)</title>
+    <title>C++学习--白书篇：基础总结(一)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="laoyi">
@@ -65,7 +65,7 @@
             <ul class="nav">
                 <li><a href="/pages/first article.html">About</a></li>
                           <li class="divider-vertical"></li>
-                  <li >
+                  <li class="active">
                     <a href="/category/cpp.html">
 						<i class="icon-folder-open icon-large"></i>Cpp
 					</a>
@@ -75,7 +75,7 @@
 						<i class="icon-folder-open icon-large"></i>git
 					</a>
                   </li>
-                  <li class="active">
+                  <li >
                     <a href="/category/linux.html">
 						<i class="icon-folder-open icon-large"></i>Linux
 					</a>
@@ -111,8 +111,8 @@
                         <h1>
                                 <a href=""
                                         rel="bookmark"
-                                        title="Permalink to Bash笔记(四)">
-                                        Bash笔记(四)
+                                        title="Permalink to C++学习--白书篇：基础总结(一)">
+                                        C++学习--白书篇：基础总结(一)
                                 </a>
                         </h1>
                 </header>
@@ -120,198 +120,198 @@
                 <div class="well">
 <footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2014-01-05T22:30:00">
-        <i class="icon-calendar"></i>Sun 05 January 2014
+<abbr class="published" title="2014-01-31T16:30:00">
+        <i class="icon-calendar"></i>Fri 31 January 2014
 </abbr>
 <span class="label">By</span>
 <a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
 <span class="label">Category</span>
-<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
+<a href="/category/cpp.html"><i class="icon-folder-open"></i>Cpp</a>.
 
 
 <span class="label">Tags</span>
-	<a href="/tag/bash.html"><i class="icon-tag"></i>Bash</a>
+	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
 </footer><!-- /.post-info -->                </div>
-                <p><strong>本系列博文记录学习Shell终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录。</strong></p>
-<hr class="docutils" />
+                <p>装完Arch Linux最近开始复习一下C++和数据结构，为下学期做好准备。</p>
+<p>用白书刷一些简单的题目复习基本语法，发现自己太不注重基本的东西了，之前瞎搞ACM的时候也是，好多方便有效的工具都不认识。</p>
+<p>因此记录一下标准库的一些基本的工具和输入输出的简单总结。</p>
+<p>本篇主要记录一些C语言的常用工具。</p>
 <div class="section" id="id1">
-<h2>用户管理</h2>
-<p>Unix的用户列表在/etc/passwd中，
-该文件为每个用户保存了一行信息，
-包括用户名、用户id、组id、用户描述、用户的home目录及默认的shell信息</p>
-<p>用户密码加密后保存在/etc/shadow文件中，
-包含用户名、用户密码、最小密码修改间隔时间、最大密码修改间隔时间、密码无效前提醒时间等。
-时间的单位是天。</p>
-<p>用户的密码管理默认设置在/etc/login.defs中。
-设置了包含上述几个时间在内的多个参数。</p>
-<p><strong>识别用户</strong></p>
-<p>whoami</p>
+<h2>输入输出及文件操作</h2>
+<p><strong>scanf</strong></p>
 <blockquote>
-查看当前用户名</blockquote>
-<p>who</p>
-<blockquote>
-列表显示当前所有登录用户相关信息</blockquote>
-<p>who am i</p>
-<blockquote>
-这货是空格分开的，相当于who，只显示当前用户</blockquote>
-<p>w</p>
-<blockquote>
-这个能显示当前所有用户正在执行的工作</blockquote>
-<p>id</p>
-<blockquote>
-显示当前用户的用户id，组id等</blockquote>
-<p><strong>用户管理</strong></p>
-<p>useradd</p>
-<blockquote>
-<p>创建一个新用户scutlaoyi，设置home目录及用户描述</p>
-<p>useradd -m -d /home/scutlaoyi -c &quot;new user&quot; scutlaoyi</p>
-<p>系统默认给新用户一个独立的用户id和组id.</p>
+<p>这货读取输入并对相应的内存地址赋值。
+分割符是空格、回车及制表符等。</p>
+<p>返回值是一个整型表示成功读取到的数据量。
+读取失败或者EOF文件结束都会停止。</p>
+<p>默认情况下scanf不会吃掉行尾的回车，
+需要让它吃掉行尾回车的话可以这样：</p>
+<p>scanf(&quot;%d\n&quot;, &amp;num)</p>
+<p>上面这句首先读了一个整型值给变量num，并且吃掉了后面的一个\n</p>
+<p>当然这种搞法的缺陷在于只能用于Linux类型系统，
+因为windows和Mac OS的回车符都不一样。</p>
 </blockquote>
-<p>userdel</p>
+<p><strong>sscanf/fscanf</strong></p>
 <blockquote>
-<p>删除用户，-r设置连带删除对应的home目录</p>
-<p>userdel -r [username]</p>
+<p>scanf的姊妹版本，分别读取字符串或者文件。</p>
+<p>sscanf使用的时候加入第一个参数指定输入的源字符串。</p>
+<p>fscanf使用的时候加入第一个参数指定输入的源文件指针。</p>
 </blockquote>
-<p>usermod</p>
+<p><strong>fgets(buffer, size, source)</strong></p>
 <blockquote>
-<p>编辑用户信息，例如，修改用户描述</p>
-<p>usermod -c &quot;just a user&quot; [username]</p>
-<p>锁定某个用户的密码，使其不能正常登录</p>
-<p>usermod -L [username]</p>
-<p>解锁</p>
-<p>usermod -U [username]</p>
-<p>设置默认登录的shell</p>
-<p>usermod -s /bin/bash [username]</p>
-<p>设定用户归属的组(注意这个操作会清除用户原有的组归属数据)</p>
-<p>usermod -G [groupname] [username]</p>
+<p>从输入源source中读入一行字符数据到buffer缓冲区中，最大长度为size。
+超过size部分会被忽略。</p>
+<p>buffer为一个char数组，size为整型值定义长度。</p>
+<p>source可以为文件等，默认的终端标准输入(standard input)是这个： stdin</p>
+<p>fgets与scanf混用的话由于scanf默认不吃掉行尾回车，会导致scanf之后fgets第一行没有内容。
+处理方法就是上面说的改进版本scanf</p>
 </blockquote>
-<p>passwd</p>
+<p><strong>fgetc(source)</strong></p>
 <blockquote>
-<p>不带参数输入可修改当前用户密码</p>
-<p>passwd</p>
-<p>对某个用户设置密码</p>
-<p>passwd [username]</p>
+<p>从source中读取一个字符并返回。
+注意返回值是int。</p>
+<p>使用fgetc需要检查返回值不是EOF，然后再转换为char获取得到的值。</p>
 </blockquote>
-<p><strong>用户切换</strong></p>
-<p>su</p>
+<p><strong>重定向版本的文件操作</strong></p>
 <blockquote>
-<p>快速切换到某个用户,包括root也行，如果你有密码</p>
-<p>su [username]</p>
+<p>从文件读取数据可以使用多种方法，
+最简单的是输入重定向，
+将stdin指向文件。</p>
+<p>一、</p>
+<p>freopen(&quot;filename&quot;, &quot;r&quot;, stdin);</p>
+<p>将filename文件以读(r)方式打开，并重定向到stdin中。
+后续的操作便可以直接scanf搞定。</p>
+<p>同样，输出也可以这么搞：</p>
+<p>freopen(&quot;outputfilename&quot;, &quot;w&quot;, stdout);</p>
+<p>二、</p>
+<p>此外，白书没有说的一种方式是直接在终端里运行程序的时候重定向。</p>
+<p>./a.out &lt; data &gt; out</p>
+<p>其中a.out是可执行文件，利用&lt;将data数据文件作为输入，利用&gt;将输出重定向到out文件</p>
+<p>这种搞法的好处是随时可以指定输入输出，不用重新编译。</p>
 </blockquote>
-<p>sudo</p>
+<p><strong>文件流版本的文件操作</strong></p>
 <blockquote>
-<p>sudo命令可以让当前用户以root权限执行程序。</p>
-<p>sudo [command]</p>
-<p>sudo命令可以在不交出root密码的前提下给某些用户root权限管理系统。</p>
-<p>sudo命令成功的前提是当前用户在/etc/sudoers文件中存在对应的权限。
-没有权限而执行sudo的话，在我的Ubuntu里会显示错误信息，
-并威胁道:&quot;此事件将被报告。&quot; -_-\</p>
+<p>标准的文件操作，包含打开文件、操作文件和关闭文件。</p>
+<p>FILE * fin = fopen(&quot;filename&quot;, &quot;mode&quot;)</p>
+<p>打开filename文件，mode可以为r或者w，加上b的话貌似是二进制方式操作。
+返回值是一个FILE *类型的指针，指向打开的文件。</p>
+<p>用fscanf替换scanf，添加第一个参数指定输入的文件指针，例如：</p>
+<p>fscanf(fin, &quot;%d&quot;, &amp;num)</p>
+<p>从fin这个FILE *中读取一个整型值给num变量</p>
+<p>fgets的话直接就可以用了：</p>
+<p>fgets(buf, size, fin)</p>
+<p>最后记得关闭文件</p>
+<p>fclose(fin)</p>
 </blockquote>
-<p>visudo</p>
+<p><strong>printf/sprintf/fprintf</strong></p>
 <blockquote>
-<p>sudoers文件的专用编辑器，可防止多种安全问题。</p>
-<p>关于该命令的具体信息可查man。</p>
-<p>不推荐直接编辑/etc/sudoers文件。
-（虽然上次糊里糊涂用vim编辑了一次，还好没死。-_-\）</p>
-</blockquote>
+相当那个scanf三兄弟，不再赘述。</blockquote>
 </div>
 <div class="section" id="id2">
-<h2>组管理</h2>
-<p>用户组的信息保存在/etc/group文件中。
-其格式为：组名:组密码(可能为空):组id:组内成员列表</p>
-<p>groupadd</p>
+<h2>标准库的一些方便的工具</h2>
+<p><strong>cstring</strong></p>
 <blockquote>
-添加一个组
-groupadd [groupname]</blockquote>
-<p>添加用户到某个组中</p>
+<p>字符串一类的操作就不用说了，strcmp啦strcpy啦strcat啦都非常方便。</p>
+<p>此外strstr返回目标串中某子串最早出现位置的指针，有时能有奇效。</p>
+<p>这里主要想记录的是两个内存操作的工具：</p>
+<p>memset(void *ptr, int value, size_t size)</p>
 <blockquote>
-<p>使用usermod，-a为保持原有组信息并追加新组</p>
-<p>usermod -a -G [groupname] [username]</p>
+<p>查了相关的资料，memset是按字节操作的，虽然传入的value是一个int，
+但处理的时候会被转换成unsigned char进行赋值。</p>
+<p>因此处理字符数组是没有问题的，比如给一个字符数组刷二十个字符'a':</p>
+<blockquote>
+memset(target, 'a', 20)</blockquote>
+<p>但是处理数字的时候就存在问题了，例如常用的int占四个字节，照着原理来讲0或者-1是可以的。
+因为按照数字的储存方式（补码）来说，0的话所有位都是0，-1的话所有位都是1，
+刚好绕过了int与byte之间的大小区别。
+因此可以用memset刷int型数组：</p>
+<blockquote>
+memset(numAry, 0, sizeof(numAry)) //将数组的所有元素刷成0</blockquote>
+<p>这里就需要注意刷的内存块的大小，
+因为是按字节操作，因此总的大小应该是每个int的大小(sizeof(int))乘上需要刷的元素个数。</p>
 </blockquote>
-<p>groupmod</p>
+<p>memcpy(void *dis, void *source, size_t size)</p>
 <blockquote>
-<p>编辑组名称</p>
-<p>groupmod -n [new_groupname] [groupname]</p>
+<p>仍然是按字节操作，
+从source指针指向的地址开始，
+将size个字节复制，
+存储到从dis指向的地址开始的后size个字节。</p>
+<p>由于这货直接操某块内存，因此不仅能用于复制数组：</p>
+<pre class="literal-block">
+int ary1[] = {1,2,3,4,5};
+int ary2[5];
+memcpy(ary2, ary1, sizeof(int) * 5);
+</pre>
+<p>还能直接搞结构体：</p>
+<pre class="literal-block">
+struct MyStr{
+    int num,
+    char str[100]
+};
+MyStr str1, str2;
+//...
+memcpy(&amp;str2, &amp;str1, sizeof(str1));
+</pre>
+<p>注意要取址符。</p>
 </blockquote>
-<p>groupdel</p>
-<blockquote>
-<p>删除组</p>
-<p>groupdel [groupname]</p>
 </blockquote>
-<p>groups</p>
+<p><strong>cctype</strong></p>
 <blockquote>
-查看当前用户所属的组信息</blockquote>
-<p>gpasswd</p>
-<blockquote>
-<p>赋予某些用户管理组的权限</p>
-<p>设定某个组的管理员</p>
-<p>gpasswd -A [user1],[user2],[...] [groupname]</p>
-<p>使某个用户加入组</p>
-<p>gpasswd -a [username] [groupname]</p>
-<p>从组中清除某个用户</p>
-<p>gpasswd -d [username] [groupname]</p>
-<p>设定某个组的成员</p>
-<p>gpasswd -M [user1],[user2],[...]</p>
+<p>这货非常方便，拥有一堆检测的库函数。</p>
+<p>常用的有以下几个：</p>
+<pre class="literal-block">
+isdigit:检测是否数字
+isalpha:检测是否字母（含大小写）
+isupper:检测是否大写字母
+islower:检测是否小写字母
+</pre>
+<p>还有俩牛逼的货色：</p>
+<pre class="literal-block">
+toupper:将字母转换成大写
+tolower:将字母转换成小写
+</pre>
+<p>博主比较懒，有时不检测就直接tolower操数据，
+发现这货健壮性很好，数字什么的进去也就原样出来，不会死掉，方便！</p>
 </blockquote>
-</div>
-<div class="section" id="id3">
-<h2>文件权限</h2>
-<p>Unix类系统的文件权限分为三种：
-文件所有者权限、文件所属组权限、其他人权限。
-文件的权限有三款：读(r)、写(w)、执行(x)。</p>
-<p>当使用ls -l命令时，可以看到列表中每个文件的最左方即文件的权限设置</p>
-<p>第一个字符为文件类型，文件类型有：</p>
+<p><strong>cstdio</strong></p>
 <blockquote>
-<p>-:普通文件</p>
-<p>d:目录</p>
-<p>l:符号链接文件</p>
-<p>p:命名管道</p>
-<p>b:块设备</p>
-<p>c:字符设备</p>
-<p>s:socket</p>
-</blockquote>
-<p>接着每三个字符依次指定了对应的权限：所有者、组、其他人。
-r、w、x分别说明拥有该项权限，横杆-说明无此权限。</p>
-<p>如：</p>
-<p>drwxr-xr-x 2 laoyi laoyi    4096 12月 23 20:28 desktop</p>
-<p>该文件是一个目录，
-所有者拥有读写执行权限，
-组用户拥有读和执行权限，
-而其他人也拥有读和执行权限</p>
-<p>后面的依次是所有者、所有组，大小，时间和名称等信息。</p>
-<p>chgrp</p>
+<p>上面说的输入输出基本都是这个库的东西。</p>
+<p>此外还有一个有用的函数：</p>
 <blockquote>
-<p>修改一个文件的组</p>
-<p>chgrp [groupname] [filename]</p>
+feof(source)</blockquote>
+<p>检测source源是否为EOF状态。
+source可以是文件指针也可以是stdin。</p>
 </blockquote>
-<p>chown</p>
+<p><strong>cstdlib</strong></p>
 <blockquote>
-<p>修改一个文件的所有者</p>
-<p>chown [username] [filename]</p>
-<p>同时修改所有者和组</p>
-<p>chown [username]:[groupname] [filename]</p>
+<p>这个用得多的是快排：</p>
+<pre class="literal-block">
+void qsort (void* base, size_t num, size_t size,
+        int (*compar)(const void*,const void*));
+</pre>
+<p>然后在写这篇博文的时候发现居然还有这个：</p>
+<pre class="literal-block">
+void* bsearch (const void* key, const void* base,
+               size_t num, size_t size,
+              int (*compar)(const void*,const void*));
+</pre>
+<p>随机数，常用的，先用时间作为随机种子，然后用库函数获取随机值：</p>
+<pre class="literal-block">
+//首先需要包含ctime头文件
+//然后将当前时间作为随机种子
+srand(time(NULL));
+//获取一个小于100的随机值
+int randVal = rand() % 100
+</pre>
+<p>rand函数随机值的范围与库的实现有关，但可以保证最小值为0，最大值不小于32767的整数</p>
+<p>越看越神奇，还有一堆字符串转换的函数，以后处理字符串都调标准库算了：
+atoi, atof, atol......</p>
 </blockquote>
-<p>chmod</p>
-<blockquote>
-<p><strong>代号方式管理权限</strong></p>
-<p>u为所有者，g为组用户，o为其他人，a对上述三者同时操作</p>
-<p>+为增加权限， 相反， -为去除权限</p>
-<p>r读，w写，x执行</p>
-<p>权限配置可以多个组合</p>
-<p>chmod u+w [filename]</p>
-<p><strong>数字方式管理权限</strong></p>
-<p>读的数值为4， 写的数值为2， 执行的数值为1</p>
-<p>对应权限的数字求和得到最终的权限数值</p>
-<p>因此下述例子分配所有者读写执行权限，组用户读和执行权限，其他人读取的权限</p>
-<p>chmod 754 [filename]</p>
-</blockquote>
-<hr class="docutils" />
-<p>简单的Bash命令就到此为止了，
-后面的一些比较复杂我就不记了，
-像ACL之类的，
-现在学一下过几天也会忘，
-以后用到我再搞上来。</p>
-<p><strong>明天开始搞Arch Linux!</strong></p>
+<p>好多东西，记多也记不住，还是要多在实践中应用。</p>
+<p>发现写博客的好处在于,当你要讲明白一个东西时，要花更多的时间去搞清楚这货的各个方面。
+有时第一次使用的时候只是知道能这么用，但在写博客的时候却要弄清楚更深入一些的原理。
+既有助于加深理解，也有助于整理思路。</p>
+<p>不过博主整天只会写一些基础学习，东拼西凑再随便写点个人理解～ (=_=)</p>
 </div>
 
                 </div><!-- /.entry-content -->
