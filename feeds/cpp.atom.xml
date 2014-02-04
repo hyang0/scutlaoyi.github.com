@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/cpp.atom.xml" rel="self"></link><id>/</id><updated>2014-01-31T16:30:00+08:00</updated><entry><title>C++学习--白书篇：基础总结(一)</title><link href="/CppLearning001.html" rel="alternate"></link><updated>2014-01-31T16:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-01-31:CppLearning001.html</id><summary type="html">&lt;p&gt;装完Arch Linux最近开始复习一下C++和数据结构，为下学期做好准备。&lt;/p&gt;
+&lt;p&gt;用白书刷一些简单的题目复习基本语法，发现自己太不注重基本的东西了，之前瞎搞ACM的时候也是，好多方便有效的工具都不认识。&lt;/p&gt;
+&lt;p&gt;因此记录一下标准库的一些基本的工具和输入输出的简单总结。&lt;/p&gt;
+&lt;p&gt;本篇主要记录一些C语言的常用工具。&lt;/p&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;输入输出及文件操作&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;scanf&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这货读取输入并对相应的内存地址赋值。
+分割符是空格、回车及制表符等。&lt;/p&gt;
+&lt;p&gt;返回值是一个整型表示成功读取到的数据量。
+读取失败或者EOF文件结束都会停止。&lt;/p&gt;
+&lt;p&gt;默认情况下scanf不会吃掉行尾的回车，
+需要让它吃掉行尾回车的话可以这样：&lt;/p&gt;
+&lt;p&gt;scanf(&amp;quot;%d\n&amp;quot;, &amp;amp;num)&lt;/p&gt;
+&lt;p&gt;上面这句首先读了一个整型值给变量num，并且吃掉了后面的一个\n&lt;/p&gt;
+&lt;p&gt;当然这种搞法的缺陷在于只能用于Linux类型系统，
+因为windows和Mac OS的回车符都不一样。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;sscanf/fscanf&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;scanf的姊妹版本，分别读取字符串或者文件。&lt;/p&gt;
+&lt;p&gt;sscanf使用的时候加入第一个参数指定输入的源字符串。&lt;/p&gt;
+&lt;p&gt;fscanf使用的时候加入第一个参数指定输入的源文件指针。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;fgets(buffer, size, source)&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;从输入源source中读入一行字符数据到buffer缓冲区中，最大长度为size。
+超过size部分会被忽略。&lt;/p&gt;
+&lt;p&gt;buffer为一个char数组，size为整型值定义长度。&lt;/p&gt;
+&lt;p&gt;source可以为文件等，默认的终端标准输入(standard input)是这个： stdin&lt;/p&gt;
+&lt;p&gt;fgets与scanf混用的话由于scanf默认不吃掉行尾回车，会导致scanf之后fgets第一行没有内容。
+处理方法就是上面说的改进版本scanf&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;fgetc(source)&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;从source中读取一个字符并返回。
+注意返回值是int。&lt;/p&gt;
+&lt;p&gt;使用fgetc需要检查返回值不是EOF，然后再转换为char获取得到的值。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;重定向版本的文件操作&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;从文件读取数据可以使用多种方法，
+最简单的是输入重定向，
+将stdin指向文件。&lt;/p&gt;
+&lt;p&gt;一、&lt;/p&gt;
+&lt;p&gt;freopen(&amp;quot;filename&amp;quot;, &amp;quot;r&amp;quot;, stdin);&lt;/p&gt;
+&lt;p&gt;将filename文件以读(r)方式打开，并重定向到stdin中。
+后续的操作便可以直接scanf搞定。&lt;/p&gt;
+&lt;p&gt;同样，输出也可以这么搞：&lt;/p&gt;
+&lt;p&gt;freopen(&amp;quot;outputfilename&amp;quot;, &amp;quot;w&amp;quot;, stdout);&lt;/p&gt;
+&lt;p&gt;二、&lt;/p&gt;
+&lt;p&gt;此外，白书没有说的一种方式是直接在终端里运行程序的时候重定向。&lt;/p&gt;
+&lt;p&gt;./a.out &amp;lt; data &amp;gt; out&lt;/p&gt;
+&lt;p&gt;其中a.out是可执行文件，利用&amp;lt;将data数据文件作为输入，利用&amp;gt;将输出重定向到out文件&lt;/p&gt;
+&lt;p&gt;这种搞法的好处是随时可以指定输入输出，不用重新编译。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;文件流版本的文件操作&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;标准的文件操作，包含打开文件、操作文件和关闭文件。&lt;/p&gt;
+&lt;p&gt;FILE * fin = fopen(&amp;quot;filename&amp;quot;, &amp;quot;mode&amp;quot;)&lt;/p&gt;
+&lt;p&gt;打开filename文件，mode可以为r或者w，加上b的话貌似是二进制方式操作。
+返回值是一个FILE *类型的指针，指向打开的文件。&lt;/p&gt;
+&lt;p&gt;用fscanf替换scanf，添加第一个参数指定输入的文件指针，例如：&lt;/p&gt;
+&lt;p&gt;fscanf(fin, &amp;quot;%d&amp;quot;, &amp;amp;num)&lt;/p&gt;
+&lt;p&gt;从fin这个FILE *中读取一个整型值给num变量&lt;/p&gt;
+&lt;p&gt;fgets的话直接就可以用了：&lt;/p&gt;
+&lt;p&gt;fgets(buf, size, fin)&lt;/p&gt;
+&lt;p&gt;最后记得关闭文件&lt;/p&gt;
+&lt;p&gt;fclose(fin)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;printf/sprintf/fprintf&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+相当那个scanf三兄弟，不再赘述。&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;标准库的一些方便的工具&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;cstring&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;字符串一类的操作就不用说了，strcmp啦strcpy啦strcat啦都非常方便。&lt;/p&gt;
+&lt;p&gt;此外strstr返回目标串中某子串最早出现位置的指针，有时能有奇效。&lt;/p&gt;
+&lt;p&gt;这里主要想记录的是两个内存操作的工具：&lt;/p&gt;
+&lt;p&gt;memset(void *ptr, int value, size_t size)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;查了相关的资料，memset是按字节操作的，虽然传入的value是一个int，
+但处理的时候会被转换成unsigned char进行赋值。&lt;/p&gt;
+&lt;p&gt;因此处理字符数组是没有问题的，比如给一个字符数组刷二十个字符'a':&lt;/p&gt;
+&lt;blockquote&gt;
+memset(target, 'a', 20)&lt;/blockquote&gt;
+&lt;p&gt;但是处理数字的时候就存在问题了，例如常用的int占四个字节，照着原理来讲0或者-1是可以的。
+因为按照数字的储存方式（补码）来说，0的话所有位都是0，-1的话所有位都是1，
+刚好绕过了int与byte之间的大小区别。
+因此可以用memset刷int型数组：&lt;/p&gt;
+&lt;blockquote&gt;
+memset(numAry, 0, sizeof(numAry)) //将数组的所有元素刷成0&lt;/blockquote&gt;
+&lt;p&gt;这里就需要注意刷的内存块的大小，
+因为是按字节操作，因此总的大小应该是每个int的大小(sizeof(int))乘上需要刷的元素个数。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;memcpy(void *dis, void *source, size_t size)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;仍然是按字节操作，
+从source指针指向的地址开始，
+将size个字节复制，
+存储到从dis指向的地址开始的后size个字节。&lt;/p&gt;
+&lt;p&gt;由于这货直接操某块内存，因此不仅能用于复制数组：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+int ary1[] = {1,2,3,4,5};
+int ary2[5];
+memcpy(ary2, ary1, sizeof(int) * 5);
+&lt;/pre&gt;
+&lt;p&gt;还能直接搞结构体：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+struct MyStr{
+    int num,
+    char str[100]
+};
+MyStr str1, str2;
+//...
+memcpy(&amp;amp;str2, &amp;amp;str1, sizeof(str1));
+&lt;/pre&gt;
+&lt;p&gt;注意要取址符。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;cctype&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这货非常方便，拥有一堆检测的库函数。&lt;/p&gt;
+&lt;p&gt;常用的有以下几个：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+isdigit:检测是否数字
+isalpha:检测是否字母（含大小写）
+isupper:检测是否大写字母
+islower:检测是否小写字母
+&lt;/pre&gt;
+&lt;p&gt;还有俩牛逼的货色：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+toupper:将字母转换成大写
+tolower:将字母转换成小写
+&lt;/pre&gt;
+&lt;p&gt;博主比较懒，有时不检测就直接tolower操数据，
+发现这货健壮性很好，数字什么的进去也就原样出来，不会死掉，方便！&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;cstdio&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;上面说的输入输出基本都是这个库的东西。&lt;/p&gt;
+&lt;p&gt;此外还有一个有用的函数：&lt;/p&gt;
+&lt;blockquote&gt;
+feof(source)&lt;/blockquote&gt;
+&lt;p&gt;检测source源是否为EOF状态。
+source可以是文件指针也可以是stdin。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;cstdlib&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这个用得多的是快排：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+void qsort (void* base, size_t num, size_t size,
+        int (*compar)(const void*,const void*));
+&lt;/pre&gt;
+&lt;p&gt;然后在写这篇博文的时候发现居然还有这个：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+void* bsearch (const void* key, const void* base,
+               size_t num, size_t size,
+              int (*compar)(const void*,const void*));
+&lt;/pre&gt;
+&lt;p&gt;随机数，常用的，先用时间作为随机种子，然后用库函数获取随机值：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+//首先需要包含ctime头文件
+//然后将当前时间作为随机种子
+srand(time(NULL));
+//获取一个小于100的随机值
+int randVal = rand() % 100
+&lt;/pre&gt;
+&lt;p&gt;rand函数随机值的范围与库的实现有关，但可以保证最小值为0，最大值不小于32767的整数&lt;/p&gt;
+&lt;p&gt;越看越神奇，还有一堆字符串转换的函数，以后处理字符串都调标准库算了：
+atoi, atof, atol......&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;好多东西，记多也记不住，还是要多在实践中应用。&lt;/p&gt;
+&lt;p&gt;发现写博客的好处在于,当你要讲明白一个东西时，要花更多的时间去搞清楚这货的各个方面。
+有时第一次使用的时候只是知道能这么用，但在写博客的时候却要弄清楚更深入一些的原理。
+既有助于加深理解，也有助于整理思路。&lt;/p&gt;
+&lt;p&gt;不过博主整天只会写一些基础学习，东拼西凑再随便写点个人理解～ (=_=)&lt;/p&gt;
+&lt;hr class="docutils" /&gt;
+&lt;p&gt;最后，大年初一，大家新年快乐！ (^_^)&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="C/C++"></category></entry></feed>
