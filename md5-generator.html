@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Python 笔记（七）</title>
+    <title>md5 generator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="laoyi">
@@ -86,12 +86,12 @@
 						<i class="icon-folder-open icon-large"></i>network
 					</a>
                   </li>
-                  <li class="active">
+                  <li >
                     <a href="/category/python.html">
 						<i class="icon-folder-open icon-large"></i>Python
 					</a>
                   </li>
-                  <li >
+                  <li class="active">
                     <a href="/category/tools.html">
 						<i class="icon-folder-open icon-large"></i>Tools
 					</a>
@@ -117,8 +117,8 @@
                         <h1>
                                 <a href=""
                                         rel="bookmark"
-                                        title="Permalink to Python 笔记（七）">
-                                        Python 笔记（七）
+                                        title="Permalink to md5 generator">
+                                        md5 generator
                                 </a>
                         </h1>
                 </header>
@@ -126,106 +126,43 @@
                 <div class="well">
 <footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2013-10-04T10:30:00">
-        <i class="icon-calendar"></i>Fri 04 October 2013
+<abbr class="published" title="2014-02-04T11:30:00">
+        <i class="icon-calendar"></i>Tue 04 February 2014
 </abbr>
 <span class="label">By</span>
 <a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
 <span class="label">Category</span>
-<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
+<a href="/category/tools.html"><i class="icon-folder-open"></i>Tools</a>.
 
 
 <span class="label">Tags</span>
-	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+	<a href="/tag/md5.html"><i class="icon-tag"></i>md5</a>
 </footer><!-- /.post-info -->                </div>
-                <p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
-<p><strong>使用的Python版本为2.7.3，</strong>
-<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
-<hr class="docutils" />
-<div class="section" id="id1">
-<h2>文件和流</h2>
-<p><strong>打开文件</strong></p>
-<p>使用open函数打开文件，参数一为文件名，参数二为打开方式，参数三为缓冲区设置</p>
-<p>最简单的打开文件代码如下：</p>
-<div class="highlight"><pre><span class="n">myFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;myFile.txt&quot;</span><span class="p">)</span>
-</pre></div>
-<p>程序自动以读取方式打开文件，如果文件不存在会引发IOError异常</p>
-<p>以写入方式打开文件：</p>
-<div class="highlight"><pre><span class="n">myFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;myFile.txt&quot;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
-</pre></div>
-<p>'b'属性以二进制方式打开文件</p>
-<p>'a'属性以追加方式打开文件</p>
-<p>'+'属性以读写方式打开文件</p>
-<p>缓冲区设置：</p>
-<blockquote>
-<p>0(False) 不设置缓冲区，直接写入硬盘;</p>
-<p>1(True) 开启缓冲区;</p>
-<p>&gt;1 设置缓冲区大小;</p>
-<p>-1 使用默认缓冲区大小</p>
-</blockquote>
-<p><strong>读写文件（单字符）</strong></p>
-<p>read():</p>
-<blockquote>
-read函数可用于读取任意字节的字符串，添加参数可设定字节长，留空则会读取至文件结束</blockquote>
-<p>write():</p>
-<blockquote>
-write用于写入数据，参数中设定写入的字符串</blockquote>
-<p>sys.stdin:</p>
-<blockquote>
-可通过管道读取数据，类似于文件的一个东西，可调用它的read和write等读写函数进行数据处理</blockquote>
-<p>seek():</p>
-<blockquote>
-<p>同C++的seek,移动文件指针，参数一为偏移量，参数二为相对位置</p>
-<p>相对位置有如下可选参数：</p>
-<blockquote>
-<p>0，默认参数，从文件起始处开始</p>
-<p>1，从当前位置开始</p>
-<p>2，从文件结束处</p>
-</blockquote>
-</blockquote>
-<p>tell():</p>
-<blockquote>
-返回当前文件指针位置</blockquote>
-<p><strong>文件读写（行操作）</strong></p>
-<p>readline():</p>
-<blockquote>
-读取一行内容，设定参数可限制一行的最长字符数，超过部分被忽略</blockquote>
-<p>readlines():</p>
-<blockquote>
-读取所有行并保存到列表中</blockquote>
-<p>writelines():</p>
-<blockquote>
-参数中传入字符串列表，直接将整个列表写入文件</blockquote>
-<p><strong>文件关闭和缓冲区刷新</strong></p>
-<p>close():</p>
-<blockquote>
-额...就是关闭文件，程序正常退出时文件会自动关闭，但最好写一下</blockquote>
-<p>flush():</p>
-<blockquote>
-刷新缓冲区</blockquote>
-<p><strong>文件迭代器</strong></p>
-<p>简单、方便又好用的功能。</p>
-<p>所有文件对象（文件、标准输入流等）均可直接参与迭代操作，因此上述的按行处理的代码可简化为：</p>
-<div class="highlight"><pre><span class="n">myFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;somefile.txt&quot;</span><span class="p">)</span>
+                
+        <p>一个非常好用的md5散列计算工具</p>
+        <br />
+        <input type="password" id="strInput"></input>
+        <br />
+        <button onclick="getHash()">Hash dear, hash!</button>
+        <br />
+        <h4>Result:</h4>
+        <h4 id="result">No result yet.</h4>
+        <br />
+        <p>从网上搜刮的一个JavaScript实现的md5算法，URL在这里：</p>
+        <a href="http://pajhome.org.uk/crypt/md5/index.html">JavaScript md5</a>
+        <br />
+        <p>许可协议为BSD License.</p>
 
-<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">myFile</span><span class="p">:</span>
-    <span class="n">doSomething</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
-
-<span class="n">myFile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</pre></div>
-<p>依靠程序自动退出关闭文件，可创建匿名文件对象，再次简化代码：</p>
-<div class="highlight"><pre><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;somefile.txt&quot;</span><span class="p">):</span>
-    <span class="n">doSomething</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
-</pre></div>
-<p>这一节确实没多少东西。感觉基础教程对二进制文件操作的讲解不多，过几天找些别的资料补充一下。</p>
-<hr class="docutils" />
-<p>更多Python学习，推荐：</p>
-<blockquote>
-<p>简明Python教程： <a class="reference external" href="http://www.2cto.com/shouce/pythonjc/index.html">http://www.2cto.com/shouce/pythonjc/index.html</a></p>
-<p>《Python基础教程》</p>
-</blockquote>
-</div>
-
+            <script src="md5-min.js"></script>
+            <script>
+                function getHash()
+                {
+                    source = document.getElementById("strInput");
+                    result = hex_md5(source.value);
+                    document.getElementById("result").innerHTML = result;
+                }
+            </script>
+    
                 </div><!-- /.entry-content -->
         </article>
         <license>
