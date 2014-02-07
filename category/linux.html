@@ -585,6 +585,17 @@ Arch Linux提供了非常大的自由度和开放度供用户完全控制自己�
 
                 <div class="span3 well sidebar-nav" id="sidebar">
 <ul class="nav nav-list">
+<li class="nav-header"><h4>每页一句</h4></li>
+<li
+id="page-sentence">当你看到这句的时候，说明每页一句载入失败...烦请告知博主!谢谢!(^_^)</li>
+<script src="/pagesentence/sentence.js"></script>
+<script>
+function loadSentence()
+{
+    document.getElementById("page-sentence").innerHTML = generateSentence();
+}
+window.onload=loadSentence();
+</script>
 <li class="nav-header"><h4><i class="icon-external-link"></i>link</h4></li>
     <li><a href="http://github.com/scutlaoyi"><i class="icon-external-link"></i>my github</a></li>
 <li class="nav-header"><h4><i class="icon-home icon-large"></i> social</h4></li>
@@ -631,29 +642,14 @@ Arch Linux提供了非常大的自由度和开放度供用户完全控制自己�
         <i class="icon-tag icon-large"></i>Bash
     </a>
 </li>
-<li class="tag-1">
-    <a href="/tag/arch.html">
-        <i class="icon-tag icon-large"></i>Arch
-    </a>
-</li>
 <li class="tag-2">
-    <a href="/tag/network.html">
-        <i class="icon-tag icon-large"></i>network
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
     </a>
 </li>
 <li class="tag-4">
     <a href="/tag/cc.html">
         <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
     </a>
 </li>
 <li class="tag-1">
@@ -662,13 +658,28 @@ Arch Linux提供了非常大的自由度和开放度供用户完全控制自己�
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
     </a>
 </li>
 <li class="tag-4">
     <a href="/tag/md5.html">
         <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/arch.html">
+        <i class="icon-tag icon-large"></i>Arch
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/network.html">
+        <i class="icon-tag icon-large"></i>network
     </a>
 </li>
 
