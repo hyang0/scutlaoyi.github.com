@@ -1,5 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>老逸的个人站</title><link>/</link><description></description><atom:link href="http://www.scutlaoyi.tk/feeds/all.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 04 Feb 2014 11:30:00 +0800</lastBuildDate><item><title>md5 generator</title><link>/md5-generator.html</link><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>老逸的个人站</title><link>/</link><description></description><atom:link href="http://www.scutlaoyi.tk/feeds/all.rss.xml" rel="self"></atom:link><lastBuildDate>Sat, 08 Feb 2014 16:30:00 +0800</lastBuildDate><item><title>C++学习(二)：大家一起来Makefile</title><link>/CppLearning002.html</link><description>&lt;p&gt;由于一直没找到好的材料，C++的学习拖了好几天没什么进展。
+主要遇到的问题是白书的题目(UVAoj)有些麻烦，之前刷了十几道水题一直很顺利，
+到了数据结构系列突然每道题都有点难以理解（难道是自己英语水平突然掉了...），
+刷了几天进展很慢，加上每道题都有针对性的代码，对于我这种目标是复习数据结构的不太合适。&lt;/p&gt;
+&lt;p&gt;然后玩了两天JavaScript（每页一句模块实现），玩了一天游戏...&lt;/p&gt;
+&lt;p&gt;找到一个好地方学习数据结构：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;a class="reference external" href="http://www.geeksforgeeks.org/data-structures/"&gt;http://www.geeksforgeeks.org/data-structures/&lt;/a&gt;&lt;/blockquote&gt;
+&lt;p&gt;今天开始敲了一下线性表，过几天再写点总结。&lt;/p&gt;
+&lt;p&gt;然后终于到了这篇的主题，makefile的编写。&lt;/p&gt;
+&lt;div class="section" id="make"&gt;
+&lt;h2&gt;make&lt;/h2&gt;
+&lt;p&gt;所谓的make，是便于编译多个文件的工具，用make可以实现自动化构建软件。
+同时使用make可以根据依赖关系自动编译，简化手工操作。
+具体的介绍可以查一下make的手册页。&lt;/p&gt;
+&lt;p&gt;很多的IDE现在都实现了make的功能，
+比如之前用过的Visual Studio系列，Code::block，甚至是Qt SDK的开发环境，
+只要建立一个工程，就可以让IDE自动完成多文件编译和依赖检查。&lt;/p&gt;
+&lt;p&gt;但Linux下的很多软件还是使用make协助软件的部署，
+而像博主这种懒得用IDE的家伙，
+手头就一个Vim写代码，一个g++编译（写C++的话），
+有时用用gdb调试一番（更多时候是暴力调试...)，
+再用上方便的make其实也就差不多了。&lt;/p&gt;
+&lt;p&gt;开源社区中也有许多软件是用make的，
+就像博主这个网站使用的Pelican，
+从源文档加载主题文件（CSS，JS等）转换成静态的HTML页面，
+这个过程就使用了make，从而省去了大量的重复命令。&lt;/p&gt;
+&lt;p&gt;make默认情况下读取当前文件夹中的makefile文件，
+makefile相当于配置文件，
+指导make执行命令完成目标代码的编译。&lt;/p&gt;
+&lt;p&gt;make不限于特定的语言，
+博主把它放在C++栏目中是因为历史上很多很多人用make协助编译C/C++代码。&lt;/p&gt;
+&lt;p&gt;举个例子：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+假设要编译三个文件：main.cpp test.h test.cpp，输出为a.out
+那么默认情况下每次要这样写：
+g++ main.cpp test.h test.cpp -o a.out
+如果写好了makefile，每次只需要这样：
+make
+并且会自动检查依赖，忽略某些未改变的项，提高编译速度
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;获取make&lt;/h2&gt;
+&lt;p&gt;据称很多Linux发行版中都自带了make，
+我不知道其他人的是什么情况，
+反正博主手头的Arch Linux没有...(=_=)&lt;/p&gt;
+&lt;p&gt;不过不要紧，pacman -S装一下就有了，非常方便&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="makefile"&gt;
+&lt;h2&gt;makefile文件的编写&lt;/h2&gt;
+&lt;p&gt;makefile文件的基本语法如下：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+[target]:[dependencies]
+[tab]   command
+&lt;/pre&gt;
+&lt;p&gt;其中target为目标，调用命令make时指定目标即可实现不同的执行过程。&lt;/p&gt;
+&lt;p&gt;dependencies为依赖项，make执行时首先检查对应目标的依赖是否满足，
+如果搜索到存在对应的文件，且在上次执行后没有被更改，则认定该项依赖满足，
+否则搜索查找对应依赖项的目标并首先执行它，获取目标依赖。
+当所有依赖满足后执行最终目标。&lt;/p&gt;
+&lt;p&gt;tab就是一个tab制表符。&lt;/p&gt;
+&lt;p&gt;command才是最终被执行的命令语句，如&amp;quot;g++ main.cpp -o a.out&amp;quot;之类。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;一个最简单的makefile&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+all:
+    g++ main.cpp test.h test.cpp -o a.out -Wall -g
+&lt;/pre&gt;
+&lt;p&gt;all是默认make的目标。
+上面这两行定义了最简单的makefile，将它保存并执行如下语句：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+make
+&lt;/pre&gt;
+&lt;p&gt;make后不加参数，因此make执行makefile文件;
+由于没有设定目标，因此选择默认目标all;
+由于all目标没有依赖项，因此可以直接执行;
+最终那句g++被执行，完成编译（输出a.out，显示警告，添加debug信息用于gdb调试）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;多目标带依赖项的makefile&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+all: main
+
+main: main.o test.o
+    g++ main.o test.o -o a.out -Wall -g
+
+main.o: main.cpp
+    g++ -c main.cpp
+
+test.o: test.cpp test.h
+    g++ -c test.h test.cpp
+&lt;/pre&gt;
+&lt;p&gt;基本上一目了然，
+默认目标依赖main目标，
+mian目标依赖main.o和test.o，
+两个o文件依赖对应的源文件和头文件。&lt;/p&gt;
+&lt;p&gt;这种情况下首次执行make，由于所有依赖都不满足，
+因此最先被执行的是编译main.cpp，
+其次执行编译test.cpp和test.h，
+最后编译出a.out。&lt;/p&gt;
+&lt;p&gt;而在所有文件都没有变化的情况下再次执行make，
+由于两个依赖都存在，
+因此只有编译a.out的那句被执行了一次。&lt;/p&gt;
+&lt;p&gt;make自动检测文件变化，
+因此会自动重新编译被修改过的文件。&lt;/p&gt;
+&lt;p&gt;此外，还可以指定make目标以编译部分文件，指定目标的命令如下：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+make main.o
+&lt;/pre&gt;
+&lt;p&gt;这句指定编译main.o目标。&lt;/p&gt;
+&lt;p&gt;如果目标已经存在并且是最新，则make会提示：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+make: 'main.o' is up to date.
+&lt;/pre&gt;
+&lt;p&gt;插句话，-o选项让g++编译并不链接文件，生成的文件为原文件名替换上.o后缀。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;带参数和注释的makefile&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;可以在makefile中指定参数，
+同时可以写注释。&lt;/p&gt;
+&lt;p&gt;感觉比较简单，贴个例子就可以了：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+#这是注释，用井号开头就可以了
+#声明参数要像下面这样
+OUTPUT=a.out
+#使用的话是这样：
+
+all:
+    g++ main.cpp -o $(OUTPUT) -Wall -g
+&lt;/pre&gt;
+&lt;p&gt;上面的例子就定义了输出文件名参数，
+这样在多个地方都可以通过“钱+小括号”的形式使用参数&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;不想用makefile做文件名&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;随便搞，只要在make的时候麻烦一点给个参数指定文件名即可：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+make -f my_makefile
+&lt;/pre&gt;
+&lt;p&gt;使用my_makefile文件作为配置文件。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;make的各种功能&lt;/h2&gt;
+&lt;p&gt;学会写makefile之后应该能够看出来，
+make其实是通过构造shell命令执行功能的，
+因此发挥想象力，用make可以搞定非常多的东西。&lt;/p&gt;
+&lt;p&gt;一个非常简单的例子是自动清空当前文件夹的编译过程文件：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+all:
+#......
+
+clean:
+    rm -rf *.o *.gch
+&lt;/pre&gt;
+&lt;p&gt;这样，执行&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+make clean
+&lt;/pre&gt;
+&lt;p&gt;即可搞定清扫工作。&lt;/p&gt;
+&lt;p&gt;当然&amp;quot;rm -rf&amp;quot;是比较狠的，使用要小心。&lt;/p&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">laoyi</dc:creator><pubDate>Sat, 08 Feb 2014 16:30:00 +0800</pubDate><guid>tag:,2014-02-08:CppLearning002.html</guid><category>C/C++</category></item><item><title>md5 generator</title><link>/md5-generator.html</link><description>
         &lt;p&gt;一个非常好用的md5散列计算工具&lt;/p&gt;
         &lt;br /&gt;
         &lt;input type="password" id="strInput"&gt;&lt;/input&gt;
@@ -23,7 +178,7 @@
                     document.getElementById("result").innerHTML = result;
                 }
             &lt;/script&gt;
-    </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">laoyi</dc:creator><pubDate>Tue, 04 Feb 2014 11:30:00 +0800</pubDate><guid>tag:,2014-02-04:md5-generator.html</guid><category>md5</category></item><item><title>C++学习--白书篇：基础总结(一)</title><link>/CppLearning001.html</link><description>&lt;p&gt;装完Arch Linux最近开始复习一下C++和数据结构，为下学期做好准备。&lt;/p&gt;
+    </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">laoyi</dc:creator><pubDate>Tue, 04 Feb 2014 11:30:00 +0800</pubDate><guid>tag:,2014-02-04:md5-generator.html</guid><category>md5</category></item><item><title>C++学习(一):白书基础总结</title><link>/CppLearning001.html</link><description>&lt;p&gt;装完Arch Linux最近开始复习一下C++和数据结构，为下学期做好准备。&lt;/p&gt;
 &lt;p&gt;用白书刷一些简单的题目复习基本语法，发现自己太不注重基本的东西了，之前瞎搞ACM的时候也是，好多方便有效的工具都不认识。&lt;/p&gt;
 &lt;p&gt;因此记录一下标准库的一些基本的工具和输入输出的简单总结。&lt;/p&gt;
 &lt;p&gt;本篇主要记录一些C语言的常用工具。&lt;/p&gt;

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Bash笔记(一)</title>
+    <title>C++学习(二)：大家一起来Makefile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="laoyi">
@@ -66,7 +66,7 @@
             <ul class="nav">
                 <li><a href="/pages/first article.html">About</a></li>
                           <li class="divider-vertical"></li>
-                  <li >
+                  <li class="active">
                     <a href="/category/cpp.html">
 						<i class="icon-folder-open icon-large"></i>Cpp
 					</a>
@@ -76,7 +76,7 @@
 						<i class="icon-folder-open icon-large"></i>git
 					</a>
                   </li>
-                  <li class="active">
+                  <li >
                     <a href="/category/linux.html">
 						<i class="icon-folder-open icon-large"></i>Linux
 					</a>
@@ -117,8 +117,8 @@
                         <h1>
                                 <a href=""
                                         rel="bookmark"
-                                        title="Permalink to Bash笔记(一)">
-                                        Bash笔记(一)
+                                        title="Permalink to C++学习(二)：大家一起来Makefile">
+                                        C++学习(二)：大家一起来Makefile
                                 </a>
                         </h1>
                 </header>
@@ -126,266 +126,172 @@
                 <div class="well">
 <footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2014-01-02T22:30:00">
-        <i class="icon-calendar"></i>Thu 02 January 2014
+<abbr class="published" title="2014-02-08T16:30:00">
+        <i class="icon-calendar"></i>Sat 08 February 2014
 </abbr>
 <span class="label">By</span>
 <a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
 <span class="label">Category</span>
-<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
+<a href="/category/cpp.html"><i class="icon-folder-open"></i>Cpp</a>.
 
 
 <span class="label">Tags</span>
-	<a href="/tag/bash.html"><i class="icon-tag"></i>Bash</a>
+	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
 </footer><!-- /.post-info -->                </div>
-                <p><strong>本系列博文记录学习Shell终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录。</strong></p>
-<hr class="docutils" />
+                <p>由于一直没找到好的材料，C++的学习拖了好几天没什么进展。
+主要遇到的问题是白书的题目(UVAoj)有些麻烦，之前刷了十几道水题一直很顺利，
+到了数据结构系列突然每道题都有点难以理解（难道是自己英语水平突然掉了...），
+刷了几天进展很慢，加上每道题都有针对性的代码，对于我这种目标是复习数据结构的不太合适。</p>
+<p>然后玩了两天JavaScript（每页一句模块实现），玩了一天游戏...</p>
+<p>找到一个好地方学习数据结构：</p>
+<blockquote>
+<a class="reference external" href="http://www.geeksforgeeks.org/data-structures/">http://www.geeksforgeeks.org/data-structures/</a></blockquote>
+<p>今天开始敲了一下线性表，过几天再写点总结。</p>
+<p>然后终于到了这篇的主题，makefile的编写。</p>
+<div class="section" id="make">
+<h2>make</h2>
+<p>所谓的make，是便于编译多个文件的工具，用make可以实现自动化构建软件。
+同时使用make可以根据依赖关系自动编译，简化手工操作。
+具体的介绍可以查一下make的手册页。</p>
+<p>很多的IDE现在都实现了make的功能，
+比如之前用过的Visual Studio系列，Code::block，甚至是Qt SDK的开发环境，
+只要建立一个工程，就可以让IDE自动完成多文件编译和依赖检查。</p>
+<p>但Linux下的很多软件还是使用make协助软件的部署，
+而像博主这种懒得用IDE的家伙，
+手头就一个Vim写代码，一个g++编译（写C++的话），
+有时用用gdb调试一番（更多时候是暴力调试...)，
+再用上方便的make其实也就差不多了。</p>
+<p>开源社区中也有许多软件是用make的，
+就像博主这个网站使用的Pelican，
+从源文档加载主题文件（CSS，JS等）转换成静态的HTML页面，
+这个过程就使用了make，从而省去了大量的重复命令。</p>
+<p>make默认情况下读取当前文件夹中的makefile文件，
+makefile相当于配置文件，
+指导make执行命令完成目标代码的编译。</p>
+<p>make不限于特定的语言，
+博主把它放在C++栏目中是因为历史上很多很多人用make协助编译C/C++代码。</p>
+<p>举个例子：</p>
+<pre class="literal-block">
+假设要编译三个文件：main.cpp test.h test.cpp，输出为a.out
+那么默认情况下每次要这样写：
+g++ main.cpp test.h test.cpp -o a.out
+如果写好了makefile，每次只需要这样：
+make
+并且会自动检查依赖，忽略某些未改变的项，提高编译速度
+</pre>
+</div>
 <div class="section" id="id1">
-<h2>基础知识</h2>
-<p>以echo为例，bash的基本命令及结构如下：</p>
-<p>显示命令后的所有参数</p>
-<p>echo [option] [arg0] [arg1] [arg2] [...]</p>
-<p>命令、参数之间用空格区分，空格数量差异没有作用,
-在单引号或双引号之间的所有字符被当成同一个参数</p>
-<p>echo &quot;Hey, this is a single argument.&quot;</p>
-<p>设定option使echo解析字符操作符</p>
-<p>echo -e &quot;A line with n a newline.&quot;</p>
-<p>命令执行成功返回0，否则返回非0值,
-返回值的意义可查命令的man</p>
+<h2>获取make</h2>
+<p>据称很多Linux发行版中都自带了make，
+我不知道其他人的是什么情况，
+反正博主手头的Arch Linux没有...(=_=)</p>
+<p>不过不要紧，pacman -S装一下就有了，非常方便</p>
+</div>
+<div class="section" id="makefile">
+<h2>makefile文件的编写</h2>
+<p>makefile文件的基本语法如下：</p>
+<pre class="literal-block">
+[target]:[dependencies]
+[tab]   command
+</pre>
+<p>其中target为目标，调用命令make时指定目标即可实现不同的执行过程。</p>
+<p>dependencies为依赖项，make执行时首先检查对应目标的依赖是否满足，
+如果搜索到存在对应的文件，且在上次执行后没有被更改，则认定该项依赖满足，
+否则搜索查找对应依赖项的目标并首先执行它，获取目标依赖。
+当所有依赖满足后执行最终目标。</p>
+<p>tab就是一个tab制表符。</p>
+<p>command才是最终被执行的命令语句，如&quot;g++ main.cpp -o a.out&quot;之类。</p>
+<p><strong>一个最简单的makefile</strong></p>
+<pre class="literal-block">
+all:
+    g++ main.cpp test.h test.cpp -o a.out -Wall -g
+</pre>
+<p>all是默认make的目标。
+上面这两行定义了最简单的makefile，将它保存并执行如下语句：</p>
+<pre class="literal-block">
+make
+</pre>
+<p>make后不加参数，因此make执行makefile文件;
+由于没有设定目标，因此选择默认目标all;
+由于all目标没有依赖项，因此可以直接执行;
+最终那句g++被执行，完成编译（输出a.out，显示警告，添加debug信息用于gdb调试）。</p>
+<p><strong>多目标带依赖项的makefile</strong></p>
+<pre class="literal-block">
+all: main
+
+main: main.o test.o
+    g++ main.o test.o -o a.out -Wall -g
+
+main.o: main.cpp
+    g++ -c main.cpp
+
+test.o: test.cpp test.h
+    g++ -c test.h test.cpp
+</pre>
+<p>基本上一目了然，
+默认目标依赖main目标，
+mian目标依赖main.o和test.o，
+两个o文件依赖对应的源文件和头文件。</p>
+<p>这种情况下首次执行make，由于所有依赖都不满足，
+因此最先被执行的是编译main.cpp，
+其次执行编译test.cpp和test.h，
+最后编译出a.out。</p>
+<p>而在所有文件都没有变化的情况下再次执行make，
+由于两个依赖都存在，
+因此只有编译a.out的那句被执行了一次。</p>
+<p>make自动检测文件变化，
+因此会自动重新编译被修改过的文件。</p>
+<p>此外，还可以指定make目标以编译部分文件，指定目标的命令如下：</p>
+<pre class="literal-block">
+make main.o
+</pre>
+<p>这句指定编译main.o目标。</p>
+<p>如果目标已经存在并且是最新，则make会提示：</p>
+<pre class="literal-block">
+make: 'main.o' is up to date.
+</pre>
+<p>插句话，-o选项让g++编译并不链接文件，生成的文件为原文件名替换上.o后缀。</p>
+<p><strong>带参数和注释的makefile</strong></p>
+<p>可以在makefile中指定参数，
+同时可以写注释。</p>
+<p>感觉比较简单，贴个例子就可以了：</p>
+<pre class="literal-block">
+#这是注释，用井号开头就可以了
+#声明参数要像下面这样
+OUTPUT=a.out
+#使用的话是这样：
+
+all:
+    g++ main.cpp -o $(OUTPUT) -Wall -g
+</pre>
+<p>上面的例子就定义了输出文件名参数，
+这样在多个地方都可以通过“钱+小括号”的形式使用参数</p>
+<p><strong>不想用makefile做文件名</strong></p>
+<p>随便搞，只要在make的时候麻烦一点给个参数指定文件名即可：</p>
+<pre class="literal-block">
+make -f my_makefile
+</pre>
+<p>使用my_makefile文件作为配置文件。</p>
 </div>
 <div class="section" id="id2">
-<h2>命令的帮助文档</h2>
-<p>type</p>
-<blockquote>
-<p>命令有两种类型，内部和外部命令
-显示命令的类型</p>
-<p>type [command]</p>
-<p>某些命令有两种类型，显示所有类型</p>
-<p>type -a [command]</p>
-<p>当执行同名命令时内置命令优先，
-执行外部命令必须指定命令路径，如echo:</p>
-<p>/bin/echo Hello</p>
-</blockquote>
-<p>man</p>
-<blockquote>
-<p>查找某个命令的手册页</p>
-<p>man [command]</p>
-<p>查找某个配置文件的手册页</p>
-<p>man [configuration file name]</p>
-<p>模糊搜索:查找带string的命令列表</p>
-<p>man -k [string]</p>
-<p>匹配某个section的命令,关于section的解释在man man中有</p>
-<p>man [section] [command]</p>
-<p>查看当前系统的文件系统结构树</p>
-<p>man hier</p>
-</blockquote>
-<p>whatis</p>
-<blockquote>
-<p>一句话描述命令</p>
-<p>whatis [command]</p>
-</blockquote>
-<p>whereis</p>
-<blockquote>
-<p>查找命令的所在目录列表</p>
-<p>whereis [command]</p>
-</blockquote>
-<p>which</p>
-<blockquote>
-<p>which查找命令的路径并确定命令所在目录</p>
-<p>which [command]</p>
-</blockquote>
-</div>
-<div class="section" id="id3">
-<h2>目录操作</h2>
-<p>pwd</p>
-<blockquote>
-<p>显示当前所在的工作目录</p>
-<p>pwd</p>
-</blockquote>
-<p>cd</p>
-<blockquote>
-<p>进入某目录,可使用相对路径或绝对路径</p>
-<p>cd [location]</p>
-<p>进入home目录</p>
-<p>cd ~</p>
-<p>进入上一次的目录(方便！)</p>
-<p>cd -</p>
-</blockquote>
-<p>ls</p>
-<blockquote>
-<p>显示当前文件夹内容</p>
-<p>ls [location]</p>
-<p>显示所有文件（包括隐藏文件）</p>
-<p>ls -a [location]</p>
-<p>显示详细信息</p>
-<p>ls -l [location]</p>
-<p>显示详细信息并令文件大小显示更人性化(-_-||)</p>
-<p>ls -lh [location]</p>
-</blockquote>
-<p>mkdir</p>
-<blockquote>
-<p>创建目录</p>
-<p>mkdir [dir_name]</p>
-<p>一个命令创建多层目录</p>
-<p>mkdir -p [dir_name/dir_name/......]</p>
-</blockquote>
-<p>rmdir</p>
-<blockquote>
-<p>当目录为空时删除该目录</p>
-<p>rmdir [dir_name]</p>
-<p>一个命令删除目录树</p>
-<p>rmdir -p [dir_name/dir_name/......]</p>
-</blockquote>
-</div>
-<div class="section" id="id4">
-<h2>文件操作</h2>
-<p>file</p>
-<blockquote>
-<p>显示文件类型</p>
-<p>file [filename]</p>
-</blockquote>
-<p>touch</p>
-<blockquote>
-<p>创建一个新文件</p>
-<p>touch [filename]</p>
-<p>创建文件并指定时间</p>
-<p>touch -t [time] [filename] //touch -t 201312291830 test</p>
-</blockquote>
-<p>rm</p>
-<blockquote>
-<p>删除文件(没了就没了啵...)</p>
-<p>rm [filename]</p>
-<p>删除前确认</p>
-<p>rm -i [filename]</p>
-<p>最牛逼的删除操作,强力递归删除目录及目录中的文件</p>
-<p>rm -rf [dirname]</p>
-</blockquote>
-<p>cp</p>
-<blockquote>
-<p>复制文件,从原文件到目标文件</p>
-<p>cp [source_filename] [destination_filename]</p>
-<p>复制文件夹及其中的文件</p>
-<p>cp -r [source_dir] [destination_dir]</p>
-<p>同时复制多个文件到同一个文件夹(最后一个参数务必为一个文件夹)</p>
-<p>cp [file1] [file2] [......] [destination_dir]</p>
-<p>防止复制时的现有文件覆盖</p>
-<p>cp -i [......]</p>
-<p>复制时保留原文件的权限和时间信息</p>
-<p>cp -p [......]</p>
-</blockquote>
-<p>mv</p>
-<blockquote>
-<p>移动文件（或者将文件改名）</p>
-<p>mv [source_filename] [destination_filename]</p>
-</blockquote>
-</div>
-<div class="section" id="id5">
-<h2>文件内容操作</h2>
-<p>head</p>
-<blockquote>
-<p>默认显示文件的前十行</p>
-<p>head [filename]</p>
-<p>可以设定显示的行数</p>
-<p>head -[number] [filename] //head -4 test.txt</p>
-</blockquote>
-<p>tail</p>
-<blockquote>
-<p>默认显示文件最后十行</p>
-<p>tail [filename]</p>
-<p>同上，设置显示的行数</p>
-<p>tail -[number] [filename]</p>
-</blockquote>
-<p>cat</p>
-<blockquote>
-<p>输出文件内容到标准输出中</p>
-<p>cat [filename]</p>
-<p>可同时输出多个文件</p>
-<p>cat [file1] [file2] [file3] [...]</p>
-<p>不指定文件，则从标准输入中读取数据，直到EOF,
-可用这个特性创建新文件（利用输出重定向）</p>
-<p>cat &gt; out.txt</p>
-<p>复制文件</p>
-<p>cat in.txt &gt; out.txt</p>
-</blockquote>
-<p>tac</p>
-<blockquote>
-与cat相反的输出</blockquote>
-<p>less/more</p>
-<blockquote>
-<p>翻页显示文件内容
-//更推荐用less,可以使用类似vim的翻页操作，并且支持搜索</p>
-<p>less [filename]</p>
-<p>可将其他命令的输出管道输入到less中</p>
-<p>ls | less</p>
-<p>//关于管道后面有详细说明</p>
-</blockquote>
-<p>strings</p>
-<blockquote>
-<p>将某个二进制文件中的可读ASCII字符输出
-//有点憋屈的命令...</p>
-<p>strings /bin/ls</p>
-</blockquote>
-</div>
-<div class="section" id="id6">
-<h2>命令的执行与控制</h2>
-<p>alias</p>
-<blockquote>
-<p>可为某个常用的命令设置别名，别名与原名等同</p>
-<p>alias dog=cat</p>
-<p>同样，可设定带option甚至arguments的别名，需要用引号包含</p>
-<p>alias la='ls -a'</p>
-<p>显示当前所有别名</p>
-<p>alias</p>
-<p>去除别名</p>
-<p>unalias [command]</p>
-</blockquote>
-<p>set -x</p>
-<blockquote>
-开启命令回显</blockquote>
-<p>set +x</p>
-<blockquote>
-关闭命令回显</blockquote>
-<p>semicolon</p>
-<blockquote>
-<p>命令与命令之间用分号分隔</p>
-<p>echo Hello; echo Hey</p>
-</blockquote>
-<p>ampersand</p>
-<blockquote>
-<p>单个与符号让当前命令在后台执行</p>
-<p>sleep 20 &amp;</p>
-</blockquote>
-<p>dollar question</p>
-<blockquote>
-<p>钱+问号获取前一个命令的返回值</p>
-<p>echo Hey ; echo $?</p>
-<p>//Hey 0</p>
-</blockquote>
-<p>double ampersand</p>
-<blockquote>
-<p>双与符号连接两个命令，第二个命令只在第一个命令执行成功时才执行</p>
-<p>echo first &amp;&amp; echo second</p>
-</blockquote>
-<p>double vertical bar</p>
-<blockquote>
-<p>双竖直分割符连接两个命令，第二个命令只在第一个命令失败(返回非0值)时执行</p>
-<p>echo first || echo second</p>
-</blockquote>
-<p>combination</p>
-<blockquote>
-<p>组合使用&amp;&amp;和||可以做逻辑处理</p>
-<p>rm file &amp;&amp; echo ok || echo failed</p>
-</blockquote>
-<p>pound sign</p>
-<blockquote>
-注释使用#号</blockquote>
-<p>escape character</p>
-<blockquote>
-<p>使用反斜杠作为逃逸符</p>
-<p>echo hello ; world</p>
-<p>也可使用反斜杠作为隔行命令</p>
-<p>echo hello world</p>
-</blockquote>
+<h2>make的各种功能</h2>
+<p>学会写makefile之后应该能够看出来，
+make其实是通过构造shell命令执行功能的，
+因此发挥想象力，用make可以搞定非常多的东西。</p>
+<p>一个非常简单的例子是自动清空当前文件夹的编译过程文件：</p>
+<pre class="literal-block">
+all:
+#......
+
+clean:
+    rm -rf *.o *.gch
+</pre>
+<p>这样，执行</p>
+<pre class="literal-block">
+make clean
+</pre>
+<p>即可搞定清扫工作。</p>
+<p>当然&quot;rm -rf&quot;是比较狠的，使用要小心。</p>
 </div>
 
                 </div><!-- /.entry-content -->
