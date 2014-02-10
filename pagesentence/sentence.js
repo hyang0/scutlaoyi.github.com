@@ -31,7 +31,9 @@ var sentences = new Array(
         "不论在繁杂的世界里维系清醒有多么的难，闪念之间，你会发现，总有些东西，并不曾变淡。",
         "人的悲哀，在于被自己曾经厌恶的东西捕获。",
         "从跪伏而站起的那一天， 便是权力匍匐称臣的日子，便是极权一去不返的日子。",
-        "If you live each day as if it was your last, someday you'll most certainly be right. --Steve Jobs"
+        "If you live each day as if it was your last, someday you'll most certainly be right. --Steve Jobs",
+        "But we are hackers, hackers have black terminals with green font colors. --John Nunemaker",
+        "每一个优秀的人，都有一段沉默的时光。那一段时光，是付出了许多努力，忍受孤独和寂寞，不抱怨不诉苦，日后说起时，连自己都能被感动的日子。"
         );
 function generateSentence()
 {
