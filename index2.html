@@ -112,6 +112,60 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/Bash003.html">Bash笔记(三)</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-01-04T22:00:00">
+        <i class="icon-calendar"></i>Sat 04 January 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/bash.html"><i class="icon-tag"></i>Bash</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Shell终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录。</strong></p>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>常用过滤器</h2>
+<p>cat</p>
+<blockquote>
+<p>就是把输入流或文件内容输出出来</p>
+<p>cat [filename]</p>
+<p>文件太长就可以用less分页显示</p>
+<p>cat [filename] | less</p>
+</blockquote>
+<p>tee</p>
+<blockquote>
+<p>管道默认把输出作为下一级的输入，
+某些情况下需要显示保存中间结果（管道很长之类的），
+可以使用tee</p>
+<p>tee类似cat将输入作为标准输出，同时输出到文件</p>
+<p>tac [filename] | tee [tempfilename] | tac | [......]</p>
+</blockquote>
+<p>grep</p>
+<blockquote>
+<p>Unix中的一个非常重要的过滤器。</p>
+<p>在输入流中搜索并输出符合对应条件的行,
+下面这货过滤出所有带'str'的行</p>
+<p>cat [filename] | grep 'str'</p>
+<p>设置过滤对大小写不敏感</p>
+<p>grep -i [str]</p>
+<p>反向过滤，找出所有不包含str的行</p>
+<p>grep -v [str]</p>
+<p>设置连带输出目标行后的4行（数字可变）</p>
+<p>grep -A4 ......</p>
+<p>设置连带输出目标行前的3行</p>
+<p>grep -B3 ......</p>
+<p>设置连带输出目标行前后的2行 ...</p></blockquote></div>
+                        <a class="btn primary xsmall" href="/Bash003.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/Bash002.html">Bash笔记(二)</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -472,42 +526,6 @@
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/network003.html">socket编程(3):多线程socket服务器/客户端</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2013-09-28T16:00:00">
-        <i class="icon-calendar"></i>Sat 28 September 2013
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/network.html"><i class="icon-folder-open"></i>network</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/network.html"><i class="icon-tag"></i>network</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><hr class="docutils" />
-<p>多线程的tcp服务器与单线程的差别不大，主要差别在于服务器接受一个请求后创建一个新线程处理请求，主线程继续等待连接，因此可以在同一个时间处理多个请求。单线程的服务器每次都只有主线程接受并处理请求，这种情况下其他连接就必须等待。</p>
-<p>在GNU/Linux操作系统下可以使用pthread创建并管理线程。</p>
-<p>应该注意的一点是pthread不是Linux默认库的一部分，因此在编译时需要添加参数 -lpthread ，否则会报错(找不到文件：undefined reference to 'pthread_create')。</p>
-<p>由于本代码只为测试多线程，编写时没有考虑长的时延，因此在主线程退出前仅等待最后一个子线程的退出，这在实际操作中八成会出问题。</p>
-<p>另外在创建线程时传入的函数参数为指针，需要注意对内存的管理，防止多个线程的指针变量指向同一个地址。</p>
-<p><strong>C++版本服务器代码：</strong></p>
-<div class="highlight"><pre><span class="cp">#include &lt;cstdio&gt;</span>
-<span class="cp">#include &lt;cstring&gt;</span>
-<span class="cp">#include &lt;cstdlib&gt;</span>
-<span class="cp">#include &lt;cerrno&gt;</span>
-<span class="cp">#include &lt;unistd.h&gt;</span>
-<span class="cp">#include &lt;sys/types.h&gt;</span>
-<span class="cp">#include &lt;sys/socket.h&gt;</span>
-<span class="cp">#include &lt;netinet/in.h&gt;</span>
-<span class="cp">#include ...</span></pre></div>
-                        <a class="btn primary xsmall" href="/network003.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -576,13 +594,18 @@ window.onload=loadSentence();
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
 <li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
     </a>
 </li>
-<li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
+<li class="tag-2">
+    <a href="/tag/network.html">
+        <i class="icon-tag icon-large"></i>network
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
     </a>
 </li>
 <li class="tag-2">
@@ -591,33 +614,28 @@ window.onload=loadSentence();
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>Python
-    </a>
-</li>
-<li class="tag-2">
     <a href="/tag/git.html">
         <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/network.html">
-        <i class="icon-tag icon-large"></i>network
     </a>
 </li>
 <li class="tag-1">
     <a href="/tag/arch.html">
         <i class="icon-tag icon-large"></i>Arch
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
     </a>
 </li>
 

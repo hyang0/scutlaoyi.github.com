@@ -112,6 +112,59 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/CppLearning003.html">C++学习(三)：线性表的奇技淫巧(一)</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-02-11T21:30:00">
+        <i class="icon-calendar"></i>Tue 11 February 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/cpp.html"><i class="icon-folder-open"></i>Cpp</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>在Github上建了一个新仓库练习数据结构，
+地址在这里：</p>
+<blockquote>
+<a class="reference external" href="https://github.com/scutLaoYi/data-structure">https://github.com/scutLaoYi/data-structure</a></blockquote>
+<p>clone的话记得在后面加.git后缀(没什么好clone的)。</p>
+<p>我觉得莫名其妙的是代码类型居然被判为57%的C、25%的C++，
+以及18%的Objective-C。</p>
+<p>学习的资料上一篇博文已经说过了，是个好地方。</p>
+<p>从线性表学起，实现了资料里说的一些问题，
+光看不写的话感觉倒是容易看懂，不过真的写起来总是一大堆问题。</p>
+<p>上哪都一样。</p>
+<p>线性表才看了一半不到，
+总结一下自己用的一些实现方法及若干这几天见到的牛逼技术。</p>
+<div class="section" id="id1">
+<h2>数据结构的实现</h2>
+<p>自己的实现方案使用了类模板，
+首先定义了一个节点的结构：</p>
+<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="n">Node</span>
+<span class="p">{</span>
+    <span class="n">Type</span> <span class="n">value</span><span class="p">;</span>
+    <span class="n">Node</span> <span class="o">*</span><span class="n">nex</span><span class="p">;</span>
+
+    <span class="n">Node</span><span class="p">();</span>
+<span class="p">};</span>
+</pre></div>
+<p>包含一个节点值及一个指向下一个节点的指针。
+构造函数用于初始化指针，赋值为0。</p>
+<p>然后搞了一个freelist用于处理内存。</p>
+<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">Freelist</span>
+<span class="p">{</span>
+    <span class="n">Node</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">top ...</span></pre></div></div>
+                        <a class="btn primary xsmall" href="/CppLearning003.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/CppLearning002.html">C++学习(二)：大家一起来Makefile</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -266,13 +319,18 @@ window.onload=loadSentence();
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
 <li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
     </a>
 </li>
-<li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
+<li class="tag-2">
+    <a href="/tag/network.html">
+        <i class="icon-tag icon-large"></i>network
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
     </a>
 </li>
 <li class="tag-2">
@@ -281,33 +339,28 @@ window.onload=loadSentence();
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>Python
-    </a>
-</li>
-<li class="tag-2">
     <a href="/tag/git.html">
         <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/network.html">
-        <i class="icon-tag icon-large"></i>network
     </a>
 </li>
 <li class="tag-1">
     <a href="/tag/arch.html">
         <i class="icon-tag icon-large"></i>Arch
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
     </a>
 </li>
 
