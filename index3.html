@@ -96,6 +96,11 @@
 						<i class="icon-folder-open icon-large"></i>Tools
 					</a>
                   </li>
+                  <li >
+                    <a href="/category/vim.html">
+						<i class="icon-folder-open icon-large"></i>Vim
+					</a>
+                  </li>
 
                           <ul class="nav pull-right">
                                 <li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
@@ -111,6 +116,44 @@
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
+        <div class="article">
+                <h1><a href="/Python006.html">Python 笔记（六）</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-10-03T10:30:00">
+        <i class="icon-calendar"></i>Thu 03 October 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3，</strong>
+<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>模块</h2>
+<p><strong>模块的定义:</strong></p>
+<p>最简单的，一个文件(*.py)便是一个模块，文件名为模块名，模块可以单独运行也可以被其他模块所包含。</p>
+<p>使用import指令便可以包含其他模块</p>
+<p>使用条件判断：if __name__ == '__main__' 可判定当前模块是否独立运行，True为独立运行，False为被其他模块import</p>
+<p>当模块被其他模块import时，模块内的代码（类定义、函数定义、变量定义）均会被执行一次</p>
+<p>因此添加上述的条件判断可避免某些独立运行的代码在模块被包含时运行，这种机制有利于代码重用</p>
+<p>类似但更加强大的概念是包，包可以将若干模块封装在一起，成为一个程序组。</p>
+<p><strong>获取标准库中的一些常用模块及功能介绍:</strong></p>
+<p>通过dir()函数可获取某个模块中的所有命名，包括函数、变量等</p>
+<p>通过print某个模块或模块中成员的__doc__文档字符串，可获取文档介绍</p>
+<p>例如sys模块中的sys.exit能够退出程序，并指定返回值</p>
+<p>sys ...</p></div>
+                        <a class="btn primary xsmall" href="/Python006.html">more ...</a>
+                </div>
+        </div>
+        <hr />
         <div class="article">
                 <h1><a href="/network003.html">socket编程(3):多线程socket服务器/客户端</a></h1>
                 <div class="well small"><footer class="post-info">
@@ -474,53 +517,6 @@ git ...</pre></div>
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/learning Git 1.html">Git 与 GitHub 不完全教程（一）</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2013-09-07T16:00:00">
-        <i class="icon-calendar"></i>Sat 07 September 2013
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/git.html"><i class="icon-folder-open"></i>git</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/git.html"><i class="icon-tag"></i>git</a>
-	<a href="/tag/github.html"><i class="icon-tag"></i>github</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>git是常用的配置管理工具，关于Git的介绍请见维基百科（维基百科关于Git的介绍），Github是常用的代码托管服务（维基百科关于GitHub的介绍），在此敲一份扫盲和不完全配置帖，留待日后自己可查看，顺带给大家方便学习。</p>
-<p>由于时间有限，仅记录最简单的终端界面下Git的使用，自认为已经足够，如更喜欢GUI界面风格请自行脑补。</p>
-<p>本文档操作环境为GNU/Linux Ubuntu 12.04 LTS x64，为方便windows用户，在配置时添加了windows下的安装配置过程，不保证万无一失。</p>
-<div class="section" id="git">
-<h2>Git篇：</h2>
-<div class="section" id="id1">
-<h3>安装与配置git</h3>
-<p>Ubuntu: 简单:</p>
-<pre class="literal-block">
-sudo apt-get install git
-</pre>
-<p>即可。</p>
-<p>以上代码没看懂的请别往下看了，扫盲Ubuntu先。</p>
-<p>windows:到这个网址下载:</p>
-<blockquote>
-<a class="reference external" href="http://msysgit.github.io/">http://msysgit.github.io/</a></blockquote>
-<dl class="docutils">
-<dt>或者git官网下载:</dt>
-<dd><a class="reference external" href="http://git-scm.com/download/win">http://git-scm.com/download/win</a></dd>
-</dl>
-<p>安装即可。</p>
-</div>
-<div class="section" id="id2">
-<h3>首次使用</h3>
-<p>windows下使用终端的Git需要启动Git自带的终端，而不是windows的命令行，
-一般在安装后有一个叫做Git ...</p></div></div>
-                        <a class="btn primary xsmall" href="/learning Git 1.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -528,7 +524,8 @@ sudo apt-get install git
                         <li class=""><a href="/index.html">1</a></li>
                         <li class=""><a href="/index2.html">2</a></li>
                         <li class="active"><a href="/index3.html">3</a></li>
-                        <li class="next disabled"><a href="#">&rarr; Next</a></li>
+                        <li class=""><a href="/index4.html">4</a></li>
+                        <li class="next"><a href="/index4.html">Next &rarr;</a></li>
         </ul>
         </div>
 
@@ -586,6 +583,11 @@ window.onload=loadSentence();
     <i class="icon-folder-open icon-large"></i>Tools
 </a>
 </li>
+<li>
+<a href="/category/vim.html">
+    <i class="icon-folder-open icon-large"></i>Vim
+</a>
+</li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
 <li class="tag-2">
@@ -593,9 +595,9 @@ window.onload=loadSentence();
         <i class="icon-tag icon-large"></i>SoftwareArchitect
     </a>
 </li>
-<li class="tag-2">
-    <a href="/tag/network.html">
-        <i class="icon-tag icon-large"></i>network
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
     </a>
 </li>
 <li class="tag-2">
@@ -609,18 +611,8 @@ window.onload=loadSentence();
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/arch.html">
-        <i class="icon-tag icon-large"></i>Arch
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
+    <a href="/tag/network.html">
+        <i class="icon-tag icon-large"></i>network
     </a>
 </li>
 <li class="tag-2">
@@ -628,9 +620,24 @@ window.onload=loadSentence();
         <i class="icon-tag icon-large"></i>Bash
     </a>
 </li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
+    </a>
+</li>
 <li class="tag-1">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>Python
+    <a href="/tag/arch.html">
+        <i class="icon-tag icon-large"></i>Arch
     </a>
 </li>
 

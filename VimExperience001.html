@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Bash笔记(三)</title>
+    <title>Vim经验记录(一):与系统共享剪贴板</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="laoyi">
@@ -76,7 +76,7 @@
 						<i class="icon-folder-open icon-large"></i>git
 					</a>
                   </li>
-                  <li class="active">
+                  <li >
                     <a href="/category/linux.html">
 						<i class="icon-folder-open icon-large"></i>Linux
 					</a>
@@ -96,7 +96,7 @@
 						<i class="icon-folder-open icon-large"></i>Tools
 					</a>
                   </li>
-                  <li >
+                  <li class="active">
                     <a href="/category/vim.html">
 						<i class="icon-folder-open icon-large"></i>Vim
 					</a>
@@ -122,8 +122,8 @@
                         <h1>
                                 <a href=""
                                         rel="bookmark"
-                                        title="Permalink to Bash笔记(三)">
-                                        Bash笔记(三)
+                                        title="Permalink to Vim经验记录(一):与系统共享剪贴板">
+                                        Vim经验记录(一):与系统共享剪贴板
                                 </a>
                         </h1>
                 </header>
@@ -131,194 +131,129 @@
                 <div class="well">
 <footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2014-01-04T22:00:00">
-        <i class="icon-calendar"></i>Sat 04 January 2014
+<abbr class="published" title="2014-02-13T12:30:00">
+        <i class="icon-calendar"></i>Thu 13 February 2014
 </abbr>
 <span class="label">By</span>
 <a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
 <span class="label">Category</span>
-<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
+<a href="/category/vim.html"><i class="icon-folder-open"></i>Vim</a>.
 
 
 <span class="label">Tags</span>
-	<a href="/tag/bash.html"><i class="icon-tag"></i>Bash</a>
+	<a href="/tag/vim.html"><i class="icon-tag"></i>Vim</a>
 </footer><!-- /.post-info -->                </div>
-                <p><strong>本系列博文记录学习Shell终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录。</strong></p>
-<hr class="docutils" />
+                <p>这几天玩剪贴板搞得灰头土脸，
+幸好现在终于找到最佳的解决方案了，
+虽然好用，方法还是有点猥琐。</p>
+<p>博主主要的目的在于多个Vim之间可以共享剪贴板。
+写博文的时候，
+像上一篇博文中就有非常多的代码片段，
+因此需要快捷的复制粘贴操作。</p>
+<p>目标：</p>
+<blockquote>
+找到一种方法方便快速地访问系统剪贴板，
+使Vim支持从系统剪贴板中复制粘贴数据，
+通过系统剪贴板快捷地与其他应用程序交换数据，
+如Firefox中网页的某些文本框，
+或者与其他Vim进程交换数据。</blockquote>
+<p>环境：</p>
+<pre class="literal-block">
+OS: Arch Linux(x64)
+Window Manager: X11
+DesktopEnvironment: LXDE
+Package Manager: Pacman
+</pre>
 <div class="section" id="id1">
-<h2>常用过滤器</h2>
-<p>cat</p>
-<blockquote>
-<p>就是把输入流或文件内容输出出来</p>
-<p>cat [filename]</p>
-<p>文件太长就可以用less分页显示</p>
-<p>cat [filename] | less</p>
-</blockquote>
-<p>tee</p>
-<blockquote>
-<p>管道默认把输出作为下一级的输入，
-某些情况下需要显示保存中间结果（管道很长之类的），
-可以使用tee</p>
-<p>tee类似cat将输入作为标准输出，同时输出到文件</p>
-<p>tac [filename] | tee [tempfilename] | tac | [......]</p>
-</blockquote>
-<p>grep</p>
-<blockquote>
-<p>Unix中的一个非常重要的过滤器。</p>
-<p>在输入流中搜索并输出符合对应条件的行,
-下面这货过滤出所有带'str'的行</p>
-<p>cat [filename] | grep 'str'</p>
-<p>设置过滤对大小写不敏感</p>
-<p>grep -i [str]</p>
-<p>反向过滤，找出所有不包含str的行</p>
-<p>grep -v [str]</p>
-<p>设置连带输出目标行后的4行（数字可变）</p>
-<p>grep -A4 ......</p>
-<p>设置连带输出目标行前的3行</p>
-<p>grep -B3 ......</p>
-<p>设置连带输出目标行前后的2行</p>
-<p>grep -C2 ......</p>
-</blockquote>
-<p>cut</p>
-<blockquote>
-<p>截取并输出若干列的文本</p>
-<p>设置分割符为':', 输出第一列和第三列的文本</p>
-<p>cut -d: -f1,3 [filename]</p>
-<p>设置分割符为空格时要用引号包括起来</p>
-<p>cut -d&quot; &quot; -f1,2,3,5 [filename]</p>
-<p>还可设置截取字符范围</p>
-<p>截取每行第3到第7个字符</p>
-<p>cut -c3-7 [filename]</p>
-</blockquote>
-<p>tr</p>
-<blockquote>
-<p>字符转换,
-例如将小写a转为大写A</p>
-<p>tr 'a' 'A'</p>
-<p>设定范围转换</p>
-<p>tr 'a-z' 'A-Z' #范围不一样会怎样呢？自己试试吧～</p>
-<p>特殊字符也是可以的，
-比如说把换行全部换成空格</p>
-<p>tr '\n' ' '</p>
-<p>还能用于压缩多个空格</p>
-<p>tr -s ' '</p>
-<p>移位什么的很方便</p>
-<p>tr 'a-z' 'o-za-n'</p>
-<p>删除所有a/b/c字符</p>
-<p>tr -d 'abc'</p>
-</blockquote>
-<p>wc</p>
-<blockquote>
-<p>不是厕所，是字符计数的缩写</p>
-<p>统计行数、字数及字符数</p>
-<p>wc [filename]</p>
-</blockquote>
-<p>sort</p>
-<blockquote>
-<p>排序用的，默认是每行按字典序排
-//突然想起当年瞎搞ACM的时候被字典序坑过好多次.-_-</p>
-<p>sort [filename]</p>
-<p>按数字大小排</p>
-<p>sort -n [filename]</p>
-<p>按某一列排(假设第三列)</p>
-<p>sort -k3 [filename]</p>
-</blockquote>
-<p>uniq</p>
-<blockquote>
-<p>去掉相同的行</p>
-<p>uniq [filename]</p>
-</blockquote>
-<p>comm</p>
-<blockquote>
-<p>逐行比较两个文件，
-仅第一个有的在第一列，
-仅第二个有的在第二列，
-相同的在第三列</p>
-<p>comm [file1] [file2]</p>
-<p>可设置只显示某几列</p>
-<p>comm -23 [file1] [file2]</p>
-</blockquote>
-<p>od</p>
-<blockquote>
-<p>可将文件内容编码成其他进制</p>
-<p>转十六进制并输出,每词一个字节</p>
-<p>od -t x1 [filename]</p>
-<p>十进制输出</p>
-<p>od -b [filename]</p>
-<p>ASCII码输出</p>
-<p>od -c [filename]</p>
-</blockquote>
-<p>sed</p>
-<blockquote>
-<p>使用正则表达式编辑文本。</p>
-<p>这货太牛逼了，两三句话说不完，在这里挂个链接吧。</p>
-<p><a class="reference external" href="http://coolshell.cn/articles/9104.html">http://coolshell.cn/articles/9104.html</a></p>
-</blockquote>
+<h2>鼠标解法</h2>
+<p>最初遇到这个问题时想到了上学期在工作室的Ubuntu系统，
+通过配置标神找到的vimrc文件，
+可以直接支持鼠标点击、鼠标选择、右键复制粘贴甚至是滚轮翻页。</p>
+<p>不知道是因为桌面环境不一样还是系统问题，
+原有的配置文件在Arch Linux加LXDE的环境里会导致Vim出错。</p>
+<p>重新配置了vimrc使现在的Vim支持原有的大部分功能，
+然而鼠标的功能还是没有以前那么强悍了。</p>
+<pre class="literal-block">
+set mouse=a         &quot; Enable the use of the mouse.
+set selection=exclusive
+set selectmode=mouse,key
+set nocompatible    &quot; No vi mode
+</pre>
+<p>上面的配置语句让Vim支持鼠标选择及滚轮翻页，
+然而当想使用右键复制的时候却会发现复制是没有效果的。</p>
+<p>当然这还是一部分解决了粘贴问题，
+首先从别的地方复制，
+切换到Vim把光标移动到需要粘贴的地方，
+进入插入(insert)模式，
+这个时候鼠标点右键并粘贴，
+东西就进去了。</p>
+<p>但这样还是会有问题，
+如果给Vim设定了自动括号补全一类的功能，
+粘贴的过程中Vim也会画蛇添足地给粘贴的内容再补全一遍，
+如果刚好粘贴的是代码一类的东西，带很多括号，
+粘贴完成后需要手动处理多出来的内容。</p>
+<p>而且也太不雅观了。</p>
+<p>这个问题其实在之前Ubuntu中也出现过，
+于是博主上Google寻找更加优雅的解决方案。</p>
 </div>
-<div class="section" id="unix">
-<h2>基本的Unix工具</h2>
-<p>find</p>
-<blockquote>
-<p>找东西用的，据说直接暴搜得到结果。
-想要高效搜索用下面说的locate</p>
-<p>查找某目录(及其子目录)下的所有文件</p>
-<p>find [location]</p>
-<p>查找某目录其子目录下的某种文件(匹配)</p>
-<p>find [location] -name [option]</p>
-<p>eg. find / -name &quot;*.txt&quot; #找系统中的所有txt文件</p>
-<p>查找某种类型文件,关于type可查man</p>
-<p>find [location] -type [type]</p>
-<p>查找并对目标执行某些命令操作，
--exec 后接操作的命令(下述例子删除了目标文件)</p>
-<p>find ~ -name &quot;*.txt~&quot; -exec rm {} \;</p>
-</blockquote>
-<p>locate</p>
-<blockquote>
-<p>使用索引搜索文件，
-比find效率更高</p>
-<p>更新数据库(在我的Ubuntu里要sudo)</p>
-<p>updatedb</p>
-<p>查找文件</p>
-<p>locate [pattern]</p>
-<p>具体情况可以查man</p>
-</blockquote>
-<p>date</p>
-<blockquote>
-<p>看时间</p>
-<p>date</p>
-<p>自定义格式(A:星期 d:天 m:月 Y:年)</p>
-<p>date +'%A %d-%m-%Y'</p>
-</blockquote>
-<p>cal</p>
-<blockquote>
-<p>月历</p>
-<p>cal</p>
-<p>显示某年某月的月历(1970年三月)</p>
-<p>cal 3 1970</p>
-<p>或者显示整年的日历</p>
-<p>cal 1989</p>
-</blockquote>
-<p>sleep</p>
-<blockquote>
-<p>休眠嘛(单位：秒)</p>
-<p>sleep 100 #别等它...</p>
-</blockquote>
-<p>time</p>
-<blockquote>
-<p>获取命令运行的时间</p>
-<p>time echo 'hello,world'</p>
-</blockquote>
-<p>gzip/gunzip:文件压缩工具</p>
-<blockquote>
-<p>压缩目标文件，
-默认得到同名的后缀为gz的文件。</p>
-<p>注意：原文件会被替换</p>
-<p>gzip [file]</p>
-<p>将gz文件作为目标文件解压缩</p>
-<p>gunzip [file] 或 gzip -d [file]</p>
-<p>zcat命令可查看压缩包文本内容</p>
-<p>zcat [file]</p>
-</blockquote>
+<div class="section" id="id2">
+<h2>寄存器解法</h2>
+<p><strong>Vim之间的共享数据</strong></p>
+<p>Stack Overflow上的更优方案是使用Vim的寄存器。
+首先在vimrc里加入一行:</p>
+<pre class="literal-block">
+set clipboard=unnamed
+</pre>
+<p>这句将Vim的系统剪贴板指定到匿名寄存器中。</p>
+<p>这样多个Vim之间便可以共享匿名寄存器的数据了，
+直接在某个Vim进程中复制（例如yy）一段文本，
+在另外的Vim中直接粘贴（p）即可搞定。</p>
+<p>但是这并不是共享操作系统的剪贴板，
+因此通过鼠标在其他程序中复制的文本用这种方法无法粘贴，
+同时在Vim中复制出来的文本也没有办法共享到其他的程序中去。</p>
+<p>因此需要更加生猛的直接控制操作系统剪贴板的方法。</p>
+<p><strong>与其他程序的共享剪贴板</strong></p>
+<p>其实也非常简单，
+Vim的一个特定的寄存器与系统的剪贴板是联动的，
+在X11中是加号（+）寄存器。</p>
+<p>因此复制当前行到操作系统的剪贴板中可以这样：</p>
+<pre class="literal-block">
+&quot;+yy
+</pre>
+<p>然后在其他地方（如Firefox）直接粘贴即可。</p>
+<p>同样，
+粘贴到Vim里面去也可以通过操作对应寄存器搞定：</p>
+<pre class="literal-block">
+&quot;+p
+</pre>
+<p>博主被卡了两天的地方在于，
+资料都是这样的解决方案，
+博主自己实现的时候却发现一直没有效果。</p>
+<p>最终了解到，vi、vim、gvim是三款不一样的东西。</p>
+<p>只有部分vim的版本是支持桌面环境的剪贴板的，
+据称Ubuntu的Gnome环境下有vim-gnome及vim-gtk支持这种操作，
+特别注意的是，默认的Vim是不行的...</p>
+<p>Arch就更不用说了，
+连make都没有，哈哈～</p>
+<p>解决方案有俩，
+一个是装vim-X11 的包，
+一个是直接装gvim。</p>
+<p>由于博主已经安装了gvim，
+内置了vim-X11包，
+因此没法测试直接安装上述的包是否能解决问题。</p>
+<p>不过可以肯定的是，
+用gvim可以非常完美的支持剪贴板。</p>
+<p>安装完gvim之后继续像原来一样使用Vim，
+gvim会提供给Vim一些强化的功能，
+包括剪贴板。</p>
+<p>查看当前Vim是否支持剪贴板可以在终端里敲这个：</p>
+<pre class="literal-block">
+vim --version | grep clipboard
+</pre>
+<p>如果有&quot;+xterm_clipboard&quot;说明支持，
+如果是&quot;-xterm_clipboard&quot;说明不行。</p>
+<p>剪贴板问题就到此为止了，
+下一次记录一下寄存器的一些东西。</p>
 </div>
 
                 </div><!-- /.entry-content -->

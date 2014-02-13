@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/vim.atom.xml" rel="self"></link><id>/</id><updated>2014-02-13T12:30:00+08:00</updated><entry><title>Vim经验记录(一):与系统共享剪贴板</title><link href="/VimExperience001.html" rel="alternate"></link><updated>2014-02-13T12:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-02-13:VimExperience001.html</id><summary type="html">&lt;p&gt;这几天玩剪贴板搞得灰头土脸，
+幸好现在终于找到最佳的解决方案了，
+虽然好用，方法还是有点猥琐。&lt;/p&gt;
+&lt;p&gt;博主主要的目的在于多个Vim之间可以共享剪贴板。
+写博文的时候，
+像上一篇博文中就有非常多的代码片段，
+因此需要快捷的复制粘贴操作。&lt;/p&gt;
+&lt;p&gt;目标：&lt;/p&gt;
+&lt;blockquote&gt;
+找到一种方法方便快速地访问系统剪贴板，
+使Vim支持从系统剪贴板中复制粘贴数据，
+通过系统剪贴板快捷地与其他应用程序交换数据，
+如Firefox中网页的某些文本框，
+或者与其他Vim进程交换数据。&lt;/blockquote&gt;
+&lt;p&gt;环境：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+OS: Arch Linux(x64)
+Window Manager: X11
+DesktopEnvironment: LXDE
+Package Manager: Pacman
+&lt;/pre&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;鼠标解法&lt;/h2&gt;
+&lt;p&gt;最初遇到这个问题时想到了上学期在工作室的Ubuntu系统，
+通过配置标神找到的vimrc文件，
+可以直接支持鼠标点击、鼠标选择、右键复制粘贴甚至是滚轮翻页。&lt;/p&gt;
+&lt;p&gt;不知道是因为桌面环境不一样还是系统问题，
+原有的配置文件在Arch Linux加LXDE的环境里会导致Vim出错。&lt;/p&gt;
+&lt;p&gt;重新配置了vimrc使现在的Vim支持原有的大部分功能，
+然而鼠标的功能还是没有以前那么强悍了。&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+set mouse=a         &amp;quot; Enable the use of the mouse.
+set selection=exclusive
+set selectmode=mouse,key
+set nocompatible    &amp;quot; No vi mode
+&lt;/pre&gt;
+&lt;p&gt;上面的配置语句让Vim支持鼠标选择及滚轮翻页，
+然而当想使用右键复制的时候却会发现复制是没有效果的。&lt;/p&gt;
+&lt;p&gt;当然这还是一部分解决了粘贴问题，
+首先从别的地方复制，
+切换到Vim把光标移动到需要粘贴的地方，
+进入插入(insert)模式，
+这个时候鼠标点右键并粘贴，
+东西就进去了。&lt;/p&gt;
+&lt;p&gt;但这样还是会有问题，
+如果给Vim设定了自动括号补全一类的功能，
+粘贴的过程中Vim也会画蛇添足地给粘贴的内容再补全一遍，
+如果刚好粘贴的是代码一类的东西，带很多括号，
+粘贴完成后需要手动处理多出来的内容。&lt;/p&gt;
+&lt;p&gt;而且也太不雅观了。&lt;/p&gt;
+&lt;p&gt;这个问题其实在之前Ubuntu中也出现过，
+于是博主上Google寻找更加优雅的解决方案。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;寄存器解法&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Vim之间的共享数据&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Stack Overflow上的更优方案是使用Vim的寄存器。
+首先在vimrc里加入一行:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+set clipboard=unnamed
+&lt;/pre&gt;
+&lt;p&gt;这句将Vim的系统剪贴板指定到匿名寄存器中。&lt;/p&gt;
+&lt;p&gt;这样多个Vim之间便可以共享匿名寄存器的数据了，
+直接在某个Vim进程中复制（例如yy）一段文本，
+在另外的Vim中直接粘贴（p）即可搞定。&lt;/p&gt;
+&lt;p&gt;但是这并不是共享操作系统的剪贴板，
+因此通过鼠标在其他程序中复制的文本用这种方法无法粘贴，
+同时在Vim中复制出来的文本也没有办法共享到其他的程序中去。&lt;/p&gt;
+&lt;p&gt;因此需要更加生猛的直接控制操作系统剪贴板的方法。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;与其他程序的共享剪贴板&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;其实也非常简单，
+Vim的一个特定的寄存器与系统的剪贴板是联动的，
+在X11中是加号（+）寄存器。&lt;/p&gt;
+&lt;p&gt;因此复制当前行到操作系统的剪贴板中可以这样：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+&amp;quot;+yy
+&lt;/pre&gt;
+&lt;p&gt;然后在其他地方（如Firefox）直接粘贴即可。&lt;/p&gt;
+&lt;p&gt;同样，
+粘贴到Vim里面去也可以通过操作对应寄存器搞定：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+&amp;quot;+p
+&lt;/pre&gt;
+&lt;p&gt;博主被卡了两天的地方在于，
+资料都是这样的解决方案，
+博主自己实现的时候却发现一直没有效果。&lt;/p&gt;
+&lt;p&gt;最终了解到，vi、vim、gvim是三款不一样的东西。&lt;/p&gt;
+&lt;p&gt;只有部分vim的版本是支持桌面环境的剪贴板的，
+据称Ubuntu的Gnome环境下有vim-gnome及vim-gtk支持这种操作，
+特别注意的是，默认的Vim是不行的...&lt;/p&gt;
+&lt;p&gt;Arch就更不用说了，
+连make都没有，哈哈～&lt;/p&gt;
+&lt;p&gt;解决方案有俩，
+一个是装vim-X11 的包，
+一个是直接装gvim。&lt;/p&gt;
+&lt;p&gt;由于博主已经安装了gvim，
+内置了vim-X11包，
+因此没法测试直接安装上述的包是否能解决问题。&lt;/p&gt;
+&lt;p&gt;不过可以肯定的是，
+用gvim可以非常完美的支持剪贴板。&lt;/p&gt;
+&lt;p&gt;安装完gvim之后继续像原来一样使用Vim，
+gvim会提供给Vim一些强化的功能，
+包括剪贴板。&lt;/p&gt;
+&lt;p&gt;查看当前Vim是否支持剪贴板可以在终端里敲这个：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+vim --version | grep clipboard
+&lt;/pre&gt;
+&lt;p&gt;如果有&amp;quot;+xterm_clipboard&amp;quot;说明支持，
+如果是&amp;quot;-xterm_clipboard&amp;quot;说明不行。&lt;/p&gt;
+&lt;p&gt;剪贴板问题就到此为止了，
+下一次记录一下寄存器的一些东西。&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="Vim"></category></entry></feed>
