@@ -117,6 +117,67 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/CppLearning004.html">C++学习(四)：线性表的奇技淫巧(二)</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-02-16T21:30:00">
+        <i class="icon-calendar"></i>Sun 16 February 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/cpp.html"><i class="icon-folder-open"></i>Cpp</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>这两天去玩了，
+进度比较慢。</p>
+<p>无序线性表终于算是搞了个大概，
+有些过于繁琐的就没有管了。</p>
+<p>准备入手有序线性表，
+把一些牛逼的算法也弄进去，
+二分、堆排序、归并排序什么的。</p>
+<div class="section" id="id1">
+<h2>奇技淫巧大收集（续）</h2>
+<p><strong>线性表判环</strong></p>
+<blockquote>
+<p>就是判别一个线性表中有没有出现环。</p>
+<p><strong>简单标记方案</strong></p>
+<p>几种标记都可以。</p>
+<p>如果是不重复的整数并且范围比较小的话，
+直接开个bool型的数组，用下标表示某个特定的数，
+对应值为1指定该值出现过，
+对应值为0指定该值没有出现。</p>
+<p>整数下标的数组搞不定则可以考虑弄个标准库的哈希表。</p>
+<p>总之，思路就是遍历链表，
+把出现过的标记起来，
+当遍历过程中再次碰到被标记过的节点说明链表有环，
+否则肯定能搜索到链表的表尾并结束。</p>
+<p>需要一些额外的空间及计算量。</p>
+<p><strong>Floyd方案</strong></p>
+<p>感觉搞数学的家伙总能找到一些神奇的方法解决某些奇怪的问题。</p>
+<p>开两个指针fast, slow，均初始化为头节点，
+fast每次移动两个节点，slow每次移动一个节点。</p>
+<p>单步运行，直到：</p>
+<blockquote>
+<p>1、fast指针到达表尾，无环；</p>
+<p>2、fast指针与slow指针在某一步指向同一个节点，有环；</p>
+</blockquote>
+</blockquote>
+<p><strong>线性表除环</strong></p>
+<blockquote>
+<p>简单办法就直观了，
+直接每个节点检查，
+很蠢，不详谈。</p>
+<p><strong>高效方案</strong></p>
+<p>首先，用上述的Floyd算法找到环 ...</p></blockquote></div>
+                        <a class="btn primary xsmall" href="/CppLearning004.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/CppLearning003.html">C++学习(三)：线性表的奇技淫巧(一)</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -328,6 +389,26 @@ window.onload=loadSentence();
 </li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<li class="tag-2">
+    <a href="/tag/network.html">
+        <i class="icon-tag icon-large"></i>network
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
+    </a>
+</li>
 <li class="tag-4">
     <a href="/tag/vim.html">
         <i class="icon-tag icon-large"></i>Vim
@@ -338,24 +419,14 @@ window.onload=loadSentence();
         <i class="icon-tag icon-large"></i>git
     </a>
 </li>
-<li class="tag-2">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
-    </a>
-</li>
 <li class="tag-1">
     <a href="/tag/arch.html">
         <i class="icon-tag icon-large"></i>Arch
     </a>
 </li>
-<li class="tag-1">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>Python
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
     </a>
 </li>
 <li class="tag-2">
@@ -363,19 +434,9 @@ window.onload=loadSentence();
         <i class="icon-tag icon-large"></i>SoftwareArchitect
     </a>
 </li>
-<li class="tag-2">
-    <a href="/tag/network.html">
-        <i class="icon-tag icon-large"></i>network
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
     </a>
 </li>
 
