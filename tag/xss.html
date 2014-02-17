@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>老逸的个人站 - network</title>
+    <title>老逸的个人站 - xss</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="laoyi">
@@ -81,11 +81,6 @@
 						<i class="icon-folder-open icon-large"></i>Linux
 					</a>
                   </li>
-                  <li class="active">
-                    <a href="/category/network.html">
-						<i class="icon-folder-open icon-large"></i>network
-					</a>
-                  </li>
                   <li >
                     <a href="/category/python.html">
 						<i class="icon-folder-open icon-large"></i>Python
@@ -99,6 +94,11 @@
                   <li >
                     <a href="/category/vim.html">
 						<i class="icon-folder-open icon-large"></i>Vim
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/web.html">
+						<i class="icon-folder-open icon-large"></i>web
 					</a>
                   </li>
 
@@ -117,118 +117,50 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
-                <h1><a href="/network003.html">socket编程(3):多线程socket服务器/客户端</a></h1>
+                <h1><a href="/xss_basic.html">web概念学习：XSS跨站代码注入攻击</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2013-09-28T16:00:00">
-        <i class="icon-calendar"></i>Sat 28 September 2013
+<abbr class="published" title="2014-02-17T20:30:00">
+        <i class="icon-calendar"></i>Mon 17 February 2014
 </abbr>
 <span class="label">By</span>
 <a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
 <span class="label">Category</span>
-<a href="/category/network.html"><i class="icon-folder-open"></i>network</a>.
+<a href="/category/web.html"><i class="icon-folder-open"></i>web</a>.
 
 
 <span class="label">Tags</span>
-	<a href="/tag/network.html"><i class="icon-tag"></i>network</a>
+	<a href="/tag/xss.html"><i class="icon-tag"></i>xss</a>
 </footer><!-- /.post-info --></div>
-                <div class="summary"><hr class="docutils" />
-<p>多线程的tcp服务器与单线程的差别不大，主要差别在于服务器接受一个请求后创建一个新线程处理请求，主线程继续等待连接，因此可以在同一个时间处理多个请求。单线程的服务器每次都只有主线程接受并处理请求，这种情况下其他连接就必须等待。</p>
-<p>在GNU/Linux操作系统下可以使用pthread创建并管理线程。</p>
-<p>应该注意的一点是pthread不是Linux默认库的一部分，因此在编译时需要添加参数 -lpthread ，否则会报错(找不到文件：undefined reference to 'pthread_create')。</p>
-<p>由于本代码只为测试多线程，编写时没有考虑长的时延，因此在主线程退出前仅等待最后一个子线程的退出，这在实际操作中八成会出问题。</p>
-<p>另外在创建线程时传入的函数参数为指针，需要注意对内存的管理，防止多个线程的指针变量指向同一个地址。</p>
-<p><strong>C++版本服务器代码：</strong></p>
-<div class="highlight"><pre><span class="cp">#include &lt;cstdio&gt;</span>
-<span class="cp">#include &lt;cstring&gt;</span>
-<span class="cp">#include &lt;cstdlib&gt;</span>
-<span class="cp">#include &lt;cerrno&gt;</span>
-<span class="cp">#include &lt;unistd.h&gt;</span>
-<span class="cp">#include &lt;sys/types.h&gt;</span>
-<span class="cp">#include &lt;sys/socket.h&gt;</span>
-<span class="cp">#include &lt;netinet/in.h&gt;</span>
-<span class="cp">#include ...</span></pre></div>
-                        <a class="btn primary xsmall" href="/network003.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/network002.html">socket编程(2):单线程udp服务器/客户端</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2013-09-24T10:00:00">
-        <i class="icon-calendar"></i>Tue 24 September 2013
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/network.html"><i class="icon-folder-open"></i>network</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/network.html"><i class="icon-tag"></i>network</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p><strong>基本流程</strong></p>
-<p>与tcp的通讯非常类似，不同之处在于udp是无连接的，因此没有创建连接这种操作，服务器开启端口后接受数据并直接返回。
-设置时将socket类型设置为SOCK_DGRAM即可创建udp通讯。</p>
-<p><strong>C++版本：</strong></p>
-<p>服务器：</p>
-<div class="highlight"><pre><span class="c1">//filename:udpServer.cpp</span>
-
-<span class="cp">#include &lt;cstdio&gt;</span>
-<span class="cp">#include &lt;cstring&gt;</span>
-<span class="cp">#include &lt;sys/types.h&gt;</span>
-<span class="cp">#include &lt;sys/socket.h&gt;</span>
-<span class="cp">#include &lt;netinet/in.h&gt;</span>
-<span class="cp">#include &lt;arpa/inet.h&gt;</span>
-<span class="cp">#include &lt;unistd.h&gt;</span>
-<span class="cp">#include &lt;errno.h&gt;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">BUF_SIZE</span> <span class="o">=</span> <span class="mi">512</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">SOCKET_PORT</span> <span class="o">=</span> <span class="mi">9999</span><span class="p">;</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc ...</span></pre></div>
-                        <a class="btn primary xsmall" href="/network002.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/network001.html">socket编程(1):单线程tcp服务器/客户端</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2013-09-17T15:30:00">
-        <i class="icon-calendar"></i>Tue 17 September 2013
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/network.html"><i class="icon-folder-open"></i>network</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/network.html"><i class="icon-tag"></i>network</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p><strong>tcp的单线程socket比较简单，以下是GNU/Linux环境下socket通讯的测试，分为C++版本和Python版本。</strong></p>
-<div class="section" id="id1">
-<h2>服务器：</h2>
-<p>流程：创建socket-绑定端口-监听-获取连接-读写操作-关闭连接并结束</p>
-<p><strong>C++版本：</strong></p>
-<div class="highlight"><pre><span class="cp">#include &lt;cstdio&gt;</span>
-<span class="cp">#include &lt;cstdlib&gt;</span>
-<span class="cp">#include &lt;cstring&gt;</span>
-<span class="cp">#include &lt;cerrno&gt;</span>
-<span class="cp">#include &lt;unistd.h&gt;</span>
-<span class="cp">#include &lt;sys/types.h&gt;</span>
-<span class="cp">#include &lt;sys/socket.h&gt;</span>
-<span class="cp">#include &lt;netinet/in.h&gt;</span>
-<span class="cp">#include &lt;arpa/inet.h&gt;</span>
-
-<span class="c1">//定义缓冲区的大小</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXBUF</span> <span class="o">=</span> <span class="mi">4096</span><span class="p">;</span>
-<span class="c1">//定义端口号</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">SERVER_PORT</span> <span class="o">=</span> <span class="mi">9876</span><span class="p">;</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int ...</span></pre></div></div>
-                        <a class="btn primary xsmall" href="/network001.html">more ...</a>
+                <div class="summary"><p>今天看到乌云知识库关于XSS文章，心血来潮学了一下一些概念，还是蛮好玩的。^_^</p>
+<p>维基百科关于XSS的介绍在这里：</p>
+<blockquote>
+<a class="reference external" href="https://en.wikipedia.org/wiki/Cross-site_scripting">https://en.wikipedia.org/wiki/Cross-site_scripting</a></blockquote>
+<p>XSS的全称是Cross-site scripting，中文可以翻译为跨站脚本攻击。</p>
+<p>基本的入侵方式是在目标网页的生成过程中注入代码，
+然后让用户浏览目标网页，
+这个过程中目标网页的代码也就被执行了，
+达到目的。</p>
+<p>通常说来注入的代码为JavaScript，因为需要在客户端浏览器运行，
+所以可以是客户端脚本。
+不过也看到有些直接拿HTML来玩的。</p>
+<p>常见的有反射型XSS，DOM型XSS以及持续型XSS。</p>
+<div class="section" id="reflected">
+<h2>反射型(Reflected)</h2>
+<p>反射型的XSS基本流程如下：</p>
+<pre class="literal-block">
+1. 找到一个存在XSS漏洞的页面
+2. 通过构造URL，在目标页面的URL后追加注入的代码并绕过服务器过滤(如果有的话)
+3. 将构造出来的URL发布并引诱受害者点击
+4. 用户点击该URL，跳转到目标页面，服务器将注入的代码写入最终页面，返回用户浏览器
+</pre>
+<p>简单的例子：</p>
+<p>假设有一个页面接受用户的输入并将内容输出在原页面上，
+php代码如下(假设文件名是test.php)：</p>
+<div class="highlight"><pre><span class="cp">&lt;?php</span>
+ <span class="nv">$user_input</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">];</span>
+ <span class="k">echo ...</span></pre></div></div>
+                        <a class="btn primary xsmall" href="/xss_basic.html">more ...</a>
                 </div>
         </div>
         <hr />
@@ -277,11 +209,6 @@ window.onload=loadSentence();
 </a>
 </li>
 <li>
-<a href="/category/network.html">
-    <i class="icon-folder-open icon-large"></i>network
-</a>
-</li>
-<li>
 <a href="/category/python.html">
     <i class="icon-folder-open icon-large"></i>Python
 </a>
@@ -296,11 +223,16 @@ window.onload=loadSentence();
     <i class="icon-folder-open icon-large"></i>Vim
 </a>
 </li>
+<li>
+<a href="/category/web.html">
+    <i class="icon-folder-open icon-large"></i>web
+</a>
+</li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
-<li class="tag-2">
-    <a href="/tag/network.html">
-        <i class="icon-tag icon-large"></i>network
+<li class="tag-1">
+    <a href="/tag/arch.html">
+        <i class="icon-tag icon-large"></i>Arch
     </a>
 </li>
 <li class="tag-1">
@@ -309,28 +241,13 @@ window.onload=loadSentence();
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
     </a>
 </li>
 <li class="tag-2">
     <a href="/tag/cc.html">
         <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/arch.html">
-        <i class="icon-tag icon-large"></i>Arch
     </a>
 </li>
 <li class="tag-2">
@@ -339,13 +256,33 @@ window.onload=loadSentence();
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
     </a>
 </li>
 <li class="tag-4">
     <a href="/tag/md5.html">
         <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
     </a>
 </li>
 

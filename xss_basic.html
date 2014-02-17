@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>软件体系结构：N皇后问题系列整体实现方案</title>
+    <title>web概念学习：XSS跨站代码注入攻击</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="laoyi">
@@ -81,7 +81,7 @@
 						<i class="icon-folder-open icon-large"></i>Linux
 					</a>
                   </li>
-                  <li class="active">
+                  <li >
                     <a href="/category/python.html">
 						<i class="icon-folder-open icon-large"></i>Python
 					</a>
@@ -96,7 +96,7 @@
 						<i class="icon-folder-open icon-large"></i>Vim
 					</a>
                   </li>
-                  <li >
+                  <li class="active">
                     <a href="/category/web.html">
 						<i class="icon-folder-open icon-large"></i>web
 					</a>
@@ -122,8 +122,8 @@
                         <h1>
                                 <a href=""
                                         rel="bookmark"
-                                        title="Permalink to 软件体系结构：N皇后问题系列整体实现方案">
-                                        软件体系结构：N皇后问题系列整体实现方案
+                                        title="Permalink to web概念学习：XSS跨站代码注入攻击">
+                                        web概念学习：XSS跨站代码注入攻击
                                 </a>
                         </h1>
                 </header>
@@ -131,45 +131,130 @@
                 <div class="well">
 <footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2013-11-29T22:40:00">
-        <i class="icon-calendar"></i>Fri 29 November 2013
+<abbr class="published" title="2014-02-17T20:30:00">
+        <i class="icon-calendar"></i>Mon 17 February 2014
 </abbr>
 <span class="label">By</span>
 <a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
 <span class="label">Category</span>
-<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
+<a href="/category/web.html"><i class="icon-folder-open"></i>web</a>.
 
 
 <span class="label">Tags</span>
-	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
-	<a href="/tag/softwarearchitect.html"><i class="icon-tag"></i>SoftwareArchitect</a>
+	<a href="/tag/xss.html"><i class="icon-tag"></i>xss</a>
 </footer><!-- /.post-info -->                </div>
-                <p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
-<p><strong>使用的Python版本为2.7.3</strong></p>
-<p><strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
-<hr class="docutils" />
-<p>前面三篇博文粗略描述了N皇后问题的主要解决方案，由于四种风格（包括调用返回）归属同一个作业，因此将其整合在一个文件夹中并提取了部分共有模块。</p>
-<p><strong>main.py</strong></p>
-<p>此程序作为用户交互接口，接收用户输入参数，检测合法性并调用对应程序实现计算。</p>
-<p>通过构造命令行参数将N的值、重复计算的次数等数据传入对应模块中。</p>
-<p>使用os.system()系统函数直接调用其他运算程序。</p>
-<p><strong>checkOk.py</strong></p>
-<p>此模块作为公用模块存在，用于检测当前状态是否合法。</p>
-<p>内部是一个isOk函数，接收当前的棋盘状态，当前尝试摆放的位置，以及当前的层数。</p>
-<p>若当前位置可以摆放皇后，则返回True；若检测到冲突，则返回False。</p>
-<p><strong>pipe.py/blackboard.py/callReturn.py/traceback.py</strong></p>
-<p>分别是四个风格的主程序，接收命令行参数定义N以及测试的次数。</p>
-<p>内部调用了Python库的timeit模块，用于记录运行时间。</p>
-<p>另外调用返回风格使用了据传世界上最快的二进制法进行运算。</p>
-<p>本系列代码（上述六个源文件）在GNU/GPL v2协议下开放源代码以供交流学习。</p>
-<p>完整代码可在以下Github仓库获取：</p>
-<p><a class="reference external" href="https://github.com/scutLaoYi/software_architect">https://github.com/scutLaoYi/software_architect</a></p>
-<hr class="docutils" />
-<p>更多Python学习，推荐：</p>
+                <p>今天看到乌云知识库关于XSS文章，心血来潮学了一下一些概念，还是蛮好玩的。^_^</p>
+<p>维基百科关于XSS的介绍在这里：</p>
 <blockquote>
-<p>简明Python教程： <a class="reference external" href="http://www.2cto.com/shouce/pythonjc/index.html">http://www.2cto.com/shouce/pythonjc/index.html</a></p>
-<p>《Python基础教程》</p>
+<a class="reference external" href="https://en.wikipedia.org/wiki/Cross-site_scripting">https://en.wikipedia.org/wiki/Cross-site_scripting</a></blockquote>
+<p>XSS的全称是Cross-site scripting，中文可以翻译为跨站脚本攻击。</p>
+<p>基本的入侵方式是在目标网页的生成过程中注入代码，
+然后让用户浏览目标网页，
+这个过程中目标网页的代码也就被执行了，
+达到目的。</p>
+<p>通常说来注入的代码为JavaScript，因为需要在客户端浏览器运行，
+所以可以是客户端脚本。
+不过也看到有些直接拿HTML来玩的。</p>
+<p>常见的有反射型XSS，DOM型XSS以及持续型XSS。</p>
+<div class="section" id="reflected">
+<h2>反射型(Reflected)</h2>
+<p>反射型的XSS基本流程如下：</p>
+<pre class="literal-block">
+1. 找到一个存在XSS漏洞的页面
+2. 通过构造URL，在目标页面的URL后追加注入的代码并绕过服务器过滤(如果有的话)
+3. 将构造出来的URL发布并引诱受害者点击
+4. 用户点击该URL，跳转到目标页面，服务器将注入的代码写入最终页面，返回用户浏览器
+</pre>
+<p>简单的例子：</p>
+<p>假设有一个页面接受用户的输入并将内容输出在原页面上，
+php代码如下(假设文件名是test.php)：</p>
+<div class="highlight"><pre><span class="cp">&lt;?php</span>
+ <span class="nv">$user_input</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">];</span>
+ <span class="k">echo</span> <span class="s2">&quot;Hello! Input is: </span><span class="si">$user_input</span><span class="s2">&quot;</span><span class="p">;</span>
+ <span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+<p>php的双引号内参数会被替换为变量的值，因此user_input的内容会被显示在最终的浏览页面上。</p>
+<p>这个时候有趣的东西来了，如果构造一个URL像这样的话：</p>
+<blockquote>
+test.php?user_input=szy1993&lt;script&gt;alert(&quot;Hello,world!&quot;)&lt;/script&gt;</blockquote>
+<p>那么szy1993后面的JavaScript代码就会被注入到页面上了。</p>
+<p>而实际执行的时候页面首先会alert一个窗口，内容是Hello,world!</p>
+<p>当然没有人拿一个alert去干坏事，但发挥想象力这种漏洞可以产生无限可能。
+另外直接的明文URL太显眼，通过编码等方式可以把后面的内容改得面目全非，完全没有可读性，例如：</p>
+<blockquote>
+test.php?user_input=szy1993%3c%73%63%72%69%70%74%3e%61%6c%65%72%74%28%22%48%65%6c%6c%6f%2c%77%6f%72%6c%64%21%22%29%3c%2f%73%63%72%69%70%74%3e</blockquote>
+<p>题外话，写个C的小程序就可以快速转换了，把字母换成对应的ASCII码输出，注意是十六进制。</p>
+<p>反射型XSS的注入代码包含在用户的请求中，在服务器被处理，嵌入到页面并返回客户端。</p>
+</div>
+<div class="section" id="domxss">
+<h2>基于DOM的XSS代码注入</h2>
+<p>基于DOM的XSS与反射型XSS类似，
+区别在于这款XSS本身依赖JavaScript自身完成代码的注入。</p>
+<p>假设页面代码是这样的(index.html)：</p>
+<div class="highlight"><pre><span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;display&quot;</span><span class="nt">&gt;</span>initial code<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+    <span class="kd">var</span> <span class="nx">input</span><span class="o">=</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s2">&quot;input=&quot;</span><span class="p">)</span><span class="o">+</span><span class="mi">6</span><span class="p">);</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;display&quot;</span><span class="p">).</span><span class="nx">innerHTML</span><span class="o">=</span><span class="nx">input</span><span class="p">;</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+<p>通过JavaScript获取数据写到id为display的元素里。
+如下的URL：</p>
+<blockquote>
+index.html?input=abc</blockquote>
+<p>显示内容abc</p>
+<p>构造这样的URL：</p>
+<blockquote>
+index.html?input=abc&lt;script&gt;alert(&quot;hacked!&quot;);&lt;/script&gt;</blockquote>
+<p>就可以把代码注入到页面里去了。</p>
+<p>这种注入的优势在于代码没有经过服务器，
+因此更加难以通过服务器端的过滤进行处理。</p>
+<p>不过这种方式的XSS在现在的浏览器貌似都没有效果，
+博主在自行测试的时候不管是Linux下的Firefox或者Windows下的IE8都无法使用这种方式进行注入。</p>
+<p>所有代码均被直接编码并作为HTML内容文本输出。</p>
+<p>或者是博主拿键盘的姿势不对？</p>
+</div>
+<div class="section" id="persistent-xss">
+<h2>持续(Persistent)型XSS</h2>
+<p>方法类似，
+但注入的位置不同。</p>
+<p>持续型XSS将代码写入到某些稳定持续的存储设备上，
+例如数据库里。</p>
+<p>某些网站对用户的输入没有进行必要的过滤，
+因此允许携带代码的输入存储到数据库中。</p>
+<p>例如某些用户信息的表单，
+假设是一个textarea(我忘记是什么了)，
+用户输入的信息直接写入数据库。</p>
+<p>当其他人（管理员等）浏览记录时，
+数据库读取记录并显示到页面上，
+这个时候如果被注入了代码，
+则代码也会被提取并执行。</p>
+</div>
+<div class="section" id="xss">
+<h2>XSS的用途</h2>
+<p>用途甚为广泛，
+通过注入代码可以修改页面的内容，
+构造post到其他服务器的输入框，
+或者结合Ajax等技术可以窃取用户输入的帐号密码。</p>
+<p>另外，
+由于浏览器的Same Origin Policy(同源策略？随手意译的..)，
+正常情况下两个不同源的网页之间是不能共享用户数据的，例如敏感的cookie信息。</p>
+<p>但是通过XSS代码注入，
+由于没有跳转到其他站点上，
+因此可以绕过浏览器的SOP检测，
+窃取用户登录的cookie并伪造用户身份进入目标站点。</p>
+<p>貌似最近这门技术非常热门来着。</p>
+</div>
+<div class="section" id="id1">
+<h2>参考链接</h2>
+<p>主要参考了如下的站点介绍，
+同时又收获了好几个不错的技术站点。 ^_^</p>
+<blockquote>
+<p><a class="reference external" href="http://www.codeproject.com/Articles/573458/An-Absolute-Beginners-Tutorial-on-Cross-Site-Scrip">http://www.codeproject.com/Articles/573458/An-Absolute-Beginners-Tutorial-on-Cross-Site-Scrip</a></p>
+<p><a class="reference external" href="http://excess-xss.com/">http://excess-xss.com/</a></p>
+<p><a class="reference external" href="https://www.owasp.org/index.php/Cross-site_Scripting_%28XSS%29">https://www.owasp.org/index.php/Cross-site_Scripting_%28XSS%29</a></p>
+<p><a class="reference external" href="http://www.thegeekstuff.com/2012/02/xss-attack-examples/">http://www.thegeekstuff.com/2012/02/xss-attack-examples/</a></p>
 </blockquote>
+</div>
 
                 </div><!-- /.entry-content -->
         </article>

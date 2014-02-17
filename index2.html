@@ -82,11 +82,6 @@
 					</a>
                   </li>
                   <li >
-                    <a href="/category/network.html">
-						<i class="icon-folder-open icon-large"></i>network
-					</a>
-                  </li>
-                  <li >
                     <a href="/category/python.html">
 						<i class="icon-folder-open icon-large"></i>Python
 					</a>
@@ -99,6 +94,11 @@
                   <li >
                     <a href="/category/vim.html">
 						<i class="icon-folder-open icon-large"></i>Vim
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/web.html">
+						<i class="icon-folder-open icon-large"></i>web
 					</a>
                   </li>
 
@@ -116,6 +116,40 @@
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
+        <div class="article">
+                <h1><a href="/Arch002.html">Arch Linux学习：安装篇(二)</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-01-14T19:30:00">
+        <i class="icon-calendar"></i>Tue 14 January 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/arch.html"><i class="icon-tag"></i>Arch</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。</p>
+<hr class="docutils" />
+<p>当你看到这篇博文的时候，
+老逸的新系统已安装完毕，
+弹冠相庆！^_^</p>
+<p>替换掉原来恶心的win7+Ubuntu双系统，
+现在直接将整个硬盘重新分区并安装Arch Linux.</p>
+<p>分区如下:</p>
+<pre class="literal-block">
+NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+sda      8:0    0 298.1G  0 disk
+├─sda1   8:1    0   500M  0 part /boot
+├─sda2   8:2    0    50G  0 part /
+├─sda3   8:3    0     2G  0 part [SWAP ...</pre>
+                        <a class="btn primary xsmall" href="/Arch002.html">more ...</a>
+                </div>
+        </div>
+        <hr />
         <div class="article">
                 <h1><a href="/Arch001.html">Arch Linux学习：安装篇(一)</a></h1>
                 <div class="well small"><footer class="post-info">
@@ -508,39 +542,6 @@ Arch Linux提供了非常大的自由度和开放度供用户完全控制自己�
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/PythonExpe001.html">软件体系结构：N皇后问题系列之回溯法</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2013-10-31T22:30:00">
-        <i class="icon-calendar"></i>Thu 31 October 2013
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
-	<a href="/tag/softwarearchitect.html"><i class="icon-tag"></i>SoftwareArchitect</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
-<p><strong>使用的Python版本为2.7.3</strong></p>
-<p><strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
-<hr class="docutils" />
-<p>最近学习搞得有点杂，一怒之下一个月没打理个人主页了，有些事情就是这样，你越不管，时间越长，就越不想管。</p>
-<p>软件体系结构是本学期的课程之一，大作业是用几种奇怪的风格构造一个N皇后问题的求解器。</p>
-<p>由于没有限定语言，咱自然是Python搞起。正发愁前些日子学习了那么多的理论知识没地方实践，正好，这货拿来下菜！</p>
-<p><strong>风格一：回溯法</strong></p>
-<p>其实我真的研究了很久这个神乎其神的名字，有点文言文的味道。然而半晌发现这货说到底就是深搜。
-于是敲了一个递归的函数处理之，不加任何剪枝优化，回溯法原型就基本出来了。</p>
-<p>我们将棋盘横向切分为多个单独的层，显而易见，每一层只能放置一个皇后，且每一层都应该放置皇后。于是可以递归搜索每一层，找出所有可能位置。</p>
-<p>使用深度优先搜索算法，遍历每一层的所有位置，检查当前位置是否符合要求。如果不符合要求，继续搜索下一个位置；如果符合要求，则依据深度优先原则，递归调用函数自身搜索下一层所有位置，依此类推。算法的终止条件为搜索到达了棋盘的最底层，这时候如果找到了符合条件的位置 ...</p>
-                        <a class="btn primary xsmall" href="/PythonExpe001.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -593,11 +594,6 @@ window.onload=loadSentence();
 </a>
 </li>
 <li>
-<a href="/category/network.html">
-    <i class="icon-folder-open icon-large"></i>network
-</a>
-</li>
-<li>
 <a href="/category/python.html">
     <i class="icon-folder-open icon-large"></i>Python
 </a>
@@ -612,11 +608,16 @@ window.onload=loadSentence();
     <i class="icon-folder-open icon-large"></i>Vim
 </a>
 </li>
+<li>
+<a href="/category/web.html">
+    <i class="icon-folder-open icon-large"></i>web
+</a>
+</li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
-<li class="tag-2">
-    <a href="/tag/network.html">
-        <i class="icon-tag icon-large"></i>network
+<li class="tag-1">
+    <a href="/tag/arch.html">
+        <i class="icon-tag icon-large"></i>Arch
     </a>
 </li>
 <li class="tag-1">
@@ -625,28 +626,13 @@ window.onload=loadSentence();
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
     </a>
 </li>
 <li class="tag-2">
     <a href="/tag/cc.html">
         <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/arch.html">
-        <i class="icon-tag icon-large"></i>Arch
     </a>
 </li>
 <li class="tag-2">
@@ -655,13 +641,33 @@ window.onload=loadSentence();
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
     </a>
 </li>
 <li class="tag-4">
     <a href="/tag/md5.html">
         <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
     </a>
 </li>
 

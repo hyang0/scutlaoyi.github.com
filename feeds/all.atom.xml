@@ -1,5 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2014-02-16T21:30:00+08:00</updated><entry><title>C++学习(四)：线性表的奇技淫巧(二)</title><link href="/CppLearning004.html" rel="alternate"></link><updated>2014-02-16T21:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-02-16:CppLearning004.html</id><summary type="html">&lt;p&gt;这两天去玩了，
+<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2014-02-17T20:30:00+08:00</updated><entry><title>web概念学习：XSS跨站代码注入攻击</title><link href="/xss_basic.html" rel="alternate"></link><updated>2014-02-17T20:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-02-17:xss_basic.html</id><summary type="html">&lt;p&gt;今天看到乌云知识库关于XSS文章，心血来潮学了一下一些概念，还是蛮好玩的。^_^&lt;/p&gt;
+&lt;p&gt;维基百科关于XSS的介绍在这里：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;a class="reference external" href="https://en.wikipedia.org/wiki/Cross-site_scripting"&gt;https://en.wikipedia.org/wiki/Cross-site_scripting&lt;/a&gt;&lt;/blockquote&gt;
+&lt;p&gt;XSS的全称是Cross-site scripting，中文可以翻译为跨站脚本攻击。&lt;/p&gt;
+&lt;p&gt;基本的入侵方式是在目标网页的生成过程中注入代码，
+然后让用户浏览目标网页，
+这个过程中目标网页的代码也就被执行了，
+达到目的。&lt;/p&gt;
+&lt;p&gt;通常说来注入的代码为JavaScript，因为需要在客户端浏览器运行，
+所以可以是客户端脚本。
+不过也看到有些直接拿HTML来玩的。&lt;/p&gt;
+&lt;p&gt;常见的有反射型XSS，DOM型XSS以及持续型XSS。&lt;/p&gt;
+&lt;div class="section" id="reflected"&gt;
+&lt;h2&gt;反射型(Reflected)&lt;/h2&gt;
+&lt;p&gt;反射型的XSS基本流程如下：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+1. 找到一个存在XSS漏洞的页面
+2. 通过构造URL，在目标页面的URL后追加注入的代码并绕过服务器过滤(如果有的话)
+3. 将构造出来的URL发布并引诱受害者点击
+4. 用户点击该URL，跳转到目标页面，服务器将注入的代码写入最终页面，返回用户浏览器
+&lt;/pre&gt;
+&lt;p&gt;简单的例子：&lt;/p&gt;
+&lt;p&gt;假设有一个页面接受用户的输入并将内容输出在原页面上，
+php代码如下(假设文件名是test.php)：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+ &lt;span class="nv"&gt;$user_input&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$_GET&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;input&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+ &lt;span class="k"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Hello! Input is: &lt;/span&gt;&lt;span class="si"&gt;$user_input&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;php的双引号内参数会被替换为变量的值，因此user_input的内容会被显示在最终的浏览页面上。&lt;/p&gt;
+&lt;p&gt;这个时候有趣的东西来了，如果构造一个URL像这样的话：&lt;/p&gt;
+&lt;blockquote&gt;
+test.php?user_input=szy1993&amp;lt;script&amp;gt;alert(&amp;quot;Hello,world!&amp;quot;)&amp;lt;/script&amp;gt;&lt;/blockquote&gt;
+&lt;p&gt;那么szy1993后面的JavaScript代码就会被注入到页面上了。&lt;/p&gt;
+&lt;p&gt;而实际执行的时候页面首先会alert一个窗口，内容是Hello,world!&lt;/p&gt;
+&lt;p&gt;当然没有人拿一个alert去干坏事，但发挥想象力这种漏洞可以产生无限可能。
+另外直接的明文URL太显眼，通过编码等方式可以把后面的内容改得面目全非，完全没有可读性，例如：&lt;/p&gt;
+&lt;blockquote&gt;
+test.php?user_input=szy1993%3c%73%63%72%69%70%74%3e%61%6c%65%72%74%28%22%48%65%6c%6c%6f%2c%77%6f%72%6c%64%21%22%29%3c%2f%73%63%72%69%70%74%3e&lt;/blockquote&gt;
+&lt;p&gt;题外话，写个C的小程序就可以快速转换了，把字母换成对应的ASCII码输出，注意是十六进制。&lt;/p&gt;
+&lt;p&gt;反射型XSS的注入代码包含在用户的请求中，在服务器被处理，嵌入到页面并返回客户端。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="domxss"&gt;
+&lt;h2&gt;基于DOM的XSS代码注入&lt;/h2&gt;
+&lt;p&gt;基于DOM的XSS与反射型XSS类似，
+区别在于这款XSS本身依赖JavaScript自身完成代码的注入。&lt;/p&gt;
+&lt;p&gt;假设页面代码是这样的(index.html)：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;p&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;display&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;initial code&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;input&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nx"&gt;location&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;href&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;substring&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;location&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;href&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;indexOf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;input=&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;getElementById&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;display&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;innerHTML&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nx"&gt;input&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;通过JavaScript获取数据写到id为display的元素里。
+如下的URL：&lt;/p&gt;
+&lt;blockquote&gt;
+index.html?input=abc&lt;/blockquote&gt;
+&lt;p&gt;显示内容abc&lt;/p&gt;
+&lt;p&gt;构造这样的URL：&lt;/p&gt;
+&lt;blockquote&gt;
+index.html?input=abc&amp;lt;script&amp;gt;alert(&amp;quot;hacked!&amp;quot;);&amp;lt;/script&amp;gt;&lt;/blockquote&gt;
+&lt;p&gt;就可以把代码注入到页面里去了。&lt;/p&gt;
+&lt;p&gt;这种注入的优势在于代码没有经过服务器，
+因此更加难以通过服务器端的过滤进行处理。&lt;/p&gt;
+&lt;p&gt;不过这种方式的XSS在现在的浏览器貌似都没有效果，
+博主在自行测试的时候不管是Linux下的Firefox或者Windows下的IE8都无法使用这种方式进行注入。&lt;/p&gt;
+&lt;p&gt;所有代码均被直接编码并作为HTML内容文本输出。&lt;/p&gt;
+&lt;p&gt;或者是博主拿键盘的姿势不对？&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="persistent-xss"&gt;
+&lt;h2&gt;持续(Persistent)型XSS&lt;/h2&gt;
+&lt;p&gt;方法类似，
+但注入的位置不同。&lt;/p&gt;
+&lt;p&gt;持续型XSS将代码写入到某些稳定持续的存储设备上，
+例如数据库里。&lt;/p&gt;
+&lt;p&gt;某些网站对用户的输入没有进行必要的过滤，
+因此允许携带代码的输入存储到数据库中。&lt;/p&gt;
+&lt;p&gt;例如某些用户信息的表单，
+假设是一个textarea(我忘记是什么了)，
+用户输入的信息直接写入数据库。&lt;/p&gt;
+&lt;p&gt;当其他人（管理员等）浏览记录时，
+数据库读取记录并显示到页面上，
+这个时候如果被注入了代码，
+则代码也会被提取并执行。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="xss"&gt;
+&lt;h2&gt;XSS的用途&lt;/h2&gt;
+&lt;p&gt;用途甚为广泛，
+通过注入代码可以修改页面的内容，
+构造post到其他服务器的输入框，
+或者结合Ajax等技术可以窃取用户输入的帐号密码。&lt;/p&gt;
+&lt;p&gt;另外，
+由于浏览器的Same Origin Policy(同源策略？随手意译的..)，
+正常情况下两个不同源的网页之间是不能共享用户数据的，例如敏感的cookie信息。&lt;/p&gt;
+&lt;p&gt;但是通过XSS代码注入，
+由于没有跳转到其他站点上，
+因此可以绕过浏览器的SOP检测，
+窃取用户登录的cookie并伪造用户身份进入目标站点。&lt;/p&gt;
+&lt;p&gt;貌似最近这门技术非常热门来着。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;参考链接&lt;/h2&gt;
+&lt;p&gt;主要参考了如下的站点介绍，
+同时又收获了好几个不错的技术站点。 ^_^&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://www.codeproject.com/Articles/573458/An-Absolute-Beginners-Tutorial-on-Cross-Site-Scrip"&gt;http://www.codeproject.com/Articles/573458/An-Absolute-Beginners-Tutorial-on-Cross-Site-Scrip&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://excess-xss.com/"&gt;http://excess-xss.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://www.owasp.org/index.php/Cross-site_Scripting_%28XSS%29"&gt;https://www.owasp.org/index.php/Cross-site_Scripting_%28XSS%29&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://www.thegeekstuff.com/2012/02/xss-attack-examples/"&gt;http://www.thegeekstuff.com/2012/02/xss-attack-examples/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+</summary><category term="xss"></category></entry><entry><title>C++学习(四)：线性表的奇技淫巧(二)</title><link href="/CppLearning004.html" rel="alternate"></link><updated>2014-02-16T21:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-02-16:CppLearning004.html</id><summary type="html">&lt;p&gt;这两天去玩了，
 进度比较慢。&lt;/p&gt;
 &lt;p&gt;无序线性表终于算是搞了个大概，
 有些过于繁琐的就没有管了。&lt;/p&gt;
@@ -3383,7 +3495,7 @@ write用于写入数据，参数中设定写入的字符串&lt;/blockquote&gt;
 &lt;p&gt;Python版本就不挂上来了，因为我还没写 ^_^&lt;/p&gt;
 &lt;hr class="docutils" /&gt;
 &lt;p&gt;下一篇：可能会是邮件服务器或者代理服务器神马的&lt;/p&gt;
-</summary><category term="network"></category></entry><entry><title>Python 笔记（五）</title><link href="/Python005.html" rel="alternate"></link><updated>2013-09-25T09:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2013-09-25:Python005.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。&lt;/strong&gt;&lt;/p&gt;
+</summary><category term="socket"></category></entry><entry><title>Python 笔记（五）</title><link href="/Python005.html" rel="alternate"></link><updated>2013-09-25T09:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2013-09-25:Python005.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;使用的Python版本为2.7.3，&lt;/strong&gt;
 &lt;strong&gt;在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试&lt;/strong&gt;&lt;/p&gt;
 &lt;hr class="docutils" /&gt;
@@ -3763,7 +3875,7 @@ write用于写入数据，参数中设定写入的字符串&lt;/blockquote&gt;
 &lt;p&gt;可随意使用C++版本与Python版本的客户机/服务器进行组合通讯，没有任何问题，这一方面也体现了网络通讯的方便之处，面向的是协议，而对实现协议的编程语言没有要求。&lt;/p&gt;
 &lt;hr class="docutils" /&gt;
 &lt;p&gt;下一篇：（可能是）多线程socket编程&lt;/p&gt;
-</summary><category term="network"></category></entry><entry><title>Python 笔记（四）</title><link href="/Python004.html" rel="alternate"></link><updated>2013-09-23T15:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2013-09-23:Python004.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。&lt;/strong&gt;&lt;/p&gt;
+</summary><category term="socket"></category></entry><entry><title>Python 笔记（四）</title><link href="/Python004.html" rel="alternate"></link><updated>2013-09-23T15:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2013-09-23:Python004.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;使用的Python版本为2.7.3，&lt;/strong&gt;
 &lt;strong&gt;在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试&lt;/strong&gt;&lt;/p&gt;
 &lt;hr class="docutils" /&gt;
@@ -4210,7 +4322,7 @@ write用于写入数据，参数中设定写入的字符串&lt;/blockquote&gt;
 &lt;hr class="docutils" /&gt;
 &lt;p&gt;&lt;strong&gt;下一篇：socket单线程udp服务器和客户机&lt;/strong&gt;&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="network"></category></entry><entry><title>Python 笔记（二）</title><link href="/Python002.html" rel="alternate"></link><updated>2013-09-13T22:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2013-09-13:Python002.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。&lt;/strong&gt;&lt;/p&gt;
+</summary><category term="socket"></category></entry><entry><title>Python 笔记（二）</title><link href="/Python002.html" rel="alternate"></link><updated>2013-09-13T22:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2013-09-13:Python002.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;使用的Python版本为2.7.3，&lt;/strong&gt;
 &lt;strong&gt;在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试&lt;/strong&gt;&lt;/p&gt;
 &lt;hr class="docutils" /&gt;

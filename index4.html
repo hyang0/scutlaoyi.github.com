@@ -82,11 +82,6 @@
 					</a>
                   </li>
                   <li >
-                    <a href="/category/network.html">
-						<i class="icon-folder-open icon-large"></i>network
-					</a>
-                  </li>
-                  <li >
                     <a href="/category/python.html">
 						<i class="icon-folder-open icon-large"></i>Python
 					</a>
@@ -99,6 +94,11 @@
                   <li >
                     <a href="/category/vim.html">
 						<i class="icon-folder-open icon-large"></i>Vim
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/web.html">
+						<i class="icon-folder-open icon-large"></i>web
 					</a>
                   </li>
 
@@ -116,6 +116,49 @@
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
+        <div class="article">
+                <h1><a href="/Python001.html">Python 笔记（一）</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-09-11T15:30:00">
+        <i class="icon-calendar"></i>Wed 11 September 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3，</strong>
+<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<p><strong>脚本声明和中文编码</strong></p>
+<p>在Python脚本的首行和次行添加以下命令可在命令行调用，并设置编码为中文gb2312：</p>
+<div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<span class="c"># -*- coding:gb2312 -*-</span>
+</pre></div>
+<p>Python的注释以#开始，单行注释</p>
+<p>单句Python语句占一行时结尾不用任何符号，多句时用分号分割，但极不推荐此种风格。</p>
+<p><strong>字符串</strong></p>
+<p>字符串有三种写法，单引号或双引号包围的单行字符串（可用反斜杠连接多行），或者三个单引号或双引号跨多行：</p>
+<div class="highlight"><pre><span class="c">#简单的输出语句，包含三种字符串形式</span>
+<span class="k">print</span> <span class="s">&#39;Hello,python!&#39;</span>
+<span class="k">print</span> <span class="s">u&quot;中文是可以支持的.&quot;</span>
+<span class="k">print</span> <span class="s">u&#39;&#39;&#39;字符串的第三种格式</span>
+<span class="s">跨行字符串:用三个单引号或双引号约束。</span>
+<span class="s">前方的u使该字符串作为unicode编码，正确处理中文。</span>
+<span class="s">&#39;&#39;&#39;</span>
+</pre></div>
+<p><strong>原始字符串</strong></p>
+<div class="highlight"><pre><span class="c">#普通字符串和原始字符串（r ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/Python001.html">more ...</a>
+                </div>
+        </div>
+        <hr />
         <div class="article">
                 <h1><a href="/learning Git 2.html">Git 与 GitHub 不完全教程（二）</a></h1>
                 <div class="well small"><footer class="post-info">
@@ -257,11 +300,6 @@ window.onload=loadSentence();
 </a>
 </li>
 <li>
-<a href="/category/network.html">
-    <i class="icon-folder-open icon-large"></i>network
-</a>
-</li>
-<li>
 <a href="/category/python.html">
     <i class="icon-folder-open icon-large"></i>Python
 </a>
@@ -276,11 +314,16 @@ window.onload=loadSentence();
     <i class="icon-folder-open icon-large"></i>Vim
 </a>
 </li>
+<li>
+<a href="/category/web.html">
+    <i class="icon-folder-open icon-large"></i>web
+</a>
+</li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
-<li class="tag-2">
-    <a href="/tag/network.html">
-        <i class="icon-tag icon-large"></i>network
+<li class="tag-1">
+    <a href="/tag/arch.html">
+        <i class="icon-tag icon-large"></i>Arch
     </a>
 </li>
 <li class="tag-1">
@@ -289,28 +332,13 @@ window.onload=loadSentence();
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
     </a>
 </li>
 <li class="tag-2">
     <a href="/tag/cc.html">
         <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/arch.html">
-        <i class="icon-tag icon-large"></i>Arch
     </a>
 </li>
 <li class="tag-2">
@@ -319,13 +347,33 @@ window.onload=loadSentence();
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
     </a>
 </li>
 <li class="tag-4">
     <a href="/tag/md5.html">
         <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
     </a>
 </li>
 
