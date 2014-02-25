@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>C++学习(五)：有序线性表的点滴记录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="laoyi">
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="/theme/css/font-awesome.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/theme/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/theme/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/theme/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/theme/images/apple-touch-icon-114x114.png">
+
+    <link href="/" type="application/atom+xml" rel="alternate" title="老逸的个人站 ATOM Feed" />
+    <link href="/feeds/all.rss.xml" type="application/atom+xml" rel="alternate" title="老逸的个人站 RSS Feed" />
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">老逸的个人站 </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                <li><a href="/pages/about.html">About</a></li>
+                          <li class="divider-vertical"></li>
+                  <li class="active">
+                    <a href="/category/cpp.html">
+						<i class="icon-folder-open icon-large"></i>Cpp
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/git.html">
+						<i class="icon-folder-open icon-large"></i>git
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/linux.html">
+						<i class="icon-folder-open icon-large"></i>Linux
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/python.html">
+						<i class="icon-folder-open icon-large"></i>Python
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/tools.html">
+						<i class="icon-folder-open icon-large"></i>Tools
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/vim.html">
+						<i class="icon-folder-open icon-large"></i>Vim
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/web.html">
+						<i class="icon-folder-open icon-large"></i>web
+					</a>
+                  </li>
+
+                          <ul class="nav pull-right">
+                                <li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+                          </ul>
+
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="span9" id="content">
+<section id="content">
+        <article>
+                <header>
+                        <h1>
+                                <a href=""
+                                        rel="bookmark"
+                                        title="Permalink to C++学习(五)：有序线性表的点滴记录">
+                                        C++学习(五)：有序线性表的点滴记录
+                                </a>
+                        </h1>
+                </header>
+                <div class="entry-content">
+                <div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-02-25T16:30:00">
+        <i class="icon-calendar"></i>Tue 25 February 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/cpp.html"><i class="icon-folder-open"></i>Cpp</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
+</footer><!-- /.post-info -->                </div>
+                <p>在线性表的基础上开始构建有序线性表。
+使用的是单next指针结构的线性表。</p>
+<p>后续将考虑在数组的基础上构建能够高效插入和搜索的数据结构。</p>
+<div class="section" id="id1">
+<h2>基本结构</h2>
+<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">SortedLinklist</span><span class="o">:</span> <span class="k">public</span> <span class="n">Linklist</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span>
+<span class="p">{</span>
+    <span class="nl">public:</span>
+    <span class="n">SortedLinklist</span><span class="p">(</span><span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">comp</span><span class="p">)(</span><span class="n">Type</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="n">Type</span> <span class="o">*</span><span class="n">b</span><span class="p">));</span>
+    <span class="o">~</span><span class="n">SortedLinklist</span><span class="p">();</span>
+
+    <span class="nl">protected:</span>
+    <span class="kt">bool</span> <span class="nf">insertafter</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">,</span> <span class="n">Type</span> <span class="o">&amp;</span><span class="n">data</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="nf">push</span><span class="p">(</span><span class="n">Type</span> <span class="o">&amp;</span><span class="n">data</span><span class="p">);</span>
+
+    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">comparefunc</span><span class="p">)(</span><span class="n">Type</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="n">Type</span> <span class="o">*</span><span class="n">b</span><span class="p">);</span>
+
+    <span class="nl">public:</span>
+    <span class="kt">void</span> <span class="nf">append</span><span class="p">(</span><span class="n">Type</span> <span class="o">&amp;</span><span class="n">value</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="nf">mergewithotherlist</span><span class="p">(</span><span class="n">SortedLinklist</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="nf">removeduplicates</span><span class="p">();</span>
+    <span class="n">SortedLinklist</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">intersectionwith</span><span class="p">(</span><span class="n">SortedLinklist</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">anotherlist</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+<p>从基类直接继承了内置的链表数据结构，
+在此基础上首先屏蔽了部分随机插入的函数接口，转为protected，
+其次重载了基类的插入函数，
+提供有序插入的功能。</p>
+<p>其次，
+添加了一个protected的函数指针成员，
+在构造函数中接收外部传入的比较函数指针，
+并储存到该成员中。
+达到的目的是可以自定义排序，
+此举是收到STL中qsort的启发，
+其实标准库中的很多东西都能够自定义比较函数。</p>
+<p>最后加入了若干有序线性表独有的新函数，
+合并，去重，以及查找与另一有序线性表的交集。</p>
+</div>
+<div class="section" id="id2">
+<h2>有序的实现</h2>
+<p>非常简单的做法，
+在插入新元素时，
+从头部开始搜索直到找到一个比该元素大的元素，
+或者找到链表末尾，
+那么就在该节点前插入目标元素。</p>
+<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">SortedLinklist</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;::</span><span class="n">append</span><span class="p">(</span><span class="n">Type</span> <span class="o">&amp;</span><span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Node</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">head</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">ptr</span><span class="o">-&gt;</span><span class="n">nex</span> <span class="o">&amp;&amp;</span> <span class="n">comparefunc</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="n">ptr</span><span class="o">-&gt;</span><span class="n">nex</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">),</span><span class="o">&amp;</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">ptr</span> <span class="o">=</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">nex</span><span class="p">;</span>
+
+    <span class="n">Node</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">tempnex</span> <span class="o">=</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">nex</span><span class="p">;</span>
+    <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">nex</span> <span class="o">=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">freelist</span><span class="o">-&gt;</span><span class="n">newnode</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+    <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">nex</span><span class="o">-&gt;</span><span class="n">nex</span> <span class="o">=</span> <span class="n">tempnex</span><span class="p">;</span>
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="id3">
+<h2>合并两个有序线性表</h2>
+<p>基本套路是从两个表的头开始，
+每次比较当前的两个指针，
+将小的提取出来并将对应指针往前移动。
+直到某个指针到达尾部。</p>
+<p>最后处理剩下的(如果有)另一个链表的剩余元素，
+全部接到新的链表中即可。</p>
+<p>博主的解决方案将传入的链表节点全部有序插入到原链表中，
+最终的结果是两个链表合并为同一个链表，
+传入的链表将被清空。</p>
+<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">SortedLinklist</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;::</span><span class="n">mergewithotherlist</span><span class="p">(</span><span class="n">SortedLinklist</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">listptr</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">assert</span><span class="p">(</span><span class="k">this</span> <span class="o">!=</span> <span class="n">listptr</span><span class="p">);</span>
+    <span class="c1">//two pointer for each list and one for the new list.</span>
+    <span class="n">Node</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">ptra</span> <span class="o">=</span> <span class="n">listptr</span><span class="o">-&gt;</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">nex</span><span class="p">;</span>
+    <span class="n">Node</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">ptrb</span> <span class="o">=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">nex</span><span class="p">;</span>
+    <span class="n">Node</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">traveller</span> <span class="o">=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">head</span><span class="p">;</span>
+
+    <span class="c1">//merge, smaller first</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">ptra</span> <span class="o">&amp;&amp;</span> <span class="n">ptrb</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">comparefunc</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="n">ptra</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">),</span> <span class="o">&amp;</span><span class="p">(</span><span class="n">ptrb</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">traveller</span><span class="o">-&gt;</span><span class="n">nex</span> <span class="o">=</span> <span class="n">ptrb</span><span class="p">;</span>
+            <span class="n">ptrb</span> <span class="o">=</span> <span class="n">ptrb</span><span class="o">-&gt;</span><span class="n">nex</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="n">traveller</span><span class="o">-&gt;</span><span class="n">nex</span> <span class="o">=</span> <span class="n">ptra</span><span class="p">;</span>
+            <span class="n">ptra</span> <span class="o">=</span> <span class="n">ptra</span><span class="o">-&gt;</span><span class="n">nex</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">traveller</span> <span class="o">=</span> <span class="n">traveller</span><span class="o">-&gt;</span><span class="n">nex</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">//some nodes left, append to the end of list</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">ptra</span><span class="p">)</span>
+        <span class="n">traveller</span><span class="o">-&gt;</span><span class="n">nex</span> <span class="o">=</span> <span class="n">ptra</span><span class="p">;</span>
+    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">ptrb</span><span class="p">)</span>
+        <span class="n">traveller</span><span class="o">-&gt;</span><span class="n">nex</span> <span class="o">=</span> <span class="n">ptrb</span><span class="p">;</span>
+
+    <span class="c1">//clear the other list</span>
+    <span class="n">listptr</span><span class="o">-&gt;</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">nex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="id4">
+<h2>去重的实现</h2>
+<p>目标是去除所有重复的元素。
+处理的方式是遍历链表，
+将所有与前一个元素相同的元素节点删除。</p>
+<p>需要关注一下头节点，
+以及链表为空的情况。</p>
+<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">SortedLinklist</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;::</span><span class="n">removeduplicates</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">Node</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">nex</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">ptr</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="n">Node</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">nexptr</span> <span class="o">=</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">nex</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">nexptr</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">comparefunc</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="n">nexptr</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">),</span> <span class="o">&amp;</span><span class="p">(</span><span class="n">ptr</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">)))</span>
+        <span class="p">{</span>
+            <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">nex</span> <span class="o">=</span> <span class="n">nexptr</span><span class="o">-&gt;</span><span class="n">nex</span><span class="p">;</span>
+            <span class="k">this</span><span class="o">-&gt;</span><span class="n">freelist</span><span class="o">-&gt;</span><span class="n">delnode</span><span class="p">(</span><span class="n">nexptr</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+            <span class="n">ptr</span> <span class="o">=</span> <span class="n">nexptr</span><span class="p">;</span>
+        <span class="n">nexptr</span> <span class="o">=</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">nex</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="id5">
+<h2>检测与其他有序链表的交集</h2>
+<p>由于是有序的因此比较简单，
+方法类似于合并，但这里是找到所有相同的元素。</p>
+<p>因此使用两个指针，从头部开始，
+依次比较指针指向的元素，
+如果相同，则找到一个相交的节点，记录;
+如果不同，则指向小元素的指针前移。
+直到某个指针指向表尾。</p>
+<p>博主在敲代码的时候忘记在找到相交元素后两个指针需要同时前移，
+卡了一段时间。
+因此做事还是要小心谨慎为好。</p>
+<div class="highlight"><pre><span class="k">while</span><span class="p">(</span><span class="n">taila</span>  <span class="o">&amp;&amp;</span> <span class="n">tailb</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">cp</span> <span class="o">=</span> <span class="n">comparefunc</span><span class="p">(</span>
+            <span class="o">&amp;</span><span class="p">(</span><span class="n">taila</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">),</span>
+            <span class="o">&amp;</span><span class="p">(</span><span class="n">tailb</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">)</span>
+            <span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">cp</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">newtail</span><span class="o">-&gt;</span><span class="n">nex</span> <span class="o">=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">freelist</span><span class="o">-&gt;</span><span class="n">newnode</span><span class="p">(</span><span class="n">taila</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">);</span>
+        <span class="n">newtail</span> <span class="o">=</span> <span class="n">newtail</span><span class="o">-&gt;</span><span class="n">nex</span><span class="p">;</span>
+        <span class="n">taila</span> <span class="o">=</span> <span class="n">taila</span><span class="o">-&gt;</span><span class="n">nex</span><span class="p">;</span>
+        <span class="n">tailb</span> <span class="o">=</span> <span class="n">tailb</span><span class="o">-&gt;</span><span class="n">nex</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">cp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">tailb</span> <span class="o">=</span> <span class="n">tailb</span><span class="o">-&gt;</span><span class="n">nex</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="n">taila</span> <span class="o">=</span> <span class="n">taila</span><span class="o">-&gt;</span><span class="n">nex</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="id6">
+<h2>杂记</h2>
+<p><strong>关于this指针</strong></p>
+<blockquote>
+<p>遇到一个犄角旮旯的问题：</p>
+<p>在类模板的情况下，
+子类继承父类，
+在子类中调用父类的protected或public成员时，
+需要显式指定this指针，
+否则编译报错，
+g++中显示未声明的符号。</p>
+<p>博主被这个问题卡了一段时间，
+测试时将变量复制并粘贴一遍到子类中则可以解决问题，
+否则一直显示未声明符号。</p>
+<p>最后在stackoverflow上找到了问题的答案。</p>
+<p>由于涉及到编程语言C++的内部结构问题，
+貌似有点复杂，
+因此没有找到问题的原理。</p>
+<p>反正加一个this-&gt;就可以了。
+(-_-)</p>
+</blockquote>
+</div>
+
+                </div><!-- /.entry-content -->
+        </article>
+        <license>
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
+        </a>
+        <br/>
+        This work by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.scutlaoyi.tk" property="cc:attributionName" rel="cc:attributionURL">scutLaoYi</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+        </license>
+</section>
+        </div><!--/span-->
+
+                <div class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+<li class="nav-header"><h4>每页一句</h4></li>
+<li
+id="page-sentence">当你看到这句的时候，说明每页一句载入失败...烦请告知博主!谢谢!(^_^)</li>
+<script src="/pagesentence/sentence.js"></script>
+<script>
+function loadSentence()
+{
+    document.getElementById("page-sentence").innerHTML = generateSentence();
+}
+window.onload=loadSentence();
+</script>
+<li class="nav-header"><h4><i class="icon-external-link"></i>link</h4></li>
+    <li><a href="http://github.com/scutlaoyi"><i class="icon-external-link"></i>my github</a></li>
+<li class="nav-header"><h4><i class="icon-home icon-large"></i> social</h4></li>
+<!--<li><a href="/" rel="alternate"><i
+    class="icon-bookmark icon-large"></i>atom feed</a></li>-->
+<li><a href="/feeds/all.rss.xml" rel="alternate"><i class="icon-bookmark icon-large"></i>rss feed</a></li>
+    <li><a href=""><i class="icon--sign icon-large"></i></a></li>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>Categories</h4></li>
+<li>
+<a href="/category/cpp.html">
+    <i class="icon-folder-open icon-large"></i>Cpp
+</a>
+</li>
+<li>
+<a href="/category/git.html">
+    <i class="icon-folder-open icon-large"></i>git
+</a>
+</li>
+<li>
+<a href="/category/linux.html">
+    <i class="icon-folder-open icon-large"></i>Linux
+</a>
+</li>
+<li>
+<a href="/category/python.html">
+    <i class="icon-folder-open icon-large"></i>Python
+</a>
+</li>
+<li>
+<a href="/category/tools.html">
+    <i class="icon-folder-open icon-large"></i>Tools
+</a>
+</li>
+<li>
+<a href="/category/vim.html">
+    <i class="icon-folder-open icon-large"></i>Vim
+</a>
+</li>
+<li>
+<a href="/category/web.html">
+    <i class="icon-folder-open icon-large"></i>web
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/arch.html">
+        <i class="icon-tag icon-large"></i>Arch
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <address id="about">
+                Proudly powered by <a href="http://pelican.notmyidea.org/">Pelican <i class="icon-external-link"></i></a>,
+                                which takes great advantage of <a href="http://python.org">Python <i class="icon-external-link"></i></a>.
+        </address><!-- /#about -->
+
+        <p>The theme is from <a href="http://twitter.github.com/bootstrap/">Bootstrap from Twitter <i class="icon-external-link"></i></a>,
+                   and <a href="http://fortawesome.github.com/Font-Awesome/">Font-Awesome <i class="icon-external-link"></i></a>, thanks!</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-43833562-1']);
+	  _gaq.push(['_trackPageview']);
+	  
+	  (function() {
+
+	       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				     })();
+
+</script>
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="/theme/js/bootstrap.min.js"></script>
+  </body>
+</html>

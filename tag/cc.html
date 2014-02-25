@@ -117,6 +117,48 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/CppLearning005.html">C++学习(五)：有序线性表的点滴记录</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-02-25T16:30:00">
+        <i class="icon-calendar"></i>Tue 25 February 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/cpp.html"><i class="icon-folder-open"></i>Cpp</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>在线性表的基础上开始构建有序线性表。
+使用的是单next指针结构的线性表。</p>
+<p>后续将考虑在数组的基础上构建能够高效插入和搜索的数据结构。</p>
+<div class="section" id="id1">
+<h2>基本结构</h2>
+<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">SortedLinklist</span><span class="o">:</span> <span class="k">public</span> <span class="n">Linklist</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span>
+<span class="p">{</span>
+    <span class="nl">public:</span>
+    <span class="n">SortedLinklist</span><span class="p">(</span><span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">comp</span><span class="p">)(</span><span class="n">Type</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="n">Type</span> <span class="o">*</span><span class="n">b</span><span class="p">));</span>
+    <span class="o">~</span><span class="n">SortedLinklist</span><span class="p">();</span>
+
+    <span class="nl">protected:</span>
+    <span class="kt">bool</span> <span class="nf">insertafter</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">,</span> <span class="n">Type</span> <span class="o">&amp;</span><span class="n">data</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="nf">push</span><span class="p">(</span><span class="n">Type</span> <span class="o">&amp;</span><span class="n">data</span><span class="p">);</span>
+
+    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">comparefunc</span><span class="p">)(</span><span class="n">Type</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="n">Type</span> <span class="o">*</span><span class="n">b</span><span class="p">);</span>
+
+    <span class="nl">public:</span>
+    <span class="kt">void</span> <span class="nf">append</span><span class="p">(</span><span class="n">Type</span> <span class="o">&amp;</span><span class="n">value</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="nf">mergewithotherlist</span><span class="p">(</span><span class="n">SortedLinklist</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="nf">removeduplicates ...</span></pre></div></div>
+                        <a class="btn primary xsmall" href="/CppLearning005.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/CppLearning004.html">C++学习(四)：线性表的奇技淫巧(二)</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -390,33 +432,8 @@ window.onload=loadSentence();
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
 <li class="tag-1">
-    <a href="/tag/arch.html">
-        <i class="icon-tag icon-large"></i>Arch
-    </a>
-</li>
-<li class="tag-1">
     <a href="/tag/python.html">
         <i class="icon-tag icon-large"></i>Python
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
     </a>
 </li>
 <li class="tag-4">
@@ -427,6 +444,21 @@ window.onload=loadSentence();
 <li class="tag-4">
     <a href="/tag/vim.html">
         <i class="icon-tag icon-large"></i>Vim
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/arch.html">
+        <i class="icon-tag icon-large"></i>Arch
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
     </a>
 </li>
 <li class="tag-4">
@@ -442,6 +474,16 @@ window.onload=loadSentence();
 <li class="tag-2">
     <a href="/tag/softwarearchitect.html">
         <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
     </a>
 </li>
 
