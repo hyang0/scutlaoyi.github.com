@@ -34,7 +34,8 @@ var sentences = new Array(
         "If you live each day as if it was your last, someday you'll most certainly be right. --Steve Jobs",
         "But we are hackers, hackers have black terminals with green font colors. --John Nunemaker",
         "每一个优秀的人，都有一段沉默的时光。那一段时光，是付出了许多努力，忍受孤独和寂寞，不抱怨不诉苦，日后说起时，连自己都能被感动的日子。",
-        "宪法原则中最重要的是“自由思想的原则”——不是确保我们喜欢的思想的自由，而是确保我们所憎恨的思想的自由。"
+        "宪法原则中最重要的是“自由思想的原则”——不是确保我们喜欢的思想的自由，而是确保我们所憎恨的思想的自由。",
+        "你现在要学的，就是如何不让自己的心倾注在一个地方。因为赌注越大，你会越输不起。"
         );
 function generateSentence()
 {
