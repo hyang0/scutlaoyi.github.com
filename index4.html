@@ -117,6 +117,47 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/network001.html">socket编程(1):单线程tcp服务器/客户端</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-09-17T15:30:00">
+        <i class="icon-calendar"></i>Tue 17 September 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/web.html"><i class="icon-folder-open"></i>web</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/socket.html"><i class="icon-tag"></i>socket</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>tcp的单线程socket比较简单，以下是GNU/Linux环境下socket通讯的测试，分为C++版本和Python版本。</strong></p>
+<div class="section" id="id1">
+<h2>服务器：</h2>
+<p>流程：创建socket-绑定端口-监听-获取连接-读写操作-关闭连接并结束</p>
+<p><strong>C++版本：</strong></p>
+<div class="highlight"><pre><span class="cp">#include &lt;cstdio&gt;</span>
+<span class="cp">#include &lt;cstdlib&gt;</span>
+<span class="cp">#include &lt;cstring&gt;</span>
+<span class="cp">#include &lt;cerrno&gt;</span>
+<span class="cp">#include &lt;unistd.h&gt;</span>
+<span class="cp">#include &lt;sys/types.h&gt;</span>
+<span class="cp">#include &lt;sys/socket.h&gt;</span>
+<span class="cp">#include &lt;netinet/in.h&gt;</span>
+<span class="cp">#include &lt;arpa/inet.h&gt;</span>
+
+<span class="c1">//定义缓冲区的大小</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXBUF</span> <span class="o">=</span> <span class="mi">4096</span><span class="p">;</span>
+<span class="c1">//定义端口号</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">SERVER_PORT</span> <span class="o">=</span> <span class="mi">9876</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int ...</span></pre></div></div>
+                        <a class="btn primary xsmall" href="/network001.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/Python002.html">Python 笔记（二）</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -363,19 +404,19 @@ window.onload=loadSentence();
 </li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
-<li class="tag-1">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>Python
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
     </a>
 </li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
     </a>
 </li>
-<li class="tag-4">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
     </a>
 </li>
 <li class="tag-2">
@@ -383,9 +424,29 @@ window.onload=loadSentence();
         <i class="icon-tag icon-large"></i>socket
     </a>
 </li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
 <li class="tag-1">
     <a href="/tag/arch.html">
         <i class="icon-tag icon-large"></i>Arch
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
     </a>
 </li>
 <li class="tag-2">
@@ -394,28 +455,8 @@ window.onload=loadSentence();
     </a>
 </li>
 <li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
     </a>
 </li>
 

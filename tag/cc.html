@@ -117,6 +117,57 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/CppLearning006.html">C++学习(六)：栈的实现及若干算法</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-03-04T22:30:00">
+        <i class="icon-calendar"></i>Tue 04 March 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/cpp.html"><i class="icon-folder-open"></i>Cpp</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>事情一多就需要细致分配时间，
+心情一迷茫就总会没有效率，
+越攒待办事项就越多。</p>
+<p>就像发送速率比入队速率慢的路由器似的。</p>
+<p>整个一丢包的赶脚。</p>
+<div class="section" id="id1">
+<h2>栈的实现</h2>
+<p>栈的实现是比较简单的，
+博主使用的是线性表构造的栈，
+通过复用前几篇实现的节点数据类型，
+很容易就搞定栈的实现，
+同时写了基本的push、pop等函数。</p>
+<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">LinkStack</span>
+<span class="p">{</span>
+    <span class="nl">protected:</span>
+    <span class="n">Freelist</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">freelist</span><span class="p">;</span>
+    <span class="n">Node</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">top</span><span class="p">;</span>
+
+    <span class="nl">public:</span>
+    <span class="n">LinkStack</span><span class="p">();</span>
+    <span class="kt">void</span> <span class="nf">push</span><span class="p">(</span><span class="n">Type</span> <span class="o">&amp;</span><span class="n">element</span><span class="p">);</span>
+    <span class="kt">bool</span> <span class="nf">pop</span><span class="p">();</span>
+    <span class="kt">bool</span> <span class="nf">peek</span><span class="p">(</span><span class="n">Type</span> <span class="o">&amp;</span><span class="n">buf</span><span class="p">);</span>
+    <span class="kt">bool</span> <span class="nf">isempty</span><span class="p">();</span>
+    <span class="kt">void</span> <span class="nf">insertatbottom</span><span class="p">(</span><span class="n">Type</span> <span class="o">&amp;</span><span class="n">value</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="nf">reverse</span><span class="p">();</span>
+<span class="p">};</span>
+</pre></div>
+<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">LinkStack</span><span class="o">&lt;</span><span class="n">Type ...</span></pre></div></div>
+                        <a class="btn primary xsmall" href="/CppLearning006.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/CppLearning005.html">C++学习(五)：有序线性表的点滴记录</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -431,19 +482,19 @@ window.onload=loadSentence();
 </li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
-<li class="tag-1">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>Python
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
     </a>
 </li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
     </a>
 </li>
-<li class="tag-4">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
     </a>
 </li>
 <li class="tag-2">
@@ -451,9 +502,29 @@ window.onload=loadSentence();
         <i class="icon-tag icon-large"></i>socket
     </a>
 </li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
 <li class="tag-1">
     <a href="/tag/arch.html">
         <i class="icon-tag icon-large"></i>Arch
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
     </a>
 </li>
 <li class="tag-2">
@@ -462,28 +533,8 @@ window.onload=loadSentence();
     </a>
 </li>
 <li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
     </a>
 </li>
 
