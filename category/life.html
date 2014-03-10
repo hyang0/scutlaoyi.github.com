@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>老逸的个人站 - git</title>
+    <title>老逸的个人站 - Life</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="laoyi">
@@ -71,12 +71,12 @@
 						<i class="icon-folder-open icon-large"></i>Cpp
 					</a>
                   </li>
-                  <li class="active">
+                  <li >
                     <a href="/category/git.html">
 						<i class="icon-folder-open icon-large"></i>git
 					</a>
                   </li>
-                  <li >
+                  <li class="active">
                     <a href="/category/life.html">
 						<i class="icon-folder-open icon-large"></i>Life
 					</a>
@@ -122,122 +122,70 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
-                <h1><a href="/learning Git 3.html">Git 与 GitHub 实践经验谈（一）</a></h1>
+                <h1><a href="/JobHunting001.html">实习求职(一)：百田软件开发工程师(笔试篇)</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2013-11-07T22:10:00">
-        <i class="icon-calendar"></i>Thu 07 November 2013
+<abbr class="published" title="2014-03-10T20:30:00">
+        <i class="icon-calendar"></i>Mon 10 March 2014
 </abbr>
 <span class="label">By</span>
 <a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
 <span class="label">Category</span>
-<a href="/category/git.html"><i class="icon-folder-open"></i>git</a>.
+<a href="/category/life.html"><i class="icon-folder-open"></i>Life</a>.
 
 
 <span class="label">Tags</span>
-	<a href="/tag/git.html"><i class="icon-tag"></i>git</a>
-	<a href="/tag/github.html"><i class="icon-tag"></i>github</a>
+	<a href="/tag/audition.html"><i class="icon-tag"></i>audition</a>
+	<a href="/tag/recruitment.html"><i class="icon-tag"></i>recruitment</a>
 </footer><!-- /.post-info --></div>
-                <div class="summary"><p>自从上次聊完git的基本使用之后到现在已经两个多月了，一直都没有机会真的把它用在多人配合的项目开发之中。
-主要是因为手头的小型实验项目都是自己在玩，所以很多时候用的是本地的仓库，写完commit一下基本就完事，连checkout都很少用。</p>
-<p>这个月开始接手了一个小型的团队合作项目，于是核心代码组（我，标神，院长）才算真正成立了一个小组团队开发。</p>
-<p>核心代码组负责的主要是系统后台的搭建和配置。所以我们搭建了一个小型的服务器，挂载Apache+mySQL+php+cakePHP，使用GitHub进行源码托管。</p>
-<p>这个过程中真正逐渐熟悉了git的操作，也碰到了大量实践中遇上的问题。在此写一个未知篇幅的实践经验收集帖，既有利于总结归纳开发过程中遇到的问题，理清思路，也有利于来日翻阅加深印象。</p>
-<hr class="docutils" />
-<p>首先是基本的操作回顾，这是实际开发过程中用到的一些方法，可能非常曲折，让高手看来简直就是瞎搞，不过不管质量，先记录下来，以后有更优的方案也可供对比。</p>
-<p><strong>一：</strong></p>
-<p>本地仓库的创建自然是git init，这里我们被坑了一下，理论上我们总以为git init之后会默认创建一个仓库并产生一个默认分支叫做master，结果在实际操作中发现问题，git init只负责创建仓库，但在这个时候调用git branch会发现根本没有分支。</p>
-<p>这就导致了几天前以标神为主角的惊悚一幕。话说当天标神连敲八个小时代码完成了一个基本模块的创建，正当其修养生息吞云吐雾之际，我主动提出让其提交代码到远端仓库中。然而当时远端仓库已有更新，push操作之前必须pull下最新版本代码，然而该操作却死活无法成功完成 ...</p>
-                        <a class="btn primary xsmall" href="/learning Git 3.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/learning Git 2.html">Git 与 GitHub 不完全教程（二）</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2013-09-07T16:10:00">
-        <i class="icon-calendar"></i>Sat 07 September 2013
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/git.html"><i class="icon-folder-open"></i>git</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/git.html"><i class="icon-tag"></i>git</a>
-	<a href="/tag/github.html"><i class="icon-tag"></i>github</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><div class="section" id="id1">
-<h2>分支</h2>
-<p>分支(branch)是Git的一个强大功能，它可以在不改变现有仓库、不新增仓库的情况下，通过新建一个分支以建立当前文档一模一样的支线版本，在支线版本的修改不影响主线文档的内容。</p>
-<p>分支的一个重要的功能是能够在同一个时间点上保存多份不同版本的代码，并且均为随时可用的状态，根据官方的一个示例，你可以保持一份稳定的发布版，在发布版内的代码都是可运行的，之后，你可以再拥有一个分支专门用于开发，在这上面的代码用于任意修改和处理，不对外，还能再有一个分支用于测试开发新的功能。这三个分支都可以随时切换随时合并，应变自如。</p>
-<p>当支线任务成功完成时，可通过命令简单地将支线版本合并到主线上，若由于手潮不幸把事情搞砸了，可直接删除支线，回到主线上，则原有的文档内容不受任何影响。这种功能特别适合在当前状态下需要测试开发一些新的功能，但又想要与主线的开发有所并行的情况。</p>
-<p>默认情况下，git创建完仓库后会生成一个主分支master，所有的操作均在主分支上进行，这就相当于文档的主线版本。而我们可以按自己的需要增删改查新的分支。</p>
-<p><strong>分支的创建和切换</strong></p>
-<p>显示当前仓库的分支状态:</p>
-<pre class="literal-block">
-git branch
-</pre>
-<p>Git会列表显示当前的所有分支，并在当前所在分支上作相应标记。
-新建分支（假设需要新建的分支名字为:newBranch）:</p>
-<pre class="literal-block">
-git branch newBranch
-</pre>
-<p>此时再次检查branch状态就会发现新的分支已经出现了。
-新的分支和现有的分支内容完全相同，相当于当前分支的一个副本。
-跳转到某个分支:</p>
-<pre class="literal-block">
-git ...</pre></div>
-                        <a class="btn primary xsmall" href="/learning Git 2.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/learning Git 1.html">Git 与 GitHub 不完全教程（一）</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2013-09-07T16:00:00">
-        <i class="icon-calendar"></i>Sat 07 September 2013
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/git.html"><i class="icon-folder-open"></i>git</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/git.html"><i class="icon-tag"></i>git</a>
-	<a href="/tag/github.html"><i class="icon-tag"></i>github</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>git是常用的配置管理工具，关于Git的介绍请见维基百科（维基百科关于Git的介绍），Github是常用的代码托管服务（维基百科关于GitHub的介绍），在此敲一份扫盲和不完全配置帖，留待日后自己可查看，顺带给大家方便学习。</p>
-<p>由于时间有限，仅记录最简单的终端界面下Git的使用，自认为已经足够，如更喜欢GUI界面风格请自行脑补。</p>
-<p>本文档操作环境为GNU/Linux Ubuntu 12.04 LTS x64，为方便windows用户，在配置时添加了windows下的安装配置过程，不保证万无一失。</p>
-<div class="section" id="git">
-<h2>Git篇：</h2>
-<div class="section" id="id1">
-<h3>安装与配置git</h3>
-<p>Ubuntu: 简单:</p>
-<pre class="literal-block">
-sudo apt-get install git
-</pre>
-<p>即可。</p>
-<p>以上代码没看懂的请别往下看了，扫盲Ubuntu先。</p>
-<p>windows:到这个网址下载:</p>
-<blockquote>
-<a class="reference external" href="http://msysgit.github.io/">http://msysgit.github.io/</a></blockquote>
-<dl class="docutils">
-<dt>或者git官网下载:</dt>
-<dd><a class="reference external" href="http://git-scm.com/download/win">http://git-scm.com/download/win</a></dd>
-</dl>
-<p>安装即可。</p>
-</div>
+                <div class="summary"><p>这几天没有更新内容，
+因为博主忙着准备资料找工作。</p>
+<p>压力还是很大的，
+毕竟在大华工这种地方，
+随便路上抓一个人就搞过进化算法，
+开发过hadoop服务器集群，
+甚至是ACM-ICPC world final选手。</p>
 <div class="section" id="id2">
-<h3>首次使用</h3>
-<p>windows下使用终端的Git需要启动Git自带的终端，而不是windows的命令行，
-一般在安装后有一个叫做Git ...</p></div></div>
-                        <a class="btn primary xsmall" href="/learning Git 1.html">more ...</a>
+<h2>笔试</h2>
+<p>先扯几句关于笔试的内容。</p>
+<p>百田在前几天来到学校搞宣讲会，
+那天下午好像是和小超在玩cvte的在线测评，
+吃完饭回来标神来电话，
+说百田招聘现场笔试，
+要不要去试水。</p>
+<p>既然有机会就去试一发呗，
+于是拿着一张简历一只笔就杀过去。</p>
+<p>现场还出了点状况，
+投影坏了，
+堂堂大华工，
+让人家百田的老大聊了一个小时没有PPT的公司介绍。</p>
+<p>于是笔试开始，
+由于是第一份笔试题，
+博主也不好说难易程度，
+不过从其他同学的口中得知，
+腾讯的广研创新班拿去年笔试的题目给大伙做，
+整整一份试卷的量，
+选择填空什么都有。
+相比来说百田的笔试题目就简单明了了，
+几道大题，
+手写代码即可。</p>
+<p>考的东西与网上的面试经验也有些类似，
+字符串处理，
+进制转换，
+还有一道简单的计算几何学。</p>
+<p><strong>字符串处理</strong></p>
+<p>写个函数，
+输入s1和s2两个字符串，
+去掉s1中在s2里出现过的所有字符，
+并将结果返回。
+要求是时间复杂度最低。</p>
+<p>由于给定了限制条件所有字符都是字母，
+于是直接长度26的bool数组标记s2的所有字符，
+扫一遍s1去掉所有出现的字符，
+时间复杂度O(n)，
+博主水平有限，感觉没法再快了。</p>
+<p>后来在跟院长聊天时得到一个说法 ...</p></div>
+                        <a class="btn primary xsmall" href="/JobHunting001.html">more ...</a>
                 </div>
         </div>
         <hr />

@@ -77,6 +77,11 @@
 					</a>
                   </li>
                   <li >
+                    <a href="/category/life.html">
+						<i class="icon-folder-open icon-large"></i>Life
+					</a>
+                  </li>
+                  <li >
                     <a href="/category/linux.html">
 						<i class="icon-folder-open icon-large"></i>Linux
 					</a>
@@ -116,6 +121,74 @@
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
+        <div class="article">
+                <h1><a href="/JobHunting001.html">实习求职(一)：百田软件开发工程师(笔试篇)</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-03-10T20:30:00">
+        <i class="icon-calendar"></i>Mon 10 March 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/life.html"><i class="icon-folder-open"></i>Life</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/audition.html"><i class="icon-tag"></i>audition</a>
+	<a href="/tag/recruitment.html"><i class="icon-tag"></i>recruitment</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>这几天没有更新内容，
+因为博主忙着准备资料找工作。</p>
+<p>压力还是很大的，
+毕竟在大华工这种地方，
+随便路上抓一个人就搞过进化算法，
+开发过hadoop服务器集群，
+甚至是ACM-ICPC world final选手。</p>
+<div class="section" id="id2">
+<h2>笔试</h2>
+<p>先扯几句关于笔试的内容。</p>
+<p>百田在前几天来到学校搞宣讲会，
+那天下午好像是和小超在玩cvte的在线测评，
+吃完饭回来标神来电话，
+说百田招聘现场笔试，
+要不要去试水。</p>
+<p>既然有机会就去试一发呗，
+于是拿着一张简历一只笔就杀过去。</p>
+<p>现场还出了点状况，
+投影坏了，
+堂堂大华工，
+让人家百田的老大聊了一个小时没有PPT的公司介绍。</p>
+<p>于是笔试开始，
+由于是第一份笔试题，
+博主也不好说难易程度，
+不过从其他同学的口中得知，
+腾讯的广研创新班拿去年笔试的题目给大伙做，
+整整一份试卷的量，
+选择填空什么都有。
+相比来说百田的笔试题目就简单明了了，
+几道大题，
+手写代码即可。</p>
+<p>考的东西与网上的面试经验也有些类似，
+字符串处理，
+进制转换，
+还有一道简单的计算几何学。</p>
+<p><strong>字符串处理</strong></p>
+<p>写个函数，
+输入s1和s2两个字符串，
+去掉s1中在s2里出现过的所有字符，
+并将结果返回。
+要求是时间复杂度最低。</p>
+<p>由于给定了限制条件所有字符都是字母，
+于是直接长度26的bool数组标记s2的所有字符，
+扫一遍s1去掉所有出现的字符，
+时间复杂度O(n)，
+博主水平有限，感觉没法再快了。</p>
+<p>后来在跟院长聊天时得到一个说法 ...</p></div>
+                        <a class="btn primary xsmall" href="/JobHunting001.html">more ...</a>
+                </div>
+        </div>
+        <hr />
         <div class="article">
                 <h1><a href="/CppLearning006.html">C++学习(六)：栈的实现及若干算法</a></h1>
                 <div class="well small"><footer class="post-info">
@@ -538,47 +611,6 @@ set selection=exclusive ...</pre></div>
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/Arch005.html">Arch Linux学习：Arch Linux启动二三事</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-01-20T11:30:00">
-        <i class="icon-calendar"></i>Mon 20 January 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/arch.html"><i class="icon-tag"></i>Arch</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。</p>
-<hr class="docutils" />
-<div class="section" id="arch">
-<h2>关于Arch的启动流程</h2>
-<div class="section" id="id1">
-<h3>基本流程</h3>
-<p>在BIOS主板下，
-Arch Linux的启动流程大致有以下几个步骤：</p>
-<pre class="literal-block">
-1. 电源接通，系统开机自检
-2. BIOS搜索并根据配置调用对应的硬件进行启动
-3. 假设装有Arch的硬盘作为优先启动项，则硬盘的MBR被BIOS读取执行
-4. MBR接管，读取数据启动bootloader
-5. bootloader启动，初始化数据及配置文件等
-6. bootloader启动完毕，载入linux kernel及initramfs，并启动kernel
-7. kernel启动，解包initramfs，初始化早期的用户空间，启动/init作为首个进程
-8. initramfs作为临时的根文件系统，载入所有运行系统必须的模块，用于启动引导系统的设备
-9. 相应的模块启动成功，系统继续引导，真实的根目录挂载并替换初始化根文件系统
-10./sbin/init替换/init继续引导过程，systemd启动
-11.进程调用getty，提供登录窗口等待用户登入
-12.getty获取用户输入 ...</pre></div></div>
-                        <a class="btn primary xsmall" href="/Arch005.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -626,6 +658,11 @@ window.onload=loadSentence();
 </a>
 </li>
 <li>
+<a href="/category/life.html">
+    <i class="icon-folder-open icon-large"></i>Life
+</a>
+</li>
+<li>
 <a href="/category/linux.html">
     <i class="icon-folder-open icon-large"></i>Linux
 </a>
@@ -657,24 +694,24 @@ window.onload=loadSentence();
         <i class="icon-tag icon-large"></i>md5
     </a>
 </li>
+<li class="tag-4">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
 <li class="tag-2">
     <a href="/tag/softwarearchitect.html">
         <i class="icon-tag icon-large"></i>SoftwareArchitect
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
-    </a>
-</li>
-<li class="tag-2">
     <a href="/tag/bash.html">
         <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
     </a>
 </li>
 <li class="tag-1">
@@ -687,9 +724,24 @@ window.onload=loadSentence();
         <i class="icon-tag icon-large"></i>C/C++
     </a>
 </li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
 <li class="tag-4">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
     </a>
 </li>
 <li class="tag-1">
@@ -697,14 +749,9 @@ window.onload=loadSentence();
         <i class="icon-tag icon-large"></i>Python
     </a>
 </li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
 <li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
     </a>
 </li>
 
