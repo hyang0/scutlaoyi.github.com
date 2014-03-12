@@ -122,6 +122,57 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/CppLearning001.html">C++学习(一):白书基础总结</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-01-31T16:30:00">
+        <i class="icon-calendar"></i>Fri 31 January 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/cpp.html"><i class="icon-folder-open"></i>Cpp</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>装完Arch Linux最近开始复习一下C++和数据结构，为下学期做好准备。</p>
+<p>用白书刷一些简单的题目复习基本语法，发现自己太不注重基本的东西了，之前瞎搞ACM的时候也是，好多方便有效的工具都不认识。</p>
+<p>因此记录一下标准库的一些基本的工具和输入输出的简单总结。</p>
+<p>本篇主要记录一些C语言的常用工具。</p>
+<div class="section" id="id1">
+<h2>输入输出及文件操作</h2>
+<p><strong>scanf</strong></p>
+<blockquote>
+<p>这货读取输入并对相应的内存地址赋值。
+分割符是空格、回车及制表符等。</p>
+<p>返回值是一个整型表示成功读取到的数据量。
+读取失败或者EOF文件结束都会停止。</p>
+<p>默认情况下scanf不会吃掉行尾的回车，
+需要让它吃掉行尾回车的话可以这样：</p>
+<p>scanf(&quot;%d\n&quot;, &amp;num)</p>
+<p>上面这句首先读了一个整型值给变量num，并且吃掉了后面的一个\n</p>
+<p>当然这种搞法的缺陷在于只能用于Linux类型系统，
+因为windows和Mac OS的回车符都不一样。</p>
+</blockquote>
+<p><strong>sscanf/fscanf</strong></p>
+<blockquote>
+<p>scanf的姊妹版本，分别读取字符串或者文件。</p>
+<p>sscanf使用的时候加入第一个参数指定输入的源字符串。</p>
+<p>fscanf使用的时候加入第一个参数指定输入的源文件指针。</p>
+</blockquote>
+<p><strong>fgets(buffer, size, source)</strong></p>
+<blockquote>
+<p>从输入源source中读入一行字符数据到buffer缓冲区中，最大长度为size。
+超过size部分会被忽略。</p>
+<p>buffer为一个char数组，size为整型值定义长度。</p>
+<p>source可以为文件等，默认的终端标准输入(standard input)是这个： stdin ...</p></blockquote></div>
+                        <a class="btn primary xsmall" href="/CppLearning001.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/Arch005.html">Arch Linux学习：Arch Linux启动二三事</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -586,43 +637,6 @@ Arch Linux提供了非常大的自由度和开放度供用户完全控制自己�
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/PythonExpe004.html">软件体系结构：N皇后问题系列整体实现方案</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2013-11-29T22:40:00">
-        <i class="icon-calendar"></i>Fri 29 November 2013
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
-	<a href="/tag/softwarearchitect.html"><i class="icon-tag"></i>SoftwareArchitect</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
-<p><strong>使用的Python版本为2.7.3</strong></p>
-<p><strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
-<hr class="docutils" />
-<p>前面三篇博文粗略描述了N皇后问题的主要解决方案，由于四种风格（包括调用返回）归属同一个作业，因此将其整合在一个文件夹中并提取了部分共有模块。</p>
-<p><strong>main.py</strong></p>
-<p>此程序作为用户交互接口，接收用户输入参数，检测合法性并调用对应程序实现计算。</p>
-<p>通过构造命令行参数将N的值、重复计算的次数等数据传入对应模块中。</p>
-<p>使用os.system()系统函数直接调用其他运算程序。</p>
-<p><strong>checkOk.py</strong></p>
-<p>此模块作为公用模块存在，用于检测当前状态是否合法。</p>
-<p>内部是一个isOk函数，接收当前的棋盘状态，当前尝试摆放的位置，以及当前的层数。</p>
-<p>若当前位置可以摆放皇后，则返回True；若检测到冲突，则返回False。</p>
-<p><strong>pipe.py/blackboard.py/callReturn.py/traceback.py</strong></p>
-<p>分别是四个风格的主程序，接收命令行参数定义N以及测试的次数。</p>
-<p>内部调用了Python库的timeit模块 ...</p>
-                        <a class="btn primary xsmall" href="/PythonExpe004.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -702,18 +716,8 @@ window.onload=loadSentence();
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
 <li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
     </a>
 </li>
 <li class="tag-2">
@@ -721,39 +725,19 @@ window.onload=loadSentence();
         <i class="icon-tag icon-large"></i>Bash
     </a>
 </li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
-    </a>
-</li>
 <li class="tag-1">
     <a href="/tag/arch.html">
         <i class="icon-tag icon-large"></i>Arch
     </a>
 </li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
 <li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/audition.html">
-        <i class="icon-tag icon-large"></i>audition
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
     </a>
 </li>
 <li class="tag-2">
     <a href="/tag/github.html">
         <i class="icon-tag icon-large"></i>github
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
     </a>
 </li>
 <li class="tag-1">
@@ -762,8 +746,38 @@ window.onload=loadSentence();
     </a>
 </li>
 <li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
+    </a>
+</li>
+<li class="tag-4">
     <a href="/tag/vim.html">
         <i class="icon-tag icon-large"></i>Vim
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
     </a>
 </li>
 

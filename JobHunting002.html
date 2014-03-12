@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Bash笔记(四)</title>
+    <title>实习求职(二)：百田软件开发工程师(初次面试篇)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="laoyi">
@@ -76,12 +76,12 @@
 						<i class="icon-folder-open icon-large"></i>git
 					</a>
                   </li>
-                  <li >
+                  <li class="active">
                     <a href="/category/life.html">
 						<i class="icon-folder-open icon-large"></i>Life
 					</a>
                   </li>
-                  <li class="active">
+                  <li >
                     <a href="/category/linux.html">
 						<i class="icon-folder-open icon-large"></i>Linux
 					</a>
@@ -127,8 +127,8 @@
                         <h1>
                                 <a href=""
                                         rel="bookmark"
-                                        title="Permalink to Bash笔记(四)">
-                                        Bash笔记(四)
+                                        title="Permalink to 实习求职(二)：百田软件开发工程师(初次面试篇)">
+                                        实习求职(二)：百田软件开发工程师(初次面试篇)
                                 </a>
                         </h1>
                 </header>
@@ -136,198 +136,219 @@
                 <div class="well">
 <footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2014-01-05T22:30:00">
-        <i class="icon-calendar"></i>Sun 05 January 2014
+<abbr class="published" title="2014-03-11T20:30:00">
+        <i class="icon-calendar"></i>Tue 11 March 2014
 </abbr>
 <span class="label">By</span>
 <a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
 <span class="label">Category</span>
-<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
+<a href="/category/life.html"><i class="icon-folder-open"></i>Life</a>.
 
 
 <span class="label">Tags</span>
-	<a href="/tag/bash.html"><i class="icon-tag"></i>Bash</a>
+	<a href="/tag/audition.html"><i class="icon-tag"></i>audition</a>
+	<a href="/tag/recruitment.html"><i class="icon-tag"></i>recruitment</a>
 </footer><!-- /.post-info -->                </div>
-                <p><strong>本系列博文记录学习Shell终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录。</strong></p>
-<hr class="docutils" />
-<div class="section" id="id1">
-<h2>用户管理</h2>
-<p>Unix的用户列表在/etc/passwd中，
-该文件为每个用户保存了一行信息，
-包括用户名、用户id、组id、用户描述、用户的home目录及默认的shell信息</p>
-<p>用户密码加密后保存在/etc/shadow文件中，
-包含用户名、用户密码、最小密码修改间隔时间、最大密码修改间隔时间、密码无效前提醒时间等。
-时间的单位是天。</p>
-<p>用户的密码管理默认设置在/etc/login.defs中。
-设置了包含上述几个时间在内的多个参数。</p>
-<p><strong>识别用户</strong></p>
-<p>whoami</p>
-<blockquote>
-查看当前用户名</blockquote>
-<p>who</p>
-<blockquote>
-列表显示当前所有登录用户相关信息</blockquote>
-<p>who am i</p>
-<blockquote>
-这货是空格分开的，相当于who，只显示当前用户</blockquote>
-<p>w</p>
-<blockquote>
-这个能显示当前所有用户正在执行的工作</blockquote>
-<p>id</p>
-<blockquote>
-显示当前用户的用户id，组id等</blockquote>
-<p><strong>用户管理</strong></p>
-<p>useradd</p>
-<blockquote>
-<p>创建一个新用户scutlaoyi，设置home目录及用户描述</p>
-<p>useradd -m -d /home/scutlaoyi -c &quot;new user&quot; scutlaoyi</p>
-<p>系统默认给新用户一个独立的用户id和组id.</p>
-</blockquote>
-<p>userdel</p>
-<blockquote>
-<p>删除用户，-r设置连带删除对应的home目录</p>
-<p>userdel -r [username]</p>
-</blockquote>
-<p>usermod</p>
-<blockquote>
-<p>编辑用户信息，例如，修改用户描述</p>
-<p>usermod -c &quot;just a user&quot; [username]</p>
-<p>锁定某个用户的密码，使其不能正常登录</p>
-<p>usermod -L [username]</p>
-<p>解锁</p>
-<p>usermod -U [username]</p>
-<p>设置默认登录的shell</p>
-<p>usermod -s /bin/bash [username]</p>
-<p>设定用户归属的组(注意这个操作会清除用户原有的组归属数据)</p>
-<p>usermod -G [groupname] [username]</p>
-</blockquote>
-<p>passwd</p>
-<blockquote>
-<p>不带参数输入可修改当前用户密码</p>
-<p>passwd</p>
-<p>对某个用户设置密码</p>
-<p>passwd [username]</p>
-</blockquote>
-<p><strong>用户切换</strong></p>
-<p>su</p>
-<blockquote>
-<p>快速切换到某个用户,包括root也行，如果你有密码</p>
-<p>su [username]</p>
-</blockquote>
-<p>sudo</p>
-<blockquote>
-<p>sudo命令可以让当前用户以root权限执行程序。</p>
-<p>sudo [command]</p>
-<p>sudo命令可以在不交出root密码的前提下给某些用户root权限管理系统。</p>
-<p>sudo命令成功的前提是当前用户在/etc/sudoers文件中存在对应的权限。
-没有权限而执行sudo的话，在我的Ubuntu里会显示错误信息，
-并威胁道:&quot;此事件将被报告。&quot; -_-\</p>
-</blockquote>
-<p>visudo</p>
-<blockquote>
-<p>sudoers文件的专用编辑器，可防止多种安全问题。</p>
-<p>关于该命令的具体信息可查man。</p>
-<p>不推荐直接编辑/etc/sudoers文件。
-（虽然上次糊里糊涂用vim编辑了一次，还好没死。-_-\）</p>
-</blockquote>
-</div>
+                <p>这是博主第一次参加面试，
+兴奋与紧张之情不必言说。</p>
 <div class="section" id="id2">
-<h2>组管理</h2>
-<p>用户组的信息保存在/etc/group文件中。
-其格式为：组名:组密码(可能为空):组id:组内成员列表</p>
-<p>groupadd</p>
-<blockquote>
-添加一个组
-groupadd [groupname]</blockquote>
-<p>添加用户到某个组中</p>
-<blockquote>
-<p>使用usermod，-a为保持原有组信息并追加新组</p>
-<p>usermod -a -G [groupname] [username]</p>
-</blockquote>
-<p>groupmod</p>
-<blockquote>
-<p>编辑组名称</p>
-<p>groupmod -n [new_groupname] [groupname]</p>
-</blockquote>
-<p>groupdel</p>
-<blockquote>
-<p>删除组</p>
-<p>groupdel [groupname]</p>
-</blockquote>
-<p>groups</p>
-<blockquote>
-查看当前用户所属的组信息</blockquote>
-<p>gpasswd</p>
-<blockquote>
-<p>赋予某些用户管理组的权限</p>
-<p>设定某个组的管理员</p>
-<p>gpasswd -A [user1],[user2],[...] [groupname]</p>
-<p>使某个用户加入组</p>
-<p>gpasswd -a [username] [groupname]</p>
-<p>从组中清除某个用户</p>
-<p>gpasswd -d [username] [groupname]</p>
-<p>设定某个组的成员</p>
-<p>gpasswd -M [user1],[user2],[...]</p>
-</blockquote>
+<h2>前戏</h2>
+<p>小超、标神等均顺利通过了笔试的考验，
+由于分配到相同的时间面试，
+因此组织当天一同乘坐公车前往百田总部。</p>
+<p>由于天气严寒，
+连嘴里随意吹出的气体都能蒙上白雾，
+因此面试三人组决定卸下原定的正装+皮鞋装扮，
+改为牛仔裤加太空衣，
+毕竟保命要紧。</p>
+<p>对时间的拿捏也不是非常准确，
+仨人都想着不能迟到给面试官留下坏印象，
+因此八点便在饭堂集中，
+吃完早餐打点行装乘上八点四十的公车立即出发。</p>
+<p>没想到九点二十我们已经站在百田位于二楼的办公地点，
+而约定的面试时间是十点半。</p>
+<p>于是被锁在防盗门外，
+幸好有某位不知名的漂亮美工姐姐(策划姐姐？)到达，
+才得以进入。(对百田的印象瞬间上升一个档次)</p>
+<p>填完表格就没什么事情了，
+走来走去发呆上厕所，
+等着面试官出现。
+在厕所里发现远处多玩游戏的大logo，
+后来才知道广州非常多的软件公司都在这个地方，
+俗称“天河软件园科韵路园区”。</p>
+<p>从厕所回来发现面试官已经在等着了，
+面试正式开始。</p>
 </div>
 <div class="section" id="id3">
-<h2>文件权限</h2>
-<p>Unix类系统的文件权限分为三种：
-文件所有者权限、文件所属组权限、其他人权限。
-文件的权限有三款：读(r)、写(w)、执行(x)。</p>
-<p>当使用ls -l命令时，可以看到列表中每个文件的最左方即文件的权限设置</p>
-<p>第一个字符为文件类型，文件类型有：</p>
+<h2>开场</h2>
+<p>两个帅哥，
+一个非常开朗很好相处而且经验很足的样子，
+另一个看起来技术超级厉害，很秒杀的样子。</p>
+<p>博主的面试比较奇怪，
+居然是一个一个来...</p>
+<p>见面自然是以寒暄开始，
+两句话便消除了最初的陌生感。</p>
+<p>询问了交通方式，
+是否有面试经验，
+为何找实习，
+是不是学校硬性规定还是有自己的打算。</p>
+<p>吹水的话题博主还是比较擅长的，
+于是跟面试官开始东拉西扯。
+期间还问到是否耍游戏，
+博主非常含蓄的表达自己是跟舍友耍红警的，
+年代甚是久远...
+至于Dota，
+由于技术太差被踢出舍队。</p>
+<p>此外聊到了对百田的了解和印象，
+博主差点就开始赞美工和策划的姐姐很漂亮了。
+转念一想如此轻浮可能会导致反感，
+于是简单描述了一下百田的产品、公司的目标及一些基本情况。</p>
+<p>如同网络上的面经所说，接着开始谈笔试的卷子。</p>
+</div>
+<div class="section" id="id4">
+<h2>笔试相关</h2>
+<p>关于笔试内容可参考博主的上一篇博文：</p>
 <blockquote>
-<p>-:普通文件</p>
-<p>d:目录</p>
-<p>l:符号链接文件</p>
-<p>p:命名管道</p>
-<p>b:块设备</p>
-<p>c:字符设备</p>
-<p>s:socket</p>
-</blockquote>
-<p>接着每三个字符依次指定了对应的权限：所有者、组、其他人。
-r、w、x分别说明拥有该项权限，横杆-说明无此权限。</p>
-<p>如：</p>
-<p>drwxr-xr-x 2 laoyi laoyi    4096 12月 23 20:28 desktop</p>
-<p>该文件是一个目录，
-所有者拥有读写执行权限，
-组用户拥有读和执行权限，
-而其他人也拥有读和执行权限</p>
-<p>后面的依次是所有者、所有组，大小，时间和名称等信息。</p>
-<p>chgrp</p>
-<blockquote>
-<p>修改一个文件的组</p>
-<p>chgrp [groupname] [filename]</p>
-</blockquote>
-<p>chown</p>
-<blockquote>
-<p>修改一个文件的所有者</p>
-<p>chown [username] [filename]</p>
-<p>同时修改所有者和组</p>
-<p>chown [username]:[groupname] [filename]</p>
-</blockquote>
-<p>chmod</p>
-<blockquote>
-<p><strong>代号方式管理权限</strong></p>
-<p>u为所有者，g为组用户，o为其他人，a对上述三者同时操作</p>
-<p>+为增加权限， 相反， -为去除权限</p>
-<p>r读，w写，x执行</p>
-<p>权限配置可以多个组合</p>
-<p>chmod u+w [filename]</p>
-<p><strong>数字方式管理权限</strong></p>
-<p>读的数值为4， 写的数值为2， 执行的数值为1</p>
-<p>对应权限的数字求和得到最终的权限数值</p>
-<p>因此下述例子分配所有者读写执行权限，组用户读和执行权限，其他人读取的权限</p>
-<p>chmod 754 [filename]</p>
-</blockquote>
-<hr class="docutils" />
-<p>简单的Bash命令就到此为止了，
-后面的一些比较复杂我就不记了，
-像ACL之类的，
-现在学一下过几天也会忘，
-以后用到我再搞上来。</p>
-<p><strong>明天开始搞Arch Linux!</strong></p>
+<a class="reference external" href="http://www.scutlaoyi.tk/JobHunting001.html">http://www.scutlaoyi.tk/JobHunting001.html</a></blockquote>
+<p>主要的内容是每道题的思路，
+于是博主用上一篇博文中的基本思路进行介绍。</p>
+<p>期间面试官非常仔细的构造了很多变化的问题，
+并询问解决方案。</p>
+<p>例如字符串那道，
+便假设如果要求空间尽量小，
+该如何解决。</p>
+<p>再比如进制转换的那道，
+如果要求转换成任意进制，
+现有的代码需要如何修改。</p>
+<p>这里也提到了上一篇中的一个细节，
+由于博主一时兴起给bool数组开了27，
+于是被询问设置数组大小为27而不是26的原因。
+无以应对，
+脑袋被门夹了... (-_-)</p>
+<p>在面试结束后跟其他俩人的交流中发现，
+他们也被问了一些相似的问题，
+或者是现有代码中的漏洞（他们都没去掉进制转换题目中的前导零）。</p>
+</div>
+<div class="section" id="id5">
+<h2>项目经验相关</h2>
+<p>可以肯定的是面试会被问到简历中的项目经历，
+一番介绍是免不了的，
+这里提前准备一下应该会比较好，
+至少能够把握重点让对方容易明白自己项目是干什么的。</p>
+<p>介绍完自己的项目重点应该放在自己在项目中的工作，
+在完成自己的工作时遇到了什么困难，
+如何解决，
+以及学习到了什么东西。</p>
+<p>博主也被问及遇到的问题，
+由于准备工作比较泛，
+一时间没能想到比较有代表性的困难，
+回答得不是很突出。</p>
+<p>感觉这种话题一个目的是看看项目是不是很水，
+如果没有遇到什么大问题的话说明这种项目也不怎么样。</p>
+<p>而在项目过程中遇到问题和解决问题的过程更是考验面试者各方面的能力。</p>
+<p>据称，当被问到项目的系统如果访问量超过服务器的承受能力，
+如何解决时，
+标神直接抛出采用分布式架构，
+于是话题往分布式架构方向进展，
+Hadoop什么的都出来了。</p>
+<p>下面聊的这个方面同样考验面试者的实际能力。</p>
+</div>
+<div class="section" id="id6">
+<h2>模拟场景相关</h2>
+<p>与下文的算法相关内容一样，
+博主觉得这些问题比较考验面试者的能力。
+但与算法不同的是，
+这些问题更加贴近实际，
+因此不容易通过准备复习算法和数据结构来优化表现。</p>
+<p>开始谈到流行的微博和微信，
+博主负责分析这种类似的消息推送功能应该如何实现，
+在海量数据的情况下可能会出现的问题。
+轮询、推送，新消息的计数，内存限制情况下的优化，
+太零碎了在此不一一列举。</p>
+<p>此外谈到了存储空间的拓展等，
+博主于是提及STL中存储空间占满的处理，
+即申请双倍空间并进行复制操作。</p>
+<p>主题还是基本的数据结构。</p>
+<p>接着谈及计算机网络，
+面试官也笑着说这应该是考点，
+果然是考点。</p>
+<p>五层协议、MAC地址与IP地址，
+重点放在了TCP和UDP，
+举例UDP的应用，
+博主想到QQ的局域网UDP文件传输。</p>
+<p>同样，
+场景的设定继续出现，
+一个是UDP的文件完整性检查，
+由于这货是尽力而为，
+博主印象中完整性检查只能靠上层应用层负责处理，
+因此把md5哈希给搬了出来。
+其实博主也不知道QQ的文件完整性检查是怎么做的。</p>
+<p>第二个是大文件传输的文件大小确定，
+博主继续天马行空(我真不知道实际是怎么样的...)，
+用TCP发送包括文件大小等信息，
+保证对方能够接收到必要的数据，
+再用UDP的高速传输搞定大数据量的文件内容。</p>
+<p>还聊了多线程，
+博主这下就没辙了，
+这个方面一点接触都没有。
+-_-</p>
+</div>
+<div class="section" id="id7">
+<h2>算法相关</h2>
+<p>大家对百田的印象貌似有些偏颇，
+认为小公司面试时不会探讨太深入的算法问题，
+就博主的经历来看，
+百田的算法要求还是蛮高的。</p>
+<p>自我介绍时博主聊到了大一时的五子棋，
+使用了Alpha-Beta剪枝，
+于是被要求介绍Alpha-Beta剪枝的原理，
+年代久远加上准备不足，
+“如果上一层的MAX点的当前值比当前层搜索下层节点找到的MIN值还要大，
+就忽略当前层后续的子节点的搜索，
+继续搜索上一层MAX点的下一个子节点...”
+绕了半天博主自己都被绕晕了。</p>
+<p>排序算法自然跑不了的，
+博主看过的若干面经都提及这个问题，
+而博主居然会忘记先刷一遍排序算法再去面试...
+这个部分博主无话可说。</p>
+<p>哈希表是第三个被问到的算法问题，
+包括了哈希表的实现方式，
+其实主要也就那么两种，
+closed hashing和open hashing，
+分别是用二次哈希和链表处理冲突。
+此外是链表过长导致的效率低下如何解决。</p>
+<p>总的来说算法方面由于准备不足导致表现很差，
+这是第一次面试的一个大bug。</p>
+</div>
+<div class="section" id="id8">
+<h2>爱好相关</h2>
+<p>最后面试官也询问了一下平日的爱好，
+博主的爱好还是很多的，
+阅读啊运动啊，
+还喜欢逛技术博客自己研究一些认为有趣的技术问题。</p>
+<p>灵机一动提到了前些天花了一整天搞的XSS，
+面试官也很感兴趣地让介绍一下。
+于是班门弄斧吹了一些基本的注入方式和原理。
+希望能给面试加点分吧...</p>
+<p>后来听说标神和小超甚至被问到了AVL树、B+树，
+差点把红黑树拉出来谈，
+甚寒...</p>
+</div>
+<div class="section" id="id9">
+<h2>总结</h2>
+<p>初次面试收获与遗憾并存，
+自认为最成功的地方是整个过程没有发生手抖的现象。
+(-_-)</p>
+<p>说话也算比较流利。</p>
+<p>收获的经验主要有如下几点：</p>
+<pre class="literal-block">
+1)必须刷一遍基础知识，操作系统、计算机网络、数据库、数据结构等
+2)要能灵活应对问题，能够利用现有的知识去解决实际的问题
+3)最初是听到院长说的：即使某些问题自己不会，也要试着去分析，因为思路也是很重要的
+4)对于即将去面试的公司要有一定的了解，最好有自己的看法
+</pre>
+<p>三天内给消息，
+忐忑等待中...</p>
 </div>
 
                 </div><!-- /.entry-content -->
