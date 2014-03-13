@@ -122,6 +122,53 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/Bash001.html">Bash笔记(一)</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-01-02T22:30:00">
+        <i class="icon-calendar"></i>Thu 02 January 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/bash.html"><i class="icon-tag"></i>Bash</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Shell终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录。</strong></p>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>基础知识</h2>
+<p>以echo为例，bash的基本命令及结构如下：</p>
+<p>显示命令后的所有参数</p>
+<p>echo [option] [arg0] [arg1] [arg2] [...]</p>
+<p>命令、参数之间用空格区分，空格数量差异没有作用,
+在单引号或双引号之间的所有字符被当成同一个参数</p>
+<p>echo &quot;Hey, this is a single argument.&quot;</p>
+<p>设定option使echo解析字符操作符</p>
+<p>echo -e &quot;A line with n a newline.&quot;</p>
+<p>命令执行成功返回0，否则返回非0值,
+返回值的意义可查命令的man</p>
+</div>
+<div class="section" id="id2">
+<h2>命令的帮助文档</h2>
+<p>type</p>
+<blockquote>
+<p>命令有两种类型，内部和外部命令
+显示命令的类型</p>
+<p>type [command]</p>
+<p>某些命令有两种类型，显示所有类型</p>
+<p>type -a [command]</p>
+<p>当执行同名命令时内置命令优先，
+执行外部命令必须指定命令路径，如echo:</p>
+<p>/bin ...</p></blockquote></div>
+                        <a class="btn primary xsmall" href="/Bash001.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/PythonExpe004.html">软件体系结构：N皇后问题系列整体实现方案</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -447,45 +494,6 @@
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/network002.html">socket编程(2):单线程udp服务器/客户端</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2013-09-24T10:00:00">
-        <i class="icon-calendar"></i>Tue 24 September 2013
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/web.html"><i class="icon-folder-open"></i>web</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/socket.html"><i class="icon-tag"></i>socket</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p><strong>基本流程</strong></p>
-<p>与tcp的通讯非常类似，不同之处在于udp是无连接的，因此没有创建连接这种操作，服务器开启端口后接受数据并直接返回。
-设置时将socket类型设置为SOCK_DGRAM即可创建udp通讯。</p>
-<p><strong>C++版本：</strong></p>
-<p>服务器：</p>
-<div class="highlight"><pre><span class="c1">//filename:udpServer.cpp</span>
-
-<span class="cp">#include &lt;cstdio&gt;</span>
-<span class="cp">#include &lt;cstring&gt;</span>
-<span class="cp">#include &lt;sys/types.h&gt;</span>
-<span class="cp">#include &lt;sys/socket.h&gt;</span>
-<span class="cp">#include &lt;netinet/in.h&gt;</span>
-<span class="cp">#include &lt;arpa/inet.h&gt;</span>
-<span class="cp">#include &lt;unistd.h&gt;</span>
-<span class="cp">#include &lt;errno.h&gt;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">BUF_SIZE</span> <span class="o">=</span> <span class="mi">512</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">SOCKET_PORT</span> <span class="o">=</span> <span class="mi">9999</span><span class="p">;</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc ...</span></pre></div>
-                        <a class="btn primary xsmall" href="/network002.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -570,53 +578,8 @@ window.onload=loadSentence();
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/arch.html">
-        <i class="icon-tag icon-large"></i>Arch
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
-    </a>
-</li>
-<li class="tag-2">
     <a href="/tag/github.html">
         <i class="icon-tag icon-large"></i>github
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>Python
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/audition.html">
-        <i class="icon-tag icon-large"></i>audition
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
     </a>
 </li>
 <li class="tag-2">
@@ -627,6 +590,51 @@ window.onload=loadSentence();
 <li class="tag-2">
     <a href="/tag/git.html">
         <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/arch.html">
+        <i class="icon-tag icon-large"></i>Arch
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
     </a>
 </li>
 

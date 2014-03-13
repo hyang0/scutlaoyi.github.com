@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>C++学习(二)：大家一起来Makefile</title>
+    <title>实习求职(三)：百田软件开发工程师(技术复试篇)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="laoyi">
@@ -66,7 +66,7 @@
             <ul class="nav">
                 <li><a href="/pages/about.html">About</a></li>
                           <li class="divider-vertical"></li>
-                  <li class="active">
+                  <li >
                     <a href="/category/cpp.html">
 						<i class="icon-folder-open icon-large"></i>Cpp
 					</a>
@@ -76,7 +76,7 @@
 						<i class="icon-folder-open icon-large"></i>git
 					</a>
                   </li>
-                  <li >
+                  <li class="active">
                     <a href="/category/life.html">
 						<i class="icon-folder-open icon-large"></i>Life
 					</a>
@@ -127,8 +127,8 @@
                         <h1>
                                 <a href=""
                                         rel="bookmark"
-                                        title="Permalink to C++学习(二)：大家一起来Makefile">
-                                        C++学习(二)：大家一起来Makefile
+                                        title="Permalink to 实习求职(三)：百田软件开发工程师(技术复试篇)">
+                                        实习求职(三)：百田软件开发工程师(技术复试篇)
                                 </a>
                         </h1>
                 </header>
@@ -136,172 +136,126 @@
                 <div class="well">
 <footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2014-02-08T16:30:00">
-        <i class="icon-calendar"></i>Sat 08 February 2014
+<abbr class="published" title="2014-03-13T20:30:00">
+        <i class="icon-calendar"></i>Thu 13 March 2014
 </abbr>
 <span class="label">By</span>
 <a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
 <span class="label">Category</span>
-<a href="/category/cpp.html"><i class="icon-folder-open"></i>Cpp</a>.
+<a href="/category/life.html"><i class="icon-folder-open"></i>Life</a>.
 
 
 <span class="label">Tags</span>
-	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
+	<a href="/tag/audition.html"><i class="icon-tag"></i>audition</a>
+	<a href="/tag/recruitment.html"><i class="icon-tag"></i>recruitment</a>
 </footer><!-- /.post-info -->                </div>
-                <p>由于一直没找到好的材料，C++的学习拖了好几天没什么进展。
-主要遇到的问题是白书的题目(UVAoj)有些麻烦，之前刷了十几道水题一直很顺利，
-到了数据结构系列突然每道题都有点难以理解（难道是自己英语水平突然掉了...），
-刷了几天进展很慢，加上每道题都有针对性的代码，对于我这种目标是复习数据结构的不太合适。</p>
-<p>然后玩了两天JavaScript（每页一句模块实现），玩了一天游戏...</p>
-<p>找到一个好地方学习数据结构：</p>
-<blockquote>
-<a class="reference external" href="http://www.geeksforgeeks.org/data-structures/">http://www.geeksforgeeks.org/data-structures/</a></blockquote>
-<p>今天开始敲了一下线性表，过几天再写点总结。</p>
-<p>然后终于到了这篇的主题，makefile的编写。</p>
-<div class="section" id="make">
-<h2>make</h2>
-<p>所谓的make，是便于编译多个文件的工具，用make可以实现自动化构建软件。
-同时使用make可以根据依赖关系自动编译，简化手工操作。
-具体的介绍可以查一下make的手册页。</p>
-<p>很多的IDE现在都实现了make的功能，
-比如之前用过的Visual Studio系列，Code::block，甚至是Qt SDK的开发环境，
-只要建立一个工程，就可以让IDE自动完成多文件编译和依赖检查。</p>
-<p>但Linux下的很多软件还是使用make协助软件的部署，
-而像博主这种懒得用IDE的家伙，
-手头就一个Vim写代码，一个g++编译（写C++的话），
-有时用用gdb调试一番（更多时候是暴力调试...)，
-再用上方便的make其实也就差不多了。</p>
-<p>开源社区中也有许多软件是用make的，
-就像博主这个网站使用的Pelican，
-从源文档加载主题文件（CSS，JS等）转换成静态的HTML页面，
-这个过程就使用了make，从而省去了大量的重复命令。</p>
-<p>make默认情况下读取当前文件夹中的makefile文件，
-makefile相当于配置文件，
-指导make执行命令完成目标代码的编译。</p>
-<p>make不限于特定的语言，
-博主把它放在C++栏目中是因为历史上很多很多人用make协助编译C/C++代码。</p>
-<p>举个例子：</p>
-<pre class="literal-block">
-假设要编译三个文件：main.cpp test.h test.cpp，输出为a.out
-那么默认情况下每次要这样写：
-g++ main.cpp test.h test.cpp -o a.out
-如果写好了makefile，每次只需要这样：
-make
-并且会自动检查依赖，忽略某些未改变的项，提高编译速度
-</pre>
-</div>
-<div class="section" id="id1">
-<h2>获取make</h2>
-<p>据称很多Linux发行版中都自带了make，
-我不知道其他人的是什么情况，
-反正博主手头的Arch Linux没有...(=_=)</p>
-<p>不过不要紧，pacman -S装一下就有了，非常方便</p>
-</div>
-<div class="section" id="makefile">
-<h2>makefile文件的编写</h2>
-<p>makefile文件的基本语法如下：</p>
-<pre class="literal-block">
-[target]:[dependencies]
-[tab]   command
-</pre>
-<p>其中target为目标，调用命令make时指定目标即可实现不同的执行过程。</p>
-<p>dependencies为依赖项，make执行时首先检查对应目标的依赖是否满足，
-如果搜索到存在对应的文件，且在上次执行后没有被更改，则认定该项依赖满足，
-否则搜索查找对应依赖项的目标并首先执行它，获取目标依赖。
-当所有依赖满足后执行最终目标。</p>
-<p>tab就是一个tab制表符。</p>
-<p>command才是最终被执行的命令语句，如&quot;g++ main.cpp -o a.out&quot;之类。</p>
-<p><strong>一个最简单的makefile</strong></p>
-<pre class="literal-block">
-all:
-    g++ main.cpp test.h test.cpp -o a.out -Wall -g
-</pre>
-<p>all是默认make的目标。
-上面这两行定义了最简单的makefile，将它保存并执行如下语句：</p>
-<pre class="literal-block">
-make
-</pre>
-<p>make后不加参数，因此make执行makefile文件;
-由于没有设定目标，因此选择默认目标all;
-由于all目标没有依赖项，因此可以直接执行;
-最终那句g++被执行，完成编译（输出a.out，显示警告，添加debug信息用于gdb调试）。</p>
-<p><strong>多目标带依赖项的makefile</strong></p>
-<pre class="literal-block">
-all: main
-
-main: main.o test.o
-    g++ main.o test.o -o a.out -Wall -g
-
-main.o: main.cpp
-    g++ -c main.cpp
-
-test.o: test.cpp test.h
-    g++ -c test.h test.cpp
-</pre>
-<p>基本上一目了然，
-默认目标依赖main目标，
-mian目标依赖main.o和test.o，
-两个o文件依赖对应的源文件和头文件。</p>
-<p>这种情况下首次执行make，由于所有依赖都不满足，
-因此最先被执行的是编译main.cpp，
-其次执行编译test.cpp和test.h，
-最后编译出a.out。</p>
-<p>而在所有文件都没有变化的情况下再次执行make，
-由于两个依赖都存在，
-因此只有编译a.out的那句被执行了一次。</p>
-<p>make自动检测文件变化，
-因此会自动重新编译被修改过的文件。</p>
-<p>此外，还可以指定make目标以编译部分文件，指定目标的命令如下：</p>
-<pre class="literal-block">
-make main.o
-</pre>
-<p>这句指定编译main.o目标。</p>
-<p>如果目标已经存在并且是最新，则make会提示：</p>
-<pre class="literal-block">
-make: 'main.o' is up to date.
-</pre>
-<p>插句话，-c选项让g++编译并不链接文件，生成的文件为原文件名替换上.o后缀。</p>
-<p><strong>带参数和注释的makefile</strong></p>
-<p>可以在makefile中指定参数，
-同时可以写注释。</p>
-<p>感觉比较简单，贴个例子就可以了：</p>
-<pre class="literal-block">
-#这是注释，用井号开头就可以了
-#声明参数要像下面这样
-OUTPUT=a.out
-#使用的话是这样：
-
-all:
-    g++ main.cpp -o $(OUTPUT) -Wall -g
-</pre>
-<p>上面的例子就定义了输出文件名参数，
-这样在多个地方都可以通过“钱+小括号”的形式使用参数</p>
-<p><strong>不想用makefile做文件名</strong></p>
-<p>随便搞，只要在make的时候麻烦一点给个参数指定文件名即可：</p>
-<pre class="literal-block">
-make -f my_makefile
-</pre>
-<p>使用my_makefile文件作为配置文件。</p>
-</div>
+                <p>忐忑了两天之后博主接到了来自百田的二面通知。(^_^)</p>
+<p>先前同去的小伙伴们却都没有消息，
+在焦急的等待中过了一天仍然音信全无，
+感觉就像被干掉了。</p>
+<p>不过标神早已拿到腾讯广州研究院创新班的录取通知书，
+而小超也开始积极准备cvte的面试。</p>
 <div class="section" id="id2">
-<h2>make的各种功能</h2>
-<p>学会写makefile之后应该能够看出来，
-make其实是通过构造shell命令执行功能的，
-因此发挥想象力，用make可以搞定非常多的东西。</p>
-<p>一个非常简单的例子是自动清空当前文件夹的编译过程文件：</p>
-<pre class="literal-block">
-all:
-#......
-
-clean:
-    rm -rf *.o *.gch
-</pre>
-<p>这样，执行</p>
-<pre class="literal-block">
-make clean
-</pre>
-<p>即可搞定清扫工作。</p>
-<p>当然&quot;rm -rf&quot;是比较狠的，使用要小心。</p>
+<h2>准备</h2>
+<p>在接到电话后顺便询问了二面的内容，
+得到的答复是技术复试。</p>
+<p>这让博主差点抓狂，
+要知道博主已经在一面把所有学过的看过的听说过的东西全部拿出来吹了一遍，
+复试如果继续探讨技术问题，
+不管聊什么都不可能会的。</p>
+<p>想了一下只好死马当作活马医，
+总结了上回的劣势，
+准备工作以巩固基础为主。</p>
+<p>刚好手头有跟孙少借来的《现代操作系统》，
+还有一本数据结构与算法的课本。</p>
+<p>花了一个晚上的时间刷了一遍操作系统，
+线程与进程相关、IPC问题、进程调度、内存管理、段与页的理论分析、置换算法、文件系统与i-node...
+还花了点时间看了第十章的Linux实例研究。</p>
+<p>再用了一个早上刷了一遍数据结构，
+常用的排序算法、外排序的两种思路、二分查找、哈希、索引（2-3树、B树...）、图论的基本常识...</p>
+<p>准备完成也就死而无憾了，
+毕竟超过能力的东西实在没办法。</p>
+<p>带着满脑子BC范式第三范式，
+博主踏上了开往科韵路的专线公车。</p>
+</div>
+<div class="section" id="id3">
+<h2>前戏</h2>
+<p>博主又来早了，
+找略显呆萌又万分可爱的前台姐姐交了一份成绩单，
+还不到五点，
+约的是六点。</p>
+<p>等待的时候与旁边的兄弟搭话，
+一问才发现原来是直系师兄，
+也是来面软件开发的。</p>
+<p>于是天南地北海聊，
+突发奇想询问是否有师兄去了Google，
+师兄想了一下说，
+有一个同学为了进Google跑去法国留学了。
+这让博主想到了某牛人，
+一问果然是刘子星师兄...
+真是世人皆知的大神级人物啊。</p>
+</div>
+<div class="section" id="id4">
+<h2>正戏</h2>
+<p>师兄面完就轮到博主了，
+不知道是不是有人放百田鸽子。</p>
+<p>面试官看起来是个很干练的技术牛人，
+对博主的简历研究得甚是仔细，
+由于简历内容曾经upgrade过，
+还被专门要求指出修改了哪些内容。</p>
+<p>开场就聊ACM的获奖事迹，
+于是简单描述了一下跟同班同学参加校赛捞水奖的有趣经历。
+被问到有没有进集训队，
+一下子就砍中软肋，
+只好解释由于技术太差被集训队reject了。</p>
+<p>接着谈到了Linux，
+面试官以为我是搞内核的。(T_T)
+没想到也就是学了一下简单的使用和shell的基本知识而已，
+估计他也很失望吧。</p>
+<p>还好拿Vim出来说事，
+多少显得比较专业～</p>
+<p>谈到Python，
+博主搞项目的时候用Python写过一些文本处理的小工具，
+却没有深入学习过Python的高级内容。
+好好的Python到博主手里变成搞文本的，唉...
+其实自己倒是每天在用Python，
+每次开机敲的是startx,接着便是python goagent/proxy.py
+(^_^)</p>
+<p>各种方面的问题搞得博主一头雾水，
+传说中的技术复试可是聊面向对象，聊内存回收机制的，
+网络上的面经都是如此，
+而眼下却被问到手头的机器装的是什么系统，
+只好硬着头皮回答Arch Linux加虚拟机跑的Win7处理一些文档。</p>
+<p>又聊到了这个粗制滥造的个人网站，
+博主介绍了网站的目的主要是记录一些个人学习的总结，
+既没有对某方面深入的研究报告，
+也不存在系统而清晰的分析文档，
+纯粹是兴趣瞎搞而成。</p>
+<p>对界面更有兴趣还是对后台代码更有兴趣，
+回答得不明不白差点让面试官以为前端太简单没技术含量，
+博主赶紧解释可不是看不起前端，
+而是因为代码才是兴趣所在。
+毕竟项目里院长死磕cakephp默认css的场景还历历在目，
+搞css还是那帮美国佬猛。</p>
+<p>谈了谈平日的爱好，
+博主说到了乌云上看的几篇文章，
+吹了点代码注入的玩意。
+然后出乎意料的事情就出现了，
+面试官就这样结束了二面，
+笑着说应该很快就会有通知了，
+静待消息。</p>
+<p>博主惊奇得还反问了一句“就结束了？”，
+事后一想甚是无礼，
+幸好感觉面试官没被惹恼。
+(~_~)</p>
+</div>
+<div class="section" id="id5">
+<h2>总结</h2>
+<p>整个过程中面试官都很好说话，
+气氛也相当融洽。
+比较可惜的是忘记询问是否为CTO。</p>
+<p>百田给博主的印象随着了解的增多也一直在加分，
+希望能有幸入职吧！</p>
 </div>
 
                 </div><!-- /.entry-content -->

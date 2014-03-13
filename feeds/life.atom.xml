@@ -1,5 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/life.atom.xml" rel="self"></link><id>/</id><updated>2014-03-11T20:30:00+08:00</updated><entry><title>实习求职(二)：百田软件开发工程师(初次面试篇)</title><link href="/JobHunting002.html" rel="alternate"></link><updated>2014-03-11T20:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-03-11:JobHunting002.html</id><summary type="html">&lt;p&gt;这是博主第一次参加面试，
+<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/life.atom.xml" rel="self"></link><id>/</id><updated>2014-03-13T20:30:00+08:00</updated><entry><title>实习求职(三)：百田软件开发工程师(技术复试篇)</title><link href="/JobHunting003.html" rel="alternate"></link><updated>2014-03-13T20:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-03-13:JobHunting003.html</id><summary type="html">&lt;p&gt;忐忑了两天之后博主接到了来自百田的二面通知。(^_^)&lt;/p&gt;
+&lt;p&gt;先前同去的小伙伴们却都没有消息，
+在焦急的等待中过了一天仍然音信全无，
+感觉就像被干掉了。&lt;/p&gt;
+&lt;p&gt;不过标神早已拿到腾讯广州研究院创新班的录取通知书，
+而小超也开始积极准备cvte的面试。&lt;/p&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;准备&lt;/h2&gt;
+&lt;p&gt;在接到电话后顺便询问了二面的内容，
+得到的答复是技术复试。&lt;/p&gt;
+&lt;p&gt;这让博主差点抓狂，
+要知道博主已经在一面把所有学过的看过的听说过的东西全部拿出来吹了一遍，
+复试如果继续探讨技术问题，
+不管聊什么都不可能会的。&lt;/p&gt;
+&lt;p&gt;想了一下只好死马当作活马医，
+总结了上回的劣势，
+准备工作以巩固基础为主。&lt;/p&gt;
+&lt;p&gt;刚好手头有跟孙少借来的《现代操作系统》，
+还有一本数据结构与算法的课本。&lt;/p&gt;
+&lt;p&gt;花了一个晚上的时间刷了一遍操作系统，
+线程与进程相关、IPC问题、进程调度、内存管理、段与页的理论分析、置换算法、文件系统与i-node...
+还花了点时间看了第十章的Linux实例研究。&lt;/p&gt;
+&lt;p&gt;再用了一个早上刷了一遍数据结构，
+常用的排序算法、外排序的两种思路、二分查找、哈希、索引（2-3树、B树...）、图论的基本常识...&lt;/p&gt;
+&lt;p&gt;准备完成也就死而无憾了，
+毕竟超过能力的东西实在没办法。&lt;/p&gt;
+&lt;p&gt;带着满脑子BC范式第三范式，
+博主踏上了开往科韵路的专线公车。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h2&gt;前戏&lt;/h2&gt;
+&lt;p&gt;博主又来早了，
+找略显呆萌又万分可爱的前台姐姐交了一份成绩单，
+还不到五点，
+约的是六点。&lt;/p&gt;
+&lt;p&gt;等待的时候与旁边的兄弟搭话，
+一问才发现原来是直系师兄，
+也是来面软件开发的。&lt;/p&gt;
+&lt;p&gt;于是天南地北海聊，
+突发奇想询问是否有师兄去了Google，
+师兄想了一下说，
+有一个同学为了进Google跑去法国留学了。
+这让博主想到了某牛人，
+一问果然是刘子星师兄...
+真是世人皆知的大神级人物啊。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h2&gt;正戏&lt;/h2&gt;
+&lt;p&gt;师兄面完就轮到博主了，
+不知道是不是有人放百田鸽子。&lt;/p&gt;
+&lt;p&gt;面试官看起来是个很干练的技术牛人，
+对博主的简历研究得甚是仔细，
+由于简历内容曾经upgrade过，
+还被专门要求指出修改了哪些内容。&lt;/p&gt;
+&lt;p&gt;开场就聊ACM的获奖事迹，
+于是简单描述了一下跟同班同学参加校赛捞水奖的有趣经历。
+被问到有没有进集训队，
+一下子就砍中软肋，
+只好解释由于技术太差被集训队reject了。&lt;/p&gt;
+&lt;p&gt;接着谈到了Linux，
+面试官以为我是搞内核的。(T_T)
+没想到也就是学了一下简单的使用和shell的基本知识而已，
+估计他也很失望吧。&lt;/p&gt;
+&lt;p&gt;还好拿Vim出来说事，
+多少显得比较专业～&lt;/p&gt;
+&lt;p&gt;谈到Python，
+博主搞项目的时候用Python写过一些文本处理的小工具，
+却没有深入学习过Python的高级内容。
+好好的Python到博主手里变成搞文本的，唉...
+其实自己倒是每天在用Python，
+每次开机敲的是startx,接着便是python goagent/proxy.py
+(^_^)&lt;/p&gt;
+&lt;p&gt;各种方面的问题搞得博主一头雾水，
+传说中的技术复试可是聊面向对象，聊内存回收机制的，
+网络上的面经都是如此，
+而眼下却被问到手头的机器装的是什么系统，
+只好硬着头皮回答Arch Linux加虚拟机跑的Win7处理一些文档。&lt;/p&gt;
+&lt;p&gt;又聊到了这个粗制滥造的个人网站，
+博主介绍了网站的目的主要是记录一些个人学习的总结，
+既没有对某方面深入的研究报告，
+也不存在系统而清晰的分析文档，
+纯粹是兴趣瞎搞而成。&lt;/p&gt;
+&lt;p&gt;对界面更有兴趣还是对后台代码更有兴趣，
+回答得不明不白差点让面试官以为前端太简单没技术含量，
+博主赶紧解释可不是看不起前端，
+而是因为代码才是兴趣所在。
+毕竟项目里院长死磕cakephp默认css的场景还历历在目，
+搞css还是那帮美国佬猛。&lt;/p&gt;
+&lt;p&gt;谈了谈平日的爱好，
+博主说到了乌云上看的几篇文章，
+吹了点代码注入的玩意。
+然后出乎意料的事情就出现了，
+面试官就这样结束了二面，
+笑着说应该很快就会有通知了，
+静待消息。&lt;/p&gt;
+&lt;p&gt;博主惊奇得还反问了一句“就结束了？”，
+事后一想甚是无礼，
+幸好感觉面试官没被惹恼。
+(~_~)&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id5"&gt;
+&lt;h2&gt;总结&lt;/h2&gt;
+&lt;p&gt;整个过程中面试官都很好说话，
+气氛也相当融洽。
+比较可惜的是忘记询问是否为CTO。&lt;/p&gt;
+&lt;p&gt;百田给博主的印象随着了解的增多也一直在加分，
+希望能有幸入职吧！&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="audition"></category><category term="recruitment"></category></entry><entry><title>实习求职(二)：百田软件开发工程师(初次面试篇)</title><link href="/JobHunting002.html" rel="alternate"></link><updated>2014-03-11T20:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-03-11:JobHunting002.html</id><summary type="html">&lt;p&gt;这是博主第一次参加面试，
 兴奋与紧张之情不必言说。&lt;/p&gt;
 &lt;div class="section" id="id2"&gt;
 &lt;h2&gt;前戏&lt;/h2&gt;
