@@ -14,7 +14,7 @@
         &lt;br /&gt;
         &lt;p&gt;许可协议为BSD License.&lt;/p&gt;
 
-            &lt;script src="md5-min.js"&gt;&lt;/script&gt;
+            &lt;script src="add_ons/md5-min.js"&gt;&lt;/script&gt;
             &lt;script&gt;
                 function getHash()
                 {

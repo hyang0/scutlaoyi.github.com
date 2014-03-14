@@ -430,16 +430,27 @@ fast每次移动两个节点，slow每次移动一个节点。</p>
 
                 <div class="span3 well sidebar-nav" id="sidebar">
 <ul class="nav nav-list">
-<li class="nav-header"><h4>每页一句</h4></li>
-<li
-id="page-sentence">当你看到这句的时候，说明每页一句载入失败...烦请告知博主!谢谢!(^_^)</li>
-<script src="/pagesentence/sentence.js"></script>
+<li class="nav-header"><h4><i class="icon-time"></i>time</h4></li>
+<li><p id="pagetimer"></p></li>
+
+<li class="nav-header"><h4><i class="icon-list-alt"></i>PAGE SENTENCE</h4></li>
+<li>
+<p id="page-sentence">
+当你看到这句的时候，说明每页一句载入失败...烦请告知博主!谢谢!(^_^)
+</p>
+</li>
+<script src="/add_ons/pagesentence/sentence.js"></script>
+<script src="/add_ons/clock/clock.js"></script>
 <script>
-function loadSentence()
-{
+window.onload=function(){
+      var pagetimer = document.getElementById("pagetimer");
+      pagetimer.innerHTML = getcurrenttime();
+  setInterval(function(){
+      pagetimer.innerHTML = getcurrenttime();
+      }, 1000);
+
     document.getElementById("page-sentence").innerHTML = generateSentence();
 }
-window.onload=loadSentence();
 </script>
 <li class="nav-header"><h4><i class="icon-external-link"></i>link</h4></li>
     <li><a href="http://github.com/scutlaoyi"><i class="icon-external-link"></i>my github</a></li>
@@ -492,44 +503,19 @@ window.onload=loadSentence();
 </li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
-    </a>
-</li>
 <li class="tag-2">
     <a href="/tag/git.html">
         <i class="icon-tag icon-large"></i>git
     </a>
 </li>
 <li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
     </a>
 </li>
 <li class="tag-4">
     <a href="/tag/vim.html">
         <i class="icon-tag icon-large"></i>Vim
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/audition.html">
-        <i class="icon-tag icon-large"></i>audition
     </a>
 </li>
 <li class="tag-1">
@@ -538,13 +524,18 @@ window.onload=loadSentence();
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
     </a>
 </li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
     </a>
 </li>
 <li class="tag-1">
@@ -553,8 +544,28 @@ window.onload=loadSentence();
     </a>
 </li>
 <li class="tag-2">
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
+    </a>
+</li>
+<li class="tag-2">
     <a href="/tag/socket.html">
         <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
     </a>
 </li>
 
