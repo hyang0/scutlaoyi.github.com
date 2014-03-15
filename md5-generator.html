@@ -97,11 +97,6 @@
 					</a>
                   </li>
                   <li >
-                    <a href="/category/vim.html">
-						<i class="icon-folder-open icon-large"></i>Vim
-					</a>
-                  </li>
-                  <li >
                     <a href="/category/web.html">
 						<i class="icon-folder-open icon-large"></i>web
 					</a>
@@ -150,28 +145,54 @@
 </footer><!-- /.post-info -->                </div>
                 
         <p>一个非常好用的md5散列计算工具</p>
+        <p>从网上搜刮的一个JavaScript实现的md5算法，许可协议为BSD License。URL在这里：
+        <a href="http://pajhome.org.uk/crypt/md5/index.html">JavaScript md5</a>
+        </p>
+        <p>恢复函数是博主用JavaScript做的，倒计时十秒。</p>
         <br />
         <input type="password" id="strInput"></input>
         <br />
         <button onclick="getHash()">Hash dear, hash!</button>
         <br />
-        <h4>Result:</h4>
-        <h4 id="result">No result yet.</h4>
+        <h4 id="resultlabel">No result yet.</h4>
+        <h4 id="timerlabel"></h4>
         <br />
-        <p>从网上搜刮的一个JavaScript实现的md5算法，URL在这里：</p>
-        <a href="http://pajhome.org.uk/crypt/md5/index.html">JavaScript md5</a>
-        <br />
-        <p>许可协议为BSD License.</p>
 
-            <script src="add_ons/md5-min.js"></script>
-            <script>
-                function getHash()
-                {
-                    source = document.getElementById("strInput");
-                    result = hex_md5(source.value);
-                    document.getElementById("result").innerHTML = result;
-                }
-            </script>
+    <script src="add_ons/md5-min.js"></script>
+    <script>
+        var TIMEOUT = 10;// ten seconds.
+        var md5timer;
+        var timerlabel = document.getElementById("timerlabel");
+        var resultlabel =document.getElementById("resultlabel"); 
+
+        function cleartimer()
+        {
+            clearInterval(md5timer);
+            resultlabel.innerHTML="No result yet.";
+            timerlabel.innerHTML="Timer stop.";
+        }
+
+        function settimeout()
+        {
+            var timecounter = 0;
+            md5timer = setInterval(function(){
+                    timecounter += 1;
+                    timerlabel.innerHTML = ("time remaining:"+
+                        (TIMEOUT-timecounter)+
+                        " second(s)");
+                    if(timecounter > TIMEOUT)
+                        cleartimer();
+                    }, 1000);
+        }
+            
+        function getHash()
+        {
+            var source = document.getElementById("strInput");
+            var result = hex_md5(source.value);
+            resultlabel.innerHTML = result;
+            settimeout();
+        }
+    </script>
     
                 </div><!-- /.entry-content -->
         </article>
@@ -249,11 +270,6 @@ window.onload=function(){
 </a>
 </li>
 <li>
-<a href="/category/vim.html">
-    <i class="icon-folder-open icon-large"></i>Vim
-</a>
-</li>
-<li>
 <a href="/category/web.html">
     <i class="icon-folder-open icon-large"></i>web
 </a>
@@ -261,33 +277,8 @@ window.onload=function(){
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
 <li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>Python
-    </a>
-</li>
-<li class="tag-2">
     <a href="/tag/bash.html">
         <i class="icon-tag icon-large"></i>Bash
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
     </a>
 </li>
 <li class="tag-2">
@@ -301,13 +292,38 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-2">
     <a href="/tag/audition.html">
         <i class="icon-tag icon-large"></i>audition
     </a>
 </li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
     </a>
 </li>
 <li class="tag-4">
@@ -315,14 +331,14 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>md5
     </a>
 </li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
 <li class="tag-2">
     <a href="/tag/softwarearchitect.html">
         <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
     </a>
 </li>
 

@@ -97,11 +97,6 @@
 					</a>
                   </li>
                   <li >
-                    <a href="/category/vim.html">
-						<i class="icon-folder-open icon-large"></i>Vim
-					</a>
-                  </li>
-                  <li >
                     <a href="/category/web.html">
 						<i class="icon-folder-open icon-large"></i>web
 					</a>
@@ -121,6 +116,59 @@
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
+        <div class="article">
+                <h1><a href="/VimExperience001.html">Vim经验记录(一):与系统共享剪贴板</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-02-13T12:30:00">
+        <i class="icon-calendar"></i>Thu 13 February 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/tools.html"><i class="icon-folder-open"></i>Tools</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/vim.html"><i class="icon-tag"></i>Vim</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>这几天玩剪贴板搞得灰头土脸，
+幸好现在终于找到最佳的解决方案了，
+虽然好用，方法还是有点猥琐。</p>
+<p>博主主要的目的在于多个Vim之间可以共享剪贴板。
+写博文的时候，
+像上一篇博文中就有非常多的代码片段，
+因此需要快捷的复制粘贴操作。</p>
+<p>目标：</p>
+<blockquote>
+找到一种方法方便快速地访问系统剪贴板，
+使Vim支持从系统剪贴板中复制粘贴数据，
+通过系统剪贴板快捷地与其他应用程序交换数据，
+如Firefox中网页的某些文本框，
+或者与其他Vim进程交换数据。</blockquote>
+<p>环境：</p>
+<pre class="literal-block">
+OS: Arch Linux(x64)
+Window Manager: X11
+DesktopEnvironment: LXDE
+Package Manager: Pacman
+</pre>
+<div class="section" id="id1">
+<h2>鼠标解法</h2>
+<p>最初遇到这个问题时想到了上学期在工作室的Ubuntu系统，
+通过配置标神找到的vimrc文件，
+可以直接支持鼠标点击、鼠标选择、右键复制粘贴甚至是滚轮翻页。</p>
+<p>不知道是因为桌面环境不一样还是系统问题，
+原有的配置文件在Arch Linux加LXDE的环境里会导致Vim出错。</p>
+<p>重新配置了vimrc使现在的Vim支持原有的大部分功能，
+然而鼠标的功能还是没有以前那么强悍了。</p>
+<pre class="literal-block">
+set mouse=a         &quot; Enable the use of the mouse.
+set selection=exclusive ...</pre></div>
+                        <a class="btn primary xsmall" href="/VimExperience001.html">more ...</a>
+                </div>
+        </div>
+        <hr />
         <div class="article">
                 <h1><a href="/md5-generator.html">md5 generator</a></h1>
                 <div class="well small"><footer class="post-info">
@@ -213,11 +261,6 @@ window.onload=function(){
 </a>
 </li>
 <li>
-<a href="/category/vim.html">
-    <i class="icon-folder-open icon-large"></i>Vim
-</a>
-</li>
-<li>
 <a href="/category/web.html">
     <i class="icon-folder-open icon-large"></i>web
 </a>
@@ -225,33 +268,8 @@ window.onload=function(){
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
 <li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>Python
-    </a>
-</li>
-<li class="tag-2">
     <a href="/tag/bash.html">
         <i class="icon-tag icon-large"></i>Bash
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
     </a>
 </li>
 <li class="tag-2">
@@ -265,13 +283,38 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-2">
     <a href="/tag/audition.html">
         <i class="icon-tag icon-large"></i>audition
     </a>
 </li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
     </a>
 </li>
 <li class="tag-4">
@@ -279,14 +322,14 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>md5
     </a>
 </li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
 <li class="tag-2">
     <a href="/tag/softwarearchitect.html">
         <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
     </a>
 </li>
 

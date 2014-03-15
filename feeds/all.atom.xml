@@ -1634,28 +1634,54 @@ make clean
 &lt;/div&gt;
 </summary><category term="C/C++"></category></entry><entry><title>md5 generator</title><link href="/md5-generator.html" rel="alternate"></link><updated>2014-02-04T11:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-02-04:md5-generator.html</id><summary type="html">
         &lt;p&gt;一个非常好用的md5散列计算工具&lt;/p&gt;
+        &lt;p&gt;从网上搜刮的一个JavaScript实现的md5算法，许可协议为BSD License。URL在这里：
+        &lt;a href="http://pajhome.org.uk/crypt/md5/index.html"&gt;JavaScript md5&lt;/a&gt;
+        &lt;/p&gt;
+        &lt;p&gt;恢复函数是博主用JavaScript做的，倒计时十秒。&lt;/p&gt;
         &lt;br /&gt;
         &lt;input type="password" id="strInput"&gt;&lt;/input&gt;
         &lt;br /&gt;
         &lt;button onclick="getHash()"&gt;Hash dear, hash!&lt;/button&gt;
         &lt;br /&gt;
-        &lt;h4&gt;Result:&lt;/h4&gt;
-        &lt;h4 id="result"&gt;No result yet.&lt;/h4&gt;
+        &lt;h4 id="resultlabel"&gt;No result yet.&lt;/h4&gt;
+        &lt;h4 id="timerlabel"&gt;&lt;/h4&gt;
         &lt;br /&gt;
-        &lt;p&gt;从网上搜刮的一个JavaScript实现的md5算法，URL在这里：&lt;/p&gt;
-        &lt;a href="http://pajhome.org.uk/crypt/md5/index.html"&gt;JavaScript md5&lt;/a&gt;
-        &lt;br /&gt;
-        &lt;p&gt;许可协议为BSD License.&lt;/p&gt;
 
-            &lt;script src="add_ons/md5-min.js"&gt;&lt;/script&gt;
-            &lt;script&gt;
-                function getHash()
-                {
-                    source = document.getElementById("strInput");
-                    result = hex_md5(source.value);
-                    document.getElementById("result").innerHTML = result;
-                }
-            &lt;/script&gt;
+    &lt;script src="add_ons/md5-min.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+        var TIMEOUT = 10;// ten seconds.
+        var md5timer;
+        var timerlabel = document.getElementById("timerlabel");
+        var resultlabel =document.getElementById("resultlabel"); 
+
+        function cleartimer()
+        {
+            clearInterval(md5timer);
+            resultlabel.innerHTML="No result yet.";
+            timerlabel.innerHTML="Timer stop.";
+        }
+
+        function settimeout()
+        {
+            var timecounter = 0;
+            md5timer = setInterval(function(){
+                    timecounter += 1;
+                    timerlabel.innerHTML = ("time remaining:"+
+                        (TIMEOUT-timecounter)+
+                        " second(s)");
+                    if(timecounter &gt; TIMEOUT)
+                        cleartimer();
+                    }, 1000);
+        }
+            
+        function getHash()
+        {
+            var source = document.getElementById("strInput");
+            var result = hex_md5(source.value);
+            resultlabel.innerHTML = result;
+            settimeout();
+        }
+    &lt;/script&gt;
     </summary><category term="md5"></category></entry><entry><title>C++学习(一):白书基础总结</title><link href="/CppLearning001.html" rel="alternate"></link><updated>2014-01-31T16:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-01-31:CppLearning001.html</id><summary type="html">&lt;p&gt;装完Arch Linux最近开始复习一下C++和数据结构，为下学期做好准备。&lt;/p&gt;
 &lt;p&gt;用白书刷一些简单的题目复习基本语法，发现自己太不注重基本的东西了，之前瞎搞ACM的时候也是，好多方便有效的工具都不认识。&lt;/p&gt;
 &lt;p&gt;因此记录一下标准库的一些基本的工具和输入输出的简单总结。&lt;/p&gt;
