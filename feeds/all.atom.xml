@@ -1,5 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2014-03-13T20:30:00+08:00</updated><entry><title>实习求职(三)：百田软件开发工程师(技术复试篇)</title><link href="/JobHunting003.html" rel="alternate"></link><updated>2014-03-13T20:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-03-13:JobHunting003.html</id><summary type="html">&lt;p&gt;忐忑了两天之后博主接到了来自百田的二面通知。(^_^)&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2014-03-15T16:30:00+08:00</updated><entry><title>Vim经验记录(二):寄存器的相关知识</title><link href="/VimExperience002-registers.html" rel="alternate"></link><updated>2014-03-15T16:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-03-15:VimExperience002-registers.html</id><summary type="html">&lt;p&gt;本文参考一下博文：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;a class="reference external" href="http://blog.sanctum.geek.nz/advanced-vim-registers/"&gt;http://blog.sanctum.geek.nz/advanced-vim-registers/&lt;/a&gt;&lt;/blockquote&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;基本功能&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;概念及基本用法&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Vim的寄存器基本功能是个剪贴板，
+在寄存器中可以保存文本内容，
+更强悍的是可以保存命令记录，
+俗称宏记录。&lt;/p&gt;
+&lt;p&gt;寄存器有多款，
+最简单的是命名寄存器，
+键盘上的26个字母可以指向26个不同的命名寄存器。&lt;/p&gt;
+&lt;p&gt;在一般模式下通过单个双引号调用寄存器。
+双引号后接寄存器名称，
+最后是文本操作命令。&lt;/p&gt;
+&lt;p&gt;用例子解释最简单：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+将当前文本行复制到a寄存器中：
+    &amp;quot;ayy
+将b寄存器中的内容粘贴到当前光标处：
+    &amp;quot;bp
+&lt;/pre&gt;
+&lt;p&gt;一目了然，
+通过更换其他各种命令自然就能实现多种功能了。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;查看所有非空寄存器的状态&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在一般模式下敲以下命令：&lt;/p&gt;
+&lt;blockquote&gt;
+:reg&lt;/blockquote&gt;
+&lt;p&gt;可以看到当前所有非空寄存器的内容。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;宏录制与使用&lt;/h2&gt;
+&lt;p&gt;这里说的宏是指一系列操作的集合。
+Vim中的寄存器也可用于录制用户的宏，
+再非常方便的重放，
+达到快速完成一系列指令的功能。&lt;/p&gt;
+&lt;p&gt;录制宏的操作非常简单，
+首先通过q命令进入宏录制模式，
+q后接寄存器的名称，比如a。&lt;/p&gt;
+&lt;blockquote&gt;
+qa&lt;/blockquote&gt;
+&lt;p&gt;接着就可以随意操作当前文本了，
+你的一举一动Vim都会记录下来并保存到寄存器中。&lt;/p&gt;
+&lt;p&gt;最后(记得退出到一般模式中)再按一次q退出宏录制模式。&lt;/p&gt;
+&lt;blockquote&gt;
+q&lt;/blockquote&gt;
+&lt;p&gt;重放宏直接在一般模式下用&amp;#64;关键字加寄存器名称：&lt;/p&gt;
+&lt;blockquote&gt;
+&amp;#64;a&lt;/blockquote&gt;
+&lt;p&gt;录制的操作便会自动重放一遍。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h2&gt;寄存器的追加操作&lt;/h2&gt;
+&lt;p&gt;在默认情况下复制等操作会覆盖掉寄存器中原有的内容，
+如果想要在原有内容上追加新的内容，
+可将对应名称的寄存器改为大写：&lt;/p&gt;
+&lt;blockquote&gt;
+&amp;quot;Ayy&lt;/blockquote&gt;
+&lt;p&gt;上面这句将当前行内容追加到a寄存器的末尾。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h2&gt;匿名寄存器&lt;/h2&gt;
+&lt;p&gt;可能用的最多的是Vim的匿名寄存器了。&lt;/p&gt;
+&lt;p&gt;在平常的使用过程中，
+默认的复制、剪切等操作都会将选定的内容填充到匿名寄存器中：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+yy: 复制当前行
+dd: 剪切当前行
+4dd: 剪切四行
+&lt;/pre&gt;
+&lt;p&gt;所谓的匿名寄存器实际上是名称为双引号的寄存器，
+通过查看:reg可以看到当前的内容。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id5"&gt;
+&lt;h2&gt;黑洞寄存器&lt;/h2&gt;
+&lt;p&gt;博主不知道怎么翻译，
+就随便这样命名了。&lt;/p&gt;
+&lt;p&gt;这货就像黑洞一样，
+往里面添加任意的内容都会被清空，
+就如同Linux中的/dev/null一样。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;题外话，
+在Linux下，
+可以尝试echo一些东西并且重定向到/dev/null中，
+那么命令会被执行，
+结果输出到/dev/null中，
+然后就没有然后了。&lt;/p&gt;
+&lt;p&gt;用于处理某些不需要的输出非常有效，
+比如将无聊的编译出错信息重定向到那里去，
+就不会有恼人的错误信息了。
+(-_-)&lt;/p&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;p&gt;g++ 2&amp;gt;/dev/null&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;该寄存器为 _ ，
+如果需要剪切特定的行并且不想让其污染匿名寄存器，
+可以这样：&lt;/p&gt;
+&lt;blockquote&gt;
+&amp;quot;_dd&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id6"&gt;
+&lt;h2&gt;数字寄存器&lt;/h2&gt;
+&lt;p&gt;名称是从0到9的十个寄存器。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;复制寄存器&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;寄存器0保存了最近复制的内容，
+因此复制操作会更新0号寄存器，
+但是剪切的内容不会被写到0号寄存器中。&lt;/p&gt;
+&lt;p&gt;在某些情况下这货非常有用，
+比如复制了一坨东西，
+跑去别的地方剪切了一些东西，
+这时候想要粘贴刚才复制的东西，
+会发现直接p的话剪切的东西就出来了。&lt;/p&gt;
+&lt;p&gt;这个时候一种解决方案是使用黑洞剪切不需要的内容;
+而如果一时手快忘记使用黑洞了，
+不要紧，
+刚刚复制的东西在0里面，
+因此这样就可以粘贴了：&lt;/p&gt;
+&lt;blockquote&gt;
+&amp;quot;0p&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;剪切寄存器&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;其他的数字寄存器与0号类似，
+不过保存的是最近剪切的内容。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id7"&gt;
+&lt;h2&gt;最近插入内容寄存器&lt;/h2&gt;
+&lt;p&gt;名称： .&lt;/p&gt;
+&lt;p&gt;当从一般模式进入插入模式并敲了一些东西后，
+返回一般模式，
+最近敲的这坨东西会被保存到.寄存器中。&lt;/p&gt;
+&lt;p&gt;不过再次输入同样内容不需要用以下命令：&lt;/p&gt;
+&lt;blockquote&gt;
+&amp;quot;.p&lt;/blockquote&gt;
+&lt;p&gt;虽然是可行的。&lt;/p&gt;
+&lt;p&gt;直接在一般模式下敲.重复最近一次的命令即可。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id8"&gt;
+&lt;h2&gt;文件名寄存器&lt;/h2&gt;
+&lt;p&gt;名称： %&lt;/p&gt;
+&lt;p&gt;简单，保存了文件名。&lt;/p&gt;
+&lt;hr class="docutils" /&gt;
+&lt;p&gt;学习一下Vim的寄存器还是非常有用的，
+可以快速执行非常多的操作。&lt;/p&gt;
+&lt;p&gt;这里没有提到的关于系统剪贴板的若干寄存器，
+可参考上一篇博文的内容。&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="Vim"></category></entry><entry><title>实习求职(三)：百田软件开发工程师(技术复试篇)</title><link href="/JobHunting003.html" rel="alternate"></link><updated>2014-03-13T20:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-03-13:JobHunting003.html</id><summary type="html">&lt;p&gt;忐忑了两天之后博主接到了来自百田的二面通知。(^_^)&lt;/p&gt;
 &lt;p&gt;先前同去的小伙伴们却都没有消息，
 在焦急的等待中过了一天仍然音信全无，
 感觉就像被干掉了。&lt;/p&gt;

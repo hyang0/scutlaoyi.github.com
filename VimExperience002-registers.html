@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Arch Linux学习：安装篇(二)</title>
+    <title>Vim经验记录(二):寄存器的相关知识</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="laoyi">
@@ -81,7 +81,7 @@
 						<i class="icon-folder-open icon-large"></i>Life
 					</a>
                   </li>
-                  <li class="active">
+                  <li >
                     <a href="/category/linux.html">
 						<i class="icon-folder-open icon-large"></i>Linux
 					</a>
@@ -91,7 +91,7 @@
 						<i class="icon-folder-open icon-large"></i>Python
 					</a>
                   </li>
-                  <li >
+                  <li class="active">
                     <a href="/category/tools.html">
 						<i class="icon-folder-open icon-large"></i>Tools
 					</a>
@@ -122,8 +122,8 @@
                         <h1>
                                 <a href=""
                                         rel="bookmark"
-                                        title="Permalink to Arch Linux学习：安装篇(二)">
-                                        Arch Linux学习：安装篇(二)
+                                        title="Permalink to Vim经验记录(二):寄存器的相关知识">
+                                        Vim经验记录(二):寄存器的相关知识
                                 </a>
                         </h1>
                 </header>
@@ -131,158 +131,163 @@
                 <div class="well">
 <footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2014-01-14T19:30:00">
-        <i class="icon-calendar"></i>Tue 14 January 2014
+<abbr class="published" title="2014-03-15T16:30:00">
+        <i class="icon-calendar"></i>Sat 15 March 2014
 </abbr>
 <span class="label">By</span>
 <a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
 <span class="label">Category</span>
-<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
+<a href="/category/tools.html"><i class="icon-folder-open"></i>Tools</a>.
 
 
 <span class="label">Tags</span>
-	<a href="/tag/arch.html"><i class="icon-tag"></i>Arch</a>
+	<a href="/tag/vim.html"><i class="icon-tag"></i>Vim</a>
 </footer><!-- /.post-info -->                </div>
-                <p>本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。</p>
-<hr class="docutils" />
-<p>当你看到这篇博文的时候，
-老逸的新系统已安装完毕，
-弹冠相庆！^_^</p>
-<p>替换掉原来恶心的win7+Ubuntu双系统，
-现在直接将整个硬盘重新分区并安装Arch Linux.</p>
-<p>分区如下:</p>
-<pre class="literal-block">
-NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
-sda      8:0    0 298.1G  0 disk
-├─sda1   8:1    0   500M  0 part /boot
-├─sda2   8:2    0    50G  0 part /
-├─sda3   8:3    0     2G  0 part [SWAP]
-├─sda4   8:4    0   100G  0 part /home
-└─sda5   8:5    0 145.6G  0 part /data
-</pre>
-<p>除了swap外所有分区均使用ext4。
-根据Arch官方说法，留多25%的空间能够消除碎片，
-考虑到300G硬盘的实际使用率，因此确定了上面的分区方案。</p>
-<p>boot分区给了夸张的500M，因为1G以下的空间对现在的硬盘来说都不够算。
-root分区因为要装一些软件什么的，考虑到之前的Ubuntu只有10G也没用尽，因此给了50G以防以后拓展。
-home分区用来存自己的数据，文档啦源码啦，还有我这网站的content也在里面，乱七八糟的都放，给了个100G。
-剩下的统统交给data，计划用来放些电影啦音乐啥子的，这种搞法其实是Arch的文档中介绍的。</p>
-<p>基本配置如下，列表以供参考：</p>
-<pre class="literal-block">
-partition table: GPT
-bootloader: syslinux
-linux kernal: 3.12.6-1-ARCH (tobias&#64;T-POWA-LX)
-Desktop Environment: Lightweight X11 Desktop Environment(LXDE)
-</pre>
-<p>由于确定不再使用windows，所以完全没有考虑双系统的兼容性问题，带来的好处就是可以直接使用新款分区表GPT，
-相比老旧的MBR确实优势多多。
-bootloader也相应选择了看起来更加牛逼一些的syslinux，安装过程也非常顺利方便。（当然，相比windows的无人值守性质的安装还是多少有一些事情要做的。不过windows嘛，就不说什么了...）
-内核就没有自己geek一番了，毕竟是生手第一次安装，主要考虑系统的稳定性和便捷性，直接pacstrap搞定。</p>
-<p>应用软件方面还是以轻量级为主。</p>
-<p>桌面环境直接排除了GNOME和KDE，GNOME虽然效果非常炫，但用起来机器居然有时会卡，而且GNOME本身也过于庞大。
-KDE的话，看到Arch官网的介绍和GNOME同属重量级的环境，就一起排除了。
-在xfce和LXDE之间纠结了很久，因为这俩货主打轻量级，而且是官方支持的版本。
-之前用的是xfce，考虑到尝鲜的因素、浏览器的因素（LXDE推荐网页浏览器是Firefox），以及其他心理因素，最终确定使用LXDE作为桌面环境。</p>
-<p>输入法本来安装了ibus和googlepinyin，用了两次感觉比较不爽，默认的界面非常难看，而且启动也有点慢（居然要我开启完桌面环境好一会之后才自己慢吞吞出现在菜单栏里）。
-所以果断换了fcitx。刚换上去就知道找对东西了，不仅开启的速度非常快，不用怎么配置，而且默认的黑色界面也和我的桌面主题很搭。再装上google拼音，好用的很。</p>
-<p>浏览器就Firefox无疑了，autoProxy用起来忒爽。这里插句题外话，前天给家里的winXP(老古董，想换个Lubuntu，但不是我在用，麻烦。=_=)装Firefox，居然下错Firefox搞到一个中国版，各种插件各种弹窗，各种恶心...提醒大家装Firefox去官网选择中文原版，别去中国官网下，当然故意找插件的除外。</p>
-<div class="section" id="id1">
-<h2>桌面环境的安装</h2>
-<p>安装桌面环境首先要安装xorg-server，直接pacman就行。</p>
-<p>接着是mesa，据说是用来处理3D显示的。</p>
-<p>然后要搞定显卡的驱动。</p>
-<p>从这里：</p>
+                <p>本文参考一下博文：</p>
 <blockquote>
-<a class="reference external" href="https://wiki.archlinux.org/index.php/Xorg#Driver_installation">https://wiki.archlinux.org/index.php/Xorg#Driver_installation</a></blockquote>
-<p>可以找到自己显卡对应的驱动，pacman安装即可。</p>
-<p>现在便可以通过启动X来测试了，直接命令：startx
-如果能出几个框框鼠标能动，说明安装正确，不行的话就找troubleshooting咯。</p>
-<p>安装好X便可以选择一个桌面环境自己安装了，所谓的根据喜好选择。 ^_^</p>
-<p>最后是一些配置什么的，就不赘述了。</p>
+<a class="reference external" href="http://blog.sanctum.geek.nz/advanced-vim-registers/">http://blog.sanctum.geek.nz/advanced-vim-registers/</a></blockquote>
+<div class="section" id="id1">
+<h2>基本功能</h2>
+<p><strong>概念及基本用法</strong></p>
+<p>Vim的寄存器基本功能是个剪贴板，
+在寄存器中可以保存文本内容，
+更强悍的是可以保存命令记录，
+俗称宏记录。</p>
+<p>寄存器有多款，
+最简单的是命名寄存器，
+键盘上的26个字母可以指向26个不同的命名寄存器。</p>
+<p>在一般模式下通过单个双引号调用寄存器。
+双引号后接寄存器名称，
+最后是文本操作命令。</p>
+<p>用例子解释最简单：</p>
+<pre class="literal-block">
+将当前文本行复制到a寄存器中：
+    &quot;ayy
+将b寄存器中的内容粘贴到当前光标处：
+    &quot;bp
+</pre>
+<p>一目了然，
+通过更换其他各种命令自然就能实现多种功能了。</p>
+<p><strong>查看所有非空寄存器的状态</strong></p>
+<p>在一般模式下敲以下命令：</p>
+<blockquote>
+:reg</blockquote>
+<p>可以看到当前所有非空寄存器的内容。</p>
 </div>
 <div class="section" id="id2">
-<h2>杂七杂八的经验</h2>
-<div class="section" id="id3">
-<h3>关于虚拟机</h3>
-<p>虚拟机的安装很容易出现问题，
-上回博主在virtualbox里安装的时候曾经在bootloader里卡很久，
-所有的配置都没有问题，但敲回车选择进入Arch，屏幕闪了一下又跳回bootloader主界面。</p>
-<p>查文档说如果敲了回车什么事情都没有发生，说明是配置错误引导系统失败。</p>
-<p>但是多敲几次回车它却偶尔会进系统，并且系统完全正常...</p>
-<p>此外，显示器的识别也出现过问题。
-在virtualbox里startx失败，报错为：没有找到显示器</p>
-<p>所幸这些问题在自己的真机里都没有出现，一切顺利。</p>
-</div>
-<div class="section" id="mirrorlist">
-<h3>关于mirrorlist</h3>
-<p>有了虚拟机的麻烦经历，
-实体安装的时候我把mirrorlist内容全部换成国内几个速度很快的服务器，
-效果非常好，
-速度一般都有几百K到几个M。</p>
-<p>不过遇到了另一个问题，
-不知为何国内的服务器某些软件找不到。
-具体的忘记了，但有不少的软件在国内的服务器返回了404，导致pacman报错。</p>
-<p>于是不得不再次更改mirrorlist加几个山姆大叔家的服务器。</p>
-<p>最终的最佳实践是：
-首先放几个离自己的地域最近的服务器（相同国家一般就可以了）。
-然后在文件的末尾放几个山姆大叔的主力服务器，找那些score高的，用于国内服务器找不到资源时的备用。
-要注意把远程的服务器放在文件末尾，因为pacman是按顺序搜索的。</p>
-<p>另外，千万要记得的是，每次更新mirrorlist要敲这个：</p>
+<h2>宏录制与使用</h2>
+<p>这里说的宏是指一系列操作的集合。
+Vim中的寄存器也可用于录制用户的宏，
+再非常方便的重放，
+达到快速完成一系列指令的功能。</p>
+<p>录制宏的操作非常简单，
+首先通过q命令进入宏录制模式，
+q后接寄存器的名称，比如a。</p>
 <blockquote>
-pacman -Syy</blockquote>
+qa</blockquote>
+<p>接着就可以随意操作当前文本了，
+你的一举一动Vim都会记录下来并保存到寄存器中。</p>
+<p>最后(记得退出到一般模式中)再按一次q退出宏录制模式。</p>
+<blockquote>
+q</blockquote>
+<p>重放宏直接在一般模式下用&#64;关键字加寄存器名称：</p>
+<blockquote>
+&#64;a</blockquote>
+<p>录制的操作便会自动重放一遍。</p>
+</div>
+<div class="section" id="id3">
+<h2>寄存器的追加操作</h2>
+<p>在默认情况下复制等操作会覆盖掉寄存器中原有的内容，
+如果想要在原有内容上追加新的内容，
+可将对应名称的寄存器改为大写：</p>
+<blockquote>
+&quot;Ayy</blockquote>
+<p>上面这句将当前行内容追加到a寄存器的末尾。</p>
 </div>
 <div class="section" id="id4">
-<h3>关于时间</h3>
-<p>时间的同步可以按教程搞：</p>
-<blockquote>
-<a class="reference external" href="https://wiki.archlinux.org/index.php/Network_Time_Protocol">https://wiki.archlinux.org/index.php/Network_Time_Protocol</a></blockquote>
-<p>官方的说法是，没有启动deamon的情况下敲这个：</p>
-<blockquote>
-ntpd -q</blockquote>
-<p>不过我倒是没搞定 -_-</p>
-<p>貌似服务器连接有问题，
-而且更恶心的是同步失败是没有任何出错提示的。</p>
-<p>最后在google上找到另一款方案：</p>
-<blockquote>
-ntpdate 0.us.pool.ntp.org</blockquote>
-<p>记得写入硬件时钟：</p>
-<blockquote>
-hwclock -w</blockquote>
+<h2>匿名寄存器</h2>
+<p>可能用的最多的是Vim的匿名寄存器了。</p>
+<p>在平常的使用过程中，
+默认的复制、剪切等操作都会将选定的内容填充到匿名寄存器中：</p>
+<pre class="literal-block">
+yy: 复制当前行
+dd: 剪切当前行
+4dd: 剪切四行
+</pre>
+<p>所谓的匿名寄存器实际上是名称为双引号的寄存器，
+通过查看:reg可以看到当前的内容。</p>
 </div>
 <div class="section" id="id5">
-<h3>一些好用的命令</h3>
-<p><strong>lsblk</strong></p>
-<p>这货最近敲了很多次，不带参数则显示所有存储设备的分区情况，也可以加入参数限定显示的设备。</p>
-<p>博文最前面的分区信息显示就是用lsblk打出来的。</p>
-<p><strong>ip link</strong></p>
-<p>搞网络也花了一些时间。</p>
-<p>这货显示当前所有网络设备的详细信息。</p>
-<p>启动某个设备敲：</p>
+<h2>黑洞寄存器</h2>
+<p>博主不知道怎么翻译，
+就随便这样命名了。</p>
+<p>这货就像黑洞一样，
+往里面添加任意的内容都会被清空，
+就如同Linux中的/dev/null一样。</p>
 <blockquote>
-ip link set [device] up</blockquote>
-<p>其中device是设备的名称，在ip link输出中的第一个便是。
-一般来说e开头的是有线网卡，wl开头的是无线网卡。lo据称是本地的回路，不是真实网卡。</p>
-<p>然后自己被坑的地方是这里：</p>
-<p>教程说首先使用ip link set让对应的设备state为up，然后便可以连接。
-但要注意的是这种说法对应的是有线网卡的情况。
-如果是无线网卡，直接set是没法让它从down变成up的，
-只有成功创建连接后自己才会更改状态。</p>
-<p>于是我花了好久时间一直在研究为何没法让它up，
-而google到的结果看样子没有人遇到这种奇葩情况。
-直到第二天睡醒想想算了不管它直接用wifi-menu连接看看，
-一试才发现这货根本就没有问题。</p>
-<p><strong>wifi-menu 和 dhcpcd</strong></p>
-<p>两个方便的东西，wifi-menu加上无线网卡的设备名作为参数，
-自动搜索并列表显示所有找到的网络，
-还能输入密码自动创建连接。</p>
-<p>而dhcpcd可以用在有线网卡里，
-默认状态下网卡是down的，用上面的ip link让它up，
-然后直接敲dhcpcd，
-全自动连接并从路由的dhcp服务里获取并设置网络。
-一般根据自己的网络环境选用上面俩命令的一个，成功执行便能ping www.google.com了。</p>
-<hr class="docutils" />
-<p>下一次将尝试安装virtualbox，据说很难搞...</p>
+<p>题外话，
+在Linux下，
+可以尝试echo一些东西并且重定向到/dev/null中，
+那么命令会被执行，
+结果输出到/dev/null中，
+然后就没有然后了。</p>
+<p>用于处理某些不需要的输出非常有效，
+比如将无聊的编译出错信息重定向到那里去，
+就不会有恼人的错误信息了。
+(-_-)</p>
+<p>例如：</p>
+<p>g++ 2&gt;/dev/null</p>
+</blockquote>
+<p>该寄存器为 _ ，
+如果需要剪切特定的行并且不想让其污染匿名寄存器，
+可以这样：</p>
+<blockquote>
+&quot;_dd</blockquote>
 </div>
+<div class="section" id="id6">
+<h2>数字寄存器</h2>
+<p>名称是从0到9的十个寄存器。</p>
+<p><strong>复制寄存器</strong></p>
+<p>寄存器0保存了最近复制的内容，
+因此复制操作会更新0号寄存器，
+但是剪切的内容不会被写到0号寄存器中。</p>
+<p>在某些情况下这货非常有用，
+比如复制了一坨东西，
+跑去别的地方剪切了一些东西，
+这时候想要粘贴刚才复制的东西，
+会发现直接p的话剪切的东西就出来了。</p>
+<p>这个时候一种解决方案是使用黑洞剪切不需要的内容;
+而如果一时手快忘记使用黑洞了，
+不要紧，
+刚刚复制的东西在0里面，
+因此这样就可以粘贴了：</p>
+<blockquote>
+&quot;0p</blockquote>
+<p><strong>剪切寄存器</strong></p>
+<p>其他的数字寄存器与0号类似，
+不过保存的是最近剪切的内容。</p>
+</div>
+<div class="section" id="id7">
+<h2>最近插入内容寄存器</h2>
+<p>名称： .</p>
+<p>当从一般模式进入插入模式并敲了一些东西后，
+返回一般模式，
+最近敲的这坨东西会被保存到.寄存器中。</p>
+<p>不过再次输入同样内容不需要用以下命令：</p>
+<blockquote>
+&quot;.p</blockquote>
+<p>虽然是可行的。</p>
+<p>直接在一般模式下敲.重复最近一次的命令即可。</p>
+</div>
+<div class="section" id="id8">
+<h2>文件名寄存器</h2>
+<p>名称： %</p>
+<p>简单，保存了文件名。</p>
+<hr class="docutils" />
+<p>学习一下Vim的寄存器还是非常有用的，
+可以快速执行非常多的操作。</p>
+<p>这里没有提到的关于系统剪贴板的若干寄存器，
+可参考上一篇博文的内容。</p>
 </div>
 
                 </div><!-- /.entry-content -->
