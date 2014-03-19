@@ -37,7 +37,9 @@ var sentences = new Array(
         "你现在要学的，就是如何不让自己的心倾注在一个地方。因为赌注越大，你会越输不起。",
         "以不义开始的事情，必须用罪恶使它巩固。--《麦克白》",
         "人生不过是一个行走的影子，一个在舞台上指手画脚的拙劣艺人。登场片刻，就在无声无息中悄然退下。它是一个愚人所讲的故事，充满着喧哗和躁动，却没有任何意义。",
-        "逝川与流光，飘忽不相待。"
+        "逝川与流光，飘忽不相待。",
+        "只有两种事物是无穷无尽的--宇宙和人类的愚蠢。但对于前者，我不敢确定。--爱因斯坦",
+        "And a person's character, isn't determined by how he or she enjoys vitory, but rather how he or she endures defeat.Nothing can help us endure dark times better than our faith."
 
         );
 function generateSentence()
