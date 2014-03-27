@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>C++学习(四)：线性表的奇技淫巧(二)</title>
+    <title>老逸的个人站 - data structure</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="laoyi">
@@ -66,7 +66,7 @@
             <ul class="nav">
                 <li><a href="/pages/about.html">About</a></li>
                           <li class="divider-vertical"></li>
-                  <li class="active">
+                  <li >
                     <a href="/category/cpp.html">
 						<i class="icon-folder-open icon-large"></i>Cpp
 					</a>
@@ -116,20 +116,104 @@
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
-<section id="content">
-        <article>
-                <header>
-                        <h1>
-                                <a href=""
-                                        rel="bookmark"
-                                        title="Permalink to C++学习(四)：线性表的奇技淫巧(二)">
-                                        C++学习(四)：线性表的奇技淫巧(二)
-                                </a>
-                        </h1>
-                </header>
-                <div class="entry-content">
-                <div class="well">
-<footer class="post-info">
+        <div class="article">
+                <h1><a href="/CppLearning006.html">C++学习(六)：栈的实现及若干算法</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-03-04T22:30:00">
+        <i class="icon-calendar"></i>Tue 04 March 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/cpp.html"><i class="icon-folder-open"></i>Cpp</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
+	<a href="/tag/data-structure.html"><i class="icon-tag"></i>data structure</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>事情一多就需要细致分配时间，
+心情一迷茫就总会没有效率，
+越攒待办事项就越多。</p>
+<p>就像发送速率比入队速率慢的路由器似的。</p>
+<p>整个一丢包的赶脚。</p>
+<div class="section" id="id1">
+<h2>栈的实现</h2>
+<p>栈的实现是比较简单的，
+博主使用的是线性表构造的栈，
+通过复用前几篇实现的节点数据类型，
+很容易就搞定栈的实现，
+同时写了基本的push、pop等函数。</p>
+<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">LinkStack</span>
+<span class="p">{</span>
+    <span class="nl">protected:</span>
+    <span class="n">Freelist</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">freelist</span><span class="p">;</span>
+    <span class="n">Node</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">top</span><span class="p">;</span>
+
+    <span class="nl">public:</span>
+    <span class="n">LinkStack</span><span class="p">();</span>
+    <span class="kt">void</span> <span class="nf">push</span><span class="p">(</span><span class="n">Type</span> <span class="o">&amp;</span><span class="n">element</span><span class="p">);</span>
+    <span class="kt">bool</span> <span class="nf">pop</span><span class="p">();</span>
+    <span class="kt">bool</span> <span class="nf">peek</span><span class="p">(</span><span class="n">Type</span> <span class="o">&amp;</span><span class="n">buf</span><span class="p">);</span>
+    <span class="kt">bool</span> <span class="nf">isempty</span><span class="p">();</span>
+    <span class="kt">void</span> <span class="nf">insertatbottom</span><span class="p">(</span><span class="n">Type</span> <span class="o">&amp;</span><span class="n">value</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="nf">reverse</span><span class="p">();</span>
+<span class="p">};</span>
+</pre></div>
+<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">LinkStack</span><span class="o">&lt;</span><span class="n">Type ...</span></pre></div></div>
+                        <a class="btn primary xsmall" href="/CppLearning006.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/CppLearning005.html">C++学习(五)：有序线性表的点滴记录</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-02-25T16:30:00">
+        <i class="icon-calendar"></i>Tue 25 February 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/cpp.html"><i class="icon-folder-open"></i>Cpp</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
+	<a href="/tag/data-structure.html"><i class="icon-tag"></i>data structure</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>在线性表的基础上开始构建有序线性表。
+使用的是单next指针结构的线性表。</p>
+<p>后续将考虑在数组的基础上构建能够高效插入和搜索的数据结构。</p>
+<div class="section" id="id1">
+<h2>基本结构</h2>
+<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">SortedLinklist</span><span class="o">:</span> <span class="k">public</span> <span class="n">Linklist</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span>
+<span class="p">{</span>
+    <span class="nl">public:</span>
+    <span class="n">SortedLinklist</span><span class="p">(</span><span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">comp</span><span class="p">)(</span><span class="n">Type</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="n">Type</span> <span class="o">*</span><span class="n">b</span><span class="p">));</span>
+    <span class="o">~</span><span class="n">SortedLinklist</span><span class="p">();</span>
+
+    <span class="nl">protected:</span>
+    <span class="kt">bool</span> <span class="nf">insertafter</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">,</span> <span class="n">Type</span> <span class="o">&amp;</span><span class="n">data</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="nf">push</span><span class="p">(</span><span class="n">Type</span> <span class="o">&amp;</span><span class="n">data</span><span class="p">);</span>
+
+    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">comparefunc</span><span class="p">)(</span><span class="n">Type</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="n">Type</span> <span class="o">*</span><span class="n">b</span><span class="p">);</span>
+
+    <span class="nl">public:</span>
+    <span class="kt">void</span> <span class="nf">append</span><span class="p">(</span><span class="n">Type</span> <span class="o">&amp;</span><span class="n">value</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="nf">mergewithotherlist</span><span class="p">(</span><span class="n">SortedLinklist</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="nf">removeduplicates ...</span></pre></div></div>
+                        <a class="btn primary xsmall" href="/CppLearning005.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/CppLearning004.html">C++学习(四)：线性表的奇技淫巧(二)</a></h1>
+                <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
 <abbr class="published" title="2014-02-16T21:30:00">
         <i class="icon-calendar"></i>Sun 16 February 2014
@@ -143,8 +227,8 @@
 <span class="label">Tags</span>
 	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
 	<a href="/tag/data-structure.html"><i class="icon-tag"></i>data structure</a>
-</footer><!-- /.post-info -->                </div>
-                <p>这两天去玩了，
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>这两天去玩了，
 进度比较慢。</p>
 <p>无序线性表终于算是搞了个大概，
 有些过于繁琐的就没有管了。</p>
@@ -184,112 +268,70 @@ fast每次移动两个节点，slow每次移动一个节点。</p>
 直接每个节点检查，
 很蠢，不详谈。</p>
 <p><strong>高效方案</strong></p>
-<p>首先，用上述的Floyd算法找到环，
-这个时候fast指针(或者slow指针)肯定是在环里面的某个节点。</p>
-<p>利用这个特性，统计，用指针移动统计环中节点的个数，假定为n。</p>
-<p>显而易见，
-环的出现肯定是在链表的尾部，
-因此去除环相当于将链表的尾节点与环中的连接节点切断。</p>
-<p>那么尾节点现在与哪个节点相连呢？
-明显是倒数第n个，因为环有n个节点。</p>
-<p>再利用上一篇博文讲过的从头指针查找倒数第n个节点的办法，
-加以变通，
-当两个指针在某次移动中指向同一个节点的时候，
-说明那里是环的入口。</p>
-<p>接下去就简单了，找到入口就找到了尾节点，
-把它的next赋值为0即可搞定。</p>
-<p>太麻烦了博主就没实现... -_-</p>
-</blockquote>
-<p><strong>逆向输出</strong></p>
+<p>首先，用上述的Floyd算法找到环 ...</p></blockquote></div>
+                        <a class="btn primary xsmall" href="/CppLearning004.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/CppLearning003.html">C++学习(三)：线性表的奇技淫巧(一)</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-02-11T21:30:00">
+        <i class="icon-calendar"></i>Tue 11 February 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/cpp.html"><i class="icon-folder-open"></i>Cpp</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
+	<a href="/tag/data-structure.html"><i class="icon-tag"></i>data structure</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>在Github上建了一个新仓库练习数据结构，
+地址在这里：</p>
 <blockquote>
-<p>不同于直接逆向链表，
-这个只是逆向输出所有值，链表本身没有变化。</p>
-<p>方案其实不复杂，
-递归嘛，谁不会。</p>
-<p>实现的时候偷懒，
-不想搞两个函数一个内部递归一个外部调用，
-因此用了一个默认参数0给curptr初始值，
-外部调用时只传入第一个函数指针用于输出。</p>
-<p>检测到节点指针为0说明是外部第一次调用，
-指针初始化为头节点。</p>
-<p>否则说明是递归过程，
-则做对应处理。</p>
-</blockquote>
+<a class="reference external" href="https://github.com/scutLaoYi/data-structure">https://github.com/scutLaoYi/data-structure</a></blockquote>
+<p>clone的话记得在后面加.git后缀(没什么好clone的)。</p>
+<p>我觉得莫名其妙的是代码类型居然被判为57%的C、25%的C++，
+以及18%的Objective-C。</p>
+<p>学习的资料上一篇博文已经说过了，是个好地方。</p>
+<p>从线性表学起，实现了资料里说的一些问题，
+光看不写的话感觉倒是容易看懂，不过真的写起来总是一大堆问题。</p>
+<p>上哪都一样。</p>
+<p>线性表才看了一半不到，
+总结一下自己用的一些实现方法及若干这几天见到的牛逼技术。</p>
+<div class="section" id="id1">
+<h2>数据结构的实现</h2>
+<p>自己的实现方案使用了类模板，
+首先定义了一个节点的结构：</p>
 <div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">Linklist</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;::</span><span class="n">listprintreverse</span><span class="p">(</span><span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">nodeprinter</span><span class="p">)(</span><span class="n">Type</span> <span class="o">&amp;</span><span class="p">),</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">curptr</span><span class="p">)</span>
+<span class="k">struct</span> <span class="n">Node</span>
 <span class="p">{</span>
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">curptr</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">curptr</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
-        <span class="n">listprintreverse</span><span class="p">(</span><span class="n">nodeprinter</span><span class="p">,</span> <span class="n">curptr</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">curptr</span><span class="o">-&gt;</span><span class="n">nex</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">listprintreverse</span><span class="p">(</span><span class="n">nodeprinter</span><span class="p">,</span> <span class="n">curptr</span><span class="o">-&gt;</span><span class="n">nex</span><span class="p">);</span>
-        <span class="n">nodeprinter</span><span class="p">(</span><span class="n">curptr</span><span class="o">-&gt;</span><span class="n">nex</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">return</span><span class="p">;</span>
-<span class="p">}</span>
+    <span class="n">Type</span> <span class="n">value</span><span class="p">;</span>
+    <span class="n">Node</span> <span class="o">*</span><span class="n">nex</span><span class="p">;</span>
+
+    <span class="n">Node</span><span class="p">();</span>
+<span class="p">};</span>
 </pre></div>
-<p><strong>旋转链表</strong></p>
-<blockquote>
-<p>以某个节点旋转链表，
-比如1-2-3-4-5,
-以节点2旋转，则变成3-4-5-1-2</p>
-<p>用链表实现这货就非常简单啦，
-头尾指针处理一下即可搞定。</p>
-<p>不过要注意边界情况。</p>
-</blockquote>
+<p>包含一个节点值及一个指向下一个节点的指针。
+构造函数用于初始化指针，赋值为0。</p>
+<p>然后搞了一个freelist用于处理内存。</p>
 <div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
-<span class="kt">bool</span> <span class="n">Linklist</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;::</span><span class="n">rotatefrom</span><span class="p">(</span><span class="kt">int</span> <span class="n">ind</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Freelist</span>
 <span class="p">{</span>
-    <span class="n">assert</span><span class="p">(</span><span class="n">ind</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
-    <span class="n">Node</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">point</span><span class="p">;</span>
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">_getnth</span><span class="p">(</span><span class="n">ind</span><span class="p">,</span> <span class="n">point</span><span class="p">))</span>
-        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">point</span><span class="o">-&gt;</span><span class="n">nex</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="n">Node</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">top ...</span></pre></div></div>
+                        <a class="btn primary xsmall" href="/CppLearning003.html">more ...</a>
+                </div>
+        </div>
+        <hr />
 
-    <span class="n">Node</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">end</span> <span class="o">=</span> <span class="n">getend</span><span class="p">();</span>
-
-    <span class="n">end</span><span class="o">-&gt;</span><span class="n">nex</span> <span class="o">=</span> <span class="n">head</span><span class="o">-&gt;</span><span class="n">nex</span><span class="p">;</span>
-    <span class="n">head</span><span class="o">-&gt;</span><span class="n">nex</span> <span class="o">=</span> <span class="n">point</span><span class="o">-&gt;</span><span class="n">nex</span><span class="p">;</span>
-    <span class="n">point</span><span class="o">-&gt;</span><span class="n">nex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-
-    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<div class="section" id="id2">
-<h2>关于输出</h2>
-<p>由于使用了模板，
-无法确定节点的值是什么类型，
-因此在处理遍历输出的时候就没法在类模板中把输出语句预先定义死。</p>
-<p>使用函数指针解决这个问题，
-从外部传入输出特定类型节点值的函数，
-遍历函数直接调用外部传入的函数进行最终的输出工作。</p>
-<p>第一次使用C++的函数指针，还是蛮好玩的。</p>
-<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">Linklist</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;::</span><span class="n">listprint</span><span class="p">(</span><span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">nodeprinter</span><span class="p">)(</span><span class="n">Type</span> <span class="o">&amp;</span><span class="p">))</span>
-<span class="p">{</span>
-    <span class="n">Node</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">step</span><span class="p">(</span><span class="n">ptr</span><span class="p">))</span>
-        <span class="n">nodeprinter</span><span class="p">(</span><span class="n">ptr</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">);</span>
-    <span class="k">return</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-
-                </div><!-- /.entry-content -->
-        </article>
-        <license>
-        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
-            <img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
-        </a>
-        <br/>
-        This work by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.scutlaoyi.tk" property="cc:attributionName" rel="cc:attributionURL">scutLaoYi</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-        </license>
-</section>
+                <section id="content" class="body">
+                <h1>Pages</h1>
+                        <li><a href="/pages/about.html">About</a></li>
+                </section>
         </div><!--/span-->
 
                 <div class="span3 well sidebar-nav" id="sidebar">

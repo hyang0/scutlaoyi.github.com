@@ -305,7 +305,7 @@ google说这个字面上叫做”股票跨度“，
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;搞定，睡觉。&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="C/C++"></category></entry><entry><title>C++学习(五)：有序线性表的点滴记录</title><link href="/CppLearning005.html" rel="alternate"></link><updated>2014-02-25T16:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-02-25:CppLearning005.html</id><summary type="html">&lt;p&gt;在线性表的基础上开始构建有序线性表。
+</summary><category term="C/C++"></category><category term="data structure"></category></entry><entry><title>C++学习(五)：有序线性表的点滴记录</title><link href="/CppLearning005.html" rel="alternate"></link><updated>2014-02-25T16:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-02-25:CppLearning005.html</id><summary type="html">&lt;p&gt;在线性表的基础上开始构建有序线性表。
 使用的是单next指针结构的线性表。&lt;/p&gt;
 &lt;p&gt;后续将考虑在数组的基础上构建能够高效插入和搜索的数据结构。&lt;/p&gt;
 &lt;div class="section" id="id1"&gt;
@@ -494,7 +494,7 @@ g++中显示未声明的符号。&lt;/p&gt;
 (-_-)&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;/div&gt;
-</summary><category term="C/C++"></category></entry><entry><title>C++学习(四)：线性表的奇技淫巧(二)</title><link href="/CppLearning004.html" rel="alternate"></link><updated>2014-02-16T21:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-02-16:CppLearning004.html</id><summary type="html">&lt;p&gt;这两天去玩了，
+</summary><category term="C/C++"></category><category term="data structure"></category></entry><entry><title>C++学习(四)：线性表的奇技淫巧(二)</title><link href="/CppLearning004.html" rel="alternate"></link><updated>2014-02-16T21:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-02-16:CppLearning004.html</id><summary type="html">&lt;p&gt;这两天去玩了，
 进度比较慢。&lt;/p&gt;
 &lt;p&gt;无序线性表终于算是搞了个大概，
 有些过于繁琐的就没有管了。&lt;/p&gt;
@@ -629,7 +629,7 @@ fast每次移动两个节点，slow每次移动一个节点。&lt;/p&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="C/C++"></category></entry><entry><title>C++学习(三)：线性表的奇技淫巧(一)</title><link href="/CppLearning003.html" rel="alternate"></link><updated>2014-02-11T21:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-02-11:CppLearning003.html</id><summary type="html">&lt;p&gt;在Github上建了一个新仓库练习数据结构，
+</summary><category term="C/C++"></category><category term="data structure"></category></entry><entry><title>C++学习(三)：线性表的奇技淫巧(一)</title><link href="/CppLearning003.html" rel="alternate"></link><updated>2014-02-11T21:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-02-11:CppLearning003.html</id><summary type="html">&lt;p&gt;在Github上建了一个新仓库练习数据结构，
 地址在这里：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;a class="reference external" href="https://github.com/scutLaoYi/data-structure"&gt;https://github.com/scutLaoYi/data-structure&lt;/a&gt;&lt;/blockquote&gt;
@@ -850,7 +850,7 @@ prev, cur, nex。&lt;/p&gt;
 研究了有些时日现在终于有比较好的解决方案了，
 下次来记录一下。&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="C/C++"></category></entry><entry><title>C++学习(二)：大家一起来Makefile</title><link href="/CppLearning002.html" rel="alternate"></link><updated>2014-02-08T16:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-02-08:CppLearning002.html</id><summary type="html">&lt;p&gt;由于一直没找到好的材料，C++的学习拖了好几天没什么进展。
+</summary><category term="C/C++"></category><category term="data structure"></category></entry><entry><title>C++学习(二)：大家一起来Makefile</title><link href="/CppLearning002.html" rel="alternate"></link><updated>2014-02-08T16:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-02-08:CppLearning002.html</id><summary type="html">&lt;p&gt;由于一直没找到好的材料，C++的学习拖了好几天没什么进展。
 主要遇到的问题是白书的题目(UVAoj)有些麻烦，之前刷了十几道水题一直很顺利，
 到了数据结构系列突然每道题都有点难以理解（难道是自己英语水平突然掉了...），
 刷了几天进展很慢，加上每道题都有针对性的代码，对于我这种目标是复习数据结构的不太合适。&lt;/p&gt;
