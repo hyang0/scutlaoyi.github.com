@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>老逸的个人站 - web</title>
+    <title>C++学习(七)：线性表及搜索相关</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="laoyi">
@@ -66,7 +66,7 @@
             <ul class="nav">
                 <li><a href="/pages/about.html">About</a></li>
                           <li class="divider-vertical"></li>
-                  <li >
+                  <li class="active">
                     <a href="/category/cpp.html">
 						<i class="icon-folder-open icon-large"></i>Cpp
 					</a>
@@ -96,7 +96,7 @@
 						<i class="icon-folder-open icon-large"></i>Tools
 					</a>
                   </li>
-                  <li class="active">
+                  <li >
                     <a href="/category/web.html">
 						<i class="icon-folder-open icon-large"></i>web
 					</a>
@@ -116,175 +116,149 @@
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
-        <div class="article">
-                <h1><a href="/xss_basic.html">web概念学习：XSS跨站代码注入攻击</a></h1>
-                <div class="well small"><footer class="post-info">
+<section id="content">
+        <article>
+                <header>
+                        <h1>
+                                <a href=""
+                                        rel="bookmark"
+                                        title="Permalink to C++学习(七)：线性表及搜索相关">
+                                        C++学习(七)：线性表及搜索相关
+                                </a>
+                        </h1>
+                </header>
+                <div class="entry-content">
+                <div class="well">
+<footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2014-02-17T20:30:00">
-        <i class="icon-calendar"></i>Mon 17 February 2014
+<abbr class="published" title="2014-03-28T22:30:00">
+        <i class="icon-calendar"></i>Fri 28 March 2014
 </abbr>
 <span class="label">By</span>
 <a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
 <span class="label">Category</span>
-<a href="/category/web.html"><i class="icon-folder-open"></i>web</a>.
+<a href="/category/cpp.html"><i class="icon-folder-open"></i>Cpp</a>.
 
 
 <span class="label">Tags</span>
-	<a href="/tag/xss.html"><i class="icon-tag"></i>xss</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>今天看到乌云知识库关于XSS文章，心血来潮学了一下一些概念，还是蛮好玩的。^_^</p>
-<p>维基百科关于XSS的介绍在这里：</p>
-<blockquote>
-<a class="reference external" href="https://en.wikipedia.org/wiki/Cross-site_scripting">https://en.wikipedia.org/wiki/Cross-site_scripting</a></blockquote>
-<p>XSS的全称是Cross-site scripting，中文可以翻译为跨站脚本攻击。</p>
-<p>基本的入侵方式是在目标网页的生成过程中注入代码，
-然后让用户浏览目标网页，
-这个过程中目标网页的代码也就被执行了，
-达到目的。</p>
-<p>通常说来注入的代码为JavaScript，因为需要在客户端浏览器运行，
-所以可以是客户端脚本。
-不过也看到有些直接拿HTML来玩的。</p>
-<p>常见的有反射型XSS，DOM型XSS以及持续型XSS。</p>
-<div class="section" id="reflected">
-<h2>反射型(Reflected)</h2>
-<p>反射型的XSS基本流程如下：</p>
-<pre class="literal-block">
-1. 找到一个存在XSS漏洞的页面
-2. 通过构造URL，在目标页面的URL后追加注入的代码并绕过服务器过滤(如果有的话)
-3. 将构造出来的URL发布并引诱受害者点击
-4. 用户点击该URL，跳转到目标页面，服务器将注入的代码写入最终页面，返回用户浏览器
-</pre>
-<p>简单的例子：</p>
-<p>假设有一个页面接受用户的输入并将内容输出在原页面上，
-php代码如下(假设文件名是test.php)：</p>
-<div class="highlight"><pre><span class="cp">&lt;?php</span>
- <span class="nv">$user_input</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">];</span>
- <span class="k">echo ...</span></pre></div></div>
-                        <a class="btn primary xsmall" href="/xss_basic.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/network003.html">socket编程(3):多线程socket服务器/客户端</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2013-09-28T16:00:00">
-        <i class="icon-calendar"></i>Sat 28 September 2013
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/web.html"><i class="icon-folder-open"></i>web</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/socket.html"><i class="icon-tag"></i>socket</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><hr class="docutils" />
-<p>多线程的tcp服务器与单线程的差别不大，主要差别在于服务器接受一个请求后创建一个新线程处理请求，主线程继续等待连接，因此可以在同一个时间处理多个请求。单线程的服务器每次都只有主线程接受并处理请求，这种情况下其他连接就必须等待。</p>
-<p>在GNU/Linux操作系统下可以使用pthread创建并管理线程。</p>
-<p>应该注意的一点是pthread不是Linux默认库的一部分，因此在编译时需要添加参数 -lpthread ，否则会报错(找不到文件：undefined reference to 'pthread_create')。</p>
-<p>由于本代码只为测试多线程，编写时没有考虑长的时延，因此在主线程退出前仅等待最后一个子线程的退出，这在实际操作中八成会出问题。</p>
-<p>另外在创建线程时传入的函数参数为指针，需要注意对内存的管理，防止多个线程的指针变量指向同一个地址。</p>
-<p><strong>C++版本服务器代码：</strong></p>
-<div class="highlight"><pre><span class="cp">#include &lt;cstdio&gt;</span>
-<span class="cp">#include &lt;cstring&gt;</span>
-<span class="cp">#include &lt;cstdlib&gt;</span>
-<span class="cp">#include &lt;cerrno&gt;</span>
-<span class="cp">#include &lt;unistd.h&gt;</span>
-<span class="cp">#include &lt;sys/types.h&gt;</span>
-<span class="cp">#include &lt;sys/socket.h&gt;</span>
-<span class="cp">#include &lt;netinet/in.h&gt;</span>
-<span class="cp">#include ...</span></pre></div>
-                        <a class="btn primary xsmall" href="/network003.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/network002.html">socket编程(2):单线程udp服务器/客户端</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2013-09-24T10:00:00">
-        <i class="icon-calendar"></i>Tue 24 September 2013
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/web.html"><i class="icon-folder-open"></i>web</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/socket.html"><i class="icon-tag"></i>socket</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p><strong>基本流程</strong></p>
-<p>与tcp的通讯非常类似，不同之处在于udp是无连接的，因此没有创建连接这种操作，服务器开启端口后接受数据并直接返回。
-设置时将socket类型设置为SOCK_DGRAM即可创建udp通讯。</p>
-<p><strong>C++版本：</strong></p>
-<p>服务器：</p>
-<div class="highlight"><pre><span class="c1">//filename:udpServer.cpp</span>
-
-<span class="cp">#include &lt;cstdio&gt;</span>
-<span class="cp">#include &lt;cstring&gt;</span>
-<span class="cp">#include &lt;sys/types.h&gt;</span>
-<span class="cp">#include &lt;sys/socket.h&gt;</span>
-<span class="cp">#include &lt;netinet/in.h&gt;</span>
-<span class="cp">#include &lt;arpa/inet.h&gt;</span>
-<span class="cp">#include &lt;unistd.h&gt;</span>
-<span class="cp">#include &lt;errno.h&gt;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">BUF_SIZE</span> <span class="o">=</span> <span class="mi">512</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">SOCKET_PORT</span> <span class="o">=</span> <span class="mi">9999</span><span class="p">;</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc ...</span></pre></div>
-                        <a class="btn primary xsmall" href="/network002.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/network001.html">socket编程(1):单线程tcp服务器/客户端</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2013-09-17T15:30:00">
-        <i class="icon-calendar"></i>Tue 17 September 2013
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/web.html"><i class="icon-folder-open"></i>web</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/socket.html"><i class="icon-tag"></i>socket</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p><strong>tcp的单线程socket比较简单，以下是GNU/Linux环境下socket通讯的测试，分为C++版本和Python版本。</strong></p>
+	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
+	<a href="/tag/data-structure.html"><i class="icon-tag"></i>data structure</a>
+</footer><!-- /.post-info -->                </div>
+                <p>其实这个系列应该归结为数据结构专题的，
+但由于记录的都是简单至极的基础知识，
+标榜数据结构吸引眼球有点过于隆重，
+于是统统放在C++的内容里。</p>
+<p>就算是C++的编程训练罢了。</p>
 <div class="section" id="id1">
-<h2>服务器：</h2>
-<p>流程：创建socket-绑定端口-监听-获取连接-读写操作-关闭连接并结束</p>
-<p><strong>C++版本：</strong></p>
-<div class="highlight"><pre><span class="cp">#include &lt;cstdio&gt;</span>
-<span class="cp">#include &lt;cstdlib&gt;</span>
-<span class="cp">#include &lt;cstring&gt;</span>
-<span class="cp">#include &lt;cerrno&gt;</span>
-<span class="cp">#include &lt;unistd.h&gt;</span>
-<span class="cp">#include &lt;sys/types.h&gt;</span>
-<span class="cp">#include &lt;sys/socket.h&gt;</span>
-<span class="cp">#include &lt;netinet/in.h&gt;</span>
-<span class="cp">#include &lt;arpa/inet.h&gt;</span>
+<h2>数组与链表的归纳总结</h2>
+<p>这些基础概念应该在开始学习编程的时候就有所涉及了，
+这里试着总结一下：</p>
+<p><strong>基本定义</strong></p>
+<p>朴素意义上，
+数组与链表一样都是用来储存若干相同类型元素的数据结构，
+其特点就是一个或多个元素以先后顺序保存在内存中。</p>
+<p>根据组织方式上的区别区分数组和链表。</p>
+<p><strong>组织区别</strong></p>
+<p>数组占用了内存中的一段连续的空间，
+在这段连续空间上，
+通过指定数组的类型确定每一个元素占用的空间大小，
+由此将所有元素依次紧密排列存放到对应空间上。</p>
+<p>相对的，
+链表不占用连续空间，
+通过在每个元素中保存下一个元素所在内存地址，
+达到组织的目的。</p>
+<p><strong>数组特点</strong></p>
+<p>由于每个元素占用空间相同，
+加上所有元素在同一片连续空间上，
+数组可以通过计算某元素相对头元素在内存中的偏移量，
+快速访问某个特定的元素。</p>
+<p>而由于相同的原因，
+数组在元素的插入和删除操作上比较麻烦，
+不管是插入还是删除，
+都需要移动所有后续的节点使其重新紧密排列。</p>
+<p><strong>链表特点</strong></p>
+<p>相对于数组，
+由于链表元素是通过指针指向下一个节点，
+没有连续空间，
+因此插入新节点或删除原有节点在正常情况下只需要操作对应位置的前后元素，
+使它们的指针指向正确的位置，
+对其他元素没有影响，
+因此插入删除操作的效率非常高。</p>
+<p>然而，
+在访问某个特定节点时，
+以单链表为例，
+则必须从头节点开始逐个遍历链上的节点直到达到目标节点，
+因此相对数组来说访问的效率较低。</p>
+</div>
+<div class="section" id="id2">
+<h2>搜索的相关知识</h2>
+<p>最简单的暴力搜索莫过于直接遍历每个元素查找目标元素是否存在。
+时间复杂度为O(n)。</p>
+<p>根据内存组织形式的不同，数组与链表有不同的高速搜索方式。</p>
+<p><strong>数组</strong></p>
+<p>最著名的估计就是二分搜索了，
+这种方式的前提条件是数组有序。</p>
+<p>基本思路如下：</p>
+<pre class="literal-block">
+取搜索空间的中间节点；
+比较该节点元素与目标元素的大小；
+若目标元素的值较小，则搜索原空间的左半部分；
+若目标元素值较大，则搜索原空间右半部分；
+循环搜索直到找到目标元素或搜索空间为空，则搜索失败。
+</pre>
+<p>二分相当于每次减少了一半的搜索空间，
+整体算法复杂度下降为O(logn)，
+因此搜索大范围的数据速度相当快。</p>
+<p>二分的变种相当多，
+虽然基本思路类似但由于实现的功能不同导致代码存在差异。</p>
+<p>另外，
+二分思路简单实现很不容易，
+尤其是边界问题很喜欢出错。</p>
+<p><strong>链表</strong></p>
+<p>找了一下没有常见的纯链表快速搜索，
+很多人的建议是使用二叉查找树。</p>
+<p><em>二叉查找树方式</em></p>
+<p>二叉查找树其实也是二分的思想，
+对于每个节点，比较元素值，
+若目标较小则搜索左子树，
+若目标较大则搜索右子树，
+直到找到或着遇到叶子节点。</p>
+<p>另外一种实现是哈希思想。</p>
+<p><em>哈希方式</em></p>
+<p>使用open hashing，
+用数组作为哈希桶的入口节点，
+凭借数组的快速定位找到入口，
+数组元素指向保存内容的链表上，
+最后在链表中线性查找目标元素。</p>
+<p>其实这种方式没有从本质上优化链表的搜索，
+只是通过哈希去掉了大部分不同索引节点的搜索过程，
+使最终需要查找的节点数量最小化，
+达到加快搜索的目的。</p>
+<p>而对于最终链表的查找优化，
+博主在数据结构的课本上看到一种方式，
+即通过更新节点的相对位置来达到。</p>
+<p>基本思路是将常被访问的节点尽量排列在链表的前部，
+较少访问的节点排在尾部，
+这样，
+长远来看，
+总的节点遍历个数会下降。</p>
+<p>至于更新相对位置，
+最简单的方式是每次找到目标元素，
+就把对应节点与其前驱节点交换，
+使其向链表头部靠拢。</p>
+<p>其他的还有很多种更新方式。</p>
+</div>
 
-<span class="c1">//定义缓冲区的大小</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXBUF</span> <span class="o">=</span> <span class="mi">4096</span><span class="p">;</span>
-<span class="c1">//定义端口号</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">SERVER_PORT</span> <span class="o">=</span> <span class="mi">9876</span><span class="p">;</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int ...</span></pre></div></div>
-                        <a class="btn primary xsmall" href="/network001.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-
-                <section id="content" class="body">
-                <h1>Pages</h1>
-                        <li><a href="/pages/about.html">About</a></li>
-                </section>
+                </div><!-- /.entry-content -->
+        </article>
+        <license>
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
+        </a>
+        <br/>
+        This work by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.scutlaoyi.tk" property="cc:attributionName" rel="cc:attributionURL">scutLaoYi</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+        </license>
+</section>
         </div><!--/span-->
 
                 <div class="span3 well sidebar-nav" id="sidebar">
