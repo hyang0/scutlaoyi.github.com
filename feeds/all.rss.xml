@@ -1,5 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>老逸的个人站</title><link>/</link><description></description><atom:link href="http://www.scutlaoyi.tk/feeds/all.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 28 Mar 2014 22:30:00 +0800</lastBuildDate><item><title>C++学习(七)：线性表及搜索相关</title><link>/CppLearning007-array.html</link><description>&lt;p&gt;其实这个系列应该归结为数据结构专题的，
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>老逸的个人站</title><link>/</link><description></description><atom:link href="http://www.scutlaoyi.tk/feeds/all.rss.xml" rel="self"></atom:link><lastBuildDate>Sun, 30 Mar 2014 22:30:00 +0800</lastBuildDate><item><title>C++学习(八)：排序啊排序</title><link>/CppLearning008-sort-one.html</link><description>&lt;p&gt;每一本数据结构的课本都会聊九大排序，
+作为基础知识掌握这些经典的算法可能是每个搞代码的人必修的一课。&lt;/p&gt;
+&lt;p&gt;冒泡、插入和选择作为简单易懂而最基本的三种方式，
+常常被用作算法学习的入门课程。&lt;/p&gt;
+&lt;p&gt;这里试着以自己的理解总结一下。&lt;/p&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;冒泡排序&lt;/h2&gt;
+&lt;p&gt;冒泡排序的基本思路如下：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+从数组头部开始，使用指针遍历每个节点；
+对于每个当前节点，将其与相邻节点的值比较；
+若前一个节点比后一个节点大，则交换使其有序；
+移动指针，对下一个节点继续前述操作；
+&lt;/pre&gt;
+&lt;p&gt;一个上述的循环作为一趟，
+不断将节点两两比较，
+使数组趋向有序。&lt;/p&gt;
+&lt;p&gt;同时，
+可以肯定的是最大的节点经过一趟排序会被交换到数组末尾。
+因为最大的节点每次都被操作与后续节点替换，
+直到循环结束。&lt;/p&gt;
+&lt;p&gt;因此一个循环下来最末的元素必然已被排序成功。&lt;/p&gt;
+&lt;p&gt;基于这种性质，
+不断循环调用上述过程，
+每次缩短排序数组的长度使尾节点不参与排序，
+直到参与排序的数组长度为0，
+则整个数组的排序过程就完成了。&lt;/p&gt;
+&lt;p&gt;基本的代码如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;template&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;ArrayList&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;::&lt;/span&gt;&lt;span class="n"&gt;bubblesort&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="n"&gt;flag&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;compare&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                        &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="n"&gt;swap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+                &lt;span class="n"&gt;flag&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="n"&gt;flag&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="k"&gt;break&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;代码中使用了一个bool标记flag用于优化排序过程，
+其思想如下：&lt;/p&gt;
+&lt;p&gt;若某一趟排序过程中没有任何节点发生交换，
+则说明整个数组已经是有序状态，
+这种情况下后续的循环排序操作已经没有意义，
+因此检测到未发生交换的一趟则直接跳出，
+排序完成。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;插入排序&lt;/h2&gt;
+&lt;p&gt;博主以前经常搞混插入和选择排序，
+直到某次在某个地方看到对于插入排序的经典介绍：
+插入就像打牌时整理手牌的过程。&lt;/p&gt;
+&lt;p&gt;豁然开朗～&lt;/p&gt;
+&lt;p&gt;基本思路如下：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+将数组划分为已排序及未排序两部分；
+初始状态已排序为第一个元素，未排序为剩余元素；
+每次从未排序的数组块中取出第一个元素；
+对于当前元素，从已排序的数组块末端往回搜索并每次比较；
+    找到第一个比当前元素小的元素，则将当前元素插入到该元素的后面；
+    若直到头部仍没有找到更小的元素，则当前元素为最小，插入到数组头部；
+每完成一个元素的排序则已排序部分增长一位，未排序部分缩减一位；
+循环直到整个数组有序。
+&lt;/pre&gt;
+&lt;p&gt;在实际实现过程中，
+如果是以数组为基础的插入排序，
+由于插入的位置后续的所有节点都需要往后移动，
+因此通常是在比较的过程中逐个交换节点的位置，
+直到到达目标位置。&lt;/p&gt;
+&lt;p&gt;而对于链表来说，
+可以省去后续节点的两两交换过程，
+直接在目标位置插入即可。&lt;/p&gt;
+&lt;p&gt;数组实现如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;template&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;ArrayList&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;::&lt;/span&gt;&lt;span class="n"&gt;insertsort&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;ptr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ptr&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+                &lt;span class="n"&gt;compare&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;ptr&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                    &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;ptr&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;swap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ptr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ptr&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+            &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;ptr&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;对于最简单的单链表，
+这种模式的插入排序就显得不适应了，
+因为要查找某个节点的前驱非常麻烦，
+需要从链表头部开始正向查找，复杂度为O(n)。&lt;/p&gt;
+&lt;p&gt;博主想到的方法如下：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+将链表划分为已排序和未排序两段，且相互独立，各自有头节点；
+初始状态已排序为空链表，未排序为整个链表；
+每次从未排序链表中取出第一个节点，复杂度为O(1)；
+从已排序链表头开始，正向搜索直到找到第一个更大的节点或者找到表尾；
+将元素插入目标位置；
+循环直到未排序链表为空。
+&lt;/pre&gt;
+&lt;p&gt;这种方法避开了消耗很大的寻找前驱操作，
+同时也能够发挥链表的快速插入优势。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h2&gt;选择排序&lt;/h2&gt;
+&lt;p&gt;选择排序思路非常简单，
+但相对其他两种排序可能效率会稍低一些。
+其基本思路如下：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+将数组划分有序和无序两部分；
+初始状态有序部分为空，无序部分为整个数组；
+遍历无序部分的所有元素找到最小值；
+将最小值插入到有序部分的末尾；
+循环直到无序部分为空。
+&lt;/pre&gt;
+&lt;p&gt;在实现的过程中经常使用的方式是外层遍历所有节点，
+内层循环找到当前最小值，
+与外层当前指向的节点交换，
+这样只需要一次交换操作，
+避免了由于插入导致的多个元素移位。&lt;/p&gt;
+&lt;p&gt;代码实现如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;template&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;ArrayList&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;::&lt;/span&gt;&lt;span class="n"&gt;selectsort&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;minind&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;compare&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;minind&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                        &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="n"&gt;minind&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;minind&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;swap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;minind&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;这里在交换的时候加入一个条件判断，
+仅当找到的最小节点不是当前的操作节点的时候才进行交换操作，
+避免了无意义的自我交换过程。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h2&gt;比较与总结&lt;/h2&gt;
+&lt;p&gt;以上三种排序都是简单理解但效率较低的算法，
+对于较大数据量的处理不适用。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;时间复杂度分析&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;平均的时间复杂度都为O(n^2)，
+但在某些特殊情况下，插入排序的时间复杂度最好情况为O(n)，
+即在原始数组已经有序的时候，
+每次逆向查找当前节点的正确位置都可以在一次操作中完成，
+内层循环复杂度下降到1。&lt;/p&gt;
+&lt;p&gt;当然在最好情况下，
+使用标记的冒泡排序也可以在一次循环后发现没有发生元素交换而退出，
+时间复杂度也可以为O(n)。&lt;/p&gt;
+&lt;p&gt;对于选择排序则不行，
+不管什么情况选择排序都必须为每个节点遍历一次剩余的数组，
+找到当前的最小值，
+因此复杂度均为O(n^2)。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;交换次数分析&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;插入排序必须为每个节点的插入操作移动后续的所有节点，
+因此平均的交换次数为n^2。&lt;/p&gt;
+&lt;p&gt;在最好的情况下，
+没有发生交换，
+次数为0。&lt;/p&gt;
+&lt;p&gt;冒泡排序类似，每次必须将最大的元素移动到数组末尾，
+在这个过程中必须移动所有其他元素一遍，
+交换次数为n^2。&lt;/p&gt;
+&lt;p&gt;同样最好的情况无需交换，次数为0。&lt;/p&gt;
+&lt;p&gt;而对于选择排序，
+虽然对每个节点都进行了遍历查找操作，
+但最终只交换最小节点和当前节点，
+因此交换操作的次数为n。&lt;/p&gt;
+&lt;p&gt;加入了非自身判断的选择排序在最好的情况下可以省去所有的交换操作。&lt;/p&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">laoyi</dc:creator><pubDate>Sun, 30 Mar 2014 22:30:00 +0800</pubDate><guid>tag:,2014-03-30:CppLearning008-sort-one.html</guid><category>C/C++</category><category>data structure</category></item><item><title>C++学习(七)：线性表及搜索相关</title><link>/CppLearning007-array.html</link><description>&lt;p&gt;其实这个系列应该归结为数据结构专题的，
 但由于记录的都是简单至极的基础知识，
 标榜数据结构吸引眼球有点过于隆重，
 于是统统放在C++的内容里。&lt;/p&gt;

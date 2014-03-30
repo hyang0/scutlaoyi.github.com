@@ -117,6 +117,62 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/CppLearning008-sort-one.html">C++学习(八)：排序啊排序</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-03-30T22:30:00">
+        <i class="icon-calendar"></i>Sun 30 March 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/cpp.html"><i class="icon-folder-open"></i>Cpp</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
+	<a href="/tag/data-structure.html"><i class="icon-tag"></i>data structure</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>每一本数据结构的课本都会聊九大排序，
+作为基础知识掌握这些经典的算法可能是每个搞代码的人必修的一课。</p>
+<p>冒泡、插入和选择作为简单易懂而最基本的三种方式，
+常常被用作算法学习的入门课程。</p>
+<p>这里试着以自己的理解总结一下。</p>
+<div class="section" id="id1">
+<h2>冒泡排序</h2>
+<p>冒泡排序的基本思路如下：</p>
+<pre class="literal-block">
+从数组头部开始，使用指针遍历每个节点；
+对于每个当前节点，将其与相邻节点的值比较；
+若前一个节点比后一个节点大，则交换使其有序；
+移动指针，对下一个节点继续前述操作；
+</pre>
+<p>一个上述的循环作为一趟，
+不断将节点两两比较，
+使数组趋向有序。</p>
+<p>同时，
+可以肯定的是最大的节点经过一趟排序会被交换到数组末尾。
+因为最大的节点每次都被操作与后续节点替换，
+直到循环结束。</p>
+<p>因此一个循环下来最末的元素必然已被排序成功。</p>
+<p>基于这种性质，
+不断循环调用上述过程，
+每次缩短排序数组的长度使尾节点不参与排序，
+直到参与排序的数组长度为0，
+则整个数组的排序过程就完成了。</p>
+<p>基本的代码如下：</p>
+<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;::</span><span class="n">bubblesort</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">bool</span> <span class="n">flag</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int ...</span></pre></div></div>
+                        <a class="btn primary xsmall" href="/CppLearning008-sort-one.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/CppLearning007-array.html">C++学习(七)：线性表及搜索相关</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -568,14 +624,49 @@ window.onload=function(){
 </li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
-    </a>
-</li>
 <li class="tag-1">
     <a href="/tag/arch.html">
         <i class="icon-tag icon-large"></i>Arch
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/data-structure.html">
+        <i class="icon-tag icon-large"></i>data structure
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
     </a>
 </li>
 <li class="tag-2">
@@ -589,53 +680,18 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/data-structure.html">
-        <i class="icon-tag icon-large"></i>data structure
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
     </a>
 </li>
 <li class="tag-2">
     <a href="/tag/softwarearchitect.html">
         <i class="icon-tag icon-large"></i>SoftwareArchitect
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>Python
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
     </a>
 </li>
 

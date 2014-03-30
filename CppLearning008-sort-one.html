@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>C++学习(八)：排序啊排序</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="laoyi">
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="/theme/css/font-awesome.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/theme/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/theme/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/theme/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/theme/images/apple-touch-icon-114x114.png">
+
+    <link href="/" type="application/atom+xml" rel="alternate" title="老逸的个人站 ATOM Feed" />
+    <link href="/feeds/all.rss.xml" type="application/atom+xml" rel="alternate" title="老逸的个人站 RSS Feed" />
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">老逸的个人站 </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                <li><a href="/pages/about.html">About</a></li>
+                          <li class="divider-vertical"></li>
+                  <li class="active">
+                    <a href="/category/cpp.html">
+						<i class="icon-folder-open icon-large"></i>Cpp
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/git.html">
+						<i class="icon-folder-open icon-large"></i>git
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/life.html">
+						<i class="icon-folder-open icon-large"></i>Life
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/linux.html">
+						<i class="icon-folder-open icon-large"></i>Linux
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/python.html">
+						<i class="icon-folder-open icon-large"></i>Python
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/tools.html">
+						<i class="icon-folder-open icon-large"></i>Tools
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/web.html">
+						<i class="icon-folder-open icon-large"></i>web
+					</a>
+                  </li>
+
+                          <ul class="nav pull-right">
+                                <li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+                          </ul>
+
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="span9" id="content">
+<section id="content">
+        <article>
+                <header>
+                        <h1>
+                                <a href=""
+                                        rel="bookmark"
+                                        title="Permalink to C++学习(八)：排序啊排序">
+                                        C++学习(八)：排序啊排序
+                                </a>
+                        </h1>
+                </header>
+                <div class="entry-content">
+                <div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-03-30T22:30:00">
+        <i class="icon-calendar"></i>Sun 30 March 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/cpp.html"><i class="icon-folder-open"></i>Cpp</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
+	<a href="/tag/data-structure.html"><i class="icon-tag"></i>data structure</a>
+</footer><!-- /.post-info -->                </div>
+                <p>每一本数据结构的课本都会聊九大排序，
+作为基础知识掌握这些经典的算法可能是每个搞代码的人必修的一课。</p>
+<p>冒泡、插入和选择作为简单易懂而最基本的三种方式，
+常常被用作算法学习的入门课程。</p>
+<p>这里试着以自己的理解总结一下。</p>
+<div class="section" id="id1">
+<h2>冒泡排序</h2>
+<p>冒泡排序的基本思路如下：</p>
+<pre class="literal-block">
+从数组头部开始，使用指针遍历每个节点；
+对于每个当前节点，将其与相邻节点的值比较；
+若前一个节点比后一个节点大，则交换使其有序；
+移动指针，对下一个节点继续前述操作；
+</pre>
+<p>一个上述的循环作为一趟，
+不断将节点两两比较，
+使数组趋向有序。</p>
+<p>同时，
+可以肯定的是最大的节点经过一趟排序会被交换到数组末尾。
+因为最大的节点每次都被操作与后续节点替换，
+直到循环结束。</p>
+<p>因此一个循环下来最末的元素必然已被排序成功。</p>
+<p>基于这种性质，
+不断循环调用上述过程，
+每次缩短排序数组的长度使尾节点不参与排序，
+直到参与排序的数组长度为0，
+则整个数组的排序过程就完成了。</p>
+<p>基本的代码如下：</p>
+<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;::</span><span class="n">bubblesort</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">bool</span> <span class="n">flag</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">size</span><span class="o">-</span><span class="n">i</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">compare</span><span class="p">(</span><span class="o">&amp;</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                        <span class="o">&amp;</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">swap</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+                <span class="n">flag</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">flag</span><span class="p">)</span>
+            <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+<p>代码中使用了一个bool标记flag用于优化排序过程，
+其思想如下：</p>
+<p>若某一趟排序过程中没有任何节点发生交换，
+则说明整个数组已经是有序状态，
+这种情况下后续的循环排序操作已经没有意义，
+因此检测到未发生交换的一趟则直接跳出，
+排序完成。</p>
+</div>
+<div class="section" id="id2">
+<h2>插入排序</h2>
+<p>博主以前经常搞混插入和选择排序，
+直到某次在某个地方看到对于插入排序的经典介绍：
+插入就像打牌时整理手牌的过程。</p>
+<p>豁然开朗～</p>
+<p>基本思路如下：</p>
+<pre class="literal-block">
+将数组划分为已排序及未排序两部分；
+初始状态已排序为第一个元素，未排序为剩余元素；
+每次从未排序的数组块中取出第一个元素；
+对于当前元素，从已排序的数组块末端往回搜索并每次比较；
+    找到第一个比当前元素小的元素，则将当前元素插入到该元素的后面；
+    若直到头部仍没有找到更小的元素，则当前元素为最小，插入到数组头部；
+每完成一个元素的排序则已排序部分增长一位，未排序部分缩减一位；
+循环直到整个数组有序。
+</pre>
+<p>在实际实现过程中，
+如果是以数组为基础的插入排序，
+由于插入的位置后续的所有节点都需要往后移动，
+因此通常是在比较的过程中逐个交换节点的位置，
+直到到达目标位置。</p>
+<p>而对于链表来说，
+可以省去后续节点的两两交换过程，
+直接在目标位置插入即可。</p>
+<p>数组实现如下：</p>
+<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;::</span><span class="n">insertsort</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">ptr</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span>
+                <span class="n">compare</span><span class="p">(</span><span class="o">&amp;</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">array</span><span class="p">[</span><span class="n">ptr</span><span class="p">],</span>
+                    <span class="o">&amp;</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">array</span><span class="p">[</span><span class="n">ptr</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">swap</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span> <span class="n">ptr</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+            <span class="o">--</span><span class="n">ptr</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+<p>对于最简单的单链表，
+这种模式的插入排序就显得不适应了，
+因为要查找某个节点的前驱非常麻烦，
+需要从链表头部开始正向查找，复杂度为O(n)。</p>
+<p>博主想到的方法如下：</p>
+<pre class="literal-block">
+将链表划分为已排序和未排序两段，且相互独立，各自有头节点；
+初始状态已排序为空链表，未排序为整个链表；
+每次从未排序链表中取出第一个节点，复杂度为O(1)；
+从已排序链表头开始，正向搜索直到找到第一个更大的节点或者找到表尾；
+将元素插入目标位置；
+循环直到未排序链表为空。
+</pre>
+<p>这种方法避开了消耗很大的寻找前驱操作，
+同时也能够发挥链表的快速插入优势。</p>
+</div>
+<div class="section" id="id3">
+<h2>选择排序</h2>
+<p>选择排序思路非常简单，
+但相对其他两种排序可能效率会稍低一些。
+其基本思路如下：</p>
+<pre class="literal-block">
+将数组划分有序和无序两部分；
+初始状态有序部分为空，无序部分为整个数组；
+遍历无序部分的所有元素找到最小值；
+将最小值插入到有序部分的末尾；
+循环直到无序部分为空。
+</pre>
+<p>在实现的过程中经常使用的方式是外层遍历所有节点，
+内层循环找到当前最小值，
+与外层当前指向的节点交换，
+这样只需要一次交换操作，
+避免了由于插入导致的多个元素移位。</p>
+<p>代码实现如下：</p>
+<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;::</span><span class="n">selectsort</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">minind</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">compare</span><span class="p">(</span><span class="o">&amp;</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">array</span><span class="p">[</span><span class="n">minind</span><span class="p">],</span>
+                        <span class="o">&amp;</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">minind</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">minind</span> <span class="o">!=</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">swap</span><span class="p">(</span><span class="n">minind</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+<p>这里在交换的时候加入一个条件判断，
+仅当找到的最小节点不是当前的操作节点的时候才进行交换操作，
+避免了无意义的自我交换过程。</p>
+</div>
+<div class="section" id="id4">
+<h2>比较与总结</h2>
+<p>以上三种排序都是简单理解但效率较低的算法，
+对于较大数据量的处理不适用。</p>
+<p><strong>时间复杂度分析</strong></p>
+<p>平均的时间复杂度都为O(n^2)，
+但在某些特殊情况下，插入排序的时间复杂度最好情况为O(n)，
+即在原始数组已经有序的时候，
+每次逆向查找当前节点的正确位置都可以在一次操作中完成，
+内层循环复杂度下降到1。</p>
+<p>当然在最好情况下，
+使用标记的冒泡排序也可以在一次循环后发现没有发生元素交换而退出，
+时间复杂度也可以为O(n)。</p>
+<p>对于选择排序则不行，
+不管什么情况选择排序都必须为每个节点遍历一次剩余的数组，
+找到当前的最小值，
+因此复杂度均为O(n^2)。</p>
+<p><strong>交换次数分析</strong></p>
+<p>插入排序必须为每个节点的插入操作移动后续的所有节点，
+因此平均的交换次数为n^2。</p>
+<p>在最好的情况下，
+没有发生交换，
+次数为0。</p>
+<p>冒泡排序类似，每次必须将最大的元素移动到数组末尾，
+在这个过程中必须移动所有其他元素一遍，
+交换次数为n^2。</p>
+<p>同样最好的情况无需交换，次数为0。</p>
+<p>而对于选择排序，
+虽然对每个节点都进行了遍历查找操作，
+但最终只交换最小节点和当前节点，
+因此交换操作的次数为n。</p>
+<p>加入了非自身判断的选择排序在最好的情况下可以省去所有的交换操作。</p>
+</div>
+
+                </div><!-- /.entry-content -->
+        </article>
+        <license>
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
+        </a>
+        <br/>
+        This work by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.scutlaoyi.tk" property="cc:attributionName" rel="cc:attributionURL">scutLaoYi</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+        </license>
+</section>
+        </div><!--/span-->
+
+                <div class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+<li class="nav-header"><h4><i class="icon-time"></i>time</h4></li>
+<li><p id="pagetimer"></p></li>
+
+<li class="nav-header"><h4><i class="icon-list-alt"></i>PAGE SENTENCE</h4></li>
+<li>
+<p id="page-sentence">
+当你看到这句的时候，说明每页一句载入失败...烦请告知博主!谢谢!(^_^)
+</p>
+</li>
+<script src="/add_ons/pagesentence/sentence.js"></script>
+<script src="/add_ons/clock/clock.js"></script>
+<script>
+window.onload=function(){
+      var pagetimer = document.getElementById("pagetimer");
+      pagetimer.innerHTML = getcurrenttime();
+  setInterval(function(){
+      pagetimer.innerHTML = getcurrenttime();
+      }, 1000);
+
+    document.getElementById("page-sentence").innerHTML = generateSentence();
+}
+</script>
+<li class="nav-header"><h4><i class="icon-external-link"></i>link</h4></li>
+    <li><a href="http://github.com/scutlaoyi"><i class="icon-external-link"></i>my github</a></li>
+<li class="nav-header"><h4><i class="icon-home icon-large"></i> social</h4></li>
+<!--<li><a href="/" rel="alternate"><i
+    class="icon-bookmark icon-large"></i>atom feed</a></li>-->
+<li><a href="/feeds/all.rss.xml" rel="alternate"><i class="icon-bookmark icon-large"></i>rss feed</a></li>
+    <li><a href=""><i class="icon--sign icon-large"></i></a></li>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>Categories</h4></li>
+<li>
+<a href="/category/cpp.html">
+    <i class="icon-folder-open icon-large"></i>Cpp
+</a>
+</li>
+<li>
+<a href="/category/git.html">
+    <i class="icon-folder-open icon-large"></i>git
+</a>
+</li>
+<li>
+<a href="/category/life.html">
+    <i class="icon-folder-open icon-large"></i>Life
+</a>
+</li>
+<li>
+<a href="/category/linux.html">
+    <i class="icon-folder-open icon-large"></i>Linux
+</a>
+</li>
+<li>
+<a href="/category/python.html">
+    <i class="icon-folder-open icon-large"></i>Python
+</a>
+</li>
+<li>
+<a href="/category/tools.html">
+    <i class="icon-folder-open icon-large"></i>Tools
+</a>
+</li>
+<li>
+<a href="/category/web.html">
+    <i class="icon-folder-open icon-large"></i>web
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<li class="tag-1">
+    <a href="/tag/arch.html">
+        <i class="icon-tag icon-large"></i>Arch
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/data-structure.html">
+        <i class="icon-tag icon-large"></i>data structure
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <address id="about">
+                Proudly powered by <a href="http://pelican.notmyidea.org/">Pelican <i class="icon-external-link"></i></a>,
+                                which takes great advantage of <a href="http://python.org">Python <i class="icon-external-link"></i></a>.
+        </address><!-- /#about -->
+
+        <p>The theme is from <a href="http://twitter.github.com/bootstrap/">Bootstrap from Twitter <i class="icon-external-link"></i></a>,
+                   and <a href="http://fortawesome.github.com/Font-Awesome/">Font-Awesome <i class="icon-external-link"></i></a>, thanks!</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-43833562-1']);
+	  _gaq.push(['_trackPageview']);
+	  
+	  (function() {
+
+	       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				     })();
+
+</script>
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="/theme/js/bootstrap.min.js"></script>
+  </body>
+</html>
