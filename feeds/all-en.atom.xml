@@ -1,5 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2014-03-30T22:30:00+08:00</updated><entry><title>C++学习(八)：排序啊排序</title><link href="/CppLearning008-sort-one.html" rel="alternate"></link><updated>2014-03-30T22:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-03-30:CppLearning008-sort-one.html</id><summary type="html">&lt;p&gt;每一本数据结构的课本都会聊九大排序，
+<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2014-04-06T22:30:00+08:00</updated><entry><title>C++学习(九)：最大堆与堆排序</title><link href="/CppLearning009-heapsort.html" rel="alternate"></link><updated>2014-04-06T22:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-04-06:CppLearning009-heapsort.html</id><summary type="html">&lt;p&gt;初次认识堆之后就对堆排序比较有好感，
+感觉算法很有趣，
+效率也很高。&lt;/p&gt;
+&lt;p&gt;谈堆排序就必须对堆的基本原理和性质有所掌握，
+因此这里记录一下个人对堆的基本理解。&lt;/p&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;二叉堆与最大最小堆&lt;/h2&gt;
+&lt;p&gt;二叉堆有如下的基本性质：
+首先二叉堆是一棵完全二叉树，
+因此二叉堆经常使用数组进行实现。&lt;/p&gt;
+&lt;p&gt;在数组实现的二叉堆中，
+假设根节点索引值为1，
+则有如下性质：
+父节点是n号元素，
+则其孩子节点索引值分别为2n和2n+1。&lt;/p&gt;
+&lt;p&gt;对于根节点为0的二叉堆，
+则孩子节点分别为2n+1和2n+2，
+均能通过偏移量快速找到孩子节点。&lt;/p&gt;
+&lt;p&gt;其次，二叉堆的元素是部分有序的，
+每一个父节点和其子节点之间存在某些关系。&lt;/p&gt;
+&lt;p&gt;而最大/最小堆则是二叉堆的一种形式，
+最大堆的每一个父节点都比子节点的值大，
+最小堆则相反，每个父节点都比其子节点的值小。&lt;/p&gt;
+&lt;p&gt;这种情况下，最大堆的根节点就是所有节点中的最大元素，
+由于这种性质使得快速的排序算法得以实现。&lt;/p&gt;
+&lt;p&gt;需要注意的是，
+最大/最小堆的大小关系仅存在于父子节点之间，
+兄弟节点之间没有直接的大小关系。&lt;/p&gt;
+&lt;p&gt;简单起见，以下只讨论最大堆的相关内容。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;最大堆的构建&lt;/h2&gt;
+&lt;p&gt;构建最大堆的基本目标是使数组满足最大堆的性质，
+即所有父节点比其子节点的值大。&lt;/p&gt;
+&lt;p&gt;一般的做法是定义一种siftdown操作，
+siftdown操作某个特定的节点，
+将其不断与子节点比较并交换位置直到到达树中正确的位置。&lt;/p&gt;
+&lt;p&gt;题外话：博主一直以为是shiftdown...&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;siftdown操作的具体实现&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;其具体的思路如下：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+比较当前节点与其孩子节点的值:
+    若当前节点比其孩子节点都大，则该父子节点形成的子树已经满足最大堆性质，算法中止；
+    若当前节点不是最大值，则使其与较大的孩子节点交换，使该子树满足最大堆性质；
+对于交换过元素的孩子节点继续执行这个算法，直到叶子节点。
+&lt;/pre&gt;
+&lt;p&gt;代码实现如下：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+index为当前操作的节点，endindex是数组的结束位置
+获取左孩子并检查是否超过边界endindex，如果是说明当前节点没有左孩子，是叶子节点，直接返回
+如果有右孩子，则找出左右孩子节点中的较大者，否则直接使用左孩子作为较大者
+比较父节点与较大的孩子节点的值，做相应处理
+&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;template&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;ArrayList&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;::&lt;/span&gt;&lt;span class="n"&gt;shiftdown&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;endindex&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;leftchild&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;//leaf node&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;leftchild&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="n"&gt;endindex&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;rightchild&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;leftchild&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;maxind&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;leftchild&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rightchild&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;endindex&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;maxind&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;compare&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;leftchild&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;rightchild&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;?&lt;/span&gt;
+            &lt;span class="n"&gt;leftchild&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;rightchild&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;compare&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;maxind&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;swap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;maxind&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;shiftdown&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;maxind&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;endindex&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;方便理解所以使用了递归操作处理交换过的子节点，
+其实通过循环可以去掉递归提高效率。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;最大堆构建的实现&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;有了siftdown后就可以构建最大堆了，
+方法很简单，
+从索引最大的非叶子节点开始，
+对每一个节点进行siftdown操作，
+直到处理完根节点。&lt;/p&gt;
+&lt;p&gt;转换为数组的表达便是：
+假设数组长度为n，
+则从索引为n/2-1的节点开始，
+对数组的前半部分节点执行siftdown。&lt;/p&gt;
+&lt;p&gt;由于完全二叉树的性质，
+我们可以知道数组的前半段为中间节点，
+后半段为叶子节点。&lt;/p&gt;
+&lt;p&gt;通过上述的操作便可以从最底层的子树开始逐步往上构建最大堆，
+直到整个数组满足最大堆的性质。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;template&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;ArrayList&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;::&lt;/span&gt;&lt;span class="n"&gt;buildheap&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;shiftdown&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h2&gt;最大堆的效率分析&lt;/h2&gt;
+&lt;p&gt;构建最大堆的基本操作是siftdown操作，
+需要对数组的前半部分，即所有中间节点操作一遍siftdown，
+因此外层循环需要做n/2趟，
+siftdown操作的次数与树的高度有关，
+完全二叉树的的树高为logn。&lt;/p&gt;
+&lt;p&gt;博主数学不好，
+书里的分析相当详细，
+最终的结果近似为O(n)。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h2&gt;最大堆的常见用途&lt;/h2&gt;
+&lt;p&gt;常见的用途有优先队列和堆排序。&lt;/p&gt;
+&lt;p&gt;堆排序使用了堆的特殊性质用以加快排序速度。&lt;/p&gt;
+&lt;p&gt;其基本思路是，&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+1.构造一个最大堆；
+2.交换数组的头尾元素；
+3.减小数组的size使被交换出来的当前最大元素不参与接下来的操作；
+4.对新的根节点执行一趟siftdown；
+5.新的最大堆形成（size比原有size少1）；
+6.继续执行2到5，直到堆为空。
+&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;template&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;ArrayList&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;::&lt;/span&gt;&lt;span class="n"&gt;heapsort&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;buildheap&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;swap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;shiftdown&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;算法的整体时间复杂度为建堆的n加上对n个节点交换后的siftdown，&lt;/p&gt;
+&lt;p&gt;总的来说为nlogn，
+比上一次介绍的三大简单排序效率好得多。&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="C/C++"></category><category term="data structure"></category></entry><entry><title>C++学习(八)：排序啊排序</title><link href="/CppLearning008-sort-one.html" rel="alternate"></link><updated>2014-03-30T22:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-03-30:CppLearning008-sort-one.html</id><summary type="html">&lt;p&gt;每一本数据结构的课本都会聊九大排序，
 作为基础知识掌握这些经典的算法可能是每个搞代码的人必修的一课。&lt;/p&gt;
 &lt;p&gt;冒泡、插入和选择作为简单易懂而最基本的三种方式，
 常常被用作算法学习的入门课程。&lt;/p&gt;
