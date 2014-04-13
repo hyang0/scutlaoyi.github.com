@@ -42,7 +42,10 @@ var sentences = new Array(
         "And a person's character, isn't determined by how he or she enjoys vitory, but rather how he or she endures defeat.Nothing can help us endure dark times better than our faith.",
         "只有自己足够好，才不会惧怕任何模样的未来。",
         "即使岩石再坚硬，也是死的，鸡蛋再脆弱，也是活着的生命。岩石最终会碎成细沙， 而鸡蛋中就孵化越过岩石。",
-        "我们可以回避任何问题，但无法回避自己身上的那些丑陋与光明。"
+        "我们可以回避任何问题，但无法回避自己身上的那些丑陋与光明。",
+        "每天给自己一个希望，试着不为明天而烦恼，不为昨天而叹息，只为今天更美好。",
+        "当一个人有了足够的内涵和物质当后盾，人生就会变得底气十足。",
+        "不要着急，最好的总会在最不经意的时候出现。--泰戈尔"
 
         );
 function generateSentence()
