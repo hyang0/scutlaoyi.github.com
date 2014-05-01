@@ -1,6 +1,10 @@
-var sentences = new Array(
+var itsentences = new Array(
         "Don't be evil. --Google",
         "UNIX is simple. It just takes a genius to understand its simplicity. --Dennis Ritchie",
+        "But we are hackers, hackers have black terminals with green font colors. --John Nunemaker",
+        "不遵循团队基本原则随意发挥的行为在程序员的世界里就如同随地大小便，完全不尊重同伴的感受。"
+        );
+var lifesentences = new Array(
         "学习不是填满水桶，而是点燃火焰。--叶芝",
         "你是一个有思想的人，你就是一个有品味的人。",
         "要像赌徒那么不计代价地活着，但不要企图成为他们。",
@@ -31,7 +35,6 @@ var sentences = new Array(
         "人的悲哀，在于被自己曾经厌恶的东西捕获。",
         "从跪伏而站起的那一天， 便是权力匍匐称臣的日子，便是极权一去不返的日子。",
         "If you live each day as if it was your last, someday you'll most certainly be right. --Steve Jobs",
-        "But we are hackers, hackers have black terminals with green font colors. --John Nunemaker",
         "每一个优秀的人，都有一段沉默的时光。那一段时光，是付出了许多努力，忍受孤独和寂寞，不抱怨不诉苦，日后说起时，连自己都能被感动的日子。",
         "宪法原则中最重要的是“自由思想的原则”——不是确保我们喜欢的思想的自由，而是确保我们所憎恨的思想的自由。",
         "你现在要学的，就是如何不让自己的心倾注在一个地方。因为赌注越大，你会越输不起。",
@@ -47,11 +50,18 @@ var sentences = new Array(
         "当一个人有了足够的内涵和物质当后盾，人生就会变得底气十足。",
         "不要着急，最好的总会在最不经意的时候出现。--泰戈尔",
         "That love can ever lose is a fact that we cannot accept as truth.",
-        "不遵循团队基本原则随意发挥的行为在程序员的世界里就如同随地大小便，完全不尊重同伴的感受。"
-
+        "上帝若想惩罚谁，就把他想要的给他。"
         );
+var sentences = new Array(
+        itsentences,
+        lifesentences
+        );
+
 function generateSentence()
 {
-    var ind = Math.random() * sentences.length;
-    return sentences[Math.floor(ind)];
+    var typeind = Math.random()*sentences.length;
+    typeind = Math.floor(typeind);
+    var ind = Math.random() * sentences[typeind].length;
+    ind = Math.floor(ind);
+    return sentences[typeind][ind];
 }
