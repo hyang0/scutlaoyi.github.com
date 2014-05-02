@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>软件体系结构：N皇后问题系列之回溯法</title>
+    <title>老逸的个人站 - Mobile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="laoyi">
@@ -86,12 +86,12 @@
 						<i class="icon-folder-open icon-large"></i>Linux
 					</a>
                   </li>
-                  <li >
+                  <li class="active">
                     <a href="/category/mobile.html">
 						<i class="icon-folder-open icon-large"></i>Mobile
 					</a>
                   </li>
-                  <li class="active">
+                  <li >
                     <a href="/category/python.html">
 						<i class="icon-folder-open icon-large"></i>Python
 					</a>
@@ -121,94 +121,77 @@
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
-<section id="content">
-        <article>
-                <header>
-                        <h1>
-                                <a href=""
-                                        rel="bookmark"
-                                        title="Permalink to 软件体系结构：N皇后问题系列之回溯法">
-                                        软件体系结构：N皇后问题系列之回溯法
-                                </a>
-                        </h1>
-                </header>
-                <div class="entry-content">
-                <div class="well">
-<footer class="post-info">
+        <div class="article">
+                <h1><a href="/AndroidLearning001-basic-principle.html">Android基础学习（一）：基本概念与理念</a></h1>
+                <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2013-10-31T22:30:00">
-        <i class="icon-calendar"></i>Thu 31 October 2013
+<abbr class="published" title="2014-05-01T16:00:00">
+        <i class="icon-calendar"></i>Thu 01 May 2014
 </abbr>
 <span class="label">By</span>
 <a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
 <span class="label">Category</span>
-<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
+<a href="/category/mobile.html"><i class="icon-folder-open"></i>Mobile</a>.
 
 
 <span class="label">Tags</span>
-	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
-	<a href="/tag/softwarearchitect.html"><i class="icon-tag"></i>SoftwareArchitect</a>
-</footer><!-- /.post-info -->                </div>
-                <p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
-<p><strong>使用的Python版本为2.7.3</strong></p>
-<p><strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
-<hr class="docutils" />
-<p>最近学习搞得有点杂，一怒之下一个月没打理个人主页了，有些事情就是这样，你越不管，时间越长，就越不想管。</p>
-<p>软件体系结构是本学期的课程之一，大作业是用几种奇怪的风格构造一个N皇后问题的求解器。</p>
-<p>由于没有限定语言，咱自然是Python搞起。正发愁前些日子学习了那么多的理论知识没地方实践，正好，这货拿来下菜！</p>
-<p><strong>风格一：回溯法</strong></p>
-<p>其实我真的研究了很久这个神乎其神的名字，有点文言文的味道。然而半晌发现这货说到底就是深搜。
-于是敲了一个递归的函数处理之，不加任何剪枝优化，回溯法原型就基本出来了。</p>
-<p>我们将棋盘横向切分为多个单独的层，显而易见，每一层只能放置一个皇后，且每一层都应该放置皇后。于是可以递归搜索每一层，找出所有可能位置。</p>
-<p>使用深度优先搜索算法，遍历每一层的所有位置，检查当前位置是否符合要求。如果不符合要求，继续搜索下一个位置；如果符合要求，则依据深度优先原则，递归调用函数自身搜索下一层所有位置，依此类推。算法的终止条件为搜索到达了棋盘的最底层，这时候如果找到了符合条件的位置，则说明这种摆法符合要求，记录为一个可能的解。</p>
-<p>那么这个时候唯一的问题在于如何确定当前位置是否符合要求。</p>
-<p>很明显，不需要考虑的是同一层的其他位置，因为算法已经确定了每一层我们都只放一个皇后。其次，该层以下的所有层都不需要考虑，因为当前状态下所有下层都还没有皇后，不存在冲突问题。</p>
-<p>于是需要研究的就只有当前层之上的其他层皇后的位置是否与当前位置冲突。</p>
-<p>冲突存在三种情况，一是在当前皇后的坐上方放射线上，二是在当前皇后的正上方，三是在当前皇后的右上方。于是，我们通过计算可以轻易求得冲突的三种位置与当前皇后位置和层数之间的关系。</p>
-<p>假设当前皇后坐标为x,在该皇后上方的所有x位置都不能有皇后（正上方），在当前皇后所在层的前i层，位置x-i和位置x+i均不能有皇后（左右上方放射线）。构造一个for循环即可。</p>
-<p>关键代码如下：</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="n">totalLevel</span><span class="p">,</span> <span class="n">gameMap</span><span class="p">):</span>
-        <span class="sd">u&quot;&quot;&quot;</span>
-<span class="sd">        搜索主函数，</span>
-<span class="sd">        遍历当前层的所有位置，</span>
-<span class="sd">        找出可能位置并继续下层搜索</span>
-<span class="sd">        level:当前所在的层</span>
-<span class="sd">        totalLevel:总层数</span>
-<span class="sd">        gameMap:列表，保存了每一层皇后的当前位置（不断变化）</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">level</span> <span class="o">==</span> <span class="n">totalLevel</span><span class="p">:</span>
-                <span class="c">#搜索到达最底层，找到的所有符合位置即为解</span>
-                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">totalLevel</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-                        <span class="n">gameMap</span><span class="p">[</span><span class="n">level</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
-                        <span class="k">if</span> <span class="n">checkOK</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="n">gameMap</span><span class="p">):</span>
-                                <span class="k">print</span> <span class="s">&quot;found!&quot;</span><span class="p">,</span> <span class="n">gameMap</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+	<a href="/tag/android.html"><i class="icon-tag"></i>Android</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>眼下正是移动客户端应用泛滥的时代，
+Android与iOS无疑是当前移动客户端最为热门的两大系统。</p>
+<p>于是博主也跟随潮流，
+学起了Android。</p>
+<p>本博文不涉及具体代码，
+只简单记录整理基本概念，
+权当总结。</p>
+<div class="section" id="id1">
+<h2>Android应用的基本理念</h2>
+<p>Android应用与传统应用程序一样基于操作系统提供的抽象硬件环境，
+而且有更多的运行限制。</p>
+<p>由于Android系统基于Linux内核，
+存在着众多的保护机制，
+每个Android应用会通过各自独立的用户启动和运行。
+并且每个应用在运行时处在Android系统内建的沙盒中，
+与外界多了一层隔离。</p>
+<p>在资源管理方面，
+Android应用必须声明对特定资源的访问请求，
+才可执行对应的操作。
+例如外部存储器的读写、
+照相机的调用、
+网络的调用等。
+这些权限声明在用户安装的过程中进行确认，
+仅当用户授权才可以安装应用。</p>
+<p>虽然这点在实际操作过程中有很大变数，哈哈～</p>
+<p>与桌面程序较为不同的是，
+Android应用更多依赖于用户的交互，</p>
+<p>在Android应用中事件是一个非常重要的概念，
+用户的任何操作都会触发一个事件，
+例如手指的滑动，或者是按钮的点击。</p>
+<p>当用户的事件触发时，
+Android系统通知应用程序事件的发生，
+交由应用进行处理。</p>
+<p>在Android应用的内部，
+通过编写对应的回调函数来完成对事件的处理,
+例如onClick()函数，
+当用户点击按钮时该回调函数就会被调用。
+这也就构成了最简单的Android应用形式。</p>
+</div>
+<div class="section" id="id2">
+<h2>四大组件基本概念</h2>
+<p>Android应用中存在着四大组件，
+分别是Activity、Service、Content Provider和Broadcast Receiver</p>
+<p><strong>Activity</strong></p>
+<p>Android应用通过若干Activity进行组织。</p>
+<p>Activity控制着应用的某个窗口界面 ...</p></div>
+                        <a class="btn primary xsmall" href="/AndroidLearning001-basic-principle.html">more ...</a>
+                </div>
+        </div>
+        <hr />
 
-        <span class="k">else</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">totalLevel</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-                        <span class="c">#搜索未达到最底层，循环放置当前层的可能位置，搜索下一层</span>
-                        <span class="n">gameMap</span><span class="p">[</span><span class="n">level</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
-                        <span class="k">if</span> <span class="n">checkOK</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="n">gameMap</span><span class="p">):</span>
-                                <span class="n">search</span><span class="p">(</span><span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">totalLevel</span><span class="p">,</span> <span class="n">gameMap</span><span class="p">)</span>
-</pre></div>
-<p>checkOk是用来判断当前位置是否与上层的皇后冲突的函数，返回True标明不冲突。</p>
-<p>源代码等我过段时间上传到github再发布链接。</p>
-<hr class="docutils" />
-<p>更多Python学习，推荐：</p>
-<blockquote>
-<p>简明Python教程： <a class="reference external" href="http://www.2cto.com/shouce/pythonjc/index.html">http://www.2cto.com/shouce/pythonjc/index.html</a></p>
-<p>《Python基础教程》</p>
-</blockquote>
-
-                </div><!-- /.entry-content -->
-        </article>
-        <license>
-        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
-            <img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
-        </a>
-        <br/>
-        This work by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.scutlaoyi.tk" property="cc:attributionName" rel="cc:attributionURL">scutLaoYi</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-        </license>
-</section>
+                <section id="content" class="body">
+                <h1>Pages</h1>
+                        <li><a href="/pages/about.html">About</a></li>
+                </section>
         </div><!--/span-->
 
                 <div class="span3 well sidebar-nav" id="sidebar">
