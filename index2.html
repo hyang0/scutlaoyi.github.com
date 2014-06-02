@@ -122,6 +122,58 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/CppLearning006.html">C++学习(六)：栈的实现及若干算法</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-03-04T22:30:00">
+        <i class="icon-calendar"></i>Tue 04 March 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/cpp.html"><i class="icon-folder-open"></i>Cpp</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
+	<a href="/tag/data-structure.html"><i class="icon-tag"></i>data structure</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>事情一多就需要细致分配时间，
+心情一迷茫就总会没有效率，
+越攒待办事项就越多。</p>
+<p>就像发送速率比入队速率慢的路由器似的。</p>
+<p>整个一丢包的赶脚。</p>
+<div class="section" id="id1">
+<h2>栈的实现</h2>
+<p>栈的实现是比较简单的，
+博主使用的是线性表构造的栈，
+通过复用前几篇实现的节点数据类型，
+很容易就搞定栈的实现，
+同时写了基本的push、pop等函数。</p>
+<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">LinkStack</span>
+<span class="p">{</span>
+    <span class="nl">protected:</span>
+    <span class="n">Freelist</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">freelist</span><span class="p">;</span>
+    <span class="n">Node</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">top</span><span class="p">;</span>
+
+    <span class="nl">public:</span>
+    <span class="n">LinkStack</span><span class="p">();</span>
+    <span class="kt">void</span> <span class="nf">push</span><span class="p">(</span><span class="n">Type</span> <span class="o">&amp;</span><span class="n">element</span><span class="p">);</span>
+    <span class="kt">bool</span> <span class="nf">pop</span><span class="p">();</span>
+    <span class="kt">bool</span> <span class="nf">peek</span><span class="p">(</span><span class="n">Type</span> <span class="o">&amp;</span><span class="n">buf</span><span class="p">);</span>
+    <span class="kt">bool</span> <span class="nf">isempty</span><span class="p">();</span>
+    <span class="kt">void</span> <span class="nf">insertatbottom</span><span class="p">(</span><span class="n">Type</span> <span class="o">&amp;</span><span class="n">value</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="nf">reverse</span><span class="p">();</span>
+<span class="p">};</span>
+</pre></div>
+<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">LinkStack</span><span class="o">&lt;</span><span class="n">Type ...</span></pre></div></div>
+                        <a class="btn primary xsmall" href="/CppLearning006.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/CppLearning005.html">C++学习(五)：有序线性表的点滴记录</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -536,66 +588,6 @@ Arch Linux的启动流程大致有以下几个步骤：</p>
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/Arch004.html">Arch Linux学习：Repository与Pacman小记</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-01-17T19:30:00">
-        <i class="icon-calendar"></i>Fri 17 January 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/arch.html"><i class="icon-tag"></i>Arch</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。</p>
-<hr class="docutils" />
-<div class="section" id="arch-linux">
-<h2>Arch Linux 仓库</h2>
-<div class="section" id="id1">
-<h3>仓库的分类</h3>
-<p>Arch Linux的官方仓库包含如下的五个类别：
-Core, Extra, Community，Multilib，Testing</p>
-</div>
-<div class="section" id="id2">
-<h3>仓库简介</h3>
-<p><strong>core</strong></p>
-<p>core仓库包含了所有系统必备的包。
-例如bootloader，kernel，building packages等。
-貌似安装系统的时候敲pacstrap的时候就是通过连接镜像站点并获取core内容完成本地系统安装的。</p>
-<p><strong>extra</strong></p>
-<p>extra仓库包含了所有不是系统必须的包。
-类似于Firefox啦X11图形界面啦mplayer啦都在里面。
-另外Python之类的也属于extra的内容。
-据说这个仓库比较庞大，毕竟许多常用的东西都在里面。</p>
-<p><strong>community</strong></p>
-<p>这个仓库存放了所有社区中可信用户提交并获得投票通过的包。</p>
-<p>社区中用户可以提交自己的包到AUR中，
-所谓的AUR全称是Arch User Repository，
-用户可以在AUR中下载并编译别人写的包，
-再让pacman安装到自己的系统中。</p>
-<p>经过大家的使用鉴定，
-可以通过投票表决某些好用的包进入community仓库。</p>
-<p>AUR和community的关系就显而易见了，
-pacman只能直接获取community的内容，
-AUR的东西需要自行下载安装。</p>
-<p><strong>multilib</strong></p>
-<p>有点神奇的仓库，
-存放了许多32位的库文件，
-针对64位系统提供32位软件的构建和执行的能力。</p>
-<p><strong>testing</strong></p>
-<p>顾名思义，
-正在测试的包可以在这个仓库里找到。
-一个包被弄进testing的原因一种是可能会破坏当前的系统，因此需要测试；
-或者是正等待其他依赖的包重新构建 ...</p></div></div>
-                        <a class="btn primary xsmall" href="/Arch004.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -686,6 +678,21 @@ window.onload=function(){
 </li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<li class="tag-3">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/data-structure.html">
+        <i class="icon-tag icon-large"></i>data structure
+    </a>
+</li>
 <li class="tag-4">
     <a href="/tag/xss.html">
         <i class="icon-tag icon-large"></i>xss
@@ -697,18 +704,13 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
     </a>
 </li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
+<li class="tag-1">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
     </a>
 </li>
 <li class="tag-1">
@@ -717,23 +719,8 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
-    </a>
-</li>
-<li class="tag-2">
     <a href="/tag/socket.html">
         <i class="icon-tag icon-large"></i>socket
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/audition.html">
-        <i class="icon-tag icon-large"></i>audition
     </a>
 </li>
 <li class="tag-4">
@@ -741,9 +728,14 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>md5
     </a>
 </li>
-<li class="tag-3">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
     </a>
 </li>
 <li class="tag-4">
@@ -756,9 +748,9 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>Python
     </a>
 </li>
-<li class="tag-1">
-    <a href="/tag/data-structure.html">
-        <i class="icon-tag icon-large"></i>data structure
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
     </a>
 </li>
 
@@ -782,20 +774,7 @@ window.onload=function(){
     </div><!--/.fluid-container-->
 
 
-<script type="text/javascript">
 
-  var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-43833562-1']);
-	  _gaq.push(['_trackPageview']);
-	  
-	  (function() {
-
-	       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-				     })();
-
-</script>
     <!-- Le javascript -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="/theme/js/jquery-1.7.2.min.js"></script>
