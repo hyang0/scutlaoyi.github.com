@@ -122,6 +122,44 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/Python003.html">Python笔记（三）</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-09-18T15:30:00">
+        <i class="icon-calendar"></i>Wed 18 September 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3，</strong>
+<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>函数</h2>
+<p><strong>定义函数</strong></p>
+<p>关键词def，类似于C++，由函数名、参数列表、函数体和返回语句构成。</p>
+<p>在def的下一行可添加字符串作为文档字符串。
+文档字符串描述了函数的功能作用。
+文档字符串作为函数的一部分存在。
+可通过调用函数的__doc__属性返回文档字符串。</p>
+<p>参数列表中的参数后可添加赋值语句，相当于C++中的默认参数。</p>
+<p>调用函数时，默认通过位置复制，亦可指定参数名称赋值，称为关键字参数赋值。</p>
+<p>基本例子如下：</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">sayHello</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
+        <span class="s">&quot;This is a function to say hello!&quot;</span>
+        <span class="k">print</span> <span class="s">&quot;a is&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="s">&quot;b is&quot;</span><span class="p">,</span> <span class="n">b ...</span></pre></div></div>
+                        <a class="btn primary xsmall" href="/Python003.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/network001.html">socket编程(1):单线程tcp服务器/客户端</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -426,36 +464,6 @@ window.onload=function(){
 </li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
-<li class="tag-3">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/data-structure.html">
-        <i class="icon-tag icon-large"></i>data structure
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/audition.html">
-        <i class="icon-tag icon-large"></i>audition
-    </a>
-</li>
 <li class="tag-1">
     <a href="/tag/recruitment.html">
         <i class="icon-tag icon-large"></i>recruitment
@@ -464,6 +472,16 @@ window.onload=function(){
 <li class="tag-1">
     <a href="/tag/arch.html">
         <i class="icon-tag icon-large"></i>Arch
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
     </a>
 </li>
 <li class="tag-2">
@@ -477,8 +495,18 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
     </a>
 </li>
 <li class="tag-1">
@@ -487,18 +515,33 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-4">
+    <a href="/tag/litecoin.html">
+        <i class="icon-tag icon-large"></i>litecoin
+    </a>
+</li>
+<li class="tag-4">
     <a href="/tag/android.html">
         <i class="icon-tag icon-large"></i>Android
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/data-structure.html">
+        <i class="icon-tag icon-large"></i>data structure
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
     </a>
 </li>
 <li class="tag-1">
     <a href="/tag/python.html">
         <i class="icon-tag icon-large"></i>Python
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
     </a>
 </li>
 
