@@ -1,5 +1,240 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/web.atom.xml" rel="self"></link><id>/</id><updated>2014-06-08T10:00:00+08:00</updated><entry><title>玩转莱特币：概念</title><link href="/litecoin001-coin-and-wallet.html" rel="alternate"></link><updated>2014-06-08T10:00:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-06-08:litecoin001-coin-and-wallet.html</id><summary type="html">&lt;div class="section" id="p2p"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/web.atom.xml" rel="self"></link><id>/</id><updated>2014-06-16T10:00:00+08:00</updated><entry><title>玩转莱特币：使用CPUMiner和proxy挖矿的办法</title><link href="/litecoin002-mining.html" rel="alternate"></link><updated>2014-06-16T10:00:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-06-16:litecoin002-mining.html</id><summary type="html">&lt;p&gt;挖矿分为两种，
+简单暴力的直接挖矿，
+以及加入矿池进行合体挖矿。&lt;/p&gt;
+&lt;p&gt;由于现在的全网算力已经超乎想象(博主玩的时候大概为300GH/s)，
+没有专用矿机只能选择矿池挖矿。&lt;/p&gt;
+&lt;p&gt;由于博主以娱乐为主，
+没有钱和精力购买高速专用矿机，
+甚至没有好的显卡拿来用GPU挖矿，
+因此使用的是简单的CPU挖矿方式(10KH/s......)。&lt;/p&gt;
+&lt;p&gt;如果正儿八经的想赚点钱，
+推荐至少要弄个好的显卡用GPU挖矿。&lt;/p&gt;
+&lt;p&gt;在网上有一些算力的统计表，
+AMD系列的显卡跑GPU挖矿一般可以达到100KH/s以上。&lt;/p&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;矿池的选择&lt;/h2&gt;
+&lt;p&gt;由于博主用的是大陆的局域网，
+选择矿池显得比较困难。&lt;/p&gt;
+&lt;p&gt;首先需要排除掉那些没什么人的矿池，
+听说没什么人的矿池由于全池算力都很差，
+因此找到新块的几率非常低，
+进而导致每个矿工分到的收益也很小。&lt;/p&gt;
+&lt;p&gt;此外，
+由于网络的问题，
+需要选择能够稳定连接的矿池，
+否则经常断线就只能白白消耗电能。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;现在的矿池基本上都支持stratum协议，
+这种协议本质上是建立一个代理服务器中转矿机和目标服务器的连接，
+由于有了这种类似于buffer的协议层，
+相比最初的getwork方式直连，
+不仅网络的带宽占用变小，
+连接的稳定性等各方面也有较好的提升。&lt;/p&gt;
+&lt;p&gt;许多矿池甚至强制性使用stratum协议，
+例如coinotron。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;矿池的选择可以参考莱特币的info页面：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+https://litecoin.info/Mining_pool_comparison
+&lt;/pre&gt;
+&lt;p&gt;选择好矿池后，
+在网站里注册一个新的用户，
+4位的PIN码非常重要，
+各种操作都需要PIN码。
+有些矿池支持Google的身份验证器，
+推荐开启。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;不过很多矿池不支持更换验证器，
+而且没有备选的身份识别方案，
+导致一旦验证器失效就无法控制账户了。&lt;/p&gt;
+&lt;p&gt;博主刚好手机换系统，
+结果验证器就失效了，
+wemineLTC网站的账户控制丢失...&lt;/p&gt;
+&lt;p&gt;也好，
+wemineLTC的算力现在处在危险的垄断地位，
+不推荐大家加入wemineLTC矿池中，
+防止51%攻击。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;然后添加几个新的矿工，
+由于矿工只是用于识别，
+没有什么安全性危机（不会有人偷矿工，因为工作量算在矿工头上），
+因此可以随意设置名称和密码（密码甚至都是明文..）。&lt;/p&gt;
+&lt;p&gt;虽然很多矿池支持多个矿机使用同一个矿工帐号，
+但是不推荐使用，
+因为超过一定数量后可能会被识别为机器人，
+机器人帐号会被踢出矿池，
+博主猜测此举是为了阻止坏人制作病毒传播用别人的机器挖矿。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;挖矿回报类型的选择&lt;/h2&gt;
+&lt;p&gt;矿工和矿池之间是合作的关系，
+挖出来的矿根据何种协议进行划分就相当重要了。&lt;/p&gt;
+&lt;p&gt;常见的回报有PPS和PPLNS，
+以及其他多种细碎的类型。
+由于博主只体验过这两种，
+因此仅对他们做简单介绍，
+详细情况依然可以查看莱特币的info页面。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;PPS&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;简单说来PPS是指矿工的每一次有效的挖掘都计算到工作量中去，
+这种方式不会受到矿池整体情况的影响，
+只要有工作量，
+就可以直接兑换为莱特币。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这种协议对矿池来说危险系数比较高，
+假设矿池寻找新区块的几率很大，
+那么没有问题大家都有钱拿。
+然而如果矿池不景气，
+运气不好连续很长时间都没有找到区块，
+那么矿池就可能会亏本，
+因为矿工的薪水仍然需要分发。&lt;/p&gt;
+&lt;p&gt;因此使用这种协议一般矿池会收取比较高的费率，
+通常在2%左右，
+作为维持矿池运转的手段。&lt;/p&gt;
+&lt;p&gt;但对于小型的散户来说，
+使用PPS的话风险比较低，
+因为只要矿工一直在运行，
+就一直能够获得收益。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;PPLNS&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这种协议与上面的刚好相反，
+矿工按照工作量在矿池的比重进行收益计算，
+而不是工作量的净值。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;同样假设矿池效率高，
+一天找到一大堆新的块，
+那么就捞到了大把的莱特币，
+每个矿工根据在挖矿过程中自己工作量占矿池总工作量的比值得到相应的莱特币。
+大家都分到很多钱。&lt;/p&gt;
+&lt;p&gt;然而如果矿池几天才捞到一个新块，
+那么矿工同样拿这个新块的收益按比值划分收益，
+每个矿工能够得到的钱就非常少了。&lt;/p&gt;
+&lt;p&gt;这种方案的好处是矿池比较保险，
+不需要承担由于运气不好带来的损失。
+因此PPLNS的收费也会相应的降低。&lt;/p&gt;
+&lt;p&gt;然而对于矿工来说，
+运气成分也占据了一部分，
+因此PPLNS不太适合博主这种闹着玩的人，
+有可能几天都捞不到半毛莱特币。
+哦，不对，
+半毛莱特币值五十美分，
+因为现在的汇率是LTC:USD = 1:11，
+还是挺多的。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;博主选择的是PPS协议，
+虽然手续费什么的比较高，
+但看着自己账户的金额一点一点往上涨还是很有成就感的，
+相比之下，
+前期使用PPLNS跑过一个晚上，
+结果账户金额一直没有动静，
+玩得很不爽。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h2&gt;安装工具&lt;/h2&gt;
+&lt;p&gt;博主的系统是Linux系，
+因此以下的内容都以Linux为目标。
+但CPU挖矿感觉两个平台的操作基本相同。&lt;/p&gt;
+&lt;p&gt;基本套路是装两个程序，
+一个是stratum-proxy代理程序，
+一个是cpuminer挖矿主程序。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;矿机下载&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;首先下载cpuminer:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+http://sourceforge.net/projects/cpuminer/files/?source=navbar
+&lt;/pre&gt;
+&lt;p&gt;不知道为什么2.4版本在博主的系统上跑有问题，
+一直无法连接，
+而选择2.2.3版本则运行良好。
+各位读者可自行尝试。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;proxy下载&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;下载stratum-proxy:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+https://github.com/bandroidx/stratum-mining-proxy
+&lt;/pre&gt;
+&lt;p&gt;按照教程直接安装即可，
+教程就在readme文件里面。&lt;/p&gt;
+&lt;p&gt;记得跑一遍midstate文件夹里的make，
+可以大幅提高速度和稳定性，
+没有搞这个的时候十几分钟就会固定断线一次，
+而且很恶心的无法重连。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;补充安装的service_identity&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;博主启动代理服务器的时候会有一个Warning，
+显示缺少service_identity的组件，
+虽然仍然能够正常使用，
+但后来也安装了这个组件：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+https://pypi.python.org/pypi/service_identity
+&lt;/pre&gt;
+&lt;p&gt;首先下载源码，
+解压到任意目录并用终端进入，
+然后执行python setup.py install，
+可能需要root权限，
+等待跑完即可。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h2&gt;启动挖矿&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;proxy的启动&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;首先需要启动proxy，
+在proxy的目录下敲：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+./mining_proxy.py -pa scrypt -o server_url -p server_port
+&lt;/pre&gt;
+&lt;p&gt;第一个参数指定了算法类型，
+听说除了比特币以外所有电子货币都是使用scrypt算法。
+不添加这个参数也是可以正常启动的，
+矿机也跑得很欢快，
+cpu占用也是满的，
+但是网站的监测显示算力一直为零...&lt;/p&gt;
+&lt;p&gt;server_url为矿池服务器的地址，
+server_port为矿池服务器的端口，
+这些可以在矿池的网站里面找到，
+注意端口要与对应的币种相同，
+比如挖莱特币的别跑到狗币的端口去。&lt;/p&gt;
+&lt;p&gt;proxy的设置主要是与矿池服务器的连接，
+一切正常的话会有一堆输出，
+这样保持proxy持续运行即可，
+另外要注意观察有没有ERROR。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;miner的启动&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如果没有更改proxy的端口的话，
+proxy的本地端口应该为8332，
+因此可以在miner目录下通过下述的命令启动矿机：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+./minerd -a scrypt -o http://127.0.0.1:8332 -O username:password -t 4 -s 6
+&lt;/pre&gt;
+&lt;p&gt;同样指定算法为scrypt，
+连接localhost的8332端口，
+其中username为矿工帐号，password为密码。
+这里需要注意的是username一般为以下格式：&amp;quot;网站注册名.矿工名&amp;quot;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;正常情况&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如果一切正常，
+则miderd窗口会间断打出状态信息，
+一般为如下格式：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+[2014-06-08 23:40:38] thread 1: 41964 hashes, 5.76 khash/s
+[2014-06-08 23:40:38] accepted: 23/23 (100.00%), 22.98 khash/s (yay!!!)
+[2014-06-08 23:41:31] thread 3: 343092 hashes, 5.74 khash/s
+[2014-06-08 23:41:31] thread 2: 343416 hashes, 5.73 khash/s
+&lt;/pre&gt;
+&lt;p&gt;前面的是日期时间，
+然后是线程编号，
+后面是具体的速率和哈希块什么的。&lt;/p&gt;
+&lt;p&gt;一段时间后应该有如上第二行的内容，
+accepted表明工作成功，
+最容易辨认的是那个&amp;quot;yay!!!&amp;quot;。
+这说明你的矿机已经挖到东西了。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;异常情况&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;连接失败什么的矿机会在一定时间内自动重试，
+默认好像是十五秒。&lt;/p&gt;
+&lt;p&gt;另外如果连接成功，
+但一直是&amp;quot;booooo&amp;quot;(五个o)，
+说明当前的工作出问题，
+没有被算入。
+需要检查本地的配置什么的是否有问题。&lt;/p&gt;
+&lt;p&gt;这样，
+一个CPU矿机就搭建完成了，
+坐等收益吧。&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="litecoin"></category></entry><entry><title>玩转莱特币：概念</title><link href="/litecoin001-coin-and-wallet.html" rel="alternate"></link><updated>2014-06-08T10:00:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-06-08:litecoin001-coin-and-wallet.html</id><summary type="html">&lt;div class="section" id="p2p"&gt;
 &lt;h2&gt;关于p2p货币&lt;/h2&gt;
 &lt;p&gt;其实这个概念已经出现好几年了，
 作为一种新类型的虚拟货币，
