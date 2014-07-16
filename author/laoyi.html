@@ -122,6 +122,69 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/webTool001-simple-powerful.html">一些好用web工具的记录</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-07-16T10:00:00">
+        <i class="icon-calendar"></i>Wed 16 July 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/web.html"><i class="icon-folder-open"></i>web</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/web-tool.html"><i class="icon-tag"></i>web tool</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>最近找到了许多好用的Web工具，在此记录一下使用心得。</p>
+<div class="section" id="id1">
+<h2>爬墙类</h2>
+<p>几年前，
+詹神曾经在班级邮件里说过，
+“作为程序员，翻墙应该是基本技能”。
+这句话我一直印象很深。</p>
+<p>当时的自己年少无知，
+对爬墙技术的了解也不深，
+但随着对Google依赖的不断深化，
+搜文档、找工具、查资料，
+加上许多信息工具的应用，
+这才越来越体会到这句话的深刻含义。</p>
+<p>爬墙的一个原则是不要在一棵树上吊死，
+这句是在某知名博主的博客上看到的，
+永远要留有备用的手段。</p>
+<p><strong>goagent</strong></p>
+<p>这货连接的是Google的服务器，
+凭借限定流量免费的Google App Engine服务，
+热心的技术人员开发出了一套转发代理的工具，
+是最近一段时间比较稳定的爬墙方式。</p>
+<p>自己搭建服务器的话需要注册一个GAE的账户，
+建立一个新的App，
+然后把服务器端给传上去。</p>
+<p>本地的客户端通过指定AppID连接服务器端，
+把本地的网络请求转发给服务器，
+由服务器代理处理页面并返回结果。</p>
+<p><em>安全问题</em></p>
+<p>月光博客之前曾经谈过这货的安全性问题，
+由于CA证书是伪造的，
+而且默认的CA证书是公开的，
+因此非常容易被中间人攻击。</p>
+<p>解决的方案是把目录下的默认CA.crt删掉，
+让GoAgent启动时自行生成新的唯一证书，
+相当于私有的证书。
+然后再把这个新的CA导入到系统的证书信任里。</p>
+<p>此外，
+最好开启服务器端的验证，
+在配置文件里把validate开启。</p>
+<p>但不管怎样优化也不能让这货有比较好的安全性，
+GAE在转发用户请求的时候会把AppID也写入到User Agent里面去，
+这非常容易暴露用户的身份。</p>
+<p>而且这货是Http代理 ...</p></div>
+                        <a class="btn primary xsmall" href="/webTool001-simple-powerful.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/litecoin002-mining.html">玩转莱特币：使用CPUMiner和proxy挖矿的办法</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -723,65 +786,6 @@ q</blockquote>
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/JobHunting003.html">实习求职(三)：百田软件开发工程师(技术复试篇)</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-03-13T20:30:00">
-        <i class="icon-calendar"></i>Thu 13 March 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/life.html"><i class="icon-folder-open"></i>Life</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/audition.html"><i class="icon-tag"></i>audition</a>
-	<a href="/tag/recruitment.html"><i class="icon-tag"></i>recruitment</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>忐忑了两天之后博主接到了来自百田的二面通知。(^_^)</p>
-<p>先前同去的小伙伴们却都没有消息，
-在焦急的等待中过了一天仍然音信全无，
-感觉就像被干掉了。</p>
-<p>不过标神早已拿到腾讯广州研究院创新班的录取通知书，
-而小超也开始积极准备cvte的面试。</p>
-<div class="section" id="id2">
-<h2>准备</h2>
-<p>在接到电话后顺便询问了二面的内容，
-得到的答复是技术复试。</p>
-<p>这让博主差点抓狂，
-要知道博主已经在一面把所有学过的看过的听说过的东西全部拿出来吹了一遍，
-复试如果继续探讨技术问题，
-不管聊什么都不可能会的。</p>
-<p>想了一下只好死马当作活马医，
-总结了上回的劣势，
-准备工作以巩固基础为主。</p>
-<p>刚好手头有跟孙少借来的《现代操作系统》，
-还有一本数据结构与算法的课本。</p>
-<p>花了一个晚上的时间刷了一遍操作系统，
-线程与进程相关、IPC问题、进程调度、内存管理、段与页的理论分析、置换算法、文件系统与i-node...
-还花了点时间看了第十章的Linux实例研究。</p>
-<p>再用了一个早上刷了一遍数据结构，
-常用的排序算法、外排序的两种思路、二分查找、哈希、索引（2-3树、B树...）、图论的基本常识...</p>
-<p>准备完成也就死而无憾了，
-毕竟超过能力的东西实在没办法。</p>
-<p>带着满脑子BC范式第三范式，
-博主踏上了开往科韵路的专线公车。</p>
-</div>
-<div class="section" id="id3">
-<h2>前戏</h2>
-<p>博主又来早了，
-找略显呆萌又万分可爱的前台姐姐交了一份成绩单，
-还不到五点，
-约的是六点。</p>
-<p>等待的时候与旁边的兄弟搭话，
-一问才发现原来是直系师兄，
-也是来面软件开发的 ...</p></div>
-                        <a class="btn primary xsmall" href="/JobHunting003.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -872,9 +876,39 @@ window.onload=function(){
 </li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<li class="tag-3">
+    <a href="/tag/litecoin.html">
+        <i class="icon-tag icon-large"></i>litecoin
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/web-tool.html">
+        <i class="icon-tag icon-large"></i>web tool
+    </a>
+</li>
 <li class="tag-1">
     <a href="/tag/python.html">
         <i class="icon-tag icon-large"></i>Python
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/data-structure.html">
+        <i class="icon-tag icon-large"></i>data structure
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
     </a>
 </li>
 <li class="tag-1">
@@ -882,29 +916,14 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>Arch
     </a>
 </li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
     </a>
 </li>
-<li class="tag-3">
-    <a href="/tag/litecoin.html">
-        <i class="icon-tag icon-large"></i>litecoin
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
+<li class="tag-4">
+    <a href="/tag/android.html">
+        <i class="icon-tag icon-large"></i>Android
     </a>
 </li>
 <li class="tag-1">
@@ -917,29 +936,14 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>xss
     </a>
 </li>
-<li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
-    </a>
-</li>
 <li class="tag-3">
     <a href="/tag/vim.html">
         <i class="icon-tag icon-large"></i>Vim
     </a>
 </li>
 <li class="tag-1">
-    <a href="/tag/data-structure.html">
-        <i class="icon-tag icon-large"></i>data structure
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/android.html">
-        <i class="icon-tag icon-large"></i>Android
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
     </a>
 </li>
 <li class="tag-2">
@@ -948,8 +952,13 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
     </a>
 </li>
 
