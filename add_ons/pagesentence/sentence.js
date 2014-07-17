@@ -50,7 +50,10 @@ var lifesentences = new Array(
         "当一个人有了足够的内涵和物质当后盾，人生就会变得底气十足。",
         "不要着急，最好的总会在最不经意的时候出现。--泰戈尔",
         "That love can ever lose is a fact that we cannot accept as truth.",
-        "上帝若想惩罚谁，就把他想要的给他。"
+        "上帝若想惩罚谁，就把他想要的给他。",
+        "不要因为走得太远，而忘了我们为什么出发。",
+        "有些人活一辈子，开心就足够。而另一些人会想，有些地方我还没去过，有些事情我还没经历过，这样就老了，他的心是不甘的。",
+        "有的笑容背后是咬紧牙关的灵魂。"
         );
 var sentences = new Array(
         itsentences,

@@ -110,16 +110,15 @@ Digital Ocean的服务器听说比较好，
 &lt;p&gt;众所周知的是有一种东西叫做DNS污染，
 例如默认情况下跑一下这个&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
-nslookup twitter
+nslookup twitter.com
 &lt;/pre&gt;
 &lt;p&gt;会发现twitter的DNS解析被指向一个莫名其妙的IP上面去。&lt;/p&gt;
 &lt;p&gt;用DNSCrypt可以将所有DNS请求通过加密的443端口发送到openDNS进行解析，
 防止被DNS污染。&lt;/p&gt;
 &lt;p&gt;Windows下直接安装启动即可。&lt;/p&gt;
 &lt;p&gt;Linux下可以参考这个进行安装和启动：&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-http://dnscrypt.org
-&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;a class="reference external" href="http://dnscrypt.org"&gt;http://dnscrypt.org&lt;/a&gt;&lt;/blockquote&gt;
 &lt;p&gt;居然官网也被墙了...&lt;/p&gt;
 &lt;p&gt;DNS解析要更改为127.0.0.1，
 默认的端口是53。&lt;/p&gt;
