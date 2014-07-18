@@ -122,6 +122,48 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/CppLearning002.html">C++学习(二)：大家一起来Makefile</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-02-08T16:30:00">
+        <i class="icon-calendar"></i>Sat 08 February 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/cpp.html"><i class="icon-folder-open"></i>Cpp</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>由于一直没找到好的材料，C++的学习拖了好几天没什么进展。
+主要遇到的问题是白书的题目(UVAoj)有些麻烦，之前刷了十几道水题一直很顺利，
+到了数据结构系列突然每道题都有点难以理解（难道是自己英语水平突然掉了...），
+刷了几天进展很慢，加上每道题都有针对性的代码，对于我这种目标是复习数据结构的不太合适。</p>
+<p>然后玩了两天JavaScript（每页一句模块实现），玩了一天游戏...</p>
+<p>找到一个好地方学习数据结构：</p>
+<blockquote>
+<a class="reference external" href="http://www.geeksforgeeks.org/data-structures/">http://www.geeksforgeeks.org/data-structures/</a></blockquote>
+<p>今天开始敲了一下线性表，过几天再写点总结。</p>
+<p>然后终于到了这篇的主题，makefile的编写。</p>
+<div class="section" id="make">
+<h2>make</h2>
+<p>所谓的make，是便于编译多个文件的工具，用make可以实现自动化构建软件。
+同时使用make可以根据依赖关系自动编译，简化手工操作。
+具体的介绍可以查一下make的手册页。</p>
+<p>很多的IDE现在都实现了make的功能，
+比如之前用过的Visual Studio系列，Code::block，甚至是Qt SDK的开发环境，
+只要建立一个工程，就可以让IDE自动完成多文件编译和依赖检查。</p>
+<p>但Linux下的很多软件还是使用make协助软件的部署，
+而像博主这种懒得用IDE的家伙，
+手头就一个Vim写代码，一个g++编译（写C++的话），
+有时用用gdb调试一番（更多时候是暴力调试 ...</p></div>
+                        <a class="btn primary xsmall" href="/CppLearning002.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/md5-generator.html">md5 generator</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -543,74 +585,6 @@ Arch Linux提供了非常大的自由度和开放度供用户完全控制自己�
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/Bash002.html">Bash笔记(二)</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-01-03T22:30:00">
-        <i class="icon-calendar"></i>Fri 03 January 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/bash.html"><i class="icon-tag"></i>Bash</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p><strong>本系列博文记录学习Shell终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录。</strong></p>
-<hr class="docutils" />
-<div class="section" id="id1">
-<h2>变量</h2>
-<p>dollar sign</p>
-<blockquote>
-<p>使用美元符标记变量,
-变量大小写敏感。
-常用的系统变量有：</p>
-<p>$HOSTNAME, $USER, $UID, $HOME</p>
-</blockquote>
-<p>$PS1</p>
-<blockquote>
-<p>变量定义终端的提示符,
-可通过设置该变量改变提示符的内容：</p>
-<p>$PS1='\u&#64;\h:\W$'</p>
-<p>显示内容：用户&#64;主机:当前目录$</p>
-</blockquote>
-<p>$PATH</p>
-<blockquote>
-设定系统搜索执行命令的路径</blockquote>
-<p>使用自定义变量</p>
-<blockquote>
-<p>直接对变量名赋值即可</p>
-<p>MyVar=123</p>
-<p>使用时加上美元符</p>
-<p>echo $MyVar</p>
-</blockquote>
-<p>使用变量时引号的差异</p>
-<blockquote>
-<p>简单说来就是这样：</p>
-<p>echo '$MyVar' // $MyVar</p>
-<p>echo &quot;$MyVar&quot; // 123</p>
-</blockquote>
-<p>set</p>
-<blockquote>
-<p>查看当前所有变量</p>
-<p>set</p>
-</blockquote>
-<p>env</p>
-<blockquote>
-<p>查看当前exported的变量</p>
-<p>env</p>
-</blockquote>
-<p>unset</p>
-<blockquote>
-<p>取消设置某个变量</p>
-<p>unset [variable ...</p></blockquote></div>
-                        <a class="btn primary xsmall" href="/Bash002.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -701,19 +675,14 @@ window.onload=function(){
 </li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<li class="tag-1">
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
+    </a>
+</li>
 <li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
+    <a href="/tag/android.html">
+        <i class="icon-tag icon-large"></i>Android
     </a>
 </li>
 <li class="tag-1">
@@ -721,9 +690,54 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>Arch
     </a>
 </li>
+<li class="tag-1">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/litecoin.html">
+        <i class="icon-tag icon-large"></i>litecoin
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/page-sentences.html">
+        <i class="icon-tag icon-large"></i>page sentences
+    </a>
+</li>
 <li class="tag-4">
     <a href="/tag/web-tool.html">
         <i class="icon-tag icon-large"></i>web tool
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
     </a>
 </li>
 <li class="tag-4">
@@ -736,49 +750,14 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>Python
     </a>
 </li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/audition.html">
-        <i class="icon-tag icon-large"></i>audition
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/litecoin.html">
-        <i class="icon-tag icon-large"></i>litecoin
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
-    </a>
-</li>
 <li class="tag-1">
     <a href="/tag/data-structure.html">
         <i class="icon-tag icon-large"></i>data structure
     </a>
 </li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/android.html">
-        <i class="icon-tag icon-large"></i>Android
-    </a>
-</li>
 <li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
     </a>
 </li>
 <li class="tag-2">

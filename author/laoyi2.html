@@ -122,6 +122,77 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/VimExperience002-registers.html">Vim经验记录(二):寄存器的相关知识</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-03-15T16:30:00">
+        <i class="icon-calendar"></i>Sat 15 March 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/tools.html"><i class="icon-folder-open"></i>Tools</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/vim.html"><i class="icon-tag"></i>Vim</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>本文参考一下博文：</p>
+<blockquote>
+<a class="reference external" href="http://blog.sanctum.geek.nz/advanced-vim-registers/">http://blog.sanctum.geek.nz/advanced-vim-registers/</a></blockquote>
+<div class="section" id="id1">
+<h2>基本功能</h2>
+<p><strong>概念及基本用法</strong></p>
+<p>Vim的寄存器基本功能是个剪贴板，
+在寄存器中可以保存文本内容，
+更强悍的是可以保存命令记录，
+俗称宏记录。</p>
+<p>寄存器有多款，
+最简单的是命名寄存器，
+键盘上的26个字母可以指向26个不同的命名寄存器。</p>
+<p>在一般模式下通过单个双引号调用寄存器。
+双引号后接寄存器名称，
+最后是文本操作命令。</p>
+<p>用例子解释最简单：</p>
+<pre class="literal-block">
+将当前文本行复制到a寄存器中：
+    &quot;ayy
+将b寄存器中的内容粘贴到当前光标处：
+    &quot;bp
+</pre>
+<p>一目了然，
+通过更换其他各种命令自然就能实现多种功能了。</p>
+<p><strong>查看所有非空寄存器的状态</strong></p>
+<p>在一般模式下敲以下命令：</p>
+<blockquote>
+:reg</blockquote>
+<p>可以看到当前所有非空寄存器的内容。</p>
+</div>
+<div class="section" id="id2">
+<h2>宏录制与使用</h2>
+<p>这里说的宏是指一系列操作的集合。
+Vim中的寄存器也可用于录制用户的宏，
+再非常方便的重放，
+达到快速完成一系列指令的功能。</p>
+<p>录制宏的操作非常简单，
+首先通过q命令进入宏录制模式，
+q后接寄存器的名称，比如a。</p>
+<blockquote>
+qa</blockquote>
+<p>接着就可以随意操作当前文本了，
+你的一举一动Vim都会记录下来并保存到寄存器中。</p>
+<p>最后(记得退出到一般模式中)再按一次q退出宏录制模式。</p>
+<blockquote>
+q</blockquote>
+<p>重放宏直接在一般模式下用&#64;关键字加寄存器名称：</p>
+<blockquote>
+&#64;a</blockquote>
+<p>录制的操作便会自动重放一遍 ...</p></div>
+                        <a class="btn primary xsmall" href="/VimExperience002-registers.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/JobHunting003.html">实习求职(三)：百田软件开发工程师(技术复试篇)</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -627,48 +698,6 @@ set selection=exclusive ...</pre></div>
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/CppLearning002.html">C++学习(二)：大家一起来Makefile</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-02-08T16:30:00">
-        <i class="icon-calendar"></i>Sat 08 February 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/cpp.html"><i class="icon-folder-open"></i>Cpp</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>由于一直没找到好的材料，C++的学习拖了好几天没什么进展。
-主要遇到的问题是白书的题目(UVAoj)有些麻烦，之前刷了十几道水题一直很顺利，
-到了数据结构系列突然每道题都有点难以理解（难道是自己英语水平突然掉了...），
-刷了几天进展很慢，加上每道题都有针对性的代码，对于我这种目标是复习数据结构的不太合适。</p>
-<p>然后玩了两天JavaScript（每页一句模块实现），玩了一天游戏...</p>
-<p>找到一个好地方学习数据结构：</p>
-<blockquote>
-<a class="reference external" href="http://www.geeksforgeeks.org/data-structures/">http://www.geeksforgeeks.org/data-structures/</a></blockquote>
-<p>今天开始敲了一下线性表，过几天再写点总结。</p>
-<p>然后终于到了这篇的主题，makefile的编写。</p>
-<div class="section" id="make">
-<h2>make</h2>
-<p>所谓的make，是便于编译多个文件的工具，用make可以实现自动化构建软件。
-同时使用make可以根据依赖关系自动编译，简化手工操作。
-具体的介绍可以查一下make的手册页。</p>
-<p>很多的IDE现在都实现了make的功能，
-比如之前用过的Visual Studio系列，Code::block，甚至是Qt SDK的开发环境，
-只要建立一个工程，就可以让IDE自动完成多文件编译和依赖检查。</p>
-<p>但Linux下的很多软件还是使用make协助软件的部署，
-而像博主这种懒得用IDE的家伙，
-手头就一个Vim写代码，一个g++编译（写C++的话），
-有时用用gdb调试一番（更多时候是暴力调试 ...</p></div>
-                        <a class="btn primary xsmall" href="/CppLearning002.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -759,19 +788,14 @@ window.onload=function(){
 </li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<li class="tag-1">
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
+    </a>
+</li>
 <li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
+    <a href="/tag/android.html">
+        <i class="icon-tag icon-large"></i>Android
     </a>
 </li>
 <li class="tag-1">
@@ -779,9 +803,54 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>Arch
     </a>
 </li>
+<li class="tag-1">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/litecoin.html">
+        <i class="icon-tag icon-large"></i>litecoin
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/page-sentences.html">
+        <i class="icon-tag icon-large"></i>page sentences
+    </a>
+</li>
 <li class="tag-4">
     <a href="/tag/web-tool.html">
         <i class="icon-tag icon-large"></i>web tool
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
     </a>
 </li>
 <li class="tag-4">
@@ -794,49 +863,14 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>Python
     </a>
 </li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/audition.html">
-        <i class="icon-tag icon-large"></i>audition
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/litecoin.html">
-        <i class="icon-tag icon-large"></i>litecoin
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
-    </a>
-</li>
 <li class="tag-1">
     <a href="/tag/data-structure.html">
         <i class="icon-tag icon-large"></i>data structure
     </a>
 </li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/android.html">
-        <i class="icon-tag icon-large"></i>Android
-    </a>
-</li>
 <li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
     </a>
 </li>
 <li class="tag-2">

@@ -122,6 +122,74 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/Bash002.html">Bash笔记(二)</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-01-03T22:30:00">
+        <i class="icon-calendar"></i>Fri 03 January 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/bash.html"><i class="icon-tag"></i>Bash</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Shell终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录。</strong></p>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>变量</h2>
+<p>dollar sign</p>
+<blockquote>
+<p>使用美元符标记变量,
+变量大小写敏感。
+常用的系统变量有：</p>
+<p>$HOSTNAME, $USER, $UID, $HOME</p>
+</blockquote>
+<p>$PS1</p>
+<blockquote>
+<p>变量定义终端的提示符,
+可通过设置该变量改变提示符的内容：</p>
+<p>$PS1='\u&#64;\h:\W$'</p>
+<p>显示内容：用户&#64;主机:当前目录$</p>
+</blockquote>
+<p>$PATH</p>
+<blockquote>
+设定系统搜索执行命令的路径</blockquote>
+<p>使用自定义变量</p>
+<blockquote>
+<p>直接对变量名赋值即可</p>
+<p>MyVar=123</p>
+<p>使用时加上美元符</p>
+<p>echo $MyVar</p>
+</blockquote>
+<p>使用变量时引号的差异</p>
+<blockquote>
+<p>简单说来就是这样：</p>
+<p>echo '$MyVar' // $MyVar</p>
+<p>echo &quot;$MyVar&quot; // 123</p>
+</blockquote>
+<p>set</p>
+<blockquote>
+<p>查看当前所有变量</p>
+<p>set</p>
+</blockquote>
+<p>env</p>
+<blockquote>
+<p>查看当前exported的变量</p>
+<p>env</p>
+</blockquote>
+<p>unset</p>
+<blockquote>
+<p>取消设置某个变量</p>
+<p>unset [variable ...</p></blockquote></div>
+                        <a class="btn primary xsmall" href="/Bash002.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/Bash001.html">Bash笔记(一)</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -450,50 +518,6 @@
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/Python005.html">Python 笔记（五）</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2013-09-25T09:30:00">
-        <i class="icon-calendar"></i>Wed 25 September 2013
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
-<p><strong>使用的Python版本为2.7.3，</strong>
-<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
-<hr class="docutils" />
-<div class="section" id="id1">
-<h2>类的进阶玩法</h2>
-<p><strong>构造函数：</strong></p>
-<p>构造函数的名称为 &quot;__init__&quot;，在对象被生成时自动调用：</p>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">ComplexClass</span><span class="p">:</span>
-        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="n">number</span>
-</pre></div>
-<p><strong>继承状态下的构造函数：</strong></p>
-<p>如果一个类继承了某基类，且没有重写构造函数，则基类构造函数被自动调用：</p>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">ComplexClass</span><span class="p">:</span>
-        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="n">number</span>
-
-<span class="k">class</span> <span class="nc">AnotherClass</span><span class="p">(</span><span class="n">ComplexClass</span><span class="p">):</span>
-        <span class="k">pass</span>
-
-<span class="n">cc</span> <span class="o">=</span> <span class="n">ComplexClass</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">ac</span> <span class="o">=</span> <span class="n">AnotherClass</span><span class="p">()</span>
-<span class="c">#错误！构造函数需要两个参数 ...</span></pre></div></div>
-                        <a class="btn primary xsmall" href="/Python005.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -584,19 +608,14 @@ window.onload=function(){
 </li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<li class="tag-1">
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
+    </a>
+</li>
 <li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
+    <a href="/tag/android.html">
+        <i class="icon-tag icon-large"></i>Android
     </a>
 </li>
 <li class="tag-1">
@@ -604,9 +623,54 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>Arch
     </a>
 </li>
+<li class="tag-1">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/litecoin.html">
+        <i class="icon-tag icon-large"></i>litecoin
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/page-sentences.html">
+        <i class="icon-tag icon-large"></i>page sentences
+    </a>
+</li>
 <li class="tag-4">
     <a href="/tag/web-tool.html">
         <i class="icon-tag icon-large"></i>web tool
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
     </a>
 </li>
 <li class="tag-4">
@@ -619,49 +683,14 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>Python
     </a>
 </li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/audition.html">
-        <i class="icon-tag icon-large"></i>audition
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/litecoin.html">
-        <i class="icon-tag icon-large"></i>litecoin
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
-    </a>
-</li>
 <li class="tag-1">
     <a href="/tag/data-structure.html">
         <i class="icon-tag icon-large"></i>data structure
     </a>
 </li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/android.html">
-        <i class="icon-tag icon-large"></i>Android
-    </a>
-</li>
 <li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
     </a>
 </li>
 <li class="tag-2">

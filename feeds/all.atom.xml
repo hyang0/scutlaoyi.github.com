@@ -1,5 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2014-07-16T10:00:00+08:00</updated><entry><title>一些好用web工具的记录</title><link href="/webTool001-simple-powerful.html" rel="alternate"></link><updated>2014-07-16T10:00:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-07-16:webTool001-simple-powerful.html</id><summary type="html">&lt;p&gt;最近找到了许多好用的Web工具，在此记录一下使用心得。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2014-07-18T14:30:00+08:00</updated><entry><title>每页一句大集合</title><link href="/mei-ye-ju-da-ji-he.html" rel="alternate"></link><updated>2014-07-18T14:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-07-18:mei-ye-ju-da-ji-he.html</id><summary type="html">
+    &lt;p&gt;这篇博文用于展示博主收藏的所有经典句子，点击下方载入按钮后出现。&lt;/p&gt;
+    &lt;button id="load_button" onclick="loadAllSentences()"&gt;载入&lt;/button&gt;
+    &lt;div id="sentences_div"&gt;
+    &lt;/div&gt;
+
+    &lt;script&gt;
+      function listAllItemFromArrayWithTitle(item_array, title)
+      {
+        var index;
+        
+        var content_div = document.getElementById("sentences_div");
+
+        var title_element = document.createElement("p");
+        title_element.innerHTML = title;
+        content_div.insertBefore(title_element, null);
+
+        var list_node = document.createElement("ul");
+        for(index = 0; index &lt; item_array.length; ++index)
+        {
+          var new_elem = document.createElement("li");
+          new_elem.innerHTML = item_array[index];
+          list_node.insertBefore(new_elem, null);
+        }
+        content_div.insertBefore(list_node, null);
+        return;
+      }
+
+      function loadAllSentences()
+      {
+        listAllItemFromArrayWithTitle(sentences[0], "Coding相关");
+        listAllItemFromArrayWithTitle(sentences[1], "生活相关");
+        var load_button_ = document.getElementById("load_button");
+        load_button.style.visibility = "hidden";
+        return;
+      }
+    &lt;/script&gt;
+  </summary><category term="page sentences"></category></entry><entry><title>一些好用web工具的记录</title><link href="/webTool001-simple-powerful.html" rel="alternate"></link><updated>2014-07-16T10:00:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-07-16:webTool001-simple-powerful.html</id><summary type="html">&lt;p&gt;最近找到了许多好用的Web工具，在此记录一下使用心得。&lt;/p&gt;
 &lt;div class="section" id="id1"&gt;
 &lt;h2&gt;爬墙类&lt;/h2&gt;
 &lt;p&gt;几年前，
