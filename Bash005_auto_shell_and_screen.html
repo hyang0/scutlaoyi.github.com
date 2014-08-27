@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>老逸的个人站 - litecoin</title>
+    <title>screen混搭shell实现自动化工具</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="laoyi">
@@ -81,7 +81,7 @@
 						<i class="icon-folder-open icon-large"></i>Life
 					</a>
                   </li>
-                  <li >
+                  <li class="active">
                     <a href="/category/linux.html">
 						<i class="icon-folder-open icon-large"></i>Linux
 					</a>
@@ -121,146 +121,192 @@
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
-        <div class="article">
-                <h1><a href="/litecoin002-mining.html">玩转莱特币：使用CPUMiner和proxy挖矿的办法</a></h1>
-                <div class="well small"><footer class="post-info">
+<section id="content">
+        <article>
+                <header>
+                        <h1>
+                                <a href=""
+                                        rel="bookmark"
+                                        title="Permalink to screen混搭shell实现自动化工具">
+                                        screen混搭shell实现自动化工具
+                                </a>
+                        </h1>
+                </header>
+                <div class="entry-content">
+                <div class="well">
+<footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2014-06-16T10:00:00">
-        <i class="icon-calendar"></i>Mon 16 June 2014
+<abbr class="published" title="2014-08-27T11:00:00">
+        <i class="icon-calendar"></i>Wed 27 August 2014
 </abbr>
 <span class="label">By</span>
 <a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
 <span class="label">Category</span>
-<a href="/category/web.html"><i class="icon-folder-open"></i>web</a>.
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
 
 
 <span class="label">Tags</span>
-	<a href="/tag/litecoin.html"><i class="icon-tag"></i>litecoin</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>挖矿分为两种，
-简单暴力的直接挖矿，
-以及加入矿池进行合体挖矿。</p>
-<p>由于现在的全网算力已经超乎想象(博主玩的时候大概为300GH/s)，
-没有专用矿机只能选择矿池挖矿。</p>
-<p>由于博主以娱乐为主，
-没有钱和精力购买高速专用矿机，
-甚至没有好的显卡拿来用GPU挖矿，
-因此使用的是简单的CPU挖矿方式(10KH/s......)。</p>
-<p>如果正儿八经的想赚点钱，
-推荐至少要弄个好的显卡用GPU挖矿。</p>
-<p>在网上有一些算力的统计表，
-AMD系列的显卡跑GPU挖矿一般可以达到100KH/s以上。</p>
-<div class="section" id="id1">
-<h2>矿池的选择</h2>
-<p>由于博主用的是大陆的局域网，
-选择矿池显得比较困难。</p>
-<p>首先需要排除掉那些没什么人的矿池，
-听说没什么人的矿池由于全池算力都很差，
-因此找到新块的几率非常低，
-进而导致每个矿工分到的收益也很小。</p>
-<p>此外，
-由于网络的问题，
-需要选择能够稳定连接的矿池，
-否则经常断线就只能白白消耗电能。</p>
-<blockquote>
-<p>现在的矿池基本上都支持stratum协议，
-这种协议本质上是建立一个代理服务器中转矿机和目标服务器的连接，
-由于有了这种类似于buffer的协议层，
-相比最初的getwork方式直连，
-不仅网络的带宽占用变小，
-连接的稳定性等各方面也有较好的提升。</p>
-<p>许多矿池甚至强制性使用stratum协议，
-例如coinotron。</p>
-</blockquote>
-<p>矿池的选择可以参考莱特币的info页面：</p>
+	<a href="/tag/bash.html"><i class="icon-tag"></i>Bash</a>
+</footer><!-- /.post-info -->                </div>
+                <p>博主最近应用了许多强悍的网络辅助工具，
+大部分是Python程序及shell脚本，
+一个shadowsocks，一个goagent，还有一个DNScrypt。
+这些工具的特点是在正常的情况下可以无视，
+而在网络异常时（google上不去）则需要查看输出是否工作正常，
+必要时需要手动配置和重启。</p>
+<p>因此既需要工具界面不太占用地方（最好能全部缩在同个界面里），
+又需要非常方便地调出输出记录观察工作情况。</p>
+<p>为了方便使用和管理，
+博主自造了若干shell脚本用于便捷启动，
+同时用screen将三个工具控制在同一个session中，
+在一个terminal窗口里显示和切换，
+比较简洁。</p>
+<p>然而开机启动时还是需要敲入下面的命令：</p>
 <pre class="literal-block">
-https://litecoin.info/Mining_pool_comparison
+&lt;Ctrl-Alt-t&gt;
+screen
+bash some_path/startproxy
+&lt;Ctrl-a&gt; c
+bash some_path/goagent
+&lt;Ctrl-a&gt; c
+bash some_path/dnsproxy
 </pre>
-<p>选择好矿池后，
-在网站里注册一个新的用户，
-4位的PIN码非常重要，
-各种操作都需要PIN码。
-有些矿池支持Google的身份验证器，
-推荐开启。</p>
-<blockquote>
-<p>不过很多矿池不支持更换验证器，
-而且没有备选的身份识别方案 ...</p></blockquote></div>
-                        <a class="btn primary xsmall" href="/litecoin002-mining.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/litecoin001-coin-and-wallet.html">玩转莱特币：概念</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-06-08T10:00:00">
-        <i class="icon-calendar"></i>Sun 08 June 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/web.html"><i class="icon-folder-open"></i>web</a>.
+<p>非常繁琐。</p>
+<p>于是考虑编写脚本让screen自动化创建新的window跑上述的三个命令，
+并让screen自动detach退到后台，
+需要时再手动开启新的Terminal调用screen重新attach查看工作情况。</p>
+<div class="section" id="screen">
+<h2>screen的终端参数命令</h2>
+<p><strong>detach模式启动并执行新命令</strong></p>
+<p>启动新的session并为其命名，
+同时在这个session里执行命令并detach：</p>
+<pre class="literal-block">
+screen -S &lt;session-name&gt; -d -m &lt;command&gt;
+</pre>
+<p>session-name是给定的名字，
+command是实际执行的命令，
+可以带参数。</p>
+<p>另外默认情况下执行命令会进入到screen的session里，
+使用-d -m指定detach模式，
+这样相当于后台执行，
+不进入该命令的window。</p>
+<p><strong>在现有的session中新建window跑命令</strong></p>
+<p>screen用session-name识别不同的session。
+开新的window跑新命令用这个：</p>
+<pre class="literal-block">
+screen -S &lt;session-name&gt; -X screen &lt;command&gt;
+</pre>
+<p>前提条件是这个session存在，
+否则会提示“No screen session found.”</p>
+<p><strong>终端命令使用screen的注意事项</strong></p>
+<p>由于执行的命令是直接通过命令参数给到screen的session中的，
+因此命令执行完成后session会被自动终止。</p>
+<p>例如下面的随意一个命令：</p>
+<pre class="literal-block">
+screen -S test_screen ls
+screen -S test_screen -d -m ls
+</pre>
+<p>都会直接返回，
+因为命令执行完成后screen自动退出了。</p>
+<p>但是下面几个就不会：</p>
+<pre class="literal-block">
+screen -S test_screen_top top
+screen -S test_screen_top -d -m top
+</pre>
+<p>因为top一直在执行，
+第一行命令会自动进入screen的session并且显示top的输出，
+第二行命令需要自己调用screen重新attach到对应的session并获得top的输出，
+否则一直在后台运行。</p>
+<p>此外需要注意的是命令执行的成功与否一般看不出来-_-|||
+因此博主的办法是检查当前的session是否存在，
+并且进去看看是不是在执行目标命令。</p>
+<p><strong>重新attach现有的session</strong></p>
+<pre class="literal-block">
+session -r &lt;session-name&gt;
+</pre>
+<p>不多说。</p>
+</div>
+<div class="section" id="id1">
+<h2>screen的控制命令</h2>
+<p>突然发现居然没写过这货的介绍，
+这里顺路补充一下。</p>
+<p>开启screen新session的最直接命令就是在终端里：</p>
+<pre class="literal-block">
+screen
+</pre>
+<p>这样便在新的session中创建了一个window并等待输入命令。</p>
+<p>查看当前的所有session可以敲：</p>
+<pre class="literal-block">
+screen -ls
+</pre>
+<p>在screen中，
+默认的控制指令是&lt;Ctrl-a&gt;，
+常见的命令有如下：</p>
+<pre class="literal-block">
+新的window：&lt;Ctrl-a&gt;, c
+切换到下一个window：&lt;Ctrl-a&gt;, n
+切换到上一个window：&lt;Ctrl-a&gt;, p
+detach当前session：&lt;Ctrl-a&gt;, d
+</pre>
+<p>screen的退出与终端的退出相同，
+当所有的windows都被&lt;Ctrl-d&gt;或者exit后整个screen的session就自动终止。</p>
+</div>
+<div class="section" id="id2">
+<h2>screen自动化脚本的完整实现</h2>
+<p><strong>关于工作路径问题</strong></p>
+<p>博主的shell脚本都放在相同的目录里，
+因此在一个脚本中调用其他脚本可直接使用&quot;./some_sh.sh&quot;。
+然而问题在于工作路径是根据脚本被调用时终端所在的工作路径来的，
+因此在home目录下调用则工作路径就变成&quot;/home&quot;，
+自然就没办法执行不在目录下的其他脚本了。</p>
+<p>博主原来的解决办法是在脚本的第一行给个cd，
+并且用绝对路径写死，
+确保切换到正确的工作路径，
+问题在于写死的东西总是不够灵活。</p>
+<p>后来发现可以通过dirname解决问题。
+dirname可以从带路径的文件名称中截取出路径来，
+例如&quot;/home/laoyi/abc/test.sh&quot;可以截取到&quot;/home/laoyi/abc&quot;，
+因此在脚本中这么来一下就可以获得相对当前的目标路径，
+再执行一次cd就可以确保在任何路径下调用脚本都能够正常运行。</p>
+<p><strong>完整实现</strong></p>
+<div class="highlight"><pre><span class="c">#!/bin/bash</span>
+<span class="nv">DIR</span><span class="o">=</span><span class="sb">`</span>dirname <span class="nv">$0</span><span class="sb">`</span>
+<span class="nb">cd</span> <span class="nv">$DIR</span>
+<span class="nv">session_name</span><span class="o">=</span>network_tool
+screen -S <span class="nv">$session_name</span> -d -m bash ./goagent
+screen -S <span class="nv">$session_name</span> -X screen bash ./dnsproxy
+screen -S <span class="nv">$session_name</span> -X screen bash ./startproxy
+</pre></div>
+<p>设置session的名称为network_tool方便随时reattach查看状态。</p>
+<p>至此，
+启动所有工具只需要一个命令：</p>
+<pre class="literal-block">
+bash some_path/start_network_tools.sh
+</pre>
+</div>
+<div class="section" id="lxde">
+<h2>LXDE中开机启动项的添加</h2>
+<p>既然从七八个命令降到一个命令，
+何不再进一步直接让脚本开启运行呢，
+更加省事。</p>
+<p>于是博主查了一下Arch Linux的文档，
+发现可以通过添加命令到下面这个文件中直接添加启动项：</p>
+<pre class="literal-block">
+~/.config/lxsession/LXDE/autostart
+</pre>
+<p>如果文件不存在直接新建即可。</p>
+<p>于是将上面的命令扔到autostart文件中，
+从此开机自动运行所有工具，
+上网只需直接开启firefox。</p>
+</div>
 
-
-<span class="label">Tags</span>
-	<a href="/tag/litecoin.html"><i class="icon-tag"></i>litecoin</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><div class="section" id="p2p">
-<h2>关于p2p货币</h2>
-<p>其实这个概念已经出现好几年了，
-作为一种新类型的虚拟货币，
-它们的共同点是去中心化。</p>
-<p><strong>发行</strong></p>
-<p>传统的货币必须要有一个中央发行机构，
-负责印发钞票，对该货币的市场拥有控制的能力。
-据说这种形式的货币普遍存在的不足是容易受到各种势力的管制。</p>
-<p>比特币及各种类型的p2p货币(莱特币、狗币...)则不是如此，
-他们没有中央控制机构，
-而是基于特定的困难算法，
-通过一定的速率产生。
-没有任何机构能够控制新币的产生，
-这样就有效防止了受到某些势力管制的危险。</p>
-<p><strong>交易记录</strong></p>
-<p>而对于交易记录，
-传统的货币是通过某些中央机构进行存储，
-比如银行的数据库，
-仍然是中心化的特点。
-这种特点导致修改交易记录成为可能，
-例如直接篡改数据库内容。</p>
-<p>与此相反，
-p2p货币的交易记录存储在全网的所有运行的机器中，
-相当于分布式的数据库。
-这样，
-如果某人想要篡改某一次的交易记录，
-则需要入侵网络中所有的计算机，
-基本上不可能。</p>
-<p><strong>交易确认</strong></p>
-<p>使用一种叫做块链的东西用于储存交易记录，
-每份交易储存在区块中，
-区块逐个相连形成块链。</p>
-<p>通过困难的计算产生区块，
-当新的交易产生时，
-数据写入区块中，
-区块插入块链。
-这样就完成了交易的记录。</p>
-<p>此外，
-由于没有机制使区块从块链中移除，
-因此这种类型的交易是不可逆的。</p>
-<p>伪造交易的现有方式是，
-使用超过一半的全网算力，
-生成新的区块，
-由于算力超过其他机器的总和，
-能够使自行伪造的交易记录被确认。
-也就是常说的51 ...</p></div>
-                        <a class="btn primary xsmall" href="/litecoin001-coin-and-wallet.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-
-                <section id="content" class="body">
-                <h1>Pages</h1>
-                        <li><a href="/pages/about.html">About</a></li>
-                </section>
+                </div><!-- /.entry-content -->
+        </article>
+        <license>
+        <br/>
+        This work by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.scutlaoyi.tk" property="cc:attributionName" rel="cc:attributionURL">scutLaoYi</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+        </license>
+</section>
         </div><!--/span-->
 
                 <div class="span3 well sidebar-nav" id="sidebar">

@@ -122,6 +122,63 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/Bash005_auto_shell_and_screen.html">screen混搭shell实现自动化工具</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-08-27T11:00:00">
+        <i class="icon-calendar"></i>Wed 27 August 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/bash.html"><i class="icon-tag"></i>Bash</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>博主最近应用了许多强悍的网络辅助工具，
+大部分是Python程序及shell脚本，
+一个shadowsocks，一个goagent，还有一个DNScrypt。
+这些工具的特点是在正常的情况下可以无视，
+而在网络异常时（google上不去）则需要查看输出是否工作正常，
+必要时需要手动配置和重启。</p>
+<p>因此既需要工具界面不太占用地方（最好能全部缩在同个界面里），
+又需要非常方便地调出输出记录观察工作情况。</p>
+<p>为了方便使用和管理，
+博主自造了若干shell脚本用于便捷启动，
+同时用screen将三个工具控制在同一个session中，
+在一个terminal窗口里显示和切换，
+比较简洁。</p>
+<p>然而开机启动时还是需要敲入下面的命令：</p>
+<pre class="literal-block">
+&lt;Ctrl-Alt-t&gt;
+screen
+bash some_path/startproxy
+&lt;Ctrl-a&gt; c
+bash some_path/goagent
+&lt;Ctrl-a&gt; c
+bash some_path/dnsproxy
+</pre>
+<p>非常繁琐。</p>
+<p>于是考虑编写脚本让screen自动化创建新的window跑上述的三个命令，
+并让screen自动detach退到后台，
+需要时再手动开启新的Terminal调用screen重新attach查看工作情况。</p>
+<div class="section" id="screen">
+<h2>screen的终端参数命令</h2>
+<p><strong>detach模式启动并执行新命令</strong></p>
+<p>启动新的session并为其命名，
+同时在这个session里执行命令并detach：</p>
+<pre class="literal-block">
+screen -S &lt;session-name&gt; -d -m &lt;command&gt;
+</pre>
+<p>session-name是给定的名字，
+command是实际执行的命令 ...</p></div>
+                        <a class="btn primary xsmall" href="/Bash005_auto_shell_and_screen.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/Arch005.html">Arch Linux学习：Arch Linux启动二三事</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -668,9 +725,29 @@ window.onload=function(){
 </li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<li class="tag-3">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/data-structure.html">
+        <i class="icon-tag icon-large"></i>data structure
+    </a>
+</li>
 <li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/web-tool.html">
+        <i class="icon-tag icon-large"></i>web tool
     </a>
 </li>
 <li class="tag-2">
@@ -684,23 +761,8 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-1">
-    <a href="/tag/audition.html">
-        <i class="icon-tag icon-large"></i>audition
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/arch.html">
-        <i class="icon-tag icon-large"></i>Arch
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
     </a>
 </li>
 <li class="tag-1">
@@ -708,24 +770,9 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>C/C++
     </a>
 </li>
-<li class="tag-4">
-    <a href="/tag/android.html">
-        <i class="icon-tag icon-large"></i>Android
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
-    </a>
-</li>
 <li class="tag-1">
-    <a href="/tag/data-structure.html">
-        <i class="icon-tag icon-large"></i>data structure
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/page-sentences.html">
-        <i class="icon-tag icon-large"></i>page sentences
+    <a href="/tag/arch.html">
+        <i class="icon-tag icon-large"></i>Arch
     </a>
 </li>
 <li class="tag-4">
@@ -738,24 +785,34 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>litecoin
     </a>
 </li>
-<li class="tag-3">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/web-tool.html">
-        <i class="icon-tag icon-large"></i>web tool
+<li class="tag-1">
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/page-sentences.html">
+        <i class="icon-tag icon-large"></i>page sentences
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/android.html">
+        <i class="icon-tag icon-large"></i>Android
     </a>
 </li>
 <li class="tag-1">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>Python
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
     </a>
 </li>
 

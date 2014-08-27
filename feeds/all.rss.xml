@@ -1,5 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>老逸的个人站</title><link>/</link><description></description><atom:link href="http://www.scutlaoyi.tk/feeds/all.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 18 Jul 2014 14:30:00 +0800</lastBuildDate><item><title>每页一句大集合</title><link>/mei-ye-ju-da-ji-he.html</link><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>老逸的个人站</title><link>/</link><description></description><atom:link href="http://www.scutlaoyi.tk/feeds/all.rss.xml" rel="self"></atom:link><lastBuildDate>Wed, 27 Aug 2014 11:00:00 +0800</lastBuildDate><item><title>screen混搭shell实现自动化工具</title><link>/Bash005_auto_shell_and_screen.html</link><description>&lt;p&gt;博主最近应用了许多强悍的网络辅助工具，
+大部分是Python程序及shell脚本，
+一个shadowsocks，一个goagent，还有一个DNScrypt。
+这些工具的特点是在正常的情况下可以无视，
+而在网络异常时（google上不去）则需要查看输出是否工作正常，
+必要时需要手动配置和重启。&lt;/p&gt;
+&lt;p&gt;因此既需要工具界面不太占用地方（最好能全部缩在同个界面里），
+又需要非常方便地调出输出记录观察工作情况。&lt;/p&gt;
+&lt;p&gt;为了方便使用和管理，
+博主自造了若干shell脚本用于便捷启动，
+同时用screen将三个工具控制在同一个session中，
+在一个terminal窗口里显示和切换，
+比较简洁。&lt;/p&gt;
+&lt;p&gt;然而开机启动时还是需要敲入下面的命令：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+&amp;lt;Ctrl-Alt-t&amp;gt;
+screen
+bash some_path/startproxy
+&amp;lt;Ctrl-a&amp;gt; c
+bash some_path/goagent
+&amp;lt;Ctrl-a&amp;gt; c
+bash some_path/dnsproxy
+&lt;/pre&gt;
+&lt;p&gt;非常繁琐。&lt;/p&gt;
+&lt;p&gt;于是考虑编写脚本让screen自动化创建新的window跑上述的三个命令，
+并让screen自动detach退到后台，
+需要时再手动开启新的Terminal调用screen重新attach查看工作情况。&lt;/p&gt;
+&lt;div class="section" id="screen"&gt;
+&lt;h2&gt;screen的终端参数命令&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;detach模式启动并执行新命令&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;启动新的session并为其命名，
+同时在这个session里执行命令并detach：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+screen -S &amp;lt;session-name&amp;gt; -d -m &amp;lt;command&amp;gt;
+&lt;/pre&gt;
+&lt;p&gt;session-name是给定的名字，
+command是实际执行的命令，
+可以带参数。&lt;/p&gt;
+&lt;p&gt;另外默认情况下执行命令会进入到screen的session里，
+使用-d -m指定detach模式，
+这样相当于后台执行，
+不进入该命令的window。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;在现有的session中新建window跑命令&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;screen用session-name识别不同的session。
+开新的window跑新命令用这个：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+screen -S &amp;lt;session-name&amp;gt; -X screen &amp;lt;command&amp;gt;
+&lt;/pre&gt;
+&lt;p&gt;前提条件是这个session存在，
+否则会提示“No screen session found.”&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;终端命令使用screen的注意事项&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;由于执行的命令是直接通过命令参数给到screen的session中的，
+因此命令执行完成后session会被自动终止。&lt;/p&gt;
+&lt;p&gt;例如下面的随意一个命令：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+screen -S test_screen ls
+screen -S test_screen -d -m ls
+&lt;/pre&gt;
+&lt;p&gt;都会直接返回，
+因为命令执行完成后screen自动退出了。&lt;/p&gt;
+&lt;p&gt;但是下面几个就不会：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+screen -S test_screen_top top
+screen -S test_screen_top -d -m top
+&lt;/pre&gt;
+&lt;p&gt;因为top一直在执行，
+第一行命令会自动进入screen的session并且显示top的输出，
+第二行命令需要自己调用screen重新attach到对应的session并获得top的输出，
+否则一直在后台运行。&lt;/p&gt;
+&lt;p&gt;此外需要注意的是命令执行的成功与否一般看不出来-_-|||
+因此博主的办法是检查当前的session是否存在，
+并且进去看看是不是在执行目标命令。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;重新attach现有的session&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+session -r &amp;lt;session-name&amp;gt;
+&lt;/pre&gt;
+&lt;p&gt;不多说。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;screen的控制命令&lt;/h2&gt;
+&lt;p&gt;突然发现居然没写过这货的介绍，
+这里顺路补充一下。&lt;/p&gt;
+&lt;p&gt;开启screen新session的最直接命令就是在终端里：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+screen
+&lt;/pre&gt;
+&lt;p&gt;这样便在新的session中创建了一个window并等待输入命令。&lt;/p&gt;
+&lt;p&gt;查看当前的所有session可以敲：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+screen -ls
+&lt;/pre&gt;
+&lt;p&gt;在screen中，
+默认的控制指令是&amp;lt;Ctrl-a&amp;gt;，
+常见的命令有如下：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+新的window：&amp;lt;Ctrl-a&amp;gt;, c
+切换到下一个window：&amp;lt;Ctrl-a&amp;gt;, n
+切换到上一个window：&amp;lt;Ctrl-a&amp;gt;, p
+detach当前session：&amp;lt;Ctrl-a&amp;gt;, d
+&lt;/pre&gt;
+&lt;p&gt;screen的退出与终端的退出相同，
+当所有的windows都被&amp;lt;Ctrl-d&amp;gt;或者exit后整个screen的session就自动终止。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;screen自动化脚本的完整实现&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;关于工作路径问题&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;博主的shell脚本都放在相同的目录里，
+因此在一个脚本中调用其他脚本可直接使用&amp;quot;./some_sh.sh&amp;quot;。
+然而问题在于工作路径是根据脚本被调用时终端所在的工作路径来的，
+因此在home目录下调用则工作路径就变成&amp;quot;/home&amp;quot;，
+自然就没办法执行不在目录下的其他脚本了。&lt;/p&gt;
+&lt;p&gt;博主原来的解决办法是在脚本的第一行给个cd，
+并且用绝对路径写死，
+确保切换到正确的工作路径，
+问题在于写死的东西总是不够灵活。&lt;/p&gt;
+&lt;p&gt;后来发现可以通过dirname解决问题。
+dirname可以从带路径的文件名称中截取出路径来，
+例如&amp;quot;/home/laoyi/abc/test.sh&amp;quot;可以截取到&amp;quot;/home/laoyi/abc&amp;quot;，
+因此在脚本中这么来一下就可以获得相对当前的目标路径，
+再执行一次cd就可以确保在任何路径下调用脚本都能够正常运行。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;完整实现&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class="nv"&gt;DIR&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;dirname &lt;span class="nv"&gt;$0&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;
+&lt;span class="nb"&gt;cd&lt;/span&gt; &lt;span class="nv"&gt;$DIR&lt;/span&gt;
+&lt;span class="nv"&gt;session_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;network_tool
+screen -S &lt;span class="nv"&gt;$session_name&lt;/span&gt; -d -m bash ./goagent
+screen -S &lt;span class="nv"&gt;$session_name&lt;/span&gt; -X screen bash ./dnsproxy
+screen -S &lt;span class="nv"&gt;$session_name&lt;/span&gt; -X screen bash ./startproxy
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;设置session的名称为network_tool方便随时reattach查看状态。&lt;/p&gt;
+&lt;p&gt;至此，
+启动所有工具只需要一个命令：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+bash some_path/start_network_tools.sh
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="lxde"&gt;
+&lt;h2&gt;LXDE中开机启动项的添加&lt;/h2&gt;
+&lt;p&gt;既然从七八个命令降到一个命令，
+何不再进一步直接让脚本开启运行呢，
+更加省事。&lt;/p&gt;
+&lt;p&gt;于是博主查了一下Arch Linux的文档，
+发现可以通过添加命令到下面这个文件中直接添加启动项：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+~/.config/lxsession/LXDE/autostart
+&lt;/pre&gt;
+&lt;p&gt;如果文件不存在直接新建即可。&lt;/p&gt;
+&lt;p&gt;于是将上面的命令扔到autostart文件中，
+从此开机自动运行所有工具，
+上网只需直接开启firefox。&lt;/p&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">laoyi</dc:creator><pubDate>Wed, 27 Aug 2014 11:00:00 +0800</pubDate><guid>tag:,2014-08-27:Bash005_auto_shell_and_screen.html</guid><category>Bash</category></item><item><title>每页一句大集合</title><link>/mei-ye-ju-da-ji-he.html</link><description>
     &lt;p&gt;这篇博文用于展示博主收藏的所有经典句子，点击下方载入按钮后出现。&lt;/p&gt;
     &lt;button id="load_button" onclick="loadAllSentences()"&gt;载入&lt;/button&gt;
     &lt;div id="sentences_div"&gt;

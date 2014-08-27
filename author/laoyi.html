@@ -122,6 +122,63 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/Bash005_auto_shell_and_screen.html">screen混搭shell实现自动化工具</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-08-27T11:00:00">
+        <i class="icon-calendar"></i>Wed 27 August 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/bash.html"><i class="icon-tag"></i>Bash</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>博主最近应用了许多强悍的网络辅助工具，
+大部分是Python程序及shell脚本，
+一个shadowsocks，一个goagent，还有一个DNScrypt。
+这些工具的特点是在正常的情况下可以无视，
+而在网络异常时（google上不去）则需要查看输出是否工作正常，
+必要时需要手动配置和重启。</p>
+<p>因此既需要工具界面不太占用地方（最好能全部缩在同个界面里），
+又需要非常方便地调出输出记录观察工作情况。</p>
+<p>为了方便使用和管理，
+博主自造了若干shell脚本用于便捷启动，
+同时用screen将三个工具控制在同一个session中，
+在一个terminal窗口里显示和切换，
+比较简洁。</p>
+<p>然而开机启动时还是需要敲入下面的命令：</p>
+<pre class="literal-block">
+&lt;Ctrl-Alt-t&gt;
+screen
+bash some_path/startproxy
+&lt;Ctrl-a&gt; c
+bash some_path/goagent
+&lt;Ctrl-a&gt; c
+bash some_path/dnsproxy
+</pre>
+<p>非常繁琐。</p>
+<p>于是考虑编写脚本让screen自动化创建新的window跑上述的三个命令，
+并让screen自动detach退到后台，
+需要时再手动开启新的Terminal调用screen重新attach查看工作情况。</p>
+<div class="section" id="screen">
+<h2>screen的终端参数命令</h2>
+<p><strong>detach模式启动并执行新命令</strong></p>
+<p>启动新的session并为其命名，
+同时在这个session里执行命令并detach：</p>
+<pre class="literal-block">
+screen -S &lt;session-name&gt; -d -m &lt;command&gt;
+</pre>
+<p>session-name是给定的名字，
+command是实际执行的命令 ...</p></div>
+                        <a class="btn primary xsmall" href="/Bash005_auto_shell_and_screen.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/mei-ye-ju-da-ji-he.html">每页一句大集合</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -665,77 +722,6 @@ siftdown操作某个特定的节点，
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/CppLearning007-array.html">C++学习(七)：线性表及搜索相关</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-03-28T22:30:00">
-        <i class="icon-calendar"></i>Fri 28 March 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/cpp.html"><i class="icon-folder-open"></i>Cpp</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
-	<a href="/tag/data-structure.html"><i class="icon-tag"></i>data structure</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>其实这个系列应该归结为数据结构专题的，
-但由于记录的都是简单至极的基础知识，
-标榜数据结构吸引眼球有点过于隆重，
-于是统统放在C++的内容里。</p>
-<p>就算是C++的编程训练罢了。</p>
-<div class="section" id="id1">
-<h2>数组与链表的归纳总结</h2>
-<p>这些基础概念应该在开始学习编程的时候就有所涉及了，
-这里试着总结一下：</p>
-<p><strong>基本定义</strong></p>
-<p>朴素意义上，
-数组与链表一样都是用来储存若干相同类型元素的数据结构，
-其特点就是一个或多个元素以先后顺序保存在内存中。</p>
-<p>根据组织方式上的区别区分数组和链表。</p>
-<p><strong>组织区别</strong></p>
-<p>数组占用了内存中的一段连续的空间，
-在这段连续空间上，
-通过指定数组的类型确定每一个元素占用的空间大小，
-由此将所有元素依次紧密排列存放到对应空间上。</p>
-<p>相对的，
-链表不占用连续空间，
-通过在每个元素中保存下一个元素所在内存地址，
-达到组织的目的。</p>
-<p><strong>数组特点</strong></p>
-<p>由于每个元素占用空间相同，
-加上所有元素在同一片连续空间上，
-数组可以通过计算某元素相对头元素在内存中的偏移量，
-快速访问某个特定的元素。</p>
-<p>而由于相同的原因，
-数组在元素的插入和删除操作上比较麻烦，
-不管是插入还是删除，
-都需要移动所有后续的节点使其重新紧密排列。</p>
-<p><strong>链表特点</strong></p>
-<p>相对于数组，
-由于链表元素是通过指针指向下一个节点，
-没有连续空间，
-因此插入新节点或删除原有节点在正常情况下只需要操作对应位置的前后元素，
-使它们的指针指向正确的位置，
-对其他元素没有影响，
-因此插入删除操作的效率非常高。</p>
-<p>然而，
-在访问某个特定节点时，
-以单链表为例，
-则必须从头节点开始逐个遍历链上的节点直到达到目标节点，
-因此相对数组来说访问的效率较低。</p>
-</div>
-<div class="section" id="id2">
-<h2>搜索的相关知识</h2>
-<p>最简单的暴力搜索莫过于直接遍历每个元素查找目标元素是否存在。
-时间复杂度为O(n ...</p></div>
-                        <a class="btn primary xsmall" href="/CppLearning007-array.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -826,9 +812,29 @@ window.onload=function(){
 </li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<li class="tag-3">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/data-structure.html">
+        <i class="icon-tag icon-large"></i>data structure
+    </a>
+</li>
 <li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/web-tool.html">
+        <i class="icon-tag icon-large"></i>web tool
     </a>
 </li>
 <li class="tag-2">
@@ -842,23 +848,8 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-1">
-    <a href="/tag/audition.html">
-        <i class="icon-tag icon-large"></i>audition
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/arch.html">
-        <i class="icon-tag icon-large"></i>Arch
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
     </a>
 </li>
 <li class="tag-1">
@@ -866,24 +857,9 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>C/C++
     </a>
 </li>
-<li class="tag-4">
-    <a href="/tag/android.html">
-        <i class="icon-tag icon-large"></i>Android
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
-    </a>
-</li>
 <li class="tag-1">
-    <a href="/tag/data-structure.html">
-        <i class="icon-tag icon-large"></i>data structure
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/page-sentences.html">
-        <i class="icon-tag icon-large"></i>page sentences
+    <a href="/tag/arch.html">
+        <i class="icon-tag icon-large"></i>Arch
     </a>
 </li>
 <li class="tag-4">
@@ -896,24 +872,34 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>litecoin
     </a>
 </li>
-<li class="tag-3">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/web-tool.html">
-        <i class="icon-tag icon-large"></i>web tool
+<li class="tag-1">
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/page-sentences.html">
+        <i class="icon-tag icon-large"></i>page sentences
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/android.html">
+        <i class="icon-tag icon-large"></i>Android
     </a>
 </li>
 <li class="tag-1">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>Python
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
     </a>
 </li>
 
