@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Arch Linux学习：安装篇(三)</title>
+    <title>老逸的个人站</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="laoyi">
@@ -81,7 +81,7 @@
 						<i class="icon-folder-open icon-large"></i>Life
 					</a>
                   </li>
-                  <li class="active">
+                  <li >
                     <a href="/category/linux.html">
 						<i class="icon-folder-open icon-large"></i>Linux
 					</a>
@@ -121,148 +121,67 @@
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
-<section id="content">
-        <article>
-                <header>
-                        <h1>
-                                <a href=""
-                                        rel="bookmark"
-                                        title="Permalink to Arch Linux学习：安装篇(三)">
-                                        Arch Linux学习：安装篇(三)
-                                </a>
-                        </h1>
-                </header>
-                <div class="entry-content">
-                <div class="well">
-<footer class="post-info">
+        <div class="article">
+                <h1><a href="/learning Git 1.html">Git 与 GitHub 不完全教程（一）</a></h1>
+                <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2014-01-16T19:30:00">
-        <i class="icon-calendar"></i>Thu 16 January 2014
+<abbr class="published" title="2013-09-07T16:00:00">
+        <i class="icon-calendar"></i>Sat 07 September 2013
 </abbr>
 <span class="label">By</span>
 <a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
 <span class="label">Category</span>
-<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
+<a href="/category/git.html"><i class="icon-folder-open"></i>git</a>.
 
 
 <span class="label">Tags</span>
-	<a href="/tag/arch.html"><i class="icon-tag"></i>Arch</a>
-</footer><!-- /.post-info -->                </div>
-                <p>本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。</p>
-<hr class="docutils" />
-<div class="section" id="virtualbox">
-<h2>关于VirtualBox的安装</h2>
-<p>看了教程感觉很难搞，光是篇幅就吓死人。</p>
-<p>昨天看清楚才发现原来是自己搞错了，
-在Arch Linux里装VirtualBox是不难的，
-大概也就两页的篇幅。</p>
-<p>首先需要以下的包，
-用pacman装就可以了。</p>
+	<a href="/tag/git.html"><i class="icon-tag"></i>git</a>
+	<a href="/tag/github.html"><i class="icon-tag"></i>github</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>git是常用的配置管理工具，关于Git的介绍请见维基百科（维基百科关于Git的介绍），Github是常用的代码托管服务（维基百科关于GitHub的介绍），在此敲一份扫盲和不完全配置帖，留待日后自己可查看，顺带给大家方便学习。</p>
+<p>由于时间有限，仅记录最简单的终端界面下Git的使用，自认为已经足够，如更喜欢GUI界面风格请自行脑补。</p>
+<p>本文档操作环境为GNU/Linux Ubuntu 12.04 LTS x64，为方便windows用户，在配置时添加了windows下的安装配置过程，不保证万无一失。</p>
+<div class="section" id="git">
+<h2>Git篇：</h2>
+<div class="section" id="id1">
+<h3>安装与配置git</h3>
+<p>Ubuntu: 简单:</p>
+<pre class="literal-block">
+sudo apt-get install git
+</pre>
+<p>即可。</p>
+<p>以上代码没看懂的请别往下看了，扫盲Ubuntu先。</p>
+<p>windows:到这个网址下载:</p>
 <blockquote>
-virtualbox</blockquote>
-<p>pacman会自动连带安装host-modules。</p>
-<p>别想不开用终端去操作，
-再装个Qt吧，
-装完就有熟悉的界面了，
-如果以前用过virtualbox的话。</p>
-<blockquote>
-qt4</blockquote>
-<p>我用的是默认的kernel，
-所以接下去就不用怎么配置了，
-如果想每次手动启动virtualbox的话，
-在启动之前敲这个就可以了：</p>
-<blockquote>
-modprobe vboxdrv</blockquote>
-<p>像我这种整天挂个win7当代理服务器的，
-把这个模块扔到启动配置文件里去比较方便。</p>
-<p>方法是在/etc/modules-load.d/里建立一个新的*.conf文件，
-起个好听的名字，比如virtualbox.conf，
-内容就加入这句即可：</p>
-<blockquote>
-vboxdrv</blockquote>
-<p>这样就能够在每次启动的时候自动启动这个模块。</p>
-<p>据称这个模块作为虚拟机的基础模块，
-必须在启动虚拟机前正确启动。
-自己测试的时候如果没有启动这货直接启动虚拟机，
-系统会报错并退出。</p>
-<p>然后，
-桌面环境里开启virtualbox，
-该干嘛干嘛。</p>
-<div class="section" id="troubleshooting">
-<h3>troubleshooting</h3>
-<p>虽然教程说的非常简单，
-博主在安装的时候还是出了很大的问题。</p>
-<p>在安装完启动vboxdrv的时候系统报错：</p>
-<blockquote>
-modprobe: ERROR: could not insert 'vboxdrv': Exec format error.</blockquote>
-<p>搜了半天的google没有找到好的解决方案。
-一般遇到这种问题是自制的kernel或者非标准kernel在复杂模式下安装之后可能会出现的。</p>
-<p>可能的情况是virtualbox的编译针对的不是当前的kernel，
-导致模块执行失败。</p>
-<p>我就搞不懂了为何官方默认的kernel照着教程搞也会出这种问题。</p>
-<p>有一种解决方案是安装dkms(virtualbox-host-dkms)然后设置vboxhost指向当前版本的kernel。</p>
-<p>照着别人的建议安装了dkms，
-指向的时候还是报错，
-说没有kernel的header，
-貌似是头文件一类的东西。</p>
-<p>遂放弃。</p>
-<p>另有国外牛人的建议是重新编译virtualbox。
-先下载virtualbox的源文件，
-再下载kernel的header，
-最后用dkms编译...</p>
-<p>当时一看头就大了。</p>
-<p>后来结合多方的解决方案，
-查了一下发现自己的kernel是3.12.6-1，
-跟最新版本3.12.7-1有点差距。
-另外官方的virtualbox看样子是针对最新版本的kernel编译，
-于是升级了内核：</p>
-<blockquote>
-pacman -S linux</blockquote>
-<p>再重新安装了一下virtualbox，
-果然问题就解决了。</p>
-<p>经验在于：
-官方的仓库一般都是针对最新版本的kernel编译，
-所以对于有些对kernel版本非常敏感的程序来说，
-出问题的时候要关注一下自己的kernel是否兼容。</p>
+<a class="reference external" href="http://msysgit.github.io/">http://msysgit.github.io/</a></blockquote>
+<dl class="docutils">
+<dt>或者git官网下载:</dt>
+<dd><a class="reference external" href="http://git-scm.com/download/win">http://git-scm.com/download/win</a></dd>
+</dl>
+<p>安装即可。</p>
 </div>
-<div class="section" id="nat">
-<h3>NAT网络地址转换与端口转发</h3>
-<p><strong>NAT</strong></p>
-<p>学过计算机网络的兄弟对这货应该都不陌生。
-virtualbox自带模块能够将host系统作为类似路由的东西，
-将guest系统的包全部通过host系统转发出去。</p>
-<p>NAT的优势在于简单、方便、安全。
-virtualbox默认启动了NAT，不用配置便可以使用。
-在博主亲测下不论是arch linux的guest系统还是windows的guest系统都能够直接识别并自动连接网络。</p>
-<p>其次，host系统作为路由器存在，
-对外界隐藏了本地guest系统的存在，
-这也就大大降低了guest系统被入侵的几率。</p>
-<p>另外，多个guest虚拟主机之间也杜绝了数据泄漏的问题，因为guest系统之间也是无法互相识别的。</p>
-<p><strong>端口转发</strong></p>
-<p>NAT的一个缺陷在于，
-外界无法检测到guest系统的存在，
-因此如果有某些服务需要监听端口获取外界的连接（SSL、FTP、http服务器等），
-默认情况下NAT无法处理。</p>
-<p>因此就有了端口转发的机制解决这个问题。</p>
-<p>端口转发将host系统的某个端口（或者某个IP的端口）转发到guest系统的某个端口上，
-例如将host的80转发到guest的80，
-那么在guest上监听80端口的http服务器就可以对外服务了。
-而从外部看来就是连接了host的服务器。</p>
-<p>virtualbox里配置端口转发非常方便，
-在network里选advance添加端口转发规则即可。</p>
-<hr class="docutils" />
-<p>Arch Linux的基本安装和配置就都搞定了，
-下一回准备聊一下systemd或者pacman之类的知识和应用。</p>
-</div>
-</div>
+<div class="section" id="id2">
+<h3>首次使用</h3>
+<p>windows下使用终端的Git需要启动Git自带的终端，而不是windows的命令行，
+一般在安装后有一个叫做Git ...</p></div></div>
+                        <a class="btn primary xsmall" href="/learning Git 1.html">more ...</a>
+                </div>
+        </div>
+        <hr />
 
-                </div><!-- /.entry-content -->
-        </article>
-        <license>
-        <br/>
-        This work by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.scutlaoyi.tk" property="cc:attributionName" rel="cc:attributionURL">scutLaoYi</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-        </license>
-</section>
+        <div class="pagination">
+        <ul>
+                        <li class="prev"><a href="/index5.html">&larr; Previous</a></li>
+                        <li class=""><a href="/index.html">1</a></li>
+                        <li class=""><a href="/index2.html">2</a></li>
+                        <li class=""><a href="/index3.html">3</a></li>
+                        <li class=""><a href="/index4.html">4</a></li>
+                        <li class=""><a href="/index5.html">5</a></li>
+                        <li class="active"><a href="/index6.html">6</a></li>
+                        <li class="next disabled"><a href="#">&rarr; Next</a></li>
+        </ul>
+        </div>
+
         </div><!--/span-->
 
                 <div class="span3 well sidebar-nav" id="sidebar">

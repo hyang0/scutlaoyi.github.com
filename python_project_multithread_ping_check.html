@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>一种并发小规模服务器连通性检测的Python实现</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="laoyi">
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="/theme/css/font-awesome.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/theme/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/theme/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/theme/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/theme/images/apple-touch-icon-114x114.png">
+
+    <link href="/" type="application/atom+xml" rel="alternate" title="老逸的个人站 ATOM Feed" />
+    <link href="/feeds/all.rss.xml" type="application/atom+xml" rel="alternate" title="老逸的个人站 RSS Feed" />
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">老逸的个人站 </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                <li><a href="/pages/about.html">About</a></li>
+                          <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/cpp.html">
+						<i class="icon-folder-open icon-large"></i>Cpp
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/git.html">
+						<i class="icon-folder-open icon-large"></i>git
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/life.html">
+						<i class="icon-folder-open icon-large"></i>Life
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/linux.html">
+						<i class="icon-folder-open icon-large"></i>Linux
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/mobile.html">
+						<i class="icon-folder-open icon-large"></i>Mobile
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/python.html">
+						<i class="icon-folder-open icon-large"></i>Python
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/tools.html">
+						<i class="icon-folder-open icon-large"></i>Tools
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/web.html">
+						<i class="icon-folder-open icon-large"></i>web
+					</a>
+                  </li>
+
+                          <ul class="nav pull-right">
+                                <li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+                          </ul>
+
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="span9" id="content">
+<section id="content">
+        <article>
+                <header>
+                        <h1>
+                                <a href=""
+                                        rel="bookmark"
+                                        title="Permalink to 一种并发小规模服务器连通性检测的Python实现">
+                                        一种并发小规模服务器连通性检测的Python实现
+                                </a>
+                        </h1>
+                </header>
+                <div class="entry-content">
+                <div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-09-03T09:30:00">
+        <i class="icon-calendar"></i>Wed 03 September 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+	<a href="/tag/web-tool.html"><i class="icon-tag"></i>web tool</a>
+</footer><!-- /.post-info -->                </div>
+                <div class="section" id="id1">
+<h2>问题描述</h2>
+<p>博主购买了某shadowsocks服务，
+众所周知shadowsocks的配置文件外貌如下：</p>
+<pre class="literal-block">
+{
+  server:server_name,
+  server_port:1234,
+  local_port:1234,
+  password:server_password,
+  method:encypt_method,
+  timeout:600
+}
+</pre>
+<p>博主的服务器列表在某网页上，
+因此每次需要配置都要到网页上找。</p>
+<p>而比较麻烦的是，
+随着gfw的不断升级和修改配置，
+服务器的可用性也一直变化，
+大部分服务器在一段时间后都会变得不可用，
+而且由于端口和密码的改变，
+也经常需要修改本地的ss配置文件以保持成功连接。</p>
+<p>因此原有情况博主需要经常登录网站获得服务器列表，
+手动ping每个ip查找可用的服务器，
+再把服务器连接信息写到本地的config.json文件中，
+最后重新启动shadowsocks。</p>
+<p>相当痛苦。</p>
+</div>
+<div class="section" id="id2">
+<h2>需求描述</h2>
+<p>一个本地的自动化工具，
+自动抓取最新的服务器列表，
+自动分析提取出服务器配置信息，
+自动测试与服务器的连通性和延迟时间，
+最后自动生成最优连接服务器的配置文件输出到config.json。</p>
+<p>这样博主只需要拿生成的config.json给shadowsocks使用即可。</p>
+<p>另外，
+由于多个服务器的连接测试都需要消耗一定的时间，
+因此最好能够并发检测，
+最后统计并处理所有结果。</p>
+</div>
+<div class="section" id="pythonhtmlhtmlparser">
+<h2>Python网页HTML分析工具HTMLParser</h2>
+<p>这是一个简单的HTML页面分析库，
+其基本分析方式是遍历扫描HTML文档内容，
+用户继承该基类，
+在派生类中通过回调的方式自定义检测到各种标签的处理过程。</p>
+<p>由于博主的服务器列表在页面内容里，
+通过分析页面源代码找到服务器配置数据储存在一个class为'crayon-plain-wrap'的div中。</p>
+<p>于是将每个该类型div的内容抓出来即可，
+由于不需要其他数据，
+因此用一个Bool标记完成。</p>
+<p>抓出来的服务器数据都储存到server_list中给外部取用。</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">ConfigHtmlParser</span><span class="p">(</span><span class="n">HTMLParser</span><span class="o">.</span><span class="n">HTMLParser</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">HTMLParser</span><span class="o">.</span><span class="n">HTMLParser</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">recoding</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">server_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">handle_starttag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">attrs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">tag</span> <span class="o">==</span> <span class="s">&#39;div&#39;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">attrs</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">attr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;crayon-plain-wrap&#39;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">recoding</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="k">def</span> <span class="nf">handle_endtag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">recoding</span> <span class="o">=</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">handle_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">recoding</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">server_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_server_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">server_list</span>
+</pre></div>
+<p>针对简单粗暴的页面扫描这个库还是相当直接的。</p>
+<p>这样就完成了对原始数据的提取，
+接下来才是重头戏。</p>
+</div>
+<div class="section" id="pythonping">
+<h2>Python中ping的实现和结果分析</h2>
+<p>博主搜索了一下Python原生的ping实现，
+发现了这个库：<a class="reference external" href="https://pypi.python.org/pypi/ping/0.2">https://pypi.python.org/pypi/ping/0.2</a>，
+需要下载安装麻烦不说，
+执行起来还需要root，
+相当不爽。</p>
+<p>于是考虑直接系统调用linux的ping然后手工分析执行结果。</p>
+<p>曲线救国还真找到了办法，
+有个subprocess的库可用于执行系统指令，
+据说是用来替代老旧的os库的system函数。</p>
+<p>subprocess.check_output函数执行目标指令，
+返回执行结果，
+当调用的程序return了非零值时抛异常。</p>
+<p>于是代码成了这样：</p>
+<div class="highlight"><pre><span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">([</span><span class="s">&#39;ping&#39;</span><span class="p">,</span> <span class="s">&#39;-c 5&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">check_result</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">,</span> <span class="n">er</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s">&quot;server </span><span class="si">%s</span><span class="s"> error: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">,</span> <span class="n">er</span><span class="p">)</span>
+</pre></div>
+<p>这样就调用了系统的ping并对目标服务器发送五个ICMP报文。</p>
+<p>获取到的结果一般是这样的：</p>
+<pre class="literal-block">
+laoyi ~$ping baidu.com -c 5
+PING baidu.com (220.181.111.85) 56(84) bytes of data.
+64 bytes from 220.181.111.85: icmp_seq=1 ttl=54 time=55.3 ms
+64 bytes from 220.181.111.85: icmp_seq=2 ttl=54 time=52.4 ms
+64 bytes from 220.181.111.85: icmp_seq=3 ttl=54 time=52.8 ms
+64 bytes from 220.181.111.85: icmp_seq=4 ttl=54 time=52.4 ms
+64 bytes from 220.181.111.85: icmp_seq=5 ttl=54 time=52.9 ms
+
+--- baidu.com ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4002ms
+rtt min/avg/max/mdev = 52.428/53.221/55.378/1.135 ms
+
+laoyi ~$ping google.com -c 5
+PING google.com (173.194.127.224) 56(84) bytes of data.
+64 bytes from hkg03s16-in-f0.1e100.net (173.194.127.224): icmp_seq=1 ttl=45 time=261 ms
+64 bytes from hkg03s16-in-f0.1e100.net (173.194.127.224): icmp_seq=4 ttl=45 time=253 ms
+64 bytes from hkg03s16-in-f0.1e100.net (173.194.127.224): icmp_seq=5 ttl=45 time=258 ms
+
+--- google.com ping statistics ---
+5 packets transmitted, 3 received, 40% packet loss, time 4000ms
+rtt min/avg/max/mdev = 253.307/257.617/261.039/3.271 ms
+
+laoyi ~$ping domain_not_found.com -c 5
+ping: unknown host domain_not_found.com
+</pre>
+<p>分别是正常（无丢包），
+少量丢包以及直接域名解析失败的情况。</p>
+<p>经过测试发现全丢包的情况会导致ping执行返回1，
+同样域名解析失败也会，
+因此需要做异常处理。</p>
+<p>当然本工具的目的是找到最优的服务器，
+对于连接失败或丢包严重的服务器就直接无视即可。</p>
+<p>获取到ping结果后需要对数据进行处理，
+主要需要得到的是一个丢包率和一个平均的延时。</p>
+<p>丢包率在结果的倒数第二行，
+平均延时则在倒数第一行的第二个数值。</p>
+<p>遵循简单粗暴的原则，
+博主直接正则表达式强力抓取，
+匹配 'xxx% packet loss'和最后一行的斜杠+数字组合，
+偷鸡摸狗直接找第一个前面有斜杠的数字，
+搞定：</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">check_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result_text</span><span class="p">):</span>
+    <span class="n">lost_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">r&#39;(\d{1,3})% packet loss&#39;</span><span class="p">)</span>
+    <span class="n">lost_result</span> <span class="o">=</span> <span class="n">lost_re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">result_text</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">lost_result</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#39;0&#39;</span><span class="p">:</span>
+        <span class="n">avg_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">r&#39;\/(\d{3}\.\d{3})&#39;</span><span class="p">)</span>
+        <span class="n">avg_result</span> <span class="o">=</span> <span class="n">avg_re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">result_text</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">avg_result</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="k">print</span> <span class="s">&quot;found server </span><span class="si">%s</span><span class="s"> delay </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">delay</span><span class="p">)</span>
+    <span class="k">return</span>
+</pre></div>
+<p>完成后把需要的平均延时数据存起来，
+后面用来找最优服务器。</p>
+<p>丢包容忍率为0，
+毕竟有丢包的服务器用起来也非常不爽。</p>
+</div>
+<div class="section" id="id3">
+<h2>Python多线程</h2>
+<p>多线程主要使用threading库，
+相比C艹方便的地方在于类成员函数也可以直接丢进threading调用，
+不用静态函数什么的去处理this指针。</p>
+<p>博主用函数包装了一层ping调用过程，
+然后在外部直接用threading创建新线程执行该函数，
+于是并发检测的雏形就出来了。</p>
+<p>问题在于如何搞定线程的管理，
+默认情况下主线程执行完成后会直接退出，
+这就导致ping过程还没有完成程序却直接结束了。</p>
+<p>查了一下库文档，
+发现有几种办法，
+一是用join作线程等待，
+然而这种办法还得把所有线程存起来，
+太麻烦。</p>
+<p>于是使用了threading库的一个计数器，
+active_count函数返回当前活动的线程计数，
+默认情况下只有主线程，
+因此该值为1。</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">ConfigTextParser</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">):</span>
+            <span class="n">data_field</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;:&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_field</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetch_text</span><span class="p">(</span><span class="n">data_field</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="s">&#39;server&#39;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetch_text</span><span class="p">(</span><span class="n">data_field</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">do_test</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+                <span class="k">break</span>
+
+    <span class="c">#......</span>
+
+    <span class="k">def</span> <span class="nf">do_test</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&#39;start checking server: </span><span class="si">%s</span><span class="s">, ip: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">name_to_ip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">))</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">([</span><span class="s">&#39;ping&#39;</span><span class="p">,</span> <span class="s">&#39;-c 5&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">check_result</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">,</span> <span class="n">er</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot;server </span><span class="si">%s</span><span class="s"> error: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">,</span> <span class="n">er</span><span class="p">)</span>
+
+    <span class="c">#......</span>
+
+<span class="k">def</span> <span class="nf">run_check</span><span class="p">():</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">ConfigHtmlParser</span><span class="p">()</span>
+    <span class="n">html_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s">&#39;rb&#39;</span><span class="p">)</span>
+
+    <span class="n">parser</span><span class="o">.</span><span class="n">feed</span><span class="p">(</span><span class="n">html_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">))</span>
+    <span class="n">server_list</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">get_server_list</span><span class="p">()</span>
+
+    <span class="n">config_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">server</span> <span class="ow">in</span> <span class="n">server_list</span><span class="p">:</span>
+        <span class="n">config_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ConfigTextParser</span><span class="p">(</span><span class="n">server</span><span class="p">))</span>
+
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">thread_count</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">active_count</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">thread_count</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">print</span> <span class="s">&quot;All servers checking complete!&quot;</span>
+
+    <span class="n">delay</span> <span class="o">=</span> <span class="mi">10000</span>
+    <span class="n">best_config</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="n">config_list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">delay</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">delay</span> <span class="o">&lt;</span> <span class="n">delay</span><span class="p">:</span>
+                <span class="n">best_config</span> <span class="o">=</span> <span class="n">config</span>
+
+    <span class="k">if</span> <span class="n">best_config</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&quot;No useful server found! Damn it!&quot;</span>
+        <span class="k">return</span>
+
+    <span class="k">print</span> <span class="s">&quot;best server found: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">best_config</span><span class="o">.</span><span class="n">server</span>
+
+    <span class="n">config_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;config.json&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">config_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">best_config</span><span class="o">.</span><span class="n">config_text</span><span class="p">)</span>
+    <span class="n">config_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+<p>综合实现，
+首先抓取服务器列表数据，
+遍历所有服务器地址并针对每个地址创建线程执行ping，
+创建完成直接返回，
+在外部通过检查计数器数值等待所有子进程结束，
+也就表明所有ping命令完成执行。</p>
+<p>由于博主不赶时间，
+因此在等待的轮询中让主线程每次休眠两秒，
+以降低资源消耗。</p>
+<p>最后遍历一遍所有的服务器检测结果，
+找到最小延时的服务器，
+把配置文件输出到config.json中。</p>
+<p>搞定收工。</p>
+</div>
+
+                </div><!-- /.entry-content -->
+        </article>
+        <license>
+        <br/>
+        This work by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.scutlaoyi.tk" property="cc:attributionName" rel="cc:attributionURL">scutLaoYi</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+        </license>
+</section>
+        </div><!--/span-->
+
+                <div class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+<li class="nav-header"><h4><i class="icon-time"></i>time</h4></li>
+<li><p id="pagetimer"></p></li>
+
+<li class="nav-header"><h4><i class="icon-list-alt"></i>PAGE SENTENCE</h4></li>
+<li>
+<p id="page-sentence">
+当你看到这句的时候，说明每页一句载入失败...烦请告知博主!谢谢!(^_^)
+</p>
+</li>
+<script src="/add_ons/pagesentence/sentence.js"></script>
+<script src="/add_ons/clock/clock.js"></script>
+<script>
+window.onload=function(){
+      var pagetimer = document.getElementById("pagetimer");
+      pagetimer.innerHTML = getcurrenttime();
+  setInterval(function(){
+      pagetimer.innerHTML = getcurrenttime();
+      }, 1000);
+
+    document.getElementById("page-sentence").innerHTML = generateSentence();
+}
+</script>
+<li class="nav-header"><h4><i class="icon-external-link"></i>link</h4></li>
+    <li><a href="http://github.com/scutlaoyi"><i class="icon-external-link"></i>my github</a></li>
+<li class="nav-header"><h4><i class="icon-home icon-large"></i> social</h4></li>
+<!--<li><a href="/" rel="alternate"><i
+    class="icon-bookmark icon-large"></i>atom feed</a></li>-->
+<li><a href="/feeds/all.rss.xml" rel="alternate"><i class="icon-bookmark icon-large"></i>rss feed</a></li>
+    <li><a href=""><i class="icon--sign icon-large"></i></a></li>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>Categories</h4></li>
+<li>
+<a href="/category/cpp.html">
+    <i class="icon-folder-open icon-large"></i>Cpp
+</a>
+</li>
+<li>
+<a href="/category/git.html">
+    <i class="icon-folder-open icon-large"></i>git
+</a>
+</li>
+<li>
+<a href="/category/life.html">
+    <i class="icon-folder-open icon-large"></i>Life
+</a>
+</li>
+<li>
+<a href="/category/linux.html">
+    <i class="icon-folder-open icon-large"></i>Linux
+</a>
+</li>
+<li>
+<a href="/category/mobile.html">
+    <i class="icon-folder-open icon-large"></i>Mobile
+</a>
+</li>
+<li>
+<a href="/category/python.html">
+    <i class="icon-folder-open icon-large"></i>Python
+</a>
+</li>
+<li>
+<a href="/category/tools.html">
+    <i class="icon-folder-open icon-large"></i>Tools
+</a>
+</li>
+<li>
+<a href="/category/web.html">
+    <i class="icon-folder-open icon-large"></i>web
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<li class="tag-2">
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/web-tool.html">
+        <i class="icon-tag icon-large"></i>web tool
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/litecoin.html">
+        <i class="icon-tag icon-large"></i>litecoin
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/android.html">
+        <i class="icon-tag icon-large"></i>Android
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/page-sentences.html">
+        <i class="icon-tag icon-large"></i>page sentences
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/data-structure.html">
+        <i class="icon-tag icon-large"></i>data structure
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/arch.html">
+        <i class="icon-tag icon-large"></i>Arch
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
+    </a>
+</li>
+
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <address id="about">
+                Proudly powered by <a href="http://pelican.notmyidea.org/">Pelican <i class="icon-external-link"></i></a>,
+                                which takes great advantage of <a href="http://python.org">Python <i class="icon-external-link"></i></a>.
+        </address><!-- /#about -->
+
+        <p>The theme is from <a href="http://twitter.github.com/bootstrap/">Bootstrap from Twitter <i class="icon-external-link"></i></a>,
+                   and <a href="http://fortawesome.github.com/Font-Awesome/">Font-Awesome <i class="icon-external-link"></i></a>, thanks!</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="/theme/js/bootstrap.min.js"></script>
+  </body>
+</html>
