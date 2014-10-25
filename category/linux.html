@@ -122,6 +122,67 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/arch_upgrade_note.html">Arch Linux升级笔记</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-10-24T18:30:00">
+        <i class="icon-calendar"></i>Fri 24 October 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/arch.html"><i class="icon-tag"></i>Arch</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>花了半天时间升级了自家的Arch Linux，
+状况百出，
+记录一下处理的流程。</p>
+<p>自从用上公司发的笔记本后自己的本子就不怎么玩了，
+主要是ssd忒爽，
+而且玩坏了有保修，
+不用自己管～</p>
+<div class="section" id="pacman">
+<h2>pacman的自动更新</h2>
+<p>直接跑命令就可以了，
+pacman -Syu，
+下载了几百兆的新东西，
+安装了几十分钟。</p>
+<p>重启后内核从3.14升级到3.17最新版。</p>
+<p>貌似更换了部分驱动，
+用起来没什么感觉。</p>
+</div>
+<div class="section" id="openbox">
+<h2>openbox故障</h2>
+<p>博主的桌面环境是lxde，
+重启后进桌面什么都没有，
+只有一团黑布和一个鼠标的指针。</p>
+<p>试了一下发现右键可以打开openbox菜单，
+快捷键也可以开启各种应用，
+初步断定openbox运行正常，
+只是panel没有正确启动而已。</p>
+<p>在官网上找到下面的介绍：</p>
+<blockquote>
+<a class="reference external" href="https://wiki.archlinux.org/index.php/LXDE#Changes_to_desktop.conf_with_lxsession_1:0.5.1-1">https://wiki.archlinux.org/index.php/LXDE#Changes_to_desktop.conf_with_lxsession_1:0.5.1-1</a></blockquote>
+<p>于是改了配置，
+重启，
+熟悉的桌面就回来了。</p>
+</div>
+<div class="section" id="dnscrypt-proxy">
+<h2>dnscrypt_proxy故障</h2>
+<p>发现dnscrypt_proxy启动失败，
+查了输出发现丢失几个奇怪的库文件，
+但查了一下系统发现库是在的。</p>
+<p>搞了几下没搞定，
+直接把dnscrypt_proxy删了。</p>
+<p>由于是源码编译安装 ...</p></div>
+                        <a class="btn primary xsmall" href="/arch_upgrade_note.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/Bash005_auto_shell_and_screen.html">screen混搭shell实现自动化工具</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -596,58 +657,16 @@ Arch Linux提供了非常大的自由度和开放度供用户完全控制自己�
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/Bash001.html">Bash笔记(一)</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-01-02T22:30:00">
-        <i class="icon-calendar"></i>Thu 02 January 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
 
-
-<span class="label">Tags</span>
-	<a href="/tag/bash.html"><i class="icon-tag"></i>Bash</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p><strong>本系列博文记录学习Shell终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录。</strong></p>
-<hr class="docutils" />
-<div class="section" id="id1">
-<h2>基础知识</h2>
-<p>以echo为例，bash的基本命令及结构如下：</p>
-<p>显示命令后的所有参数</p>
-<p>echo [option] [arg0] [arg1] [arg2] [...]</p>
-<p>命令、参数之间用空格区分，空格数量差异没有作用,
-在单引号或双引号之间的所有字符被当成同一个参数</p>
-<p>echo &quot;Hey, this is a single argument.&quot;</p>
-<p>设定option使echo解析字符操作符</p>
-<p>echo -e &quot;A line with n a newline.&quot;</p>
-<p>命令执行成功返回0，否则返回非0值,
-返回值的意义可查命令的man</p>
-</div>
-<div class="section" id="id2">
-<h2>命令的帮助文档</h2>
-<p>type</p>
-<blockquote>
-<p>命令有两种类型，内部和外部命令
-显示命令的类型</p>
-<p>type [command]</p>
-<p>某些命令有两种类型，显示所有类型</p>
-<p>type -a [command]</p>
-<p>当执行同名命令时内置命令优先，
-执行外部命令必须指定命令路径，如echo:</p>
-<p>/bin ...</p></blockquote></div>
-                        <a class="btn primary xsmall" href="/Bash001.html">more ...</a>
-                </div>
+        <div class="pagination">
+        <ul>
+                        <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+                        <li class="active"><a href="/category/linux.html">1</a></li>
+                        <li class=""><a href="/category/linux2.html">2</a></li>
+                        <li class="next"><a href="/category/linux2.html">Next &rarr;</a></li>
+        </ul>
         </div>
-        <hr />
 
-                <section id="content" class="body">
-                <h1>Pages</h1>
-                        <li><a href="/pages/about.html">About</a></li>
-                </section>
         </div><!--/span-->
 
                 <div class="span3 well sidebar-nav" id="sidebar">
@@ -726,23 +745,13 @@ window.onload=function(){
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
 <li class="tag-3">
-    <a href="/tag/litecoin.html">
-        <i class="icon-tag icon-large"></i>litecoin
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
     </a>
 </li>
-<li class="tag-3">
-    <a href="/tag/web-tool.html">
-        <i class="icon-tag icon-large"></i>web tool
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/data-structure.html">
-        <i class="icon-tag icon-large"></i>data structure
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/audition.html">
-        <i class="icon-tag icon-large"></i>audition
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
     </a>
 </li>
 <li class="tag-4">
@@ -751,43 +760,18 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
     </a>
 </li>
 <li class="tag-3">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
+    <a href="/tag/litecoin.html">
+        <i class="icon-tag icon-large"></i>litecoin
     </a>
 </li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
+<li class="tag-1">
+    <a href="/tag/data-structure.html">
+        <i class="icon-tag icon-large"></i>data structure
     </a>
 </li>
 <li class="tag-1">
@@ -795,14 +779,29 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>Python
     </a>
 </li>
-<li class="tag-4">
-    <a href="/tag/page-sentences.html">
-        <i class="icon-tag icon-large"></i>page sentences
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/web-tool.html">
+        <i class="icon-tag icon-large"></i>web tool
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/arch.html">
+        <i class="icon-tag icon-large"></i>Arch
     </a>
 </li>
 <li class="tag-4">
@@ -811,8 +810,28 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/arch.html">
-        <i class="icon-tag icon-large"></i>Arch
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/page-sentences.html">
+        <i class="icon-tag icon-large"></i>page sentences
     </a>
 </li>
 

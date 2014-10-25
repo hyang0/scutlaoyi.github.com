@@ -1,5 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2014-09-03T09:30:00+08:00</updated><entry><title>一种并发小规模服务器连通性检测的Python实现</title><link href="/python_project_multithread_ping_check.html" rel="alternate"></link><updated>2014-09-03T09:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-09-03:python_project_multithread_ping_check.html</id><summary type="html">&lt;div class="section" id="id1"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2014-10-24T18:30:00+08:00</updated><entry><title>Arch Linux升级笔记</title><link href="/arch_upgrade_note.html" rel="alternate"></link><updated>2014-10-24T18:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-10-24:arch_upgrade_note.html</id><summary type="html">&lt;p&gt;花了半天时间升级了自家的Arch Linux，
+状况百出，
+记录一下处理的流程。&lt;/p&gt;
+&lt;p&gt;自从用上公司发的笔记本后自己的本子就不怎么玩了，
+主要是ssd忒爽，
+而且玩坏了有保修，
+不用自己管～&lt;/p&gt;
+&lt;div class="section" id="pacman"&gt;
+&lt;h2&gt;pacman的自动更新&lt;/h2&gt;
+&lt;p&gt;直接跑命令就可以了，
+pacman -Syu，
+下载了几百兆的新东西，
+安装了几十分钟。&lt;/p&gt;
+&lt;p&gt;重启后内核从3.14升级到3.17最新版。&lt;/p&gt;
+&lt;p&gt;貌似更换了部分驱动，
+用起来没什么感觉。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="openbox"&gt;
+&lt;h2&gt;openbox故障&lt;/h2&gt;
+&lt;p&gt;博主的桌面环境是lxde，
+重启后进桌面什么都没有，
+只有一团黑布和一个鼠标的指针。&lt;/p&gt;
+&lt;p&gt;试了一下发现右键可以打开openbox菜单，
+快捷键也可以开启各种应用，
+初步断定openbox运行正常，
+只是panel没有正确启动而已。&lt;/p&gt;
+&lt;p&gt;在官网上找到下面的介绍：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;a class="reference external" href="https://wiki.archlinux.org/index.php/LXDE#Changes_to_desktop.conf_with_lxsession_1:0.5.1-1"&gt;https://wiki.archlinux.org/index.php/LXDE#Changes_to_desktop.conf_with_lxsession_1:0.5.1-1&lt;/a&gt;&lt;/blockquote&gt;
+&lt;p&gt;于是改了配置，
+重启，
+熟悉的桌面就回来了。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="dnscrypt-proxy"&gt;
+&lt;h2&gt;dnscrypt_proxy故障&lt;/h2&gt;
+&lt;p&gt;发现dnscrypt_proxy启动失败，
+查了输出发现丢失几个奇怪的库文件，
+但查了一下系统发现库是在的。&lt;/p&gt;
+&lt;p&gt;搞了几下没搞定，
+直接把dnscrypt_proxy删了。&lt;/p&gt;
+&lt;p&gt;由于是源码编译安装，
+直接跑到二进制文件的目录里把它干掉了事。&lt;/p&gt;
+&lt;p&gt;本地的unbound修改了转发规则，
+直接把dns请求发到openDNS服务器上去。&lt;/p&gt;
+&lt;p&gt;这么做的目的其实是dnscrypt对博主来说用处不大。&lt;/p&gt;
+&lt;p&gt;dnscrypt_proxy的功能是可以提供无污染的dns解析结果，
+对于某些被dns污染的URL有抵抗作用。
+本地再使用unbound进行dns缓存加速解析。&lt;/p&gt;
+&lt;p&gt;但由于已经直接配置了根据域名的代理转发，
+被墙的网站都走代理线路，
+对目标URL的访问根本不会进行本地dns解析，
+因此也就不需要dnscrypt进行防污染了。&lt;/p&gt;
+&lt;p&gt;而且现在貌似通过DNS污染进行干扰的东西越来越少，
+都是直接封ip了。&lt;/p&gt;
+&lt;p&gt;另外一个dns相关的是unbound，
+功能是一层本地的dns服务器，
+配置之后本地进行dns查询结果的缓存，
+当有dns请求时优先查缓存，
+没有的话再发请求到远端的dns服务器。&lt;/p&gt;
+&lt;p&gt;本地需要配置dns服务器为unbound的监听地址。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="chromium"&gt;
+&lt;h2&gt;chromium的安装&lt;/h2&gt;
+&lt;p&gt;其实Firefox各方面都非常好用，
+但由于垃圾Flash的原因，
+有时候看视频有点麻烦。&lt;/p&gt;
+&lt;p&gt;听说Chrome系列在linux下的Flash比较完善，
+于是狠心花了几十兆的空间装了个Chromium。&lt;/p&gt;
+&lt;p&gt;然后就出问题了，
+Chromium无法启动，
+一直显示permission deny。&lt;/p&gt;
+&lt;p&gt;追查到最后发现是配置文件读取失败，
+由于pacman的调用需要root权限，
+因此每次安装或者执行程序的升级操作都是切到root帐号，
+平常使用的是普通的帐号。&lt;/p&gt;
+&lt;p&gt;很奇怪的就是chromium安装完成后在普通帐号的home目录下创建的config文件夹，
+居然是root账户创建的，
+因此切换回普通账户后由于config文件夹不是自己所有，
+一直访问失败。&lt;/p&gt;
+&lt;p&gt;知道原因后处理也就很简单了，
+切换到root更新一下config目录的所有者即可：&lt;/p&gt;
+&lt;blockquote&gt;
+chown -R normal:normal /home/normal/.config/chromium&lt;/blockquote&gt;
+&lt;p&gt;对于其他一些程序，
+如果安装完成后发现无法启动，
+也可以观察一下是否配置文件的权限有问题。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="chromiumflashpepper-flash"&gt;
+&lt;h2&gt;Chromium中Flash插件pepper-flash的安装&lt;/h2&gt;
+&lt;p&gt;这货居然是在AUR中，
+博主一直绕过AUR方面的操作，
+因为自己太懒，
+感觉需要自行编译打包实在麻烦。&lt;/p&gt;
+&lt;p&gt;没想到今天还是没法绕过这块东西，
+不过学了一下发现其实也不难。&lt;/p&gt;
+&lt;p&gt;问题却主要出在网络连接上。&lt;/p&gt;
+&lt;p&gt;根据Arch官方的文档，
+AUR仓库中包的安装主要有如下几步：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+1、首先需要安装必须的编译和打包工具：pacman -S --needed base-devel
+2、去到目标包的首页点击下载tar包
+3、解压目标tar包：tar -xvf foo.tar.gz
+4、进去解压出来的目录，跑一趟makepkg，自动下载编译并打包所需的包
+5、调用pacman安装最终生成的目标包：pacman -U bar.tar.xz
+&lt;/pre&gt;
+&lt;p&gt;注意的是如果makepkg出来的src目录里有readme的话，
+需要先看一下readme，
+防止后续的安装出错。&lt;/p&gt;
+&lt;p&gt;对于pepper-flash，
+则直接走一遍上述流程即可。&lt;/p&gt;
+&lt;p&gt;然后坑爹的事情来了，
+博主跑makepkg的时候一直下载源代码失败，
+感觉就像是被墙了一样。&lt;/p&gt;
+&lt;p&gt;于是开启全局http代理走goagent：&lt;/p&gt;
+&lt;blockquote&gt;
+export http_proxy=127.0.0.1:8087&lt;/blockquote&gt;
+&lt;p&gt;发现没有效果，
+才知道原来这个是https。&lt;/p&gt;
+&lt;blockquote&gt;
+export https_proxy=127.0.0.1:8087&lt;/blockquote&gt;
+&lt;p&gt;然后报证书错误，
+原来博主没有导入goa的假证书到系统里，
+因为一直用Firefox什么问题都没有。&lt;/p&gt;
+&lt;p&gt;想想不如走socks5代理算了，
+pacman装了一个转发应用网络请求到socks代理的工具：&lt;/p&gt;
+&lt;blockquote&gt;
+pacman -S proxychains-ng&lt;/blockquote&gt;
+&lt;p&gt;更改了配置文件，
+走本地的shadowsocks代理，
+执行makepkg&lt;/p&gt;
+&lt;blockquote&gt;
+proxychains makepkg&lt;/blockquote&gt;
+&lt;p&gt;报错...&lt;/p&gt;
+&lt;p&gt;没办法，
+最后导入goa的假证书再更新系统证书解决问题：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+1、复制CA.crt到/usr/local/share/ca-certificates/goa.crt
+2、执行命令： update-ca-certificates
+&lt;/pre&gt;
+&lt;p&gt;如果没有操作一的目标目录就自己创建个。&lt;/p&gt;
+&lt;p&gt;至此，
+pepper-flash插件终于装完，
+博主的升级之旅也就结束了。&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="Arch"></category></entry><entry><title>一种并发小规模服务器连通性检测的Python实现</title><link href="/python_project_multithread_ping_check.html" rel="alternate"></link><updated>2014-09-03T09:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-09-03:python_project_multithread_ping_check.html</id><summary type="html">&lt;div class="section" id="id1"&gt;
 &lt;h2&gt;问题描述&lt;/h2&gt;
 &lt;p&gt;博主购买了某shadowsocks服务，
 众所周知shadowsocks的配置文件外貌如下：&lt;/p&gt;
