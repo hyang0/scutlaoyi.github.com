@@ -1,10 +1,10 @@
-var itsentences = new Array(
+var sentences = new Array(
+        //Coding
         "Don't be evil. --Google",
         "UNIX is simple. It just takes a genius to understand its simplicity. --Dennis Ritchie",
         "But we are hackers, hackers have black terminals with green font colors. --John Nunemaker",
-        "不遵循团队基本原则随意发挥的行为在程序员的世界里就如同随地大小便，完全不尊重同伴的感受。"
-        );
-var lifesentences = new Array(
+        "不遵循团队基本原则随意发挥的行为在程序员的世界里就如同随地大小便，完全不尊重同伴的感受。",
+        //Life
         "学习不是填满水桶，而是点燃火焰。--叶芝",
         "你是一个有思想的人，你就是一个有品味的人。",
         "要像赌徒那么不计代价地活着，但不要企图成为他们。",
@@ -56,17 +56,11 @@ var lifesentences = new Array(
         "有的笑容背后是咬紧牙关的灵魂。",
         "我们真正的痛苦，来自于因耽误而产生的持续的焦虑，来自于因最后时刻所完成项目质量之低劣而产生的负罪感，还来自于因为失去人生中许多机会而产生的深深的悔恨。",
         "铁匠在啤酒中撒下眼泪，悲叹自己没有办法在铁路时代卖马蹄，但是这并不会使他们的马蹄更受欢迎。那些学习变成机械师的铁匠才会保住自己的饭碗。"
-        );
-var sentences = new Array(
-        itsentences,
-        lifesentences
-        );
+);
 
 function generateSentence()
 {
-    var typeind = Math.random()*sentences.length;
-    typeind = Math.floor(typeind);
-    var ind = Math.random() * sentences[typeind].length;
-    ind = Math.floor(ind);
-    return sentences[typeind][ind];
+    var rand = new Date().getTime();
+    var ind = rand % sentences.length;
+    return sentences[ind];
 }
