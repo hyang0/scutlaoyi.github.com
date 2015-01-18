@@ -107,6 +107,39 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/PythonExpe001.html">软件体系结构：N皇后问题系列之回溯法</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-10-31T22:30:00+08:00">
+        <i class="icon-calendar"></i>四 31 十月 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/coding.html"><i class="icon-folder-open"></i>Coding</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+	<a href="/tag/softwarearchitect.html"><i class="icon-tag"></i>SoftwareArchitect</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3</strong></p>
+<p><strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<p>最近学习搞得有点杂，一怒之下一个月没打理个人主页了，有些事情就是这样，你越不管，时间越长，就越不想管。</p>
+<p>软件体系结构是本学期的课程之一，大作业是用几种奇怪的风格构造一个N皇后问题的求解器。</p>
+<p>由于没有限定语言，咱自然是Python搞起。正发愁前些日子学习了那么多的理论知识没地方实践，正好，这货拿来下菜！</p>
+<p><strong>风格一：回溯法</strong></p>
+<p>其实我真的研究了很久这个神乎其神的名字，有点文言文的味道。然而半晌发现这货说到底就是深搜。
+于是敲了一个递归的函数处理之，不加任何剪枝优化，回溯法原型就基本出来了。</p>
+<p>我们将棋盘横向切分为多个单独的层，显而易见，每一层只能放置一个皇后，且每一层都应该放置皇后。于是可以递归搜索每一层，找出所有可能位置。</p>
+<p>使用深度优先搜索算法，遍历每一层的所有位置，检查当前位置是否符合要求。如果不符合要求，继续搜索下一个位置；如果符合要求，则依据深度优先原则，递归调用函数自身搜索下一层所有位置，依此类推。算法的终止条件为搜索到达了棋盘的最底层，这时候如果找到了符合条件的位置 ...</p>
+                        <a class="btn primary xsmall" href="/PythonExpe001.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/Python007.html">Python 笔记（七）</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -468,49 +501,6 @@
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/Python001.html">Python 笔记（一）</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2013-09-11T15:30:00+08:00">
-        <i class="icon-calendar"></i>三 11 九月 2013
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/coding.html"><i class="icon-folder-open"></i>Coding</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
-<p><strong>使用的Python版本为2.7.3，</strong>
-<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
-<hr class="docutils" />
-<p><strong>脚本声明和中文编码</strong></p>
-<p>在Python脚本的首行和次行添加以下命令可在命令行调用，并设置编码为中文gb2312：</p>
-<div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
-<span class="c"># -*- coding:gb2312 -*-</span>
-</pre></div>
-<p>Python的注释以#开始，单行注释</p>
-<p>单句Python语句占一行时结尾不用任何符号，多句时用分号分割，但极不推荐此种风格。</p>
-<p><strong>字符串</strong></p>
-<p>字符串有三种写法，单引号或双引号包围的单行字符串（可用反斜杠连接多行），或者三个单引号或双引号跨多行：</p>
-<div class="highlight"><pre><span class="c">#简单的输出语句，包含三种字符串形式</span>
-<span class="k">print</span> <span class="s">&#39;Hello,python!&#39;</span>
-<span class="k">print</span> <span class="s">u&quot;中文是可以支持的.&quot;</span>
-<span class="k">print</span> <span class="s">u&#39;&#39;&#39;字符串的第三种格式</span>
-<span class="s">跨行字符串:用三个单引号或双引号约束。</span>
-<span class="s">前方的u使该字符串作为unicode编码，正确处理中文。</span>
-<span class="s">&#39;&#39;&#39;</span>
-</pre></div>
-<p><strong>原始字符串</strong></p>
-<div class="highlight"><pre><span class="c">#普通字符串和原始字符串（r ...</span></pre></div>
-                        <a class="btn primary xsmall" href="/Python001.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -588,18 +578,8 @@ window.onload=function(){
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
 <li class="tag-2">
-    <a href="/tag/audition.html">
-        <i class="icon-tag icon-large"></i>audition
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/web-tool.html">
-        <i class="icon-tag icon-large"></i>web tool
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
     </a>
 </li>
 <li class="tag-4">
@@ -608,58 +588,13 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/page-sentences.html">
-        <i class="icon-tag icon-large"></i>page sentences
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
-    </a>
-</li>
-<li class="tag-2">
     <a href="/tag/github.html">
         <i class="icon-tag icon-large"></i>github
     </a>
 </li>
 <li class="tag-1">
-    <a href="/tag/arch-linux.html">
-        <i class="icon-tag icon-large"></i>Arch Linux
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>Python
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/litecoin.html">
-        <i class="icon-tag icon-large"></i>litecoin
-    </a>
-</li>
-<li class="tag-1">
     <a href="/tag/data-structure.html">
         <i class="icon-tag icon-large"></i>data structure
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
     </a>
 </li>
 <li class="tag-4">
@@ -668,8 +603,63 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-3">
+    <a href="/tag/litecoin.html">
+        <i class="icon-tag icon-large"></i>litecoin
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/page-sentences.html">
+        <i class="icon-tag icon-large"></i>page sentences
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/arch-linux.html">
+        <i class="icon-tag icon-large"></i>Arch Linux
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-3">
     <a href="/tag/vim.html">
         <i class="icon-tag icon-large"></i>Vim
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/web-tool.html">
+        <i class="icon-tag icon-large"></i>web tool
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
     </a>
 </li>
 <li class="tag-2">

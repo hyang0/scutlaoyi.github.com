@@ -1,5 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/web.atom.xml" rel="self"></link><id>/</id><updated>2014-07-16T10:00:00+08:00</updated><entry><title>一些好用web工具的记录</title><link href="/webTool001-simple-powerful.html" rel="alternate"></link><updated>2014-07-16T10:00:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-07-16:webTool001-simple-powerful.html</id><summary type="html">&lt;p&gt;最近找到了许多好用的Web工具，在此记录一下使用心得。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/web.atom.xml" rel="self"></link><id>/</id><updated>2015-01-18T20:00:00+08:00</updated><entry><title>GoAgent代理php服务器浅析</title><link href="/webTool002-goagent-php-server-analyse.html" rel="alternate"></link><updated>2015-01-18T20:00:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2015-01-18:webTool002-goagent-php-server-analyse.html</id><summary type="html">&lt;p&gt;这段时间主要的研究方向是php，
+学习了一些框架的使用和php的简单机制。&lt;/p&gt;
+&lt;p&gt;花了点时间简单分析了一下php的代理服务器构造，
+记录如下。&lt;/p&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;基本业务流程&lt;/h2&gt;
+&lt;p&gt;众所周知，
+代理服务器的常规流程是在用户和目标服务器之间做一个跳板，
+例如原有的流程是这样的：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+用户 -&amp;gt; 目标服务器
+&lt;/pre&gt;
+&lt;p&gt;通过代理转发：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+用户 -&amp;gt; 代理服务器 -&amp;gt; 目标服务器
+&lt;/pre&gt;
+&lt;p&gt;如果在用户和目标服务器之间有墙的话，
+通过代理的转发便可以实现绕过墙的效果。&lt;/p&gt;
+&lt;p&gt;具体到GoAgent的代理方式，
+则是如下的流程：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+GoAgent客户端获取浏览器的请求
+客户端封装请求到POST的内容中
+向服务器所在的URL发送POST请求
+服务器解析并处理请求
+客户端获取服务器返回数据，处理后返回浏览器
+浏览器展示内容结果
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;代码结构&lt;/h2&gt;
+&lt;p&gt;下面以GoA 3.2.3版本中的服务器代码作为分析目标。&lt;/p&gt;
+&lt;p&gt;该php文件的入口为main函数，
+在main函数中通过检测请求类型首先做处理，
+过滤掉所有GET请求，
+只响应POST请求。&lt;/p&gt;
+&lt;p&gt;在post函数中处理主要操作，
+有如下几步：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+1   解析POST请求数据，获取各项内容
+2   密码校验
+3   url黑名单校验
+4   构造curl请求参数
+5   生成curl请求并完成转发
+6   回调函数自动处理curl结果数据并输出
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h2&gt;好玩的点&lt;/h2&gt;
+&lt;p&gt;CURL的两个回调函数&lt;/p&gt;
+&lt;blockquote&gt;
+curl_header_function被注册用来处理CURL请求返回的Header数据，
+curl_write_function用于处理返回的内容数据。
+在函数内直接调用echo_content将数据输出。&lt;/blockquote&gt;
+&lt;p&gt;服务器端信息安全问题&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;该服务器提供了HTTP代理，
+在CURL函数的参数中发现设定了如下的两项：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$curl_opt[CURLOPT_SSL_VERIFYPEER] = false;
+$curl_opt[CURLOPT_SSL_VERIFYHOST] = false;
+&lt;/pre&gt;
+&lt;p&gt;个人认为存在被中间人攻击的风险（从代理服务器到目标服务器之间）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;与代理服务器连接的信息安全问题&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;由于客户端与代理之间的连接是HTTP，
+因此存在抓包嗅探的风险。&lt;/p&gt;
+&lt;p&gt;发现服务器的echo_content函数使用下面的安全机制：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+echo $content ^ str_repeat($__password__[0], strlen($content));
+&lt;/pre&gt;
+&lt;p&gt;将返回的内容通过与个人设定的密码进行亦或运算后再进行输出，
+防止直接发送明文数据。&lt;/p&gt;
+&lt;p&gt;此外默认设定ContentType为gif图片格式，
+将数据封装到gif文档中，
+可以部分降低被嗅探分析的风险。&lt;/p&gt;
+&lt;p&gt;对于非文本类型的数据不做该加密处理。&lt;/p&gt;
+&lt;p&gt;最终返回所有数据到客户端，
+由GoAgent客户端进行解析处理。&lt;/p&gt;
+&lt;p&gt;但是总体上看感觉安全性还是比较差，
+例如抓包之后只要拿到密码分分钟可以恢复数据内容。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h2&gt;个人感觉可以优化的地方&lt;/h2&gt;
+&lt;p&gt;对于客户端到代理服务器的这段，
+可以参考现有的部分不走https的网络服务，
+使用公钥密钥系统对数据进行加密处理，
+这样可以较大程度提高数据传输的安全性。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id5"&gt;
+&lt;h2&gt;小结&lt;/h2&gt;
+&lt;p&gt;GoAgent的php模式还是比较方便的，
+搞个支持代理的php空间便可以搭起来了。&lt;/p&gt;
+&lt;p&gt;由于其走的是常规的HTTP请求，
+返回的是jpg二进制数据，
+因此不容易被针对性封锁。&lt;/p&gt;
+&lt;p&gt;但是由于各种条件限制，
+php模式的安全性比较薄弱。&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="web tool"></category></entry><entry><title>一些好用web工具的记录</title><link href="/webTool001-simple-powerful.html" rel="alternate"></link><updated>2014-07-16T10:00:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-07-16:webTool001-simple-powerful.html</id><summary type="html">&lt;p&gt;最近找到了许多好用的Web工具，在此记录一下使用心得。&lt;/p&gt;
 &lt;div class="section" id="id1"&gt;
 &lt;h2&gt;爬墙类&lt;/h2&gt;
 &lt;p&gt;几年前，

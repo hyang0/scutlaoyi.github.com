@@ -107,6 +107,54 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/xss_basic.html">web概念学习：XSS跨站代码注入攻击</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-02-17T20:30:00+08:00">
+        <i class="icon-calendar"></i>一 17 二月 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/web.html"><i class="icon-folder-open"></i>Web</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/xss.html"><i class="icon-tag"></i>xss</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>今天看到乌云知识库关于XSS文章，心血来潮学了一下一些概念，还是蛮好玩的。^_^</p>
+<p>维基百科关于XSS的介绍在这里：</p>
+<blockquote>
+<a class="reference external" href="https://en.wikipedia.org/wiki/Cross-site_scripting">https://en.wikipedia.org/wiki/Cross-site_scripting</a></blockquote>
+<p>XSS的全称是Cross-site scripting，中文可以翻译为跨站脚本攻击。</p>
+<p>基本的入侵方式是在目标网页的生成过程中注入代码，
+然后让用户浏览目标网页，
+这个过程中目标网页的代码也就被执行了，
+达到目的。</p>
+<p>通常说来注入的代码为JavaScript，因为需要在客户端浏览器运行，
+所以可以是客户端脚本。
+不过也看到有些直接拿HTML来玩的。</p>
+<p>常见的有反射型XSS，DOM型XSS以及持续型XSS。</p>
+<div class="section" id="reflected">
+<h2>反射型(Reflected)</h2>
+<p>反射型的XSS基本流程如下：</p>
+<pre class="literal-block">
+1. 找到一个存在XSS漏洞的页面
+2. 通过构造URL，在目标页面的URL后追加注入的代码并绕过服务器过滤(如果有的话)
+3. 将构造出来的URL发布并引诱受害者点击
+4. 用户点击该URL，跳转到目标页面，服务器将注入的代码写入最终页面，返回用户浏览器
+</pre>
+<p>简单的例子：</p>
+<p>假设有一个页面接受用户的输入并将内容输出在原页面上，
+php代码如下(假设文件名是test.php)：</p>
+<div class="highlight"><pre><span class="cp">&lt;?php</span>
+ <span class="nv">$user_input</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">];</span>
+ <span class="k">echo ...</span></pre></div></div>
+                        <a class="btn primary xsmall" href="/xss_basic.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/CppLearning004.html">C++学习(四)：线性表的奇技淫巧(二)</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -557,40 +605,6 @@ modprobe ...</blockquote></div></div>
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/Arch002.html">Arch Linux学习：安装篇(二)</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-01-14T19:30:00+08:00">
-        <i class="icon-calendar"></i>二 14 一月 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/arch-linux.html"><i class="icon-tag"></i>Arch Linux</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。</p>
-<hr class="docutils" />
-<p>当你看到这篇博文的时候，
-老逸的新系统已安装完毕，
-弹冠相庆！^_^</p>
-<p>替换掉原来恶心的win7+Ubuntu双系统，
-现在直接将整个硬盘重新分区并安装Arch Linux.</p>
-<p>分区如下:</p>
-<pre class="literal-block">
-NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
-sda      8:0    0 298.1G  0 disk
-├─sda1   8:1    0   500M  0 part /boot
-├─sda2   8:2    0    50G  0 part /
-├─sda3   8:3    0     2G  0 part [SWAP ...</pre>
-                        <a class="btn primary xsmall" href="/Arch002.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -668,18 +682,8 @@ window.onload=function(){
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
 <li class="tag-2">
-    <a href="/tag/audition.html">
-        <i class="icon-tag icon-large"></i>audition
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/web-tool.html">
-        <i class="icon-tag icon-large"></i>web tool
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
     </a>
 </li>
 <li class="tag-4">
@@ -688,58 +692,13 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/page-sentences.html">
-        <i class="icon-tag icon-large"></i>page sentences
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
-    </a>
-</li>
-<li class="tag-2">
     <a href="/tag/github.html">
         <i class="icon-tag icon-large"></i>github
     </a>
 </li>
 <li class="tag-1">
-    <a href="/tag/arch-linux.html">
-        <i class="icon-tag icon-large"></i>Arch Linux
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>Python
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/litecoin.html">
-        <i class="icon-tag icon-large"></i>litecoin
-    </a>
-</li>
-<li class="tag-1">
     <a href="/tag/data-structure.html">
         <i class="icon-tag icon-large"></i>data structure
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
     </a>
 </li>
 <li class="tag-4">
@@ -748,8 +707,63 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-3">
+    <a href="/tag/litecoin.html">
+        <i class="icon-tag icon-large"></i>litecoin
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/page-sentences.html">
+        <i class="icon-tag icon-large"></i>page sentences
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/arch-linux.html">
+        <i class="icon-tag icon-large"></i>Arch Linux
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-3">
     <a href="/tag/vim.html">
         <i class="icon-tag icon-large"></i>Vim
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/web-tool.html">
+        <i class="icon-tag icon-large"></i>web tool
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
     </a>
 </li>
 <li class="tag-2">

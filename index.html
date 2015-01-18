@@ -107,6 +107,75 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/webTool002-goagent-php-server-analyse.html">GoAgent代理php服务器浅析</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-01-18T20:00:00+08:00">
+        <i class="icon-calendar"></i>日 18 一月 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/web.html"><i class="icon-folder-open"></i>Web</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/web-tool.html"><i class="icon-tag"></i>web tool</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>这段时间主要的研究方向是php，
+学习了一些框架的使用和php的简单机制。</p>
+<p>花了点时间简单分析了一下php的代理服务器构造，
+记录如下。</p>
+<div class="section" id="id1">
+<h2>基本业务流程</h2>
+<p>众所周知，
+代理服务器的常规流程是在用户和目标服务器之间做一个跳板，
+例如原有的流程是这样的：</p>
+<pre class="literal-block">
+用户 -&gt; 目标服务器
+</pre>
+<p>通过代理转发：</p>
+<pre class="literal-block">
+用户 -&gt; 代理服务器 -&gt; 目标服务器
+</pre>
+<p>如果在用户和目标服务器之间有墙的话，
+通过代理的转发便可以实现绕过墙的效果。</p>
+<p>具体到GoAgent的代理方式，
+则是如下的流程：</p>
+<pre class="literal-block">
+GoAgent客户端获取浏览器的请求
+客户端封装请求到POST的内容中
+向服务器所在的URL发送POST请求
+服务器解析并处理请求
+客户端获取服务器返回数据，处理后返回浏览器
+浏览器展示内容结果
+</pre>
+</div>
+<div class="section" id="id2">
+<h2>代码结构</h2>
+<p>下面以GoA 3.2.3版本中的服务器代码作为分析目标。</p>
+<p>该php文件的入口为main函数，
+在main函数中通过检测请求类型首先做处理，
+过滤掉所有GET请求，
+只响应POST请求。</p>
+<p>在post函数中处理主要操作，
+有如下几步：</p>
+<pre class="literal-block">
+1   解析POST请求数据，获取各项内容
+2   密码校验
+3   url黑名单校验
+4   构造curl请求参数
+5   生成curl请求并完成转发
+6   回调函数自动处理curl结果数据并输出
+</pre>
+</div>
+<div class="section" id="id3">
+<h2>好玩的点 ...</h2></div>
+                        <a class="btn primary xsmall" href="/webTool002-goagent-php-server-analyse.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/arch_upgrade_note.html">Arch Linux升级笔记</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -652,72 +721,6 @@ DNS解析从tk那边转移到GoDaddy了，
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/AndroidLearning001-basic-principle.html">Android基础学习（一）：基本概念与理念</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-05-01T16:00:00+08:00">
-        <i class="icon-calendar"></i>四 01 五月 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/coding.html"><i class="icon-folder-open"></i>Coding</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/android.html"><i class="icon-tag"></i>Android</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>眼下正是移动客户端应用泛滥的时代，
-Android与iOS无疑是当前移动客户端最为热门的两大系统。</p>
-<p>于是博主也跟随潮流，
-学起了Android。</p>
-<p>本博文不涉及具体代码，
-只简单记录整理基本概念，
-权当总结。</p>
-<div class="section" id="id1">
-<h2>Android应用的基本理念</h2>
-<p>Android应用与传统应用程序一样基于操作系统提供的抽象硬件环境，
-而且有更多的运行限制。</p>
-<p>由于Android系统基于Linux内核，
-存在着众多的保护机制，
-每个Android应用会通过各自独立的用户启动和运行。
-并且每个应用在运行时处在Android系统内建的沙盒中，
-与外界多了一层隔离。</p>
-<p>在资源管理方面，
-Android应用必须声明对特定资源的访问请求，
-才可执行对应的操作。
-例如外部存储器的读写、
-照相机的调用、
-网络的调用等。
-这些权限声明在用户安装的过程中进行确认，
-仅当用户授权才可以安装应用。</p>
-<p>虽然这点在实际操作过程中有很大变数，哈哈～</p>
-<p>与桌面程序较为不同的是，
-Android应用更多依赖于用户的交互，</p>
-<p>在Android应用中事件是一个非常重要的概念，
-用户的任何操作都会触发一个事件，
-例如手指的滑动，或者是按钮的点击。</p>
-<p>当用户的事件触发时，
-Android系统通知应用程序事件的发生，
-交由应用进行处理。</p>
-<p>在Android应用的内部，
-通过编写对应的回调函数来完成对事件的处理,
-例如onClick()函数，
-当用户点击按钮时该回调函数就会被调用。
-这也就构成了最简单的Android应用形式。</p>
-</div>
-<div class="section" id="id2">
-<h2>四大组件基本概念</h2>
-<p>Android应用中存在着四大组件，
-分别是Activity、Service、Content Provider和Broadcast Receiver</p>
-<p><strong>Activity</strong></p>
-<p>Android应用通过若干Activity进行组织。</p>
-<p>Activity控制着应用的某个窗口界面 ...</p></div>
-                        <a class="btn primary xsmall" href="/AndroidLearning001-basic-principle.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -795,18 +798,8 @@ window.onload=function(){
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
 <li class="tag-2">
-    <a href="/tag/audition.html">
-        <i class="icon-tag icon-large"></i>audition
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/web-tool.html">
-        <i class="icon-tag icon-large"></i>web tool
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
     </a>
 </li>
 <li class="tag-4">
@@ -815,58 +808,13 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/page-sentences.html">
-        <i class="icon-tag icon-large"></i>page sentences
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
-    </a>
-</li>
-<li class="tag-2">
     <a href="/tag/github.html">
         <i class="icon-tag icon-large"></i>github
     </a>
 </li>
 <li class="tag-1">
-    <a href="/tag/arch-linux.html">
-        <i class="icon-tag icon-large"></i>Arch Linux
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>Python
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/litecoin.html">
-        <i class="icon-tag icon-large"></i>litecoin
-    </a>
-</li>
-<li class="tag-1">
     <a href="/tag/data-structure.html">
         <i class="icon-tag icon-large"></i>data structure
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
     </a>
 </li>
 <li class="tag-4">
@@ -875,8 +823,63 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-3">
+    <a href="/tag/litecoin.html">
+        <i class="icon-tag icon-large"></i>litecoin
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/page-sentences.html">
+        <i class="icon-tag icon-large"></i>page sentences
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/arch-linux.html">
+        <i class="icon-tag icon-large"></i>Arch Linux
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-3">
     <a href="/tag/vim.html">
         <i class="icon-tag icon-large"></i>Vim
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/web-tool.html">
+        <i class="icon-tag icon-large"></i>web tool
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
     </a>
 </li>
 <li class="tag-2">

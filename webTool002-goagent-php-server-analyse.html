@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>老逸的个人站 - web tool</title>
+    <title>GoAgent代理php服务器浅析</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="laoyi">
@@ -86,7 +86,7 @@
 						<i class="icon-folder-open icon-large"></i>Tool
 					</a>
                   </li>
-                  <li >
+                  <li class="active">
                     <a href="/category/web.html">
 						<i class="icon-folder-open icon-large"></i>Web
 					</a>
@@ -106,9 +106,20 @@
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
-        <div class="article">
-                <h1><a href="/webTool002-goagent-php-server-analyse.html">GoAgent代理php服务器浅析</a></h1>
-                <div class="well small"><footer class="post-info">
+<section id="content">
+        <article>
+                <header>
+                        <h1>
+                                <a href=""
+                                        rel="bookmark"
+                                        title="Permalink to GoAgent代理php服务器浅析">
+                                        GoAgent代理php服务器浅析
+                                </a>
+                        </h1>
+                </header>
+                <div class="entry-content">
+                <div class="well">
+<footer class="post-info">
 <span class="label">Date</span>
 <abbr class="published" title="2015-01-18T20:00:00+08:00">
         <i class="icon-calendar"></i>日 18 一月 2015
@@ -121,8 +132,8 @@
 
 <span class="label">Tags</span>
 	<a href="/tag/web-tool.html"><i class="icon-tag"></i>web tool</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>这段时间主要的研究方向是php，
+</footer><!-- /.post-info -->                </div>
+                <p>这段时间主要的研究方向是php，
 学习了一些框架的使用和php的简单机制。</p>
 <p>花了点时间简单分析了一下php的代理服务器构造，
 记录如下。</p>
@@ -170,149 +181,67 @@ GoAgent客户端获取浏览器的请求
 </pre>
 </div>
 <div class="section" id="id3">
-<h2>好玩的点 ...</h2></div>
-                        <a class="btn primary xsmall" href="/webTool002-goagent-php-server-analyse.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/python_project_multithread_ping_check.html">一种并发小规模服务器连通性检测的Python实现</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-09-03T09:30:00+08:00">
-        <i class="icon-calendar"></i>三 03 九月 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/coding.html"><i class="icon-folder-open"></i>Coding</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
-	<a href="/tag/web-tool.html"><i class="icon-tag"></i>web tool</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><div class="section" id="id1">
-<h2>问题描述</h2>
-<p>博主购买了某shadowsocks服务，
-众所周知shadowsocks的配置文件外貌如下：</p>
+<h2>好玩的点</h2>
+<p>CURL的两个回调函数</p>
+<blockquote>
+curl_header_function被注册用来处理CURL请求返回的Header数据，
+curl_write_function用于处理返回的内容数据。
+在函数内直接调用echo_content将数据输出。</blockquote>
+<p>服务器端信息安全问题</p>
+<blockquote>
+<p>该服务器提供了HTTP代理，
+在CURL函数的参数中发现设定了如下的两项：</p>
 <pre class="literal-block">
-{
-  server:server_name,
-  server_port:1234,
-  local_port:1234,
-  password:server_password,
-  method:encypt_method,
-  timeout:600
-}
+$curl_opt[CURLOPT_SSL_VERIFYPEER] = false;
+$curl_opt[CURLOPT_SSL_VERIFYHOST] = false;
 </pre>
-<p>博主的服务器列表在某网页上，
-因此每次需要配置都要到网页上找。</p>
-<p>而比较麻烦的是，
-随着gfw的不断升级和修改配置，
-服务器的可用性也一直变化，
-大部分服务器在一段时间后都会变得不可用，
-而且由于端口和密码的改变，
-也经常需要修改本地的ss配置文件以保持成功连接。</p>
-<p>因此原有情况博主需要经常登录网站获得服务器列表，
-手动ping每个ip查找可用的服务器，
-再把服务器连接信息写到本地的config.json文件中，
-最后重新启动shadowsocks。</p>
-<p>相当痛苦。</p>
+<p>个人认为存在被中间人攻击的风险（从代理服务器到目标服务器之间）</p>
+</blockquote>
+<p>与代理服务器连接的信息安全问题</p>
+<blockquote>
+<p>由于客户端与代理之间的连接是HTTP，
+因此存在抓包嗅探的风险。</p>
+<p>发现服务器的echo_content函数使用下面的安全机制：</p>
+<pre class="literal-block">
+echo $content ^ str_repeat($__password__[0], strlen($content));
+</pre>
+<p>将返回的内容通过与个人设定的密码进行亦或运算后再进行输出，
+防止直接发送明文数据。</p>
+<p>此外默认设定ContentType为gif图片格式，
+将数据封装到gif文档中，
+可以部分降低被嗅探分析的风险。</p>
+<p>对于非文本类型的数据不做该加密处理。</p>
+<p>最终返回所有数据到客户端，
+由GoAgent客户端进行解析处理。</p>
+<p>但是总体上看感觉安全性还是比较差，
+例如抓包之后只要拿到密码分分钟可以恢复数据内容。</p>
+</blockquote>
 </div>
-<div class="section" id="id2">
-<h2>需求描述</h2>
-<p>一个本地的自动化工具，
-自动抓取最新的服务器列表，
-自动分析提取出服务器配置信息，
-自动测试与服务器的连通性和延迟时间，
-最后自动生成最优连接服务器的配置文件输出到config.json。</p>
-<p>这样博主只需要拿生成的config.json给shadowsocks使用即可。</p>
-<p>另外，
-由于多个服务器的连接测试都需要消耗一定的时间，
-因此最好能够并发检测，
-最后统计并处理所有结果。</p>
+<div class="section" id="id4">
+<h2>个人感觉可以优化的地方</h2>
+<p>对于客户端到代理服务器的这段，
+可以参考现有的部分不走https的网络服务，
+使用公钥密钥系统对数据进行加密处理，
+这样可以较大程度提高数据传输的安全性。</p>
 </div>
-<div class="section" id="pythonhtmlhtmlparser">
-<h2>Python网页HTML分析工具HTMLParser</h2>
-<p>这是一个简单的HTML页面分析库，
-其基本分析方式是遍历扫描HTML文档内容，
-用户继承该基类，
-在派生类中通过回调的方式自定义检测到各种标签的处理过程。</p>
-<p>由于博主的服务器列表在页面内容里，
-通过分析页面源代码找到服务器配置数据储存在一个class为'crayon-plain-wrap ...</p></div>
-                        <a class="btn primary xsmall" href="/python_project_multithread_ping_check.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/webTool001-simple-powerful.html">一些好用web工具的记录</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-07-16T10:00:00+08:00">
-        <i class="icon-calendar"></i>三 16 七月 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/web.html"><i class="icon-folder-open"></i>Web</a>.
+<div class="section" id="id5">
+<h2>小结</h2>
+<p>GoAgent的php模式还是比较方便的，
+搞个支持代理的php空间便可以搭起来了。</p>
+<p>由于其走的是常规的HTTP请求，
+返回的是jpg二进制数据，
+因此不容易被针对性封锁。</p>
+<p>但是由于各种条件限制，
+php模式的安全性比较薄弱。</p>
+</div>
 
-
-<span class="label">Tags</span>
-	<a href="/tag/web-tool.html"><i class="icon-tag"></i>web tool</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>最近找到了许多好用的Web工具，在此记录一下使用心得。</p>
-<div class="section" id="id1">
-<h2>爬墙类</h2>
-<p>几年前，
-詹神曾经在班级邮件里说过，
-“作为程序员，翻墙应该是基本技能”。
-这句话我一直印象很深。</p>
-<p>当时的自己年少无知，
-对爬墙技术的了解也不深，
-但随着对Google依赖的不断深化，
-搜文档、找工具、查资料，
-加上许多信息工具的应用，
-这才越来越体会到这句话的深刻含义。</p>
-<p>爬墙的一个原则是不要在一棵树上吊死，
-这句是在某知名博主的博客上看到的，
-永远要留有备用的手段。</p>
-<p><strong>goagent</strong></p>
-<p>这货连接的是Google的服务器，
-凭借限定流量免费的Google App Engine服务，
-热心的技术人员开发出了一套转发代理的工具，
-是最近一段时间比较稳定的爬墙方式。</p>
-<p>自己搭建服务器的话需要注册一个GAE的账户，
-建立一个新的App，
-然后把服务器端给传上去。</p>
-<p>本地的客户端通过指定AppID连接服务器端，
-把本地的网络请求转发给服务器，
-由服务器代理处理页面并返回结果。</p>
-<p><em>安全问题</em></p>
-<p>月光博客之前曾经谈过这货的安全性问题，
-由于CA证书是伪造的，
-而且默认的CA证书是公开的，
-因此非常容易被中间人攻击。</p>
-<p>解决的方案是把目录下的默认CA.crt删掉，
-让GoAgent启动时自行生成新的唯一证书，
-相当于私有的证书。
-然后再把这个新的CA导入到系统的证书信任里。</p>
-<p>此外，
-最好开启服务器端的验证，
-在配置文件里把validate开启。</p>
-<p>但不管怎样优化也不能让这货有比较好的安全性，
-GAE在转发用户请求的时候会把AppID也写入到User Agent里面去，
-这非常容易暴露用户的身份。</p>
-<p>而且这货是Http代理 ...</p></div>
-                        <a class="btn primary xsmall" href="/webTool001-simple-powerful.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-
-                <section id="content" class="body">
-                <h1>Pages</h1>
-                        <li><a href="/pages/about.html">About</a></li>
-                </section>
+                </div><!-- /.entry-content -->
+        </article>
+        <license>
+        <br/>
+        This work by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.scutlaoyi.tk" property="cc:attributionName" rel="cc:attributionURL">scutLaoYi</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+        </license>
+</section>
         </div><!--/span-->
 
                 <div class="span3 well sidebar-nav" id="sidebar">
