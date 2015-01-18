@@ -143,7 +143,7 @@ proxychains makepkg&lt;/blockquote&gt;
 pepper-flash插件终于装完，
 博主的升级之旅也就结束了。&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="Arch"></category></entry><entry><title>screen混搭shell实现自动化工具</title><link href="/Bash005_auto_shell_and_screen.html" rel="alternate"></link><updated>2014-08-27T11:00:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-08-27:Bash005_auto_shell_and_screen.html</id><summary type="html">&lt;p&gt;博主最近应用了许多强悍的网络辅助工具，
+</summary><category term="Arch Linux"></category></entry><entry><title>screen混搭shell实现自动化工具</title><link href="/Bash005_auto_shell_and_screen.html" rel="alternate"></link><updated>2014-08-27T11:00:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-08-27:Bash005_auto_shell_and_screen.html</id><summary type="html">&lt;p&gt;博主最近应用了许多强悍的网络辅助工具，
 大部分是Python程序及shell脚本，
 一个shadowsocks，一个goagent，还有一个DNScrypt。
 这些工具的特点是在正常的情况下可以无视，
@@ -454,7 +454,7 @@ MENU BACKGROUND splash.png&lt;/blockquote&gt;
 但在图形界面没有相关功能或者崩溃了的情况下用户许多时候却束手无策。
 所以博主经常被拉去帮忙重装系统...&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="Arch"></category></entry><entry><title>Arch Linux学习：Repository与Pacman小记</title><link href="/Arch004.html" rel="alternate"></link><updated>2014-01-17T19:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-01-17:Arch004.html</id><summary type="html">&lt;p&gt;本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。&lt;/p&gt;
+</summary><category term="Arch Linux"></category></entry><entry><title>Arch Linux学习：Repository与Pacman小记</title><link href="/Arch004.html" rel="alternate"></link><updated>2014-01-17T19:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-01-17:Arch004.html</id><summary type="html">&lt;p&gt;本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。&lt;/p&gt;
 &lt;hr class="docutils" /&gt;
 &lt;div class="section" id="arch-linux"&gt;
 &lt;h2&gt;Arch Linux 仓库&lt;/h2&gt;
@@ -676,7 +676,7 @@ pacman -Scc&lt;/blockquote&gt;
 &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Pacman"&gt;https://wiki.archlinux.org/index.php/Pacman&lt;/a&gt;&lt;/blockquote&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="Arch"></category></entry><entry><title>Arch Linux学习：安装篇(三)</title><link href="/Arch003.html" rel="alternate"></link><updated>2014-01-16T19:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-01-16:Arch003.html</id><summary type="html">&lt;p&gt;本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。&lt;/p&gt;
+</summary><category term="Arch Linux"></category></entry><entry><title>Arch Linux学习：安装篇(三)</title><link href="/Arch003.html" rel="alternate"></link><updated>2014-01-16T19:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-01-16:Arch003.html</id><summary type="html">&lt;p&gt;本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。&lt;/p&gt;
 &lt;hr class="docutils" /&gt;
 &lt;div class="section" id="virtualbox"&gt;
 &lt;h2&gt;关于VirtualBox的安装&lt;/h2&gt;
@@ -783,7 +783,7 @@ virtualbox默认启动了NAT，不用配置便可以使用。
 下一回准备聊一下systemd或者pacman之类的知识和应用。&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="Arch"></category></entry><entry><title>Arch Linux学习：安装篇(二)</title><link href="/Arch002.html" rel="alternate"></link><updated>2014-01-14T19:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-01-14:Arch002.html</id><summary type="html">&lt;p&gt;本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。&lt;/p&gt;
+</summary><category term="Arch Linux"></category></entry><entry><title>Arch Linux学习：安装篇(二)</title><link href="/Arch002.html" rel="alternate"></link><updated>2014-01-14T19:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-01-14:Arch002.html</id><summary type="html">&lt;p&gt;本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。&lt;/p&gt;
 &lt;hr class="docutils" /&gt;
 &lt;p&gt;当你看到这篇博文的时候，
 老逸的新系统已安装完毕，
@@ -924,7 +924,7 @@ ip link set [device] up&lt;/blockquote&gt;
 &lt;p&gt;下一次将尝试安装virtualbox，据说很难搞...&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="Arch"></category></entry><entry><title>Arch Linux学习：安装篇(一)</title><link href="/Arch001.html" rel="alternate"></link><updated>2014-01-08T19:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-01-08:Arch001.html</id><summary type="html">&lt;p&gt;本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。&lt;/p&gt;
+</summary><category term="Arch Linux"></category></entry><entry><title>Arch Linux学习：安装篇(一)</title><link href="/Arch001.html" rel="alternate"></link><updated>2014-01-08T19:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-01-08:Arch001.html</id><summary type="html">&lt;p&gt;本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。&lt;/p&gt;
 &lt;hr class="docutils" /&gt;
 &lt;div class="section" id="id1"&gt;
 &lt;h2&gt;关于Arch Linux&lt;/h2&gt;
@@ -1268,7 +1268,7 @@ reboot并让硬盘引导，
 &lt;p&gt;我觉得光是这一点就充分体现了Arch Linux的简介性和高度的可定制性了。&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="Arch"></category></entry><entry><title>Bash笔记(四)</title><link href="/Bash004.html" rel="alternate"></link><updated>2014-01-05T22:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-01-05:Bash004.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;本系列博文记录学习Shell终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录。&lt;/strong&gt;&lt;/p&gt;
+</summary><category term="Arch Linux"></category></entry><entry><title>Bash笔记(四)</title><link href="/Bash004.html" rel="alternate"></link><updated>2014-01-05T22:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-01-05:Bash004.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;本系列博文记录学习Shell终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录。&lt;/strong&gt;&lt;/p&gt;
 &lt;hr class="docutils" /&gt;
 &lt;div class="section" id="id1"&gt;
 &lt;h2&gt;用户管理&lt;/h2&gt;

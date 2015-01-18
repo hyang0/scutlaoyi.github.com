@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>老逸的个人站</title>
+    <title>老逸的个人站 - Arch Linux</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="laoyi">
@@ -107,285 +107,63 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
-                <h1><a href="/CppLearning004.html">C++学习(四)：线性表的奇技淫巧(二)</a></h1>
+                <h1><a href="/arch_upgrade_note.html">Arch Linux升级笔记</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2014-02-16T21:30:00+08:00">
-        <i class="icon-calendar"></i>日 16 二月 2014
+<abbr class="published" title="2014-10-24T18:30:00+08:00">
+        <i class="icon-calendar"></i>五 24 十月 2014
 </abbr>
 <span class="label">By</span>
 <a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
 <span class="label">Category</span>
-<a href="/category/coding.html"><i class="icon-folder-open"></i>Coding</a>.
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
 
 
 <span class="label">Tags</span>
-	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
-	<a href="/tag/data-structure.html"><i class="icon-tag"></i>data structure</a>
+	<a href="/tag/arch-linux.html"><i class="icon-tag"></i>Arch Linux</a>
 </footer><!-- /.post-info --></div>
-                <div class="summary"><p>这两天去玩了，
-进度比较慢。</p>
-<p>无序线性表终于算是搞了个大概，
-有些过于繁琐的就没有管了。</p>
-<p>准备入手有序线性表，
-把一些牛逼的算法也弄进去，
-二分、堆排序、归并排序什么的。</p>
-<div class="section" id="id1">
-<h2>奇技淫巧大收集（续）</h2>
-<p><strong>线性表判环</strong></p>
+                <div class="summary"><p>花了半天时间升级了自家的Arch Linux，
+状况百出，
+记录一下处理的流程。</p>
+<p>自从用上公司发的笔记本后自己的本子就不怎么玩了，
+主要是ssd忒爽，
+而且玩坏了有保修，
+不用自己管～</p>
+<div class="section" id="pacman">
+<h2>pacman的自动更新</h2>
+<p>直接跑命令就可以了，
+pacman -Syu，
+下载了几百兆的新东西，
+安装了几十分钟。</p>
+<p>重启后内核从3.14升级到3.17最新版。</p>
+<p>貌似更换了部分驱动，
+用起来没什么感觉。</p>
+</div>
+<div class="section" id="openbox">
+<h2>openbox故障</h2>
+<p>博主的桌面环境是lxde，
+重启后进桌面什么都没有，
+只有一团黑布和一个鼠标的指针。</p>
+<p>试了一下发现右键可以打开openbox菜单，
+快捷键也可以开启各种应用，
+初步断定openbox运行正常，
+只是panel没有正确启动而已。</p>
+<p>在官网上找到下面的介绍：</p>
 <blockquote>
-<p>就是判别一个线性表中有没有出现环。</p>
-<p><strong>简单标记方案</strong></p>
-<p>几种标记都可以。</p>
-<p>如果是不重复的整数并且范围比较小的话，
-直接开个bool型的数组，用下标表示某个特定的数，
-对应值为1指定该值出现过，
-对应值为0指定该值没有出现。</p>
-<p>整数下标的数组搞不定则可以考虑弄个标准库的哈希表。</p>
-<p>总之，思路就是遍历链表，
-把出现过的标记起来，
-当遍历过程中再次碰到被标记过的节点说明链表有环，
-否则肯定能搜索到链表的表尾并结束。</p>
-<p>需要一些额外的空间及计算量。</p>
-<p><strong>Floyd方案</strong></p>
-<p>感觉搞数学的家伙总能找到一些神奇的方法解决某些奇怪的问题。</p>
-<p>开两个指针fast, slow，均初始化为头节点，
-fast每次移动两个节点，slow每次移动一个节点。</p>
-<p>单步运行，直到：</p>
-<blockquote>
-<p>1、fast指针到达表尾，无环；</p>
-<p>2、fast指针与slow指针在某一步指向同一个节点，有环；</p>
-</blockquote>
-</blockquote>
-<p><strong>线性表除环</strong></p>
-<blockquote>
-<p>简单办法就直观了，
-直接每个节点检查，
-很蠢，不详谈。</p>
-<p><strong>高效方案</strong></p>
-<p>首先，用上述的Floyd算法找到环 ...</p></blockquote></div>
-                        <a class="btn primary xsmall" href="/CppLearning004.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/VimExperience001.html">Vim经验记录(一):与系统共享剪贴板</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-02-13T12:30:00+08:00">
-        <i class="icon-calendar"></i>四 13 二月 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/tool.html"><i class="icon-folder-open"></i>Tool</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/vim.html"><i class="icon-tag"></i>Vim</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>这几天玩剪贴板搞得灰头土脸，
-幸好现在终于找到最佳的解决方案了，
-虽然好用，方法还是有点猥琐。</p>
-<p>博主主要的目的在于多个Vim之间可以共享剪贴板。
-写博文的时候，
-像上一篇博文中就有非常多的代码片段，
-因此需要快捷的复制粘贴操作。</p>
-<p>目标：</p>
-<blockquote>
-找到一种方法方便快速地访问系统剪贴板，
-使Vim支持从系统剪贴板中复制粘贴数据，
-通过系统剪贴板快捷地与其他应用程序交换数据，
-如Firefox中网页的某些文本框，
-或者与其他Vim进程交换数据。</blockquote>
-<p>环境：</p>
-<pre class="literal-block">
-OS: Arch Linux(x64)
-Window Manager: X11
-DesktopEnvironment: LXDE
-Package Manager: Pacman
-</pre>
-<div class="section" id="id1">
-<h2>鼠标解法</h2>
-<p>最初遇到这个问题时想到了上学期在工作室的Ubuntu系统，
-通过配置标神找到的vimrc文件，
-可以直接支持鼠标点击、鼠标选择、右键复制粘贴甚至是滚轮翻页。</p>
-<p>不知道是因为桌面环境不一样还是系统问题，
-原有的配置文件在Arch Linux加LXDE的环境里会导致Vim出错。</p>
-<p>重新配置了vimrc使现在的Vim支持原有的大部分功能，
-然而鼠标的功能还是没有以前那么强悍了。</p>
-<pre class="literal-block">
-set mouse=a         &quot; Enable the use of the mouse.
-set selection=exclusive ...</pre></div>
-                        <a class="btn primary xsmall" href="/VimExperience001.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/CppLearning003.html">C++学习(三)：线性表的奇技淫巧(一)</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-02-11T21:30:00+08:00">
-        <i class="icon-calendar"></i>二 11 二月 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/coding.html"><i class="icon-folder-open"></i>Coding</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
-	<a href="/tag/data-structure.html"><i class="icon-tag"></i>data structure</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>在Github上建了一个新仓库练习数据结构，
-地址在这里：</p>
-<blockquote>
-<a class="reference external" href="https://github.com/scutLaoYi/data-structure">https://github.com/scutLaoYi/data-structure</a></blockquote>
-<p>clone的话记得在后面加.git后缀(没什么好clone的)。</p>
-<p>我觉得莫名其妙的是代码类型居然被判为57%的C、25%的C++，
-以及18%的Objective-C。</p>
-<p>学习的资料上一篇博文已经说过了，是个好地方。</p>
-<p>从线性表学起，实现了资料里说的一些问题，
-光看不写的话感觉倒是容易看懂，不过真的写起来总是一大堆问题。</p>
-<p>上哪都一样。</p>
-<p>线性表才看了一半不到，
-总结一下自己用的一些实现方法及若干这几天见到的牛逼技术。</p>
-<div class="section" id="id1">
-<h2>数据结构的实现</h2>
-<p>自己的实现方案使用了类模板，
-首先定义了一个节点的结构：</p>
-<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="n">Node</span>
-<span class="p">{</span>
-    <span class="n">Type</span> <span class="n">value</span><span class="p">;</span>
-    <span class="n">Node</span> <span class="o">*</span><span class="n">nex</span><span class="p">;</span>
-
-    <span class="n">Node</span><span class="p">();</span>
-<span class="p">};</span>
-</pre></div>
-<p>包含一个节点值及一个指向下一个节点的指针。
-构造函数用于初始化指针，赋值为0。</p>
-<p>然后搞了一个freelist用于处理内存。</p>
-<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
-<span class="k">class</span> <span class="nc">Freelist</span>
-<span class="p">{</span>
-    <span class="n">Node</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">top ...</span></pre></div></div>
-                        <a class="btn primary xsmall" href="/CppLearning003.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/CppLearning002.html">C++学习(二)：大家一起来Makefile</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-02-08T16:30:00+08:00">
-        <i class="icon-calendar"></i>六 08 二月 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/coding.html"><i class="icon-folder-open"></i>Coding</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>由于一直没找到好的材料，C++的学习拖了好几天没什么进展。
-主要遇到的问题是白书的题目(UVAoj)有些麻烦，之前刷了十几道水题一直很顺利，
-到了数据结构系列突然每道题都有点难以理解（难道是自己英语水平突然掉了...），
-刷了几天进展很慢，加上每道题都有针对性的代码，对于我这种目标是复习数据结构的不太合适。</p>
-<p>然后玩了两天JavaScript（每页一句模块实现），玩了一天游戏...</p>
-<p>找到一个好地方学习数据结构：</p>
-<blockquote>
-<a class="reference external" href="http://www.geeksforgeeks.org/data-structures/">http://www.geeksforgeeks.org/data-structures/</a></blockquote>
-<p>今天开始敲了一下线性表，过几天再写点总结。</p>
-<p>然后终于到了这篇的主题，makefile的编写。</p>
-<div class="section" id="make">
-<h2>make</h2>
-<p>所谓的make，是便于编译多个文件的工具，用make可以实现自动化构建软件。
-同时使用make可以根据依赖关系自动编译，简化手工操作。
-具体的介绍可以查一下make的手册页。</p>
-<p>很多的IDE现在都实现了make的功能，
-比如之前用过的Visual Studio系列，Code::block，甚至是Qt SDK的开发环境，
-只要建立一个工程，就可以让IDE自动完成多文件编译和依赖检查。</p>
-<p>但Linux下的很多软件还是使用make协助软件的部署，
-而像博主这种懒得用IDE的家伙，
-手头就一个Vim写代码，一个g++编译（写C++的话），
-有时用用gdb调试一番（更多时候是暴力调试 ...</p></div>
-                        <a class="btn primary xsmall" href="/CppLearning002.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/md5-generator.html">md5 generator</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-02-04T11:30:00+08:00">
-        <i class="icon-calendar"></i>二 04 二月 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/tool.html"><i class="icon-folder-open"></i>Tool</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/md5.html"><i class="icon-tag"></i>md5</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary">A md5 generating tool for myself.
-                        <a class="btn primary xsmall" href="/md5-generator.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/CppLearning001.html">C++学习(一):白书基础总结</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-01-31T16:30:00+08:00">
-        <i class="icon-calendar"></i>五 31 一月 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/coding.html"><i class="icon-folder-open"></i>Coding</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>装完Arch Linux最近开始复习一下C++和数据结构，为下学期做好准备。</p>
-<p>用白书刷一些简单的题目复习基本语法，发现自己太不注重基本的东西了，之前瞎搞ACM的时候也是，好多方便有效的工具都不认识。</p>
-<p>因此记录一下标准库的一些基本的工具和输入输出的简单总结。</p>
-<p>本篇主要记录一些C语言的常用工具。</p>
-<div class="section" id="id1">
-<h2>输入输出及文件操作</h2>
-<p><strong>scanf</strong></p>
-<blockquote>
-<p>这货读取输入并对相应的内存地址赋值。
-分割符是空格、回车及制表符等。</p>
-<p>返回值是一个整型表示成功读取到的数据量。
-读取失败或者EOF文件结束都会停止。</p>
-<p>默认情况下scanf不会吃掉行尾的回车，
-需要让它吃掉行尾回车的话可以这样：</p>
-<p>scanf(&quot;%d\n&quot;, &amp;num)</p>
-<p>上面这句首先读了一个整型值给变量num，并且吃掉了后面的一个\n</p>
-<p>当然这种搞法的缺陷在于只能用于Linux类型系统，
-因为windows和Mac OS的回车符都不一样。</p>
-</blockquote>
-<p><strong>sscanf/fscanf</strong></p>
-<blockquote>
-<p>scanf的姊妹版本，分别读取字符串或者文件。</p>
-<p>sscanf使用的时候加入第一个参数指定输入的源字符串。</p>
-<p>fscanf使用的时候加入第一个参数指定输入的源文件指针。</p>
-</blockquote>
-<p><strong>fgets(buffer, size, source)</strong></p>
-<blockquote>
-<p>从输入源source中读入一行字符数据到buffer缓冲区中，最大长度为size。
-超过size部分会被忽略。</p>
-<p>buffer为一个char数组，size为整型值定义长度。</p>
-<p>source可以为文件等，默认的终端标准输入(standard input)是这个： stdin ...</p></blockquote></div>
-                        <a class="btn primary xsmall" href="/CppLearning001.html">more ...</a>
+<a class="reference external" href="https://wiki.archlinux.org/index.php/LXDE#Changes_to_desktop.conf_with_lxsession_1:0.5.1-1">https://wiki.archlinux.org/index.php/LXDE#Changes_to_desktop.conf_with_lxsession_1:0.5.1-1</a></blockquote>
+<p>于是改了配置，
+重启，
+熟悉的桌面就回来了。</p>
+</div>
+<div class="section" id="dnscrypt-proxy">
+<h2>dnscrypt_proxy故障</h2>
+<p>发现dnscrypt_proxy启动失败，
+查了输出发现丢失几个奇怪的库文件，
+但查了一下系统发现库是在的。</p>
+<p>搞了几下没搞定，
+直接把dnscrypt_proxy删了。</p>
+<p>由于是源码编译安装 ...</p></div>
+                        <a class="btn primary xsmall" href="/arch_upgrade_note.html">more ...</a>
                 </div>
         </div>
         <hr />
@@ -591,20 +369,52 @@ sda      8:0    0 298.1G  0 disk
                 </div>
         </div>
         <hr />
+        <div class="article">
+                <h1><a href="/Arch001.html">Arch Linux学习：安装篇(一)</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-01-08T19:30:00+08:00">
+        <i class="icon-calendar"></i>三 08 一月 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
 
-        <div class="pagination">
-        <ul>
-                        <li class="prev"><a href="/index2.html">&larr; Previous</a></li>
-                        <li class=""><a href="/index.html">1</a></li>
-                        <li class=""><a href="/index2.html">2</a></li>
-                        <li class="active"><a href="/index3.html">3</a></li>
-                        <li class=""><a href="/index4.html">4</a></li>
-                        <li class=""><a href="/index5.html">5</a></li>
-                        <li class=""><a href="/index6.html">6</a></li>
-                        <li class="next"><a href="/index4.html">Next &rarr;</a></li>
-        </ul>
+
+<span class="label">Tags</span>
+	<a href="/tag/arch-linux.html"><i class="icon-tag"></i>Arch Linux</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。</p>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>关于Arch Linux</h2>
+<p>Arch Linux是一个现在较为流行的Linux发行版，
+支持32/64位处理器,
+以Rolling Releases方式发布新版本。</p>
+<p>官方站点：</p>
+<p><a class="reference external" href="https://www.archlinux.org">https://www.archlinux.org</a></p>
+<p>Arch Linux的哲学是简洁、保证代码的正确性、用户为中心、开放性及自由性。
+因此据称Arch Linux的一个非常重要的特点是轻量级，
+让用户自行选择所需的组件构建属于自己的系统，
+当然这都以系统的开放性作为前提，
+Arch Linux提供了非常大的自由度和开放度供用户完全控制自己的系统。</p>
+<p><a class="reference external" href="https://wiki.archlinux.org/index.php/The_Arch_Way">https://wiki.archlinux.org/index.php/The_Arch_Way</a></p>
+<p>Arch Linux支持syslinux或GRUB两种bootloader，
+包管理器为Pacman(package manager)，
+使用systemd作为系统的服务管理器(这货还没弄清楚)</p>
+<p>在下列资源的帮助下我顺利完成了系统的安装:</p>
+<p>一个是Arch官方的Beginners' Guide:</p>
+<p><a class="reference external" href="https://wiki.archlinux.org/index.php/Beginners%27_Guide">https://wiki.archlinux.org/index.php/Beginners ...</a></p></div>
+                        <a class="btn primary xsmall" href="/Arch001.html">more ...</a>
+                </div>
         </div>
+        <hr />
 
+                <section id="content" class="body">
+                <h1>Pages</h1>
+                        <li><a href="/pages/about.html">About</a></li>
+                </section>
         </div><!--/span-->
 
                 <div class="span3 well sidebar-nav" id="sidebar">

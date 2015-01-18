@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>老逸的个人站 - laoyi</title>
+    <title>老逸的个人站 - Coding</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="laoyi">
@@ -66,7 +66,7 @@
             <ul class="nav">
                 <li><a href="/pages/about.html">About</a></li>
                           <li class="divider-vertical"></li>
-                  <li >
+                  <li class="active">
                     <a href="/category/coding.html">
 						<i class="icon-folder-open icon-large"></i>Coding
 					</a>
@@ -106,6 +106,142 @@
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
+        <div class="article">
+                <h1><a href="/python_project_multithread_ping_check.html">一种并发小规模服务器连通性检测的Python实现</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-09-03T09:30:00+08:00">
+        <i class="icon-calendar"></i>三 03 九月 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/coding.html"><i class="icon-folder-open"></i>Coding</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+	<a href="/tag/web-tool.html"><i class="icon-tag"></i>web tool</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><div class="section" id="id1">
+<h2>问题描述</h2>
+<p>博主购买了某shadowsocks服务，
+众所周知shadowsocks的配置文件外貌如下：</p>
+<pre class="literal-block">
+{
+  server:server_name,
+  server_port:1234,
+  local_port:1234,
+  password:server_password,
+  method:encypt_method,
+  timeout:600
+}
+</pre>
+<p>博主的服务器列表在某网页上，
+因此每次需要配置都要到网页上找。</p>
+<p>而比较麻烦的是，
+随着gfw的不断升级和修改配置，
+服务器的可用性也一直变化，
+大部分服务器在一段时间后都会变得不可用，
+而且由于端口和密码的改变，
+也经常需要修改本地的ss配置文件以保持成功连接。</p>
+<p>因此原有情况博主需要经常登录网站获得服务器列表，
+手动ping每个ip查找可用的服务器，
+再把服务器连接信息写到本地的config.json文件中，
+最后重新启动shadowsocks。</p>
+<p>相当痛苦。</p>
+</div>
+<div class="section" id="id2">
+<h2>需求描述</h2>
+<p>一个本地的自动化工具，
+自动抓取最新的服务器列表，
+自动分析提取出服务器配置信息，
+自动测试与服务器的连通性和延迟时间，
+最后自动生成最优连接服务器的配置文件输出到config.json。</p>
+<p>这样博主只需要拿生成的config.json给shadowsocks使用即可。</p>
+<p>另外，
+由于多个服务器的连接测试都需要消耗一定的时间，
+因此最好能够并发检测，
+最后统计并处理所有结果。</p>
+</div>
+<div class="section" id="pythonhtmlhtmlparser">
+<h2>Python网页HTML分析工具HTMLParser</h2>
+<p>这是一个简单的HTML页面分析库，
+其基本分析方式是遍历扫描HTML文档内容，
+用户继承该基类，
+在派生类中通过回调的方式自定义检测到各种标签的处理过程。</p>
+<p>由于博主的服务器列表在页面内容里，
+通过分析页面源代码找到服务器配置数据储存在一个class为'crayon-plain-wrap ...</p></div>
+                        <a class="btn primary xsmall" href="/python_project_multithread_ping_check.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/AndroidLearning001-basic-principle.html">Android基础学习（一）：基本概念与理念</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-05-01T16:00:00+08:00">
+        <i class="icon-calendar"></i>四 01 五月 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/coding.html"><i class="icon-folder-open"></i>Coding</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/android.html"><i class="icon-tag"></i>Android</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>眼下正是移动客户端应用泛滥的时代，
+Android与iOS无疑是当前移动客户端最为热门的两大系统。</p>
+<p>于是博主也跟随潮流，
+学起了Android。</p>
+<p>本博文不涉及具体代码，
+只简单记录整理基本概念，
+权当总结。</p>
+<div class="section" id="id1">
+<h2>Android应用的基本理念</h2>
+<p>Android应用与传统应用程序一样基于操作系统提供的抽象硬件环境，
+而且有更多的运行限制。</p>
+<p>由于Android系统基于Linux内核，
+存在着众多的保护机制，
+每个Android应用会通过各自独立的用户启动和运行。
+并且每个应用在运行时处在Android系统内建的沙盒中，
+与外界多了一层隔离。</p>
+<p>在资源管理方面，
+Android应用必须声明对特定资源的访问请求，
+才可执行对应的操作。
+例如外部存储器的读写、
+照相机的调用、
+网络的调用等。
+这些权限声明在用户安装的过程中进行确认，
+仅当用户授权才可以安装应用。</p>
+<p>虽然这点在实际操作过程中有很大变数，哈哈～</p>
+<p>与桌面程序较为不同的是，
+Android应用更多依赖于用户的交互，</p>
+<p>在Android应用中事件是一个非常重要的概念，
+用户的任何操作都会触发一个事件，
+例如手指的滑动，或者是按钮的点击。</p>
+<p>当用户的事件触发时，
+Android系统通知应用程序事件的发生，
+交由应用进行处理。</p>
+<p>在Android应用的内部，
+通过编写对应的回调函数来完成对事件的处理,
+例如onClick()函数，
+当用户点击按钮时该回调函数就会被调用。
+这也就构成了最简单的Android应用形式。</p>
+</div>
+<div class="section" id="id2">
+<h2>四大组件基本概念</h2>
+<p>Android应用中存在着四大组件，
+分别是Activity、Service、Content Provider和Broadcast Receiver</p>
+<p><strong>Activity</strong></p>
+<p>Android应用通过若干Activity进行组织。</p>
+<p>Activity控制着应用的某个窗口界面 ...</p></div>
+                        <a class="btn primary xsmall" href="/AndroidLearning001-basic-principle.html">more ...</a>
+                </div>
+        </div>
+        <hr />
         <div class="article">
                 <h1><a href="/CppLearning009-heapsort.html">C++学习(九)：最大堆与堆排序</a></h1>
                 <div class="well small"><footer class="post-info">
@@ -298,271 +434,6 @@ siftdown操作某个特定的节点，
         </div>
         <hr />
         <div class="article">
-                <h1><a href="/VimExperience002-registers.html">Vim经验记录(二):寄存器的相关知识</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-03-15T16:30:00+08:00">
-        <i class="icon-calendar"></i>六 15 三月 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/tool.html"><i class="icon-folder-open"></i>Tool</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/vim.html"><i class="icon-tag"></i>Vim</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>本文参考一下博文：</p>
-<blockquote>
-<a class="reference external" href="http://blog.sanctum.geek.nz/advanced-vim-registers/">http://blog.sanctum.geek.nz/advanced-vim-registers/</a></blockquote>
-<div class="section" id="id1">
-<h2>基本功能</h2>
-<p><strong>概念及基本用法</strong></p>
-<p>Vim的寄存器基本功能是个剪贴板，
-在寄存器中可以保存文本内容，
-更强悍的是可以保存命令记录，
-俗称宏记录。</p>
-<p>寄存器有多款，
-最简单的是命名寄存器，
-键盘上的26个字母可以指向26个不同的命名寄存器。</p>
-<p>在一般模式下通过单个双引号调用寄存器。
-双引号后接寄存器名称，
-最后是文本操作命令。</p>
-<p>用例子解释最简单：</p>
-<pre class="literal-block">
-将当前文本行复制到a寄存器中：
-    &quot;ayy
-将b寄存器中的内容粘贴到当前光标处：
-    &quot;bp
-</pre>
-<p>一目了然，
-通过更换其他各种命令自然就能实现多种功能了。</p>
-<p><strong>查看所有非空寄存器的状态</strong></p>
-<p>在一般模式下敲以下命令：</p>
-<blockquote>
-:reg</blockquote>
-<p>可以看到当前所有非空寄存器的内容。</p>
-</div>
-<div class="section" id="id2">
-<h2>宏录制与使用</h2>
-<p>这里说的宏是指一系列操作的集合。
-Vim中的寄存器也可用于录制用户的宏，
-再非常方便的重放，
-达到快速完成一系列指令的功能。</p>
-<p>录制宏的操作非常简单，
-首先通过q命令进入宏录制模式，
-q后接寄存器的名称，比如a。</p>
-<blockquote>
-qa</blockquote>
-<p>接着就可以随意操作当前文本了，
-你的一举一动Vim都会记录下来并保存到寄存器中。</p>
-<p>最后(记得退出到一般模式中)再按一次q退出宏录制模式。</p>
-<blockquote>
-q</blockquote>
-<p>重放宏直接在一般模式下用&#64;关键字加寄存器名称：</p>
-<blockquote>
-&#64;a</blockquote>
-<p>录制的操作便会自动重放一遍 ...</p></div>
-                        <a class="btn primary xsmall" href="/VimExperience002-registers.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/JobHunting003.html">实习求职(三)：百田软件开发工程师(技术复试篇)</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-03-13T20:30:00+08:00">
-        <i class="icon-calendar"></i>四 13 三月 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/life.html"><i class="icon-folder-open"></i>Life</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/audition.html"><i class="icon-tag"></i>audition</a>
-	<a href="/tag/recruitment.html"><i class="icon-tag"></i>recruitment</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>忐忑了两天之后博主接到了来自百田的二面通知。(^_^)</p>
-<p>先前同去的小伙伴们却都没有消息，
-在焦急的等待中过了一天仍然音信全无，
-感觉就像被干掉了。</p>
-<p>不过标神早已拿到腾讯广州研究院创新班的录取通知书，
-而小超也开始积极准备cvte的面试。</p>
-<div class="section" id="id2">
-<h2>准备</h2>
-<p>在接到电话后顺便询问了二面的内容，
-得到的答复是技术复试。</p>
-<p>这让博主差点抓狂，
-要知道博主已经在一面把所有学过的看过的听说过的东西全部拿出来吹了一遍，
-复试如果继续探讨技术问题，
-不管聊什么都不可能会的。</p>
-<p>想了一下只好死马当作活马医，
-总结了上回的劣势，
-准备工作以巩固基础为主。</p>
-<p>刚好手头有跟孙少借来的《现代操作系统》，
-还有一本数据结构与算法的课本。</p>
-<p>花了一个晚上的时间刷了一遍操作系统，
-线程与进程相关、IPC问题、进程调度、内存管理、段与页的理论分析、置换算法、文件系统与i-node...
-还花了点时间看了第十章的Linux实例研究。</p>
-<p>再用了一个早上刷了一遍数据结构，
-常用的排序算法、外排序的两种思路、二分查找、哈希、索引（2-3树、B树...）、图论的基本常识...</p>
-<p>准备完成也就死而无憾了，
-毕竟超过能力的东西实在没办法。</p>
-<p>带着满脑子BC范式第三范式，
-博主踏上了开往科韵路的专线公车。</p>
-</div>
-<div class="section" id="id3">
-<h2>前戏</h2>
-<p>博主又来早了，
-找略显呆萌又万分可爱的前台姐姐交了一份成绩单，
-还不到五点，
-约的是六点。</p>
-<p>等待的时候与旁边的兄弟搭话，
-一问才发现原来是直系师兄，
-也是来面软件开发的 ...</p></div>
-                        <a class="btn primary xsmall" href="/JobHunting003.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/JobHunting002.html">实习求职(二)：百田软件开发工程师(初次面试篇)</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-03-11T20:30:00+08:00">
-        <i class="icon-calendar"></i>二 11 三月 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/life.html"><i class="icon-folder-open"></i>Life</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/audition.html"><i class="icon-tag"></i>audition</a>
-	<a href="/tag/recruitment.html"><i class="icon-tag"></i>recruitment</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>这是博主第一次参加面试，
-兴奋与紧张之情不必言说。</p>
-<div class="section" id="id2">
-<h2>前戏</h2>
-<p>小超、标神等均顺利通过了笔试的考验，
-由于分配到相同的时间面试，
-因此组织当天一同乘坐公车前往百田总部。</p>
-<p>由于天气严寒，
-连嘴里随意吹出的气体都能蒙上白雾，
-因此面试三人组决定卸下原定的正装+皮鞋装扮，
-改为牛仔裤加太空衣，
-毕竟保命要紧。</p>
-<p>对时间的拿捏也不是非常准确，
-仨人都想着不能迟到给面试官留下坏印象，
-因此八点便在饭堂集中，
-吃完早餐打点行装乘上八点四十的公车立即出发。</p>
-<p>没想到九点二十我们已经站在百田位于二楼的办公地点，
-而约定的面试时间是十点半。</p>
-<p>于是被锁在防盗门外，
-幸好有某位不知名的漂亮美工姐姐(策划姐姐？)到达，
-才得以进入。(对百田的印象瞬间上升一个档次)</p>
-<p>填完表格就没什么事情了，
-走来走去发呆上厕所，
-等着面试官出现。
-在厕所里发现远处多玩游戏的大logo，
-后来才知道广州非常多的软件公司都在这个地方，
-俗称“天河软件园科韵路园区”。</p>
-<p>从厕所回来发现面试官已经在等着了，
-面试正式开始。</p>
-</div>
-<div class="section" id="id3">
-<h2>开场</h2>
-<p>两个帅哥，
-一个非常开朗很好相处而且经验很足的样子，
-另一个看起来技术超级厉害，很秒杀的样子。</p>
-<p>博主的面试比较奇怪，
-居然是一个一个来...</p>
-<p>见面自然是以寒暄开始，
-两句话便消除了最初的陌生感。</p>
-<p>询问了交通方式，
-是否有面试经验，
-为何找实习，
-是不是学校硬性规定还是有自己的打算。</p>
-<p>吹水的话题博主还是比较擅长的，
-于是跟面试官开始东拉西扯。
-期间还问到是否耍游戏 ...</p></div>
-                        <a class="btn primary xsmall" href="/JobHunting002.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/JobHunting001.html">实习求职(一)：百田软件开发工程师(笔试篇)</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-03-10T20:30:00+08:00">
-        <i class="icon-calendar"></i>一 10 三月 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/life.html"><i class="icon-folder-open"></i>Life</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/audition.html"><i class="icon-tag"></i>audition</a>
-	<a href="/tag/recruitment.html"><i class="icon-tag"></i>recruitment</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>这几天没有更新内容，
-因为博主忙着准备资料找工作。</p>
-<p>压力还是很大的，
-毕竟在大华工这种地方，
-随便路上抓一个人就搞过进化算法，
-开发过hadoop服务器集群，
-甚至是ACM-ICPC world final选手。</p>
-<div class="section" id="id2">
-<h2>笔试</h2>
-<p>先扯几句关于笔试的内容。</p>
-<p>百田在前几天来到学校搞宣讲会，
-那天下午好像是和小超在玩cvte的在线测评，
-吃完饭回来标神来电话，
-说百田招聘现场笔试，
-要不要去试水。</p>
-<p>既然有机会就去试一发呗，
-于是拿着一张简历一只笔就杀过去。</p>
-<p>现场还出了点状况，
-投影坏了，
-堂堂大华工，
-让人家百田的老大聊了一个小时没有PPT的公司介绍。</p>
-<p>于是笔试开始，
-由于是第一份笔试题，
-博主也不好说难易程度，
-不过从其他同学的口中得知，
-腾讯的广研创新班拿去年笔试的题目给大伙做，
-整整一份试卷的量，
-选择填空什么都有。
-相比来说百田的笔试题目就简单明了了，
-几道大题，
-手写代码即可。</p>
-<p>考的东西与网上的面试经验也有些类似，
-字符串处理，
-进制转换，
-还有一道简单的计算几何学。</p>
-<p><strong>字符串处理</strong></p>
-<p>写个函数，
-输入s1和s2两个字符串，
-去掉s1中在s2里出现过的所有字符，
-并将结果返回。
-要求是时间复杂度最低。</p>
-<p>由于给定了限制条件所有字符都是字母，
-于是直接长度26的bool数组标记s2的所有字符，
-扫一遍s1去掉所有出现的字符，
-时间复杂度O(n)，
-博主水平有限，感觉没法再快了。</p>
-<p>后来在跟院长聊天时得到一个说法 ...</p></div>
-                        <a class="btn primary xsmall" href="/JobHunting001.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
                 <h1><a href="/CppLearning006.html">C++学习(六)：栈的实现及若干算法</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -658,64 +529,171 @@ q</blockquote>
         </div>
         <hr />
         <div class="article">
-                <h1><a href="/xss_basic.html">web概念学习：XSS跨站代码注入攻击</a></h1>
+                <h1><a href="/CppLearning004.html">C++学习(四)：线性表的奇技淫巧(二)</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2014-02-17T20:30:00+08:00">
-        <i class="icon-calendar"></i>一 17 二月 2014
+<abbr class="published" title="2014-02-16T21:30:00+08:00">
+        <i class="icon-calendar"></i>日 16 二月 2014
 </abbr>
 <span class="label">By</span>
 <a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
 <span class="label">Category</span>
-<a href="/category/web.html"><i class="icon-folder-open"></i>Web</a>.
+<a href="/category/coding.html"><i class="icon-folder-open"></i>Coding</a>.
 
 
 <span class="label">Tags</span>
-	<a href="/tag/xss.html"><i class="icon-tag"></i>xss</a>
+	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
+	<a href="/tag/data-structure.html"><i class="icon-tag"></i>data structure</a>
 </footer><!-- /.post-info --></div>
-                <div class="summary"><p>今天看到乌云知识库关于XSS文章，心血来潮学了一下一些概念，还是蛮好玩的。^_^</p>
-<p>维基百科关于XSS的介绍在这里：</p>
+                <div class="summary"><p>这两天去玩了，
+进度比较慢。</p>
+<p>无序线性表终于算是搞了个大概，
+有些过于繁琐的就没有管了。</p>
+<p>准备入手有序线性表，
+把一些牛逼的算法也弄进去，
+二分、堆排序、归并排序什么的。</p>
+<div class="section" id="id1">
+<h2>奇技淫巧大收集（续）</h2>
+<p><strong>线性表判环</strong></p>
 <blockquote>
-<a class="reference external" href="https://en.wikipedia.org/wiki/Cross-site_scripting">https://en.wikipedia.org/wiki/Cross-site_scripting</a></blockquote>
-<p>XSS的全称是Cross-site scripting，中文可以翻译为跨站脚本攻击。</p>
-<p>基本的入侵方式是在目标网页的生成过程中注入代码，
-然后让用户浏览目标网页，
-这个过程中目标网页的代码也就被执行了，
-达到目的。</p>
-<p>通常说来注入的代码为JavaScript，因为需要在客户端浏览器运行，
-所以可以是客户端脚本。
-不过也看到有些直接拿HTML来玩的。</p>
-<p>常见的有反射型XSS，DOM型XSS以及持续型XSS。</p>
-<div class="section" id="reflected">
-<h2>反射型(Reflected)</h2>
-<p>反射型的XSS基本流程如下：</p>
-<pre class="literal-block">
-1. 找到一个存在XSS漏洞的页面
-2. 通过构造URL，在目标页面的URL后追加注入的代码并绕过服务器过滤(如果有的话)
-3. 将构造出来的URL发布并引诱受害者点击
-4. 用户点击该URL，跳转到目标页面，服务器将注入的代码写入最终页面，返回用户浏览器
-</pre>
-<p>简单的例子：</p>
-<p>假设有一个页面接受用户的输入并将内容输出在原页面上，
-php代码如下(假设文件名是test.php)：</p>
-<div class="highlight"><pre><span class="cp">&lt;?php</span>
- <span class="nv">$user_input</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">];</span>
- <span class="k">echo ...</span></pre></div></div>
-                        <a class="btn primary xsmall" href="/xss_basic.html">more ...</a>
+<p>就是判别一个线性表中有没有出现环。</p>
+<p><strong>简单标记方案</strong></p>
+<p>几种标记都可以。</p>
+<p>如果是不重复的整数并且范围比较小的话，
+直接开个bool型的数组，用下标表示某个特定的数，
+对应值为1指定该值出现过，
+对应值为0指定该值没有出现。</p>
+<p>整数下标的数组搞不定则可以考虑弄个标准库的哈希表。</p>
+<p>总之，思路就是遍历链表，
+把出现过的标记起来，
+当遍历过程中再次碰到被标记过的节点说明链表有环，
+否则肯定能搜索到链表的表尾并结束。</p>
+<p>需要一些额外的空间及计算量。</p>
+<p><strong>Floyd方案</strong></p>
+<p>感觉搞数学的家伙总能找到一些神奇的方法解决某些奇怪的问题。</p>
+<p>开两个指针fast, slow，均初始化为头节点，
+fast每次移动两个节点，slow每次移动一个节点。</p>
+<p>单步运行，直到：</p>
+<blockquote>
+<p>1、fast指针到达表尾，无环；</p>
+<p>2、fast指针与slow指针在某一步指向同一个节点，有环；</p>
+</blockquote>
+</blockquote>
+<p><strong>线性表除环</strong></p>
+<blockquote>
+<p>简单办法就直观了，
+直接每个节点检查，
+很蠢，不详谈。</p>
+<p><strong>高效方案</strong></p>
+<p>首先，用上述的Floyd算法找到环 ...</p></blockquote></div>
+                        <a class="btn primary xsmall" href="/CppLearning004.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/CppLearning003.html">C++学习(三)：线性表的奇技淫巧(一)</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-02-11T21:30:00+08:00">
+        <i class="icon-calendar"></i>二 11 二月 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/coding.html"><i class="icon-folder-open"></i>Coding</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
+	<a href="/tag/data-structure.html"><i class="icon-tag"></i>data structure</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>在Github上建了一个新仓库练习数据结构，
+地址在这里：</p>
+<blockquote>
+<a class="reference external" href="https://github.com/scutLaoYi/data-structure">https://github.com/scutLaoYi/data-structure</a></blockquote>
+<p>clone的话记得在后面加.git后缀(没什么好clone的)。</p>
+<p>我觉得莫名其妙的是代码类型居然被判为57%的C、25%的C++，
+以及18%的Objective-C。</p>
+<p>学习的资料上一篇博文已经说过了，是个好地方。</p>
+<p>从线性表学起，实现了资料里说的一些问题，
+光看不写的话感觉倒是容易看懂，不过真的写起来总是一大堆问题。</p>
+<p>上哪都一样。</p>
+<p>线性表才看了一半不到，
+总结一下自己用的一些实现方法及若干这几天见到的牛逼技术。</p>
+<div class="section" id="id1">
+<h2>数据结构的实现</h2>
+<p>自己的实现方案使用了类模板，
+首先定义了一个节点的结构：</p>
+<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="n">Node</span>
+<span class="p">{</span>
+    <span class="n">Type</span> <span class="n">value</span><span class="p">;</span>
+    <span class="n">Node</span> <span class="o">*</span><span class="n">nex</span><span class="p">;</span>
+
+    <span class="n">Node</span><span class="p">();</span>
+<span class="p">};</span>
+</pre></div>
+<p>包含一个节点值及一个指向下一个节点的指针。
+构造函数用于初始化指针，赋值为0。</p>
+<p>然后搞了一个freelist用于处理内存。</p>
+<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">Freelist</span>
+<span class="p">{</span>
+    <span class="n">Node</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">top ...</span></pre></div></div>
+                        <a class="btn primary xsmall" href="/CppLearning003.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/CppLearning002.html">C++学习(二)：大家一起来Makefile</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-02-08T16:30:00+08:00">
+        <i class="icon-calendar"></i>六 08 二月 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/coding.html"><i class="icon-folder-open"></i>Coding</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>由于一直没找到好的材料，C++的学习拖了好几天没什么进展。
+主要遇到的问题是白书的题目(UVAoj)有些麻烦，之前刷了十几道水题一直很顺利，
+到了数据结构系列突然每道题都有点难以理解（难道是自己英语水平突然掉了...），
+刷了几天进展很慢，加上每道题都有针对性的代码，对于我这种目标是复习数据结构的不太合适。</p>
+<p>然后玩了两天JavaScript（每页一句模块实现），玩了一天游戏...</p>
+<p>找到一个好地方学习数据结构：</p>
+<blockquote>
+<a class="reference external" href="http://www.geeksforgeeks.org/data-structures/">http://www.geeksforgeeks.org/data-structures/</a></blockquote>
+<p>今天开始敲了一下线性表，过几天再写点总结。</p>
+<p>然后终于到了这篇的主题，makefile的编写。</p>
+<div class="section" id="make">
+<h2>make</h2>
+<p>所谓的make，是便于编译多个文件的工具，用make可以实现自动化构建软件。
+同时使用make可以根据依赖关系自动编译，简化手工操作。
+具体的介绍可以查一下make的手册页。</p>
+<p>很多的IDE现在都实现了make的功能，
+比如之前用过的Visual Studio系列，Code::block，甚至是Qt SDK的开发环境，
+只要建立一个工程，就可以让IDE自动完成多文件编译和依赖检查。</p>
+<p>但Linux下的很多软件还是使用make协助软件的部署，
+而像博主这种懒得用IDE的家伙，
+手头就一个Vim写代码，一个g++编译（写C++的话），
+有时用用gdb调试一番（更多时候是暴力调试 ...</p></div>
+                        <a class="btn primary xsmall" href="/CppLearning002.html">more ...</a>
                 </div>
         </div>
         <hr />
 
         <div class="pagination">
         <ul>
-                        <li class="prev"><a href="/author/laoyi.html">&larr; Previous</a></li>
-                        <li class=""><a href="/author/laoyi.html">1</a></li>
-                        <li class="active"><a href="/author/laoyi2.html">2</a></li>
-                        <li class=""><a href="/author/laoyi3.html">3</a></li>
-                        <li class=""><a href="/author/laoyi4.html">4</a></li>
-                        <li class=""><a href="/author/laoyi5.html">5</a></li>
-                        <li class=""><a href="/author/laoyi6.html">6</a></li>
-                        <li class="next"><a href="/author/laoyi3.html">Next &rarr;</a></li>
+                        <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+                        <li class="active"><a href="/category/coding.html">1</a></li>
+                        <li class=""><a href="/category/coding2.html">2</a></li>
+                        <li class=""><a href="/category/coding3.html">3</a></li>
+                        <li class="next"><a href="/category/coding2.html">Next &rarr;</a></li>
         </ul>
         </div>
 

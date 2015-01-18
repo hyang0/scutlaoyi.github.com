@@ -1,0 +1,661 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/tool.atom.xml" rel="self"></link><id>/</id><updated>2014-07-18T14:30:00+08:00</updated><entry><title>每页一句大集合</title><link href="/mei-ye-yi-ju-da-ji-he.html" rel="alternate"></link><updated>2014-07-18T14:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-07-18:mei-ye-yi-ju-da-ji-he.html</id><summary type="html">
+    &lt;p&gt;这篇博文用于展示博主收藏的所有经典句子，点击下方载入按钮后出现。&lt;/p&gt;
+    &lt;button id="load_button" onclick="loadAllSentences()"&gt;载入&lt;/button&gt;
+    &lt;div id="sentences_div"&gt;
+    &lt;/div&gt;
+
+    &lt;script&gt;
+      function listAllItemFromArray(item_array)
+      {
+        var index;
+        
+        var content_div = document.getElementById("sentences_div");
+
+        var list_node = document.createElement("ul");
+        for(index = 0; index &lt; item_array.length; ++index)
+        {
+          var new_elem = document.createElement("li");
+          new_elem.innerHTML = item_array[index];
+          list_node.insertBefore(new_elem, null);
+        }
+        content_div.insertBefore(list_node, null);
+        return;
+      }
+
+      function loadAllSentences()
+      {
+        listAllItemFromArray(sentences);
+        var load_button_ = document.getElementById("load_button");
+        load_button.style.visibility = "hidden";
+        return;
+      }
+    &lt;/script&gt;
+  </summary><category term="page sentences"></category></entry><entry><title>Vim经验记录(二):寄存器的相关知识</title><link href="/VimExperience002-registers.html" rel="alternate"></link><updated>2014-03-15T16:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-03-15:VimExperience002-registers.html</id><summary type="html">&lt;p&gt;本文参考一下博文：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;a class="reference external" href="http://blog.sanctum.geek.nz/advanced-vim-registers/"&gt;http://blog.sanctum.geek.nz/advanced-vim-registers/&lt;/a&gt;&lt;/blockquote&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;基本功能&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;概念及基本用法&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Vim的寄存器基本功能是个剪贴板，
+在寄存器中可以保存文本内容，
+更强悍的是可以保存命令记录，
+俗称宏记录。&lt;/p&gt;
+&lt;p&gt;寄存器有多款，
+最简单的是命名寄存器，
+键盘上的26个字母可以指向26个不同的命名寄存器。&lt;/p&gt;
+&lt;p&gt;在一般模式下通过单个双引号调用寄存器。
+双引号后接寄存器名称，
+最后是文本操作命令。&lt;/p&gt;
+&lt;p&gt;用例子解释最简单：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+将当前文本行复制到a寄存器中：
+    &amp;quot;ayy
+将b寄存器中的内容粘贴到当前光标处：
+    &amp;quot;bp
+&lt;/pre&gt;
+&lt;p&gt;一目了然，
+通过更换其他各种命令自然就能实现多种功能了。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;查看所有非空寄存器的状态&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在一般模式下敲以下命令：&lt;/p&gt;
+&lt;blockquote&gt;
+:reg&lt;/blockquote&gt;
+&lt;p&gt;可以看到当前所有非空寄存器的内容。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;宏录制与使用&lt;/h2&gt;
+&lt;p&gt;这里说的宏是指一系列操作的集合。
+Vim中的寄存器也可用于录制用户的宏，
+再非常方便的重放，
+达到快速完成一系列指令的功能。&lt;/p&gt;
+&lt;p&gt;录制宏的操作非常简单，
+首先通过q命令进入宏录制模式，
+q后接寄存器的名称，比如a。&lt;/p&gt;
+&lt;blockquote&gt;
+qa&lt;/blockquote&gt;
+&lt;p&gt;接着就可以随意操作当前文本了，
+你的一举一动Vim都会记录下来并保存到寄存器中。&lt;/p&gt;
+&lt;p&gt;最后(记得退出到一般模式中)再按一次q退出宏录制模式。&lt;/p&gt;
+&lt;blockquote&gt;
+q&lt;/blockquote&gt;
+&lt;p&gt;重放宏直接在一般模式下用&amp;#64;关键字加寄存器名称：&lt;/p&gt;
+&lt;blockquote&gt;
+&amp;#64;a&lt;/blockquote&gt;
+&lt;p&gt;录制的操作便会自动重放一遍。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h2&gt;寄存器的追加操作&lt;/h2&gt;
+&lt;p&gt;在默认情况下复制等操作会覆盖掉寄存器中原有的内容，
+如果想要在原有内容上追加新的内容，
+可将对应名称的寄存器改为大写：&lt;/p&gt;
+&lt;blockquote&gt;
+&amp;quot;Ayy&lt;/blockquote&gt;
+&lt;p&gt;上面这句将当前行内容追加到a寄存器的末尾。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h2&gt;匿名寄存器&lt;/h2&gt;
+&lt;p&gt;可能用的最多的是Vim的匿名寄存器了。&lt;/p&gt;
+&lt;p&gt;在平常的使用过程中，
+默认的复制、剪切等操作都会将选定的内容填充到匿名寄存器中：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+yy: 复制当前行
+dd: 剪切当前行
+4dd: 剪切四行
+&lt;/pre&gt;
+&lt;p&gt;所谓的匿名寄存器实际上是名称为双引号的寄存器，
+通过查看:reg可以看到当前的内容。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id5"&gt;
+&lt;h2&gt;黑洞寄存器&lt;/h2&gt;
+&lt;p&gt;博主不知道怎么翻译，
+就随便这样命名了。&lt;/p&gt;
+&lt;p&gt;这货就像黑洞一样，
+往里面添加任意的内容都会被清空，
+就如同Linux中的/dev/null一样。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;题外话，
+在Linux下，
+可以尝试echo一些东西并且重定向到/dev/null中，
+那么命令会被执行，
+结果输出到/dev/null中，
+然后就没有然后了。&lt;/p&gt;
+&lt;p&gt;用于处理某些不需要的输出非常有效，
+比如将无聊的编译出错信息重定向到那里去，
+就不会有恼人的错误信息了。
+(-_-)&lt;/p&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;p&gt;g++ 2&amp;gt;/dev/null&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;该寄存器为 _ ，
+如果需要剪切特定的行并且不想让其污染匿名寄存器，
+可以这样：&lt;/p&gt;
+&lt;blockquote&gt;
+&amp;quot;_dd&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id6"&gt;
+&lt;h2&gt;数字寄存器&lt;/h2&gt;
+&lt;p&gt;名称是从0到9的十个寄存器。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;复制寄存器&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;寄存器0保存了最近复制的内容，
+因此复制操作会更新0号寄存器，
+但是剪切的内容不会被写到0号寄存器中。&lt;/p&gt;
+&lt;p&gt;在某些情况下这货非常有用，
+比如复制了一坨东西，
+跑去别的地方剪切了一些东西，
+这时候想要粘贴刚才复制的东西，
+会发现直接p的话剪切的东西就出来了。&lt;/p&gt;
+&lt;p&gt;这个时候一种解决方案是使用黑洞剪切不需要的内容;
+而如果一时手快忘记使用黑洞了，
+不要紧，
+刚刚复制的东西在0里面，
+因此这样就可以粘贴了：&lt;/p&gt;
+&lt;blockquote&gt;
+&amp;quot;0p&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;剪切寄存器&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;其他的数字寄存器与0号类似，
+不过保存的是最近剪切的内容。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id7"&gt;
+&lt;h2&gt;最近插入内容寄存器&lt;/h2&gt;
+&lt;p&gt;名称： .&lt;/p&gt;
+&lt;p&gt;当从一般模式进入插入模式并敲了一些东西后，
+返回一般模式，
+最近敲的这坨东西会被保存到.寄存器中。&lt;/p&gt;
+&lt;p&gt;不过再次输入同样内容不需要用以下命令：&lt;/p&gt;
+&lt;blockquote&gt;
+&amp;quot;.p&lt;/blockquote&gt;
+&lt;p&gt;虽然是可行的。&lt;/p&gt;
+&lt;p&gt;直接在一般模式下敲.重复最近一次的命令即可。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id8"&gt;
+&lt;h2&gt;文件名寄存器&lt;/h2&gt;
+&lt;p&gt;名称： %&lt;/p&gt;
+&lt;p&gt;简单，保存了文件名。&lt;/p&gt;
+&lt;hr class="docutils" /&gt;
+&lt;p&gt;学习一下Vim的寄存器还是非常有用的，
+可以快速执行非常多的操作。&lt;/p&gt;
+&lt;p&gt;这里没有提到的关于系统剪贴板的若干寄存器，
+可参考上一篇博文的内容。&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="Vim"></category></entry><entry><title>Vim经验记录(一):与系统共享剪贴板</title><link href="/VimExperience001.html" rel="alternate"></link><updated>2014-02-13T12:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-02-13:VimExperience001.html</id><summary type="html">&lt;p&gt;这几天玩剪贴板搞得灰头土脸，
+幸好现在终于找到最佳的解决方案了，
+虽然好用，方法还是有点猥琐。&lt;/p&gt;
+&lt;p&gt;博主主要的目的在于多个Vim之间可以共享剪贴板。
+写博文的时候，
+像上一篇博文中就有非常多的代码片段，
+因此需要快捷的复制粘贴操作。&lt;/p&gt;
+&lt;p&gt;目标：&lt;/p&gt;
+&lt;blockquote&gt;
+找到一种方法方便快速地访问系统剪贴板，
+使Vim支持从系统剪贴板中复制粘贴数据，
+通过系统剪贴板快捷地与其他应用程序交换数据，
+如Firefox中网页的某些文本框，
+或者与其他Vim进程交换数据。&lt;/blockquote&gt;
+&lt;p&gt;环境：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+OS: Arch Linux(x64)
+Window Manager: X11
+DesktopEnvironment: LXDE
+Package Manager: Pacman
+&lt;/pre&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;鼠标解法&lt;/h2&gt;
+&lt;p&gt;最初遇到这个问题时想到了上学期在工作室的Ubuntu系统，
+通过配置标神找到的vimrc文件，
+可以直接支持鼠标点击、鼠标选择、右键复制粘贴甚至是滚轮翻页。&lt;/p&gt;
+&lt;p&gt;不知道是因为桌面环境不一样还是系统问题，
+原有的配置文件在Arch Linux加LXDE的环境里会导致Vim出错。&lt;/p&gt;
+&lt;p&gt;重新配置了vimrc使现在的Vim支持原有的大部分功能，
+然而鼠标的功能还是没有以前那么强悍了。&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+set mouse=a         &amp;quot; Enable the use of the mouse.
+set selection=exclusive
+set selectmode=mouse,key
+set nocompatible    &amp;quot; No vi mode
+&lt;/pre&gt;
+&lt;p&gt;上面的配置语句让Vim支持鼠标选择及滚轮翻页，
+然而当想使用右键复制的时候却会发现复制是没有效果的。&lt;/p&gt;
+&lt;p&gt;当然这还是一部分解决了粘贴问题，
+首先从别的地方复制，
+切换到Vim把光标移动到需要粘贴的地方，
+进入插入(insert)模式，
+这个时候鼠标点右键并粘贴，
+东西就进去了。&lt;/p&gt;
+&lt;p&gt;但这样还是会有问题，
+如果给Vim设定了自动括号补全一类的功能，
+粘贴的过程中Vim也会画蛇添足地给粘贴的内容再补全一遍，
+如果刚好粘贴的是代码一类的东西，带很多括号，
+粘贴完成后需要手动处理多出来的内容。&lt;/p&gt;
+&lt;p&gt;而且也太不雅观了。&lt;/p&gt;
+&lt;p&gt;这个问题其实在之前Ubuntu中也出现过，
+于是博主上Google寻找更加优雅的解决方案。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;寄存器解法&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Vim之间的共享数据&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Stack Overflow上的更优方案是使用Vim的寄存器。
+首先在vimrc里加入一行:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+set clipboard=unnamed
+&lt;/pre&gt;
+&lt;p&gt;这句将Vim的系统剪贴板指定到匿名寄存器中。&lt;/p&gt;
+&lt;p&gt;这样多个Vim之间便可以共享匿名寄存器的数据了，
+直接在某个Vim进程中复制（例如yy）一段文本，
+在另外的Vim中直接粘贴（p）即可搞定。&lt;/p&gt;
+&lt;p&gt;但是这并不是共享操作系统的剪贴板，
+因此通过鼠标在其他程序中复制的文本用这种方法无法粘贴，
+同时在Vim中复制出来的文本也没有办法共享到其他的程序中去。&lt;/p&gt;
+&lt;p&gt;因此需要更加生猛的直接控制操作系统剪贴板的方法。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;与其他程序的共享剪贴板&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;其实也非常简单，
+Vim的一个特定的寄存器与系统的剪贴板是联动的，
+在X11中是加号（+）寄存器。&lt;/p&gt;
+&lt;p&gt;因此复制当前行到操作系统的剪贴板中可以这样：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+&amp;quot;+yy
+&lt;/pre&gt;
+&lt;p&gt;然后在其他地方（如Firefox）直接粘贴即可。&lt;/p&gt;
+&lt;p&gt;同样，
+粘贴到Vim里面去也可以通过操作对应寄存器搞定：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+&amp;quot;+p
+&lt;/pre&gt;
+&lt;p&gt;博主被卡了两天的地方在于，
+资料都是这样的解决方案，
+博主自己实现的时候却发现一直没有效果。&lt;/p&gt;
+&lt;p&gt;最终了解到，vi、vim、gvim是三款不一样的东西。&lt;/p&gt;
+&lt;p&gt;只有部分vim的版本是支持桌面环境的剪贴板的，
+据称Ubuntu的Gnome环境下有vim-gnome及vim-gtk支持这种操作，
+特别注意的是，默认的Vim是不行的...&lt;/p&gt;
+&lt;p&gt;Arch就更不用说了，
+连make都没有，哈哈～&lt;/p&gt;
+&lt;p&gt;解决方案有俩，
+一个是装vim-X11 的包，
+一个是直接装gvim。&lt;/p&gt;
+&lt;p&gt;由于博主已经安装了gvim，
+内置了vim-X11包，
+因此没法测试直接安装上述的包是否能解决问题。&lt;/p&gt;
+&lt;p&gt;不过可以肯定的是，
+用gvim可以非常完美的支持剪贴板。&lt;/p&gt;
+&lt;p&gt;安装完gvim之后继续像原来一样使用Vim，
+gvim会提供给Vim一些强化的功能，
+包括剪贴板。&lt;/p&gt;
+&lt;p&gt;查看当前Vim是否支持剪贴板可以在终端里敲这个：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+vim --version | grep clipboard
+&lt;/pre&gt;
+&lt;p&gt;如果有&amp;quot;+xterm_clipboard&amp;quot;说明支持，
+如果是&amp;quot;-xterm_clipboard&amp;quot;说明不行。&lt;/p&gt;
+&lt;p&gt;剪贴板问题就到此为止了，
+下一次记录一下寄存器的一些东西。&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="Vim"></category></entry><entry><title>md5 generator</title><link href="/md5-generator.html" rel="alternate"></link><updated>2014-02-04T11:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2014-02-04:md5-generator.html</id><summary type="html">
+        &lt;p&gt;一个非常好用的md5散列计算工具&lt;/p&gt;
+        &lt;p&gt;从网上搜刮的一个JavaScript实现的md5算法，许可协议为BSD License。URL在这里：
+        &lt;a href="http://pajhome.org.uk/crypt/md5/index.html"&gt;JavaScript md5&lt;/a&gt;
+        &lt;/p&gt;
+        &lt;p&gt;恢复函数是博主用JavaScript做的，倒计时十秒。&lt;/p&gt;
+        &lt;br /&gt;
+        &lt;input type="password" id="strInput"&gt;&lt;/input&gt;
+        &lt;br /&gt;
+        &lt;button onclick="getHash()"&gt;Hash dear, hash!&lt;/button&gt;
+        &lt;br /&gt;
+        &lt;h4 id="resultlabel"&gt;No result yet.&lt;/h4&gt;
+        &lt;h4 id="timerlabel"&gt;&lt;/h4&gt;
+        &lt;br /&gt;
+
+    &lt;script src="add_ons/md5-min.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+        var TIMEOUT = 10;// ten seconds.
+        var md5timer;
+        var timerlabel = document.getElementById("timerlabel");
+        var resultlabel =document.getElementById("resultlabel"); 
+
+        function cleartimer()
+        {
+            clearInterval(md5timer);
+            resultlabel.innerHTML="No result yet.";
+            timerlabel.innerHTML="Timer stop.";
+        }
+
+        function settimeout()
+        {
+            var timecounter = 0;
+            md5timer = setInterval(function(){
+                    timecounter += 1;
+                    timerlabel.innerHTML = ("time remaining:"+
+                        (TIMEOUT-timecounter)+
+                        " second(s)");
+                    if(timecounter &gt; TIMEOUT)
+                        cleartimer();
+                    }, 1000);
+        }
+            
+        function getHash()
+        {
+            var source = document.getElementById("strInput");
+            var result = hex_md5(source.value);
+            resultlabel.innerHTML = result;
+            settimeout();
+        }
+    &lt;/script&gt;
+    </summary><category term="md5"></category></entry><entry><title>Git 与 GitHub 实践经验谈（一）</title><link href="/learning-git-003.html" rel="alternate"></link><updated>2013-11-07T22:10:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2013-11-07:learning-git-003.html</id><summary type="html">&lt;p&gt;自从上次聊完git的基本使用之后到现在已经两个多月了，一直都没有机会真的把它用在多人配合的项目开发之中。
+主要是因为手头的小型实验项目都是自己在玩，所以很多时候用的是本地的仓库，写完commit一下基本就完事，连checkout都很少用。&lt;/p&gt;
+&lt;p&gt;这个月开始接手了一个小型的团队合作项目，于是核心代码组（我，标神，院长）才算真正成立了一个小组团队开发。&lt;/p&gt;
+&lt;p&gt;核心代码组负责的主要是系统后台的搭建和配置。所以我们搭建了一个小型的服务器，挂载Apache+mySQL+php+cakePHP，使用GitHub进行源码托管。&lt;/p&gt;
+&lt;p&gt;这个过程中真正逐渐熟悉了git的操作，也碰到了大量实践中遇上的问题。在此写一个未知篇幅的实践经验收集帖，既有利于总结归纳开发过程中遇到的问题，理清思路，也有利于来日翻阅加深印象。&lt;/p&gt;
+&lt;hr class="docutils" /&gt;
+&lt;p&gt;首先是基本的操作回顾，这是实际开发过程中用到的一些方法，可能非常曲折，让高手看来简直就是瞎搞，不过不管质量，先记录下来，以后有更优的方案也可供对比。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;一：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;本地仓库的创建自然是git init，这里我们被坑了一下，理论上我们总以为git init之后会默认创建一个仓库并产生一个默认分支叫做master，结果在实际操作中发现问题，git init只负责创建仓库，但在这个时候调用git branch会发现根本没有分支。&lt;/p&gt;
+&lt;p&gt;这就导致了几天前以标神为主角的惊悚一幕。话说当天标神连敲八个小时代码完成了一个基本模块的创建，正当其修养生息吞云吐雾之际，我主动提出让其提交代码到远端仓库中。然而当时远端仓库已有更新，push操作之前必须pull下最新版本代码，然而该操作却死活无法成功完成。&lt;/p&gt;
+&lt;p&gt;于是检查本地仓库，发现branch指向了一个奇怪的no branch分支，印象中貌似还带星号。众人大呼小叫，标神你看你又瞎搞，没有branch你pull个毛啊，肯定失败。于是七手八脚准备把branch切换到master。我手贱，在当前状态branch了一个备份，然后果断切换master。结果是，当时幸好手贱，因为master下居然只存在initial commit，标神一天的工作完全不存在。&lt;/p&gt;
+&lt;p&gt;究其原因，在git init之后我们急于pull下远端仓库代码，而且操作有误，直接将远端仓库拉下却没有指定分支，导致标神的当前分支停留在no branch下。大家手生，没有注意，直接开始开发。这提醒我们在以后的开发中要时刻留意当前分支的状态。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;二：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;远端仓库的使用也经常发生问题，最诡异的莫过于项目开始之初，十次推送有九次因为莫名其妙的原因失败。有段时间看到deny的信息就窝火，TMD由推不上去。&lt;/p&gt;
+&lt;p&gt;经过多次反复实验我们总结了如下的原因：&lt;/p&gt;
+&lt;p&gt;一：push之前远端仓库有更新，当前仓库的版本与远端仓库不匹配，因此推送被拒绝。解决此问题的方法是，在推送失败后看到消息no fast ahead，一般便是当前仓库与远端仓库不匹配。这时应该首先pull更新本地仓库的历史版本，并合并到当前分支中，确保远端仓库的历史版本都已储存在当前仓库中。此时再次尝试推送，由于在原有远端仓库的基础上增加了commit，服务器八成会接受推送。当然这时候还有可能拒绝，那是因为你的用户没有权限。在GitHub中可以设定某个仓库的协作者，只有仓库的所有者（创建者）及指定的协作者的帐号可以推送提交到仓库。&lt;/p&gt;
+&lt;p&gt;二：第一条简直就是废话，大家都知道要先更新本地仓库，但在这个pull的过程中也可能出现问题。&lt;/p&gt;
+&lt;p&gt;经过反复实验对于这种问题我们的最佳实践是:首先将远端仓库的版本pull到本地仓库的一个新的branch中，这个可以一条命令解决：&lt;/p&gt;
+&lt;blockquote&gt;
+git pull origin master:tempBranch&lt;/blockquote&gt;
+&lt;p&gt;这样便可将remote的master拉到本地的tempBranch，注意这个branch原先可以不用存在。&lt;/p&gt;
+&lt;p&gt;在这之后，在当前分支中merge新pull下来的分支tempBranch:&lt;/p&gt;
+&lt;blockquote&gt;
+merge tempBranch&lt;/blockquote&gt;
+&lt;p&gt;如果没有冲突，git会直接合并，如果冲突无法自动解决，则需要手动处理。&lt;/p&gt;
+&lt;p&gt;在merge成功后查看git log会有一条新的记录，merge from ... 表示在这个点上合并了某个支线。&lt;/p&gt;
+&lt;p&gt;这样便完成了本地仓库的历史版本更新。此时再次调用git push 推送远端仓库，八成没有问题。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;三：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;gitignore文件的使用&lt;/p&gt;
+&lt;p&gt;我们都知道编辑gitignore文件可以屏蔽不需要加入仓库的文件。然而今天被该文件的使用细节卡了一个晚上。&lt;/p&gt;
+&lt;p&gt;最终得出的结论是，git会屏蔽当前仓库所在文件夹， &lt;strong&gt;及其所有子文件夹&lt;/strong&gt; 的匹配文件。&lt;/p&gt;
+&lt;p&gt;例如，我们添加了一个index.html文件，那么在所有子目录及根目录下的同名文件都会被屏蔽，即使并没有屏蔽子目录。&lt;/p&gt;
+&lt;p&gt;这一点加上linux系列系统的隐藏文件（以点开头）在正常情况下不可见的特性，导致我们一度忽略了apache的配置文件htaccess在子目录中的存在，结果令服务器崩溃三个小时，院长重建了php框架若干次，项目停工一个晚上...&lt;/p&gt;
+&lt;p&gt;此外，这个东西的另一个神奇之处在于，假设在某个分支下ignore了某个文件，此时切换到另一个分支并修改ignore添加该文件，commit，再切换回原来的branch，你会发现，咦？！那货没有了亲～&lt;/p&gt;
+&lt;p&gt;问题在于那个文件被添加到第二个branch的历史记录里去了，此时切换回源branch，git会隐藏第二个branch的所有内容并替换为第一个branch的内容。&lt;/p&gt;
+&lt;p&gt;最近几天收获不小，有一句话是这样说的，优秀的判断力来自经验，但经验来自错误的判断。说这话的是Fred Brooks。希望我们这些挫折的经历能多少铺平来日的道路。 ^_^&lt;/p&gt;
+&lt;p&gt;时间仓促，随手记录于此。&lt;/p&gt;
+&lt;hr class="docutils" /&gt;
+&lt;p&gt;~~~~~~~~~~~~正文完~~~~~~~~~~~~~~~~~~~&lt;/p&gt;
+</summary><category term="git"></category><category term="github"></category></entry><entry><title>Git 与 GitHub 不完全教程（二）</title><link href="/learning-git-002.html" rel="alternate"></link><updated>2013-09-07T16:10:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2013-09-07:learning-git-002.html</id><summary type="html">&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;分支&lt;/h2&gt;
+&lt;p&gt;分支(branch)是Git的一个强大功能，它可以在不改变现有仓库、不新增仓库的情况下，通过新建一个分支以建立当前文档一模一样的支线版本，在支线版本的修改不影响主线文档的内容。&lt;/p&gt;
+&lt;p&gt;分支的一个重要的功能是能够在同一个时间点上保存多份不同版本的代码，并且均为随时可用的状态，根据官方的一个示例，你可以保持一份稳定的发布版，在发布版内的代码都是可运行的，之后，你可以再拥有一个分支专门用于开发，在这上面的代码用于任意修改和处理，不对外，还能再有一个分支用于测试开发新的功能。这三个分支都可以随时切换随时合并，应变自如。&lt;/p&gt;
+&lt;p&gt;当支线任务成功完成时，可通过命令简单地将支线版本合并到主线上，若由于手潮不幸把事情搞砸了，可直接删除支线，回到主线上，则原有的文档内容不受任何影响。这种功能特别适合在当前状态下需要测试开发一些新的功能，但又想要与主线的开发有所并行的情况。&lt;/p&gt;
+&lt;p&gt;默认情况下，git创建完仓库后会生成一个主分支master，所有的操作均在主分支上进行，这就相当于文档的主线版本。而我们可以按自己的需要增删改查新的分支。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;分支的创建和切换&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;显示当前仓库的分支状态:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+git branch
+&lt;/pre&gt;
+&lt;p&gt;Git会列表显示当前的所有分支，并在当前所在分支上作相应标记。
+新建分支（假设需要新建的分支名字为:newBranch）:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+git branch newBranch
+&lt;/pre&gt;
+&lt;p&gt;此时再次检查branch状态就会发现新的分支已经出现了。
+新的分支和现有的分支内容完全相同，相当于当前分支的一个副本。
+跳转到某个分支:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+git checkout newBranch
+&lt;/pre&gt;
+&lt;p&gt;即可。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;分支的删除&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+git branch -d XXX
+&lt;/pre&gt;
+&lt;p&gt;完成了分支的转换后，分支内的操作与前文的基本操作一致。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;分支的合并&lt;/strong&gt;&lt;/p&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;1.最简单的合并&lt;/dt&gt;
+&lt;dd&gt;&lt;p class="first"&gt;新建的分支在原来分支的基础上出现了新的变更，而原来的分支没有变化。此时的合并操作只需要直接把新分支的内容合并到原有分支即可。&lt;/p&gt;
+&lt;p&gt;假设有两个branch: master &amp;amp;&amp;amp; newChange, newChange从master而来，newChange发生了一次新的提交，而master没有变化。此时需要将newChange合并到master上，需要做的是切换到master分支，然后执行如下指令:&lt;/p&gt;
+&lt;pre class="last literal-block"&gt;
+git merge newChange
+&lt;/pre&gt;
+&lt;/dd&gt;
+&lt;dt&gt;2.比较复杂的合并&lt;/dt&gt;
+&lt;dd&gt;&lt;p class="first"&gt;新建的分支和原来的分支均产生了更改，然而更改的内容没有冲突，即修改了原有内容的不同部分或者根本没有修改到同一个文件，这种情况下Git会自动进行处理，将新的修改自动合并到分支中来。使用的命令与前面的命令一样。&lt;/p&gt;
+&lt;p class="last"&gt;所产生的变化是，这种情况下合并操作类似commit，我在测试的时候Git提示需要输入合并的说明信息。合并后调用git log发现多了一次merge记录，与commit操作一样存在记录。&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;3.最后一种最复杂的情况&lt;/dt&gt;
+&lt;dd&gt;&lt;p class="first"&gt;不仅两个分支产生了更改，还更改了相同的部分，这就产生了合并的冲突，Git的自动合并失败，此时需要做的是自己处理冲突并再次提交。&lt;/p&gt;
+&lt;p&gt;假设当前有分支branchOne &amp;amp;&amp;amp; branchTwo，均从master分支而来，master分支原有一个readme文档。branchOne &amp;amp;&amp;amp; branchTwo各自在文档的最后添加了一行新的不同的内容，并各自提交。此时，在branchTwo分之下调用 “git merge branchOne”，Git会提示冲突出现:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+Auto-merging readme.txt
+CONFLICT (content): Merge conflict in readme.txt
+Automatic merge failed; fix conflicts and then commit the result.
+&lt;/pre&gt;
+&lt;p class="last"&gt;在这种情况下，打开提示冲突的文档，你会发现所有冲突的地方Git均做了标记，HEAD后的内容为当前分支的版本，”======”分割后下方的为合并方的版本，需要做的是删除所有标记，保留自己想要的版本。在处理完所有冲突后，再次add 和commit即可。&lt;/p&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/div&gt;
+&lt;div class="section" id="remote"&gt;
+&lt;h2&gt;远端仓库（remote）&lt;/h2&gt;
+&lt;p&gt;远端仓库，就是架设在其他机器上的Git仓库，通过互联网连接后可通过Git获取和修改远端仓库的数据，达到协作的目的。比较有名的免费公有仓库是GitHub：
+&lt;a class="reference external" href="https://github.com"&gt;https://github.com&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在此以GitHub为例记录Git中关于远端仓库的若干使用步骤。&lt;/p&gt;
+&lt;p&gt;假设需要使用的远端仓库为我的操作系统大作业仓库：
+&lt;a class="reference external" href="https://github.com/scutLaoYi/operating-system-solution.git"&gt;https://github.com/scutLaoYi/operating-system-solution.git&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;从远端仓库直接将仓库复制到本地&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;执行如下命令:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+git clone https://github.com/scutLaoYi/operating-system-solution.git
+&lt;/pre&gt;
+&lt;p&gt;成功完成后在当前目录下就会出现一个文件夹里面存放了该仓库。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;获取当前的远端仓库列表&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;进入仓库目录，使用命令:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+git remote
+&lt;/pre&gt;
+&lt;p&gt;如果使用的是clone命令复制仓库，则存在一个origin的remote。否则remote得到空的仓库列表。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;将远端仓库添加到remote列表中&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+git remote add newRemote https://github.com/scutLaoYi/operating-system-solution.git
+&lt;/pre&gt;
+&lt;p&gt;此时将该仓库地址添加到remote列表中，名字为newRemote.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;使用pull命令从远端仓库拉取新版本&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+git pull newRemote master:another
+&lt;/pre&gt;
+&lt;p&gt;此句将远端仓库newRemote中的master分支拉取到本地的another分支中。这里要注意分支的顺序，前面的是远端仓库的分支名，冒号后的为本地分支的名字。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;推送本地仓库到远端&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+git push newRemote master:remoteBranch
+&lt;/pre&gt;
+&lt;p&gt;向newRemote远端仓库的remoteBranch分支推送本地仓库的master分支。&lt;/p&gt;
+&lt;p&gt;需要用户名和密码完成认证。自行测试的时候貌似还认证了邮箱。&lt;/p&gt;
+&lt;p&gt;远端仓库的基本操作到此为之。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;杂七杂八的破玩意儿&lt;/h2&gt;
+&lt;p&gt;最后聊一下Git工具的proxy连接，由于千奇百怪的网络问题，很容易导致Git与GitHub服务器的连接失败，这种情况下如果手头有一些生龙活虎的proxy工具，可以通过其跳转使Git连接到GitHub服务器，完成工作。&lt;/p&gt;
+&lt;p&gt;本人使用的是简单的http连接方式，Git配置http的proxy十分方便，如下命令即可:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+git config –global http.proxy XXX.XXX.XXX.XXX:XXXX
+&lt;/pre&gt;
+&lt;p&gt;XXX里填的是proxy的地址和端口号
+某些工具需要ssl证书，简单地可以直接关闭Git的证书验证:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+git config --global http.sslVerify false
+&lt;/pre&gt;
+&lt;p&gt;或者通过以下命令指定证书的路径（此方法未测试）:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+git config --global http.sslCAinfo XXX/XXX/XXX
+&lt;/pre&gt;
+&lt;p&gt;至于proxy的相关内容不在本帖讨论范围。&lt;/p&gt;
+&lt;p&gt;ps:在敲完这篇东西之后，收到了一个振奋人心的消息，校园网的国际端口开通了，使用GitHub再也不用费劲心思，真是可喜可贺， &lt;em&gt;弹冠相庆&lt;/em&gt; 啊哈哈哈～&lt;/p&gt;
+&lt;p&gt;~~~~~~~~~~~~正文完~~~~~~~~~~~~~~~~~~~&lt;/p&gt;
+&lt;p&gt;下一篇，稍微聊一下GitHub上的一些玩法～&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="git"></category><category term="github"></category></entry><entry><title>Git 与 GitHub 不完全教程（一）</title><link href="/learning-git-001.html" rel="alternate"></link><updated>2013-09-07T16:00:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2013-09-07:learning-git-001.html</id><summary type="html">&lt;p&gt;git是常用的配置管理工具，关于Git的介绍请见维基百科（维基百科关于Git的介绍），Github是常用的代码托管服务（维基百科关于GitHub的介绍），在此敲一份扫盲和不完全配置帖，留待日后自己可查看，顺带给大家方便学习。&lt;/p&gt;
+&lt;p&gt;由于时间有限，仅记录最简单的终端界面下Git的使用，自认为已经足够，如更喜欢GUI界面风格请自行脑补。&lt;/p&gt;
+&lt;p&gt;本文档操作环境为GNU/Linux Ubuntu 12.04 LTS x64，为方便windows用户，在配置时添加了windows下的安装配置过程，不保证万无一失。&lt;/p&gt;
+&lt;div class="section" id="git"&gt;
+&lt;h2&gt;Git篇：&lt;/h2&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h3&gt;安装与配置git&lt;/h3&gt;
+&lt;p&gt;Ubuntu: 简单:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+sudo apt-get install git
+&lt;/pre&gt;
+&lt;p&gt;即可。&lt;/p&gt;
+&lt;p&gt;以上代码没看懂的请别往下看了，扫盲Ubuntu先。&lt;/p&gt;
+&lt;p&gt;windows:到这个网址下载:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;a class="reference external" href="http://msysgit.github.io/"&gt;http://msysgit.github.io/&lt;/a&gt;&lt;/blockquote&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;或者git官网下载:&lt;/dt&gt;
+&lt;dd&gt;&lt;a class="reference external" href="http://git-scm.com/download/win"&gt;http://git-scm.com/download/win&lt;/a&gt;&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;p&gt;安装即可。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h3&gt;首次使用&lt;/h3&gt;
+&lt;p&gt;windows下使用终端的Git需要启动Git自带的终端，而不是windows的命令行，
+一般在安装后有一个叫做Git bash的东西，启动之即可。暂时不要使用Git GUI，如果有的话。&lt;/p&gt;
+&lt;p&gt;Ubuntu下则比较简单，直接启动终端即可，终端可直接调用Git的命令。&lt;/p&gt;
+&lt;p&gt;首次使用必须指定用户的用户名和邮箱，这个据说在提交代码的时候会作为标识出现。&lt;/p&gt;
+&lt;p&gt;敲入以下代码:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+git config --global user.name &amp;quot;John Doe&amp;quot;
+git config --global user.email johndoe&amp;#64;example.com
+&lt;/pre&gt;
+&lt;p&gt;并将其中的John Doe和 &lt;a class="reference external" href="mailto:johndoe&amp;#64;example.com"&gt;johndoe&amp;#64;example.com&lt;/a&gt; 替换为自己的名字和邮箱即可。&lt;/p&gt;
+&lt;p&gt;之后便可以开始使用啦～&lt;/p&gt;
+&lt;p&gt;此外，关于配置信息的补充说明：查看当前配置信息的命令是:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+git config --list
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h3&gt;正式开始&lt;/h3&gt;
+&lt;p&gt;我们从本地的使用开始，众所周知，Git使用一种仓库的形式进行配置管理，仓库实际上是以某个文件夹作为根目录，其内容便是仓库中的内容。假设在当前目录下需要使用Git建立仓库，敲入命令:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+git init
+&lt;/pre&gt;
+&lt;p&gt;即可完成新本地仓库的建立。
+敲入该命令后会在本目录下自动建立一个.git文件保存Git所需的仓库信息，这个文件默认情况下是不可见的，一般也不需要手动更改。&lt;/p&gt;
+&lt;p&gt;查看当前仓库的状态可敲命令:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+git status
+&lt;/pre&gt;
+&lt;p&gt;仓库存在多种状态，若根本没有建立仓库，则状态为:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+fatal: Not a git repository
+&lt;/pre&gt;
+&lt;p&gt;当建立好仓库并且没有新的更改产生时，状态为:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+# On branch master
+#
+# Initial commit
+#
+nothing to commit (create/copy files and use &amp;quot;git add&amp;quot; to track)
+&lt;/pre&gt;
+&lt;p&gt;对于我们建立的文件，存在若干种状态，已修改的，已添加的，和已提交的。
+仓库的文件管理需要经过几个状态，被修改-&amp;gt;添加到提交列表-&amp;gt;提交仓库。
+只有被提交到仓库中的文件才是真的储存到仓库中，否则只是在现有文件夹中。&lt;/p&gt;
+&lt;p&gt;当我们在空仓库中新建一个readme.txt文件，并写入一些文本后，该文件在仓库中的状态便为已修改。此时仓库状态为:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+# On branch master
+#
+# Initial commit
+#
+# Untracked files:
+#   (use &amp;quot;git add &amp;lt;file&amp;gt;...&amp;quot; to include in what will be committed)
+#
+# readme.txt
+othing added to commit but untracked files present (use &amp;quot;git add&amp;quot; to track)
+&lt;/pre&gt;
+&lt;p&gt;该状态表示有一个新文件状态为untracked，仅仅发生了更改，没有添加到提交列表，也没有提交。&lt;/p&gt;
+&lt;p&gt;此时，使用命令: &amp;quot;git add&amp;quot;可以添加文件到提交列表中。git add后连接文件名或者目录项，例如:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+git add . #将当前文件夹中被修改且未添加到提交列表中的文件全部添加
+git add abc.def #将当前文件夹中abc.def文件添加到提交列表中
+git add *.abc #将所有后缀为abc的文件添加到提交列表中
+&lt;/pre&gt;
+&lt;p&gt;因此，使用 &amp;quot;git add .&amp;quot; 将上文的readme.txt加入提交列表，仓库的状态变为:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+# On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#   (use &amp;quot;git rm --cached &amp;lt;file&amp;gt;...&amp;quot; to unstage)
+#
+# new file:   readme.txt
+&lt;/pre&gt;
+&lt;p&gt;在添加后的状态下我们可以将列表中的文件提交到仓库中，作为一个版本。每提交一次就相当于在仓库中保存了提交状态的一个文件副本。只要仓库没死掉（地震、火灾、海啸或其他因素导致硬盘数据丢失），就可以通过提交的识别码恢复到某个提交状态。
+提交的指令为：&amp;quot;git commit&amp;quot; 每一份提交都需要一段说明信息作为标记，以供日后查找识别某个版本。
+上面的提交指令敲入后git会启动一个文本编辑界面供用户输入说明信息。
+有一个便捷的操作，如果想要提交的说明信息比较简短，可以在commit后添加-m参数并直接连接字符串，该字符串便成为说明信息，示例如下:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+git commit -m &amp;quot;initial commit&amp;quot;
+&lt;/pre&gt;
+&lt;p&gt;提交完所有被修改的文件后，仓库重新返回状态:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+# On branch master
+nothing to commit (working directory clean)
+&lt;/pre&gt;
+&lt;p&gt;那么，仓库中的数据如何被有效利用呢？这里分为两种情况：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;1.仓库上一次提交后，有了新的修改，且目前想要回复到提交后的原始状态：&lt;/p&gt;
+&lt;p&gt;假设readme.txt提交后的原始信息为:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+Hey!
+It's some change.
+&lt;/pre&gt;
+&lt;p&gt;发生了修改，变成这样子了(-_-|||):&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+Hey! My name is szy. I'm from scut!
+It's sunny today~
+&lt;/pre&gt;
+&lt;p&gt;此时没有add也没有commit，git的状态为:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+# On branch master
+# Changes not staged for commit:
+#   (use &amp;quot;git add &amp;lt;file&amp;gt;...&amp;quot; to update what will be committed)
+#   (use &amp;quot;git checkout -- &amp;lt;file&amp;gt;...&amp;quot; to discard changes in working directory)
+#
+# modified:   readme.txt
+#
+no changes added to commit (use &amp;quot;git add&amp;quot; and/or &amp;quot;git commit -a&amp;quot;)
+&lt;/pre&gt;
+&lt;p&gt;很明显，git也告诉我们了，使用checkout命令可以从仓库中取出文件副本覆盖现有的被修改文件:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+git checkout -- readme.txt
+&lt;/pre&gt;
+&lt;p&gt;执行后就能得到原始的readme版本了:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+Hey!
+It's some change.
+&lt;/pre&gt;
+&lt;p&gt;2.仓库的修改已提交，想要返回某个历史版本：&lt;/p&gt;
+&lt;p&gt;这种情况下新的修改已经作为一个版本记录到仓库里了，想要返回某个历史版本，首先需要查看所有历史版本，命令为:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+git log
+&lt;/pre&gt;
+&lt;p&gt;终端会返回每一个历史版本的提交信息（就是之前敲的那个字符串）和提交的代号等，大概如下:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+commit d4e8fb1393d5bcf4044b06c35869177037ab5da9
+Author: scutLaoYi &amp;lt;HelloWorld636596&amp;#64;126.com&amp;gt;
+Date:   Tue Sep 3 15:50:23 2013 +0800
+
+    change
+
+commit 3cf8790b69961b317ea75e326271379840c541c2
+Author: scutLaoYi &amp;lt;HelloWorld636596&amp;#64;126.com&amp;gt;
+Date:   Tue Sep 3 15:36:52 2013 +0800
+
+    initial commit.
+&lt;/pre&gt;
+&lt;p&gt;上述的内容显示了两个历史版本，commit后接的一串代码为提交代号，Date下方的文本为提交信息。找到自己需要的版本，记录版本号，使用git reset命令便可返回到对应版本。注意，只是仓库返回了对应版本，文件仍为修改后版本，若确定没有必要保存新的修改数据，想直接返回到历史版本，就在这个情况下调用 checkout命令恢复即可。但小心这个操作会完全覆盖掉新的更改。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;基本上git的菜鸟级操作就有如上几个，懂的这些命令就可以在自己本地实施配置管理啦。&lt;/p&gt;
+&lt;p&gt;下一篇将聊一下branch以及远端仓库和GitHub的使用，外加一些VPN的内容。&lt;/p&gt;
+&lt;p&gt;参考文档：Git-Documentation:
+&lt;a class="reference external" href="http://git-scm.com/documentation"&gt;http://git-scm.com/documentation&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</summary><category term="git"></category><category term="github"></category></entry></feed>
