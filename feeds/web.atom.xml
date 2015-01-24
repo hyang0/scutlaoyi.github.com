@@ -1,5 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/web.atom.xml" rel="self"></link><id>/</id><updated>2015-01-18T20:00:00+08:00</updated><entry><title>GoAgent代理php服务器浅析</title><link href="/webTool002-goagent-php-server-analyse.html" rel="alternate"></link><updated>2015-01-18T20:00:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2015-01-18:webTool002-goagent-php-server-analyse.html</id><summary type="html">&lt;p&gt;这段时间主要的研究方向是php，
+<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/web.atom.xml" rel="self"></link><id>/</id><updated>2015-01-24T20:00:00+08:00</updated><entry><title>MySQL主备容灾不锁表的搭建记录</title><link href="/mysql-replicant-without-table-lock.html" rel="alternate"></link><updated>2015-01-24T20:00:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2015-01-24:mysql-replicant-without-table-lock.html</id><summary type="html">&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;背景&lt;/h2&gt;
+&lt;p&gt;最近搭了一个MySQL的主备环境，
+感觉过程还是蛮好玩的。
+记录一下以备后续的查阅。&lt;/p&gt;
+&lt;p&gt;本方案搭建MySQL主备环境，
+Master机为主机，接收写入和读取；
+Slave机为备机，从Master同步数据，只接受查询请求（只读）。&lt;/p&gt;
+&lt;p&gt;搭建过程不锁数据库表，
+可以支持线上热操作。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;主要参考&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://plusbryan.com/mysql-replication-without-downtime"&gt;http://plusbryan.com/mysql-replication-without-downtime&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-master-slave-replication-in-mysql"&gt;https://www.digitalocean.com/community/tutorials/how-to-set-up-master-slave-replication-in-mysql&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://stackoverflow.com/questions/5029485/error-could-not-initailize-master-info-structure-while-doing-master-slave-rep"&gt;https://stackoverflow.com/questions/5029485/error-could-not-initailize-master-info-structure-while-doing-master-slave-rep&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="master"&gt;
+&lt;h2&gt;Master端配置&lt;/h2&gt;
+&lt;p&gt;1、 MySQL配置文件加入如下几行(my.cnf)：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+server-id    = 1 #随意
+binlog-format   = mixed
+log-bin  = mysql-bin #一定要是binary模式才支持Replicant
+datadir  = /var/lib/mysql #MySQL的数据文件，维持现状即可
+innodb_flush_log_at_trx_commit  = 1
+sync_binlog  = 1
+binlog_do_db = database_name #这里填需要备份的数据库名，多个的话复制粘贴换数据库名
+&lt;/pre&gt;
+&lt;p&gt;2、 重启MySQL&lt;/p&gt;
+&lt;p&gt;3、 在MySQL的命令终端里创建用于自动备份的用户&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+CREATE USER replicant&amp;#64;&amp;lt;&amp;lt;slave-server-ip&amp;gt;&amp;gt;;
+GRANT REPLICATION SLAVE ON *.* TO replicant&amp;#64;&amp;lt;&amp;lt;slave-server-ip&amp;gt;&amp;gt; IDENTIFIED BY '&amp;lt;&amp;lt;choose-a-good-password&amp;gt;&amp;gt;';
+FLUSH PRIVILEGES;
+&lt;/pre&gt;
+&lt;p&gt;搞定了之后replicant账户就是用于主从同步的用户账户。&lt;/p&gt;
+&lt;p&gt;4、 Linux终端里导出需要的数据&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+mysqldump --skip-lock-tables --single-transaction --flush-logs --hex-blob --master-data=2 database_name &amp;gt; ~/whatever_dump.sql
+&lt;/pre&gt;
+&lt;p&gt;其中，database_name改为自己需要的数据库名，skip-lock-tables可以在不锁表的情况下导出数据。&lt;/p&gt;
+&lt;p&gt;5、 提取关键的LOG_FILE和POS数据&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+head whatever_dump.sql -n80 | grep &amp;quot;MASTER_LOG_POS&amp;quot;
+#大概是这样
+#-- CHANGE MASTER TO MASTER_LOG_FILE='mysql-bin.000006', MASTER_LOG_POS=106;
+&lt;/pre&gt;
+&lt;p&gt;这一步可以拿到当前数据库的日志文件相关信息，
+包括（MASTER_LOG_FILE和MASTER_LOG_POS），
+后面启动备机的同步时需要这两个数据。&lt;/p&gt;
+&lt;p&gt;6、 把数据库的数据搞到slave机器上&lt;/p&gt;
+&lt;blockquote&gt;
+scp ./whatever_dump.sql username&amp;#64;&amp;lt;&amp;lt;slave-server-ip&amp;gt;&amp;gt;:~/&lt;/blockquote&gt;
+&lt;p&gt;这里可以随意使用各种办法。
+完事之后Master机就Ready了。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="slave"&gt;
+&lt;h2&gt;Slave端的操作&lt;/h2&gt;
+&lt;p&gt;1、 创建对应的数据库并且把数据文件导入&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+CREATE DATABASES whatever;
+mysql -u root -p whatever &amp;lt; ~/whatever_dump.sql
+&lt;/pre&gt;
+&lt;p&gt;2、 编辑Slave的conf文件&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+server-id = 101 #不要跟Master一样就好
+binlog-format = mixed
+log_bin = mysql-bin
+relay-log = mysql-relay-bin
+log-slave-updates = 1
+read-only = 1 #这里会限制Slave的写入，只接收来自Master的数据，防止冲突
+binlog_do_db = whatever #需要做备份的数据库
+&lt;/pre&gt;
+&lt;p&gt;一定要注意server-id不能跟Master冲突。
+此外如果有多台备机的话也需要保证每台机器都有唯一的server-id。&lt;/p&gt;
+&lt;p&gt;3、 进入MySQL终端，设置Master信息&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+CHANGE MASTER TO MASTER_HOST='&amp;lt;&amp;lt;master-server-ip&amp;gt;&amp;gt;',MASTER_USER='replicant',MASTER_PASSWORD='&amp;lt;&amp;lt;slave-server-password&amp;gt;&amp;gt;', MASTER_LOG_FILE='&amp;lt;&amp;lt;value from above&amp;gt;&amp;gt;', MASTER_LOG_POS=&amp;lt;&amp;lt;value from above&amp;gt;&amp;gt;;
+&lt;/pre&gt;
+&lt;p&gt;4、 启动Slave的备份线程&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+START SLAVE;
+&lt;/pre&gt;
+&lt;p&gt;5、 检查状态是否正常&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+SHOW SLAVE STATUS \G
+&lt;/pre&gt;
+&lt;p&gt;正常的话Last_Error为空且Slave_IO_State为Waiting for master to send event&lt;/p&gt;
+&lt;p&gt;至此MySQL的主备就算搭好了，
+在此刻以后所有Master端的写入操作都会同步到Slave的数据库中。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h2&gt;注意事项&lt;/h2&gt;
+&lt;p&gt;如果中途操作搞错了，
+导致Slave运行错误，
+比如cnf文件写错的话，
+修复错误后需要重置一次slave，
+命令是这个：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+RESET SLAVE
+&lt;/pre&gt;
+&lt;p&gt;没有为什么，
+It's magic.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h2&gt;总结&lt;/h2&gt;
+&lt;p&gt;其实整个过程就是如下几步：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+Master端配置需要做Replicant的数据库，使其写入Log日志
+Master端重启使配置生效
+Master端建立账户供Slave访问数据
+Slave端导入Master原有数据
+Slave端配置数据库对应的Log日志
+Slave端配置访问Master的地址和用户名等信息
+Slave端启动线程同步数据
+&lt;/pre&gt;
+&lt;p&gt;由于MySQL的同步机制是基于操作Log日志来的，
+因此Log日志非常重要。&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="MySQL"></category></entry><entry><title>GoAgent代理php服务器浅析</title><link href="/webTool002-goagent-php-server-analyse.html" rel="alternate"></link><updated>2015-01-18T20:00:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2015-01-18:webTool002-goagent-php-server-analyse.html</id><summary type="html">&lt;p&gt;这段时间主要的研究方向是php，
 学习了一些框架的使用和php的简单机制。&lt;/p&gt;
 &lt;p&gt;花了点时间简单分析了一下php的代理服务器构造，
 记录如下。&lt;/p&gt;

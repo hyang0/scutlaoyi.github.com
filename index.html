@@ -107,6 +107,51 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/mysql-replicant-without-table-lock.html">MySQL主备容灾不锁表的搭建记录</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-01-24T20:00:00+08:00">
+        <i class="icon-calendar"></i>六 24 一月 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/web.html"><i class="icon-folder-open"></i>Web</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/mysql.html"><i class="icon-tag"></i>MySQL</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><div class="section" id="id1">
+<h2>背景</h2>
+<p>最近搭了一个MySQL的主备环境，
+感觉过程还是蛮好玩的。
+记录一下以备后续的查阅。</p>
+<p>本方案搭建MySQL主备环境，
+Master机为主机，接收写入和读取；
+Slave机为备机，从Master同步数据，只接受查询请求（只读）。</p>
+<p>搭建过程不锁数据库表，
+可以支持线上热操作。</p>
+</div>
+<div class="section" id="id2">
+<h2>主要参考</h2>
+<p><a class="reference external" href="http://plusbryan.com/mysql-replication-without-downtime">http://plusbryan.com/mysql-replication-without-downtime</a></p>
+<p><a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-master-slave-replication-in-mysql">https://www.digitalocean.com/community/tutorials/how-to-set-up-master-slave-replication-in-mysql</a></p>
+<p><a class="reference external" href="https://stackoverflow.com/questions/5029485/error-could-not-initailize-master-info-structure-while-doing-master-slave-rep">https://stackoverflow.com/questions/5029485/error-could-not-initailize-master-info-structure-while-doing-master-slave-rep</a></p>
+</div>
+<div class="section" id="master">
+<h2>Master端配置</h2>
+<p>1、 MySQL配置文件加入如下几行(my.cnf)：</p>
+<pre class="literal-block">
+server-id    = 1 #随意
+binlog-format   = mixed
+log-bin  = mysql-bin #一定要是binary模式才支持Replicant
+datadir  = /var/lib/mysql #MySQL的数据文件，维持现状即可 ...</pre></div>
+                        <a class="btn primary xsmall" href="/mysql-replicant-without-table-lock.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/webTool002-goagent-php-server-analyse.html">GoAgent代理php服务器浅析</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -652,75 +697,6 @@ DNS解析从tk那边转移到GoDaddy了，
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/JobHunting004-Summary-Of-Audition-Resume.html">实习求职：一些面试经验的总结(简历篇)</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-05-11T16:30:00+08:00">
-        <i class="icon-calendar"></i>日 11 五月 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/life.html"><i class="icon-folder-open"></i>Life</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/audition.html"><i class="icon-tag"></i>audition</a>
-	<a href="/tag/recruitment.html"><i class="icon-tag"></i>recruitment</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>转眼间已经五月中旬，
-最近的一个多月先后面试了几家公司，
-顺利拿到了百田和腾讯的实习offer。</p>
-<p>由于比较忙，
-而且腾讯的面试略微零碎，
-因此没有总结出完整的记录。</p>
-<p>不仅在自己的经历中收获了很多东西，
-在和朋友们的交流中也听说了很多东西，
-因此写一篇通用的总结经验，
-留给以后温故知新。</p>
-<div class="section" id="id2">
-<h2>关于简历</h2>
-<p>简历是一个大问题，
-许多人因为简历没有写好导致直接在筛选的时候就被干掉，
-连笔试机会都没有。</p>
-<p>眼下的简历一般分为两种，
-自己制作后通过各种方式提交的自制简历，
-电子版也好印刷版也好，
-普遍存在于各种行业中的中小型公司。</p>
-<p>另外一种是公司提供的表格进行填写，
-一般是直接给个网址，
-通过表单录入，
-例如腾讯就是。
-这种方式需要一定的技术支持，
-所以在小型创业型公司比较少见。</p>
-<p>以下先以自制型简历记录一般做法。</p>
-<p>自制型简历特点是自由度非常大，
-想怎么搞都行，
-想要记录的内容任由制作者自行决定。</p>
-<p>因此首先需要做的是保证简历的清爽和清晰。</p>
-<p>不使用边框是比较好的，
-因为边框的加入会导致整体效果比较死板，
-每一个项目之间都加入边框整个简历变得密密麻麻，
-阅读者也难以聚焦;
-而如果是只在外层包一个大边框更显得画蛇添足。</p>
-<p>整体排版以简单的纵向块分隔为主，
-若干行组成一个块，
-每一块中记录某个方面的信息。</p>
-<p>每个块给个标题表明内容，
-例如：个人信息、教育背景、获奖经历等。</p>
-<p><strong>个人信息</strong></p>
-<p>最佳实践是在简历的最顶端给个大大的姓名，
-接下来的第一个块留给个人信息和联系方式，
-这样的好处是非常直观，
-便于hr确定身份联系发offer。
-(^_~)</p>
-<p>个人信息不要面面具到搞一堆无价值的数据，
-如果没有特别强调工作地区就没必要给籍贯 ...</p></div>
-                        <a class="btn primary xsmall" href="/JobHunting004-Summary-Of-Audition-Resume.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -797,29 +773,24 @@ window.onload=function(){
 </li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/android.html">
-        <i class="icon-tag icon-large"></i>Android
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
     </a>
 </li>
 <li class="tag-1">
-    <a href="/tag/data-structure.html">
-        <i class="icon-tag icon-large"></i>data structure
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
     </a>
 </li>
-<li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
+<li class="tag-2">
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
     </a>
 </li>
 <li class="tag-3">
@@ -828,8 +799,63 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/audition.html">
-        <i class="icon-tag icon-large"></i>audition
+    <a href="/tag/web-tool.html">
+        <i class="icon-tag icon-large"></i>web tool
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/data-structure.html">
+        <i class="icon-tag icon-large"></i>data structure
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/android.html">
+        <i class="icon-tag icon-large"></i>Android
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/mysql.html">
+        <i class="icon-tag icon-large"></i>MySQL
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
     </a>
 </li>
 <li class="tag-4">
@@ -840,51 +866,6 @@ window.onload=function(){
 <li class="tag-1">
     <a href="/tag/arch-linux.html">
         <i class="icon-tag icon-large"></i>Arch Linux
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>Python
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/web-tool.html">
-        <i class="icon-tag icon-large"></i>web tool
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
     </a>
 </li>
 

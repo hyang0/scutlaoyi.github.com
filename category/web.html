@@ -107,6 +107,51 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/mysql-replicant-without-table-lock.html">MySQL主备容灾不锁表的搭建记录</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-01-24T20:00:00+08:00">
+        <i class="icon-calendar"></i>六 24 一月 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/web.html"><i class="icon-folder-open"></i>Web</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/mysql.html"><i class="icon-tag"></i>MySQL</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><div class="section" id="id1">
+<h2>背景</h2>
+<p>最近搭了一个MySQL的主备环境，
+感觉过程还是蛮好玩的。
+记录一下以备后续的查阅。</p>
+<p>本方案搭建MySQL主备环境，
+Master机为主机，接收写入和读取；
+Slave机为备机，从Master同步数据，只接受查询请求（只读）。</p>
+<p>搭建过程不锁数据库表，
+可以支持线上热操作。</p>
+</div>
+<div class="section" id="id2">
+<h2>主要参考</h2>
+<p><a class="reference external" href="http://plusbryan.com/mysql-replication-without-downtime">http://plusbryan.com/mysql-replication-without-downtime</a></p>
+<p><a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-master-slave-replication-in-mysql">https://www.digitalocean.com/community/tutorials/how-to-set-up-master-slave-replication-in-mysql</a></p>
+<p><a class="reference external" href="https://stackoverflow.com/questions/5029485/error-could-not-initailize-master-info-structure-while-doing-master-slave-rep">https://stackoverflow.com/questions/5029485/error-could-not-initailize-master-info-structure-while-doing-master-slave-rep</a></p>
+</div>
+<div class="section" id="master">
+<h2>Master端配置</h2>
+<p>1、 MySQL配置文件加入如下几行(my.cnf)：</p>
+<pre class="literal-block">
+server-id    = 1 #随意
+binlog-format   = mixed
+log-bin  = mysql-bin #一定要是binary模式才支持Replicant
+datadir  = /var/lib/mysql #MySQL的数据文件，维持现状即可 ...</pre></div>
+                        <a class="btn primary xsmall" href="/mysql-replicant-without-table-lock.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/webTool002-goagent-php-server-analyse.html">GoAgent代理php服务器浅析</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -604,29 +649,24 @@ window.onload=function(){
 </li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/android.html">
-        <i class="icon-tag icon-large"></i>Android
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
     </a>
 </li>
 <li class="tag-1">
-    <a href="/tag/data-structure.html">
-        <i class="icon-tag icon-large"></i>data structure
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
     </a>
 </li>
-<li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
+<li class="tag-2">
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
     </a>
 </li>
 <li class="tag-3">
@@ -635,8 +675,63 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/audition.html">
-        <i class="icon-tag icon-large"></i>audition
+    <a href="/tag/web-tool.html">
+        <i class="icon-tag icon-large"></i>web tool
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/data-structure.html">
+        <i class="icon-tag icon-large"></i>data structure
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/android.html">
+        <i class="icon-tag icon-large"></i>Android
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/mysql.html">
+        <i class="icon-tag icon-large"></i>MySQL
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
     </a>
 </li>
 <li class="tag-4">
@@ -647,51 +742,6 @@ window.onload=function(){
 <li class="tag-1">
     <a href="/tag/arch-linux.html">
         <i class="icon-tag icon-large"></i>Arch Linux
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>Python
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/web-tool.html">
-        <i class="icon-tag icon-large"></i>web tool
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
     </a>
 </li>
 

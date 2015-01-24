@@ -107,6 +107,49 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/CppLearning005.html">C++学习(五)：有序线性表的点滴记录</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-02-25T16:30:00+08:00">
+        <i class="icon-calendar"></i>二 25 二月 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/coding.html"><i class="icon-folder-open"></i>Coding</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
+	<a href="/tag/data-structure.html"><i class="icon-tag"></i>data structure</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>在线性表的基础上开始构建有序线性表。
+使用的是单next指针结构的线性表。</p>
+<p>后续将考虑在数组的基础上构建能够高效插入和搜索的数据结构。</p>
+<div class="section" id="id1">
+<h2>基本结构</h2>
+<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">SortedLinklist</span><span class="o">:</span> <span class="k">public</span> <span class="n">Linklist</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span>
+<span class="p">{</span>
+    <span class="k">public</span><span class="o">:</span>
+    <span class="n">SortedLinklist</span><span class="p">(</span><span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">comp</span><span class="p">)(</span><span class="n">Type</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="n">Type</span> <span class="o">*</span><span class="n">b</span><span class="p">));</span>
+    <span class="o">~</span><span class="n">SortedLinklist</span><span class="p">();</span>
+
+    <span class="k">protected</span><span class="o">:</span>
+    <span class="kt">bool</span> <span class="n">insertafter</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">,</span> <span class="n">Type</span> <span class="o">&amp;</span><span class="n">data</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="nf">push</span><span class="p">(</span><span class="n">Type</span> <span class="o">&amp;</span><span class="n">data</span><span class="p">);</span>
+
+    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">comparefunc</span><span class="p">)(</span><span class="n">Type</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="n">Type</span> <span class="o">*</span><span class="n">b</span><span class="p">);</span>
+
+    <span class="k">public</span><span class="o">:</span>
+    <span class="kt">void</span> <span class="n">append</span><span class="p">(</span><span class="n">Type</span> <span class="o">&amp;</span><span class="n">value</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="nf">mergewithotherlist</span><span class="p">(</span><span class="n">SortedLinklist</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="nf">removeduplicates ...</span></pre></div></div>
+                        <a class="btn primary xsmall" href="/CppLearning005.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/xss_basic.html">web概念学习：XSS跨站代码注入攻击</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -538,73 +581,6 @@ AUR的东西需要自行下载安装。</p>
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/Arch003.html">Arch Linux学习：安装篇(三)</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-01-16T19:30:00+08:00">
-        <i class="icon-calendar"></i>四 16 一月 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/arch-linux.html"><i class="icon-tag"></i>Arch Linux</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。</p>
-<hr class="docutils" />
-<div class="section" id="virtualbox">
-<h2>关于VirtualBox的安装</h2>
-<p>看了教程感觉很难搞，光是篇幅就吓死人。</p>
-<p>昨天看清楚才发现原来是自己搞错了，
-在Arch Linux里装VirtualBox是不难的，
-大概也就两页的篇幅。</p>
-<p>首先需要以下的包，
-用pacman装就可以了。</p>
-<blockquote>
-virtualbox</blockquote>
-<p>pacman会自动连带安装host-modules。</p>
-<p>别想不开用终端去操作，
-再装个Qt吧，
-装完就有熟悉的界面了，
-如果以前用过virtualbox的话。</p>
-<blockquote>
-qt4</blockquote>
-<p>我用的是默认的kernel，
-所以接下去就不用怎么配置了，
-如果想每次手动启动virtualbox的话，
-在启动之前敲这个就可以了：</p>
-<blockquote>
-modprobe vboxdrv</blockquote>
-<p>像我这种整天挂个win7当代理服务器的，
-把这个模块扔到启动配置文件里去比较方便。</p>
-<p>方法是在/etc/modules-load.d/里建立一个新的*.conf文件，
-起个好听的名字，比如virtualbox.conf，
-内容就加入这句即可：</p>
-<blockquote>
-vboxdrv</blockquote>
-<p>这样就能够在每次启动的时候自动启动这个模块。</p>
-<p>据称这个模块作为虚拟机的基础模块，
-必须在启动虚拟机前正确启动。
-自己测试的时候如果没有启动这货直接启动虚拟机，
-系统会报错并退出。</p>
-<p>然后，
-桌面环境里开启virtualbox，
-该干嘛干嘛。</p>
-<div class="section" id="troubleshooting">
-<h3>troubleshooting</h3>
-<p>虽然教程说的非常简单，
-博主在安装的时候还是出了很大的问题。</p>
-<p>在安装完启动vboxdrv的时候系统报错：</p>
-<blockquote>
-modprobe ...</blockquote></div></div>
-                        <a class="btn primary xsmall" href="/Arch003.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -681,29 +657,24 @@ window.onload=function(){
 </li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/android.html">
-        <i class="icon-tag icon-large"></i>Android
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
     </a>
 </li>
 <li class="tag-1">
-    <a href="/tag/data-structure.html">
-        <i class="icon-tag icon-large"></i>data structure
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
     </a>
 </li>
-<li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
+<li class="tag-2">
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
     </a>
 </li>
 <li class="tag-3">
@@ -712,8 +683,63 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/audition.html">
-        <i class="icon-tag icon-large"></i>audition
+    <a href="/tag/web-tool.html">
+        <i class="icon-tag icon-large"></i>web tool
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/data-structure.html">
+        <i class="icon-tag icon-large"></i>data structure
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/android.html">
+        <i class="icon-tag icon-large"></i>Android
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/mysql.html">
+        <i class="icon-tag icon-large"></i>MySQL
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
     </a>
 </li>
 <li class="tag-4">
@@ -724,51 +750,6 @@ window.onload=function(){
 <li class="tag-1">
     <a href="/tag/arch-linux.html">
         <i class="icon-tag icon-large"></i>Arch Linux
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>Python
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/web-tool.html">
-        <i class="icon-tag icon-large"></i>web tool
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
     </a>
 </li>
 

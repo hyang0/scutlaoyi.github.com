@@ -107,6 +107,73 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/Arch003.html">Arch Linux学习：安装篇(三)</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-01-16T19:30:00+08:00">
+        <i class="icon-calendar"></i>四 16 一月 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/arch-linux.html"><i class="icon-tag"></i>Arch Linux</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。</p>
+<hr class="docutils" />
+<div class="section" id="virtualbox">
+<h2>关于VirtualBox的安装</h2>
+<p>看了教程感觉很难搞，光是篇幅就吓死人。</p>
+<p>昨天看清楚才发现原来是自己搞错了，
+在Arch Linux里装VirtualBox是不难的，
+大概也就两页的篇幅。</p>
+<p>首先需要以下的包，
+用pacman装就可以了。</p>
+<blockquote>
+virtualbox</blockquote>
+<p>pacman会自动连带安装host-modules。</p>
+<p>别想不开用终端去操作，
+再装个Qt吧，
+装完就有熟悉的界面了，
+如果以前用过virtualbox的话。</p>
+<blockquote>
+qt4</blockquote>
+<p>我用的是默认的kernel，
+所以接下去就不用怎么配置了，
+如果想每次手动启动virtualbox的话，
+在启动之前敲这个就可以了：</p>
+<blockquote>
+modprobe vboxdrv</blockquote>
+<p>像我这种整天挂个win7当代理服务器的，
+把这个模块扔到启动配置文件里去比较方便。</p>
+<p>方法是在/etc/modules-load.d/里建立一个新的*.conf文件，
+起个好听的名字，比如virtualbox.conf，
+内容就加入这句即可：</p>
+<blockquote>
+vboxdrv</blockquote>
+<p>这样就能够在每次启动的时候自动启动这个模块。</p>
+<p>据称这个模块作为虚拟机的基础模块，
+必须在启动虚拟机前正确启动。
+自己测试的时候如果没有启动这货直接启动虚拟机，
+系统会报错并退出。</p>
+<p>然后，
+桌面环境里开启virtualbox，
+该干嘛干嘛。</p>
+<div class="section" id="troubleshooting">
+<h3>troubleshooting</h3>
+<p>虽然教程说的非常简单，
+博主在安装的时候还是出了很大的问题。</p>
+<p>在安装完启动vboxdrv的时候系统报错：</p>
+<blockquote>
+modprobe ...</blockquote></div></div>
+                        <a class="btn primary xsmall" href="/Arch003.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/Arch002.html">Arch Linux学习：安装篇(二)</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -502,36 +569,6 @@ Arch Linux提供了非常大的自由度和开放度供用户完全控制自己�
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/PythonExpe002.html">软件体系结构：N皇后问题系列之管道风格</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2013-11-03T22:30:00+08:00">
-        <i class="icon-calendar"></i>日 03 十一月 2013
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/coding.html"><i class="icon-folder-open"></i>Coding</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
-	<a href="/tag/softwarearchitect.html"><i class="icon-tag"></i>SoftwareArchitect</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
-<p><strong>使用的Python版本为2.7.3</strong></p>
-<p><strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
-<hr class="docutils" />
-<p><strong>风格二:管道风格</strong></p>
-<p>管道风格的主要思想是，将问题产生的输入作为流，从程序的入口输入，构造若干个过滤器，每个过滤器负责一部分过滤功能，将不符合结果的输入筛选掉，最终剩下完全符合要求的便是问题所需要的输出。</p>
-<p>考虑到N皇后问题，还是将棋盘分割为单独的层，为每个层构造一个过滤器，这样便可以从棋盘的顶部将所有可能解输入，层层筛选，直到棋盘底部依然符合要求的解集便是答案了。</p>
-<p>这里运用了一点剪枝以优化性能。显而易见，如果在第i层的某个解不符合要求，则没有必要为这个解构造所有i层以下的解，因为在第i层必然是不能通过过滤器的。因此，我的实现方法没有在最开始便构造所有层的所有解，而是只构造了第一层的所有解。在过滤第一层之后，从剩下的那些可能解的基础上，再次构造下一层的所有可能解，并传入下一层的过滤器。这样便省去了大量无效的解。</p>
-<p>那么这些解集放在哪里呢？初试Python，用了恶心的办法实现了，便是List。由于每个解都是由一个或若干个数字形成的列表组成（保存每一层的皇后位置），因此将每一层的每个可能解List存为一个大List，并再存入总List作为管道的输入流。这样在管道的另一端便获得筛选完成后的结果List。若有n皇后 ...</p>
-                        <a class="btn primary xsmall" href="/PythonExpe002.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -608,29 +645,24 @@ window.onload=function(){
 </li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/android.html">
-        <i class="icon-tag icon-large"></i>Android
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
     </a>
 </li>
 <li class="tag-1">
-    <a href="/tag/data-structure.html">
-        <i class="icon-tag icon-large"></i>data structure
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
     </a>
 </li>
-<li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
+<li class="tag-2">
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
     </a>
 </li>
 <li class="tag-3">
@@ -639,8 +671,63 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/audition.html">
-        <i class="icon-tag icon-large"></i>audition
+    <a href="/tag/web-tool.html">
+        <i class="icon-tag icon-large"></i>web tool
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/data-structure.html">
+        <i class="icon-tag icon-large"></i>data structure
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/android.html">
+        <i class="icon-tag icon-large"></i>Android
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/mysql.html">
+        <i class="icon-tag icon-large"></i>MySQL
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
     </a>
 </li>
 <li class="tag-4">
@@ -651,51 +738,6 @@ window.onload=function(){
 <li class="tag-1">
     <a href="/tag/arch-linux.html">
         <i class="icon-tag icon-large"></i>Arch Linux
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>Python
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/web-tool.html">
-        <i class="icon-tag icon-large"></i>web tool
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
     </a>
 </li>
 
