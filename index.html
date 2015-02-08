@@ -107,6 +107,72 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/webTool003-how-to-use-tor-with-meek.html">Linux下Tor的安装和Meek的配置（非Browser Bundle模式）</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-05T20:00:00+08:00">
+        <i class="icon-calendar"></i>四 05 二月 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/web.html"><i class="icon-folder-open"></i>Web</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/tor.html"><i class="icon-tag"></i>Tor</a>
+	<a href="/tag/proxy.html"><i class="icon-tag"></i>proxy</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>博主喜欢折腾东西，
+比如说好好的Tor Browser Bundle不用，
+非要装一个纯的Tor来玩，
+于是各种好玩的事情便纷至沓来。</p>
+<div class="section" id="tormeek">
+<h2>关于Tor和Meek的基本介绍</h2>
+<p><strong>TOR</strong></p>
+<p>Tor就不怎么说了，
+都懂。
+三层代理支持，
+只有出口节点知道访问内容，
+只有入口节点知道访问的IP。</p>
+<p>纯Tor目前连接不上，
+目录服务器被Block掉了。
+导致的后果就是Tor无法直接连接Tor电路。</p>
+<p><strong>网桥</strong></p>
+<p>目前可用的办法是让Tor连接到中继网桥上，
+中继网桥相当于跳板，
+将客户端的请求转发到Tor电路中。</p>
+<p>常规的中继网桥流量明显，
+容易被盯上和封锁，
+因此有了几款流量混淆插件。</p>
+<p>obfs2/3/4，
+ScrambleSuit，
+当然还有今天的主角Meek。</p>
+<p>流量混淆插件可以将非常明显的Tor数据包伪装成普通的包，
+防止被流量检测器盯上。</p>
+<p>网桥存在问题在于经常会被动态Block，
+由于正常用户需要通过各种方式获取可用的网桥信息，
+博主猜是他们也用各种类似办法获取网桥，
+一旦发现新的就统统干掉。</p>
+<p>此外通过分析数据流量和目标地址，
+估计也有一些办法可以判定某些目标地址是网桥节点，
+只要被盯上就会被干掉。</p>
+<p>归根结底就是网桥无法长期稳定使用。</p>
+<p><strong>Meek</strong></p>
+<p>最后是Meek。</p>
+<p>Meek是最近一个牛逼虎虎的插件，
+用Meek可以让Tor连接到被封锁的网络上。</p>
+<p>Meek的原理简单来说是内容的欺骗，
+首先把真正需要访问的地址（Tor网桥地址）塞进HTTPS包内部Header中，
+在HTTPS包的外部把目标URL填写为没有被干掉的普通地址，
+在传输的过程中由于目标地址正常，
+所以数据包可以成功到达服务器。</p>
+<p>到达正常服务器 ...</p></div>
+                        <a class="btn primary xsmall" href="/webTool003-how-to-use-tor-with-meek.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/mysql-replicant-without-table-lock.html">MySQL主备容灾不锁表的搭建记录</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -627,76 +693,6 @@ p2p货币的交易记录存储在全网的所有运行的机器中，
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/JobHunting005-Summary-Of-Audition-00.html">实习求职：一些面试经验的总结(面试篇)</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-06-02T16:30:00+08:00">
-        <i class="icon-calendar"></i>一 02 六月 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/life.html"><i class="icon-folder-open"></i>Life</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/audition.html"><i class="icon-tag"></i>audition</a>
-	<a href="/tag/recruitment.html"><i class="icon-tag"></i>recruitment</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>下班就顾着看电影，
-放假就顾着玩，
-站点都很久很久没有更新喽。</p>
-<p>听说有些博主坚持每日一篇的，
-感觉好夸张。</p>
-<p>最近给站点做了一些优化，
-DNS解析从tk那边转移到GoDaddy了，
-速度和稳定性都有一些提升。</p>
-<p>另外今天暂时移除了Google Analysis，
-虽然这货是神器，
-可以看到每一个访问的具体细节，
-但最近Google的服务器都快被干死了，
-导致载入Google的JS文件非常慢。
-考虑到很多访客来自大陆的局域网，
-没有做网络优化，
-为了提升体验效果于是只好忍痛暂时停用Analysis了。</p>
-<p>吹水结束。</p>
-<p>这篇来稍微记录一下面试过程的注意点。</p>
-<div class="section" id="id2">
-<h2>关于衣着</h2>
-<p>技术类的对正装基本没有要求，
-只要是正规一点的衣服，
-看起来清爽整洁就可以了。</p>
-<p>当然什么机车帽之类的别上，
-太夸张，
-听说有个兄弟就这样一面直接被腾讯秒了。</p>
-</div>
-<div class="section" id="id3">
-<h2>关于自我介绍</h2>
-<p>有一个比较常见的误区在于，
-自我介绍的时候把自己简历上的东西又复述了一遍，
-却没什么新奇的或者详细的描述。
-毕竟简历上有的东西面试官早就知道了，
-复述会给双方浪费很多时间。</p>
-<p>有条理，按时间排序，
-每个事件给一些主要的内容，
-比如说用到的技术，
-获得的奖项这些。</p>
-<p>当然不要局限在某些细节半天出不来，
-这也有些考验面试者的表达能力，
-如何将自己的学习经历整理成为长度刚好、重点突出、有条不紊的自我介绍。</p>
-<p>博主的做法是事先的准备，
-将所有干过的事情列举到纸上，
-一件事用一句话概括。
-将觉得不错的想要介绍的东西挑出来，
-按自己喜欢的顺序排好，
-然后逐步拓展开来，
-把事件的重点补充上去。</p>
-<p>这么做的好处是首先一句话能够概括的东西最为清晰 ...</p></div>
-                        <a class="btn primary xsmall" href="/JobHunting005-Summary-Of-Audition-00.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -773,59 +769,9 @@ window.onload=function(){
 </li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
-<li class="tag-1">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>Python
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/audition.html">
-        <i class="icon-tag icon-large"></i>audition
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/litecoin.html">
-        <i class="icon-tag icon-large"></i>litecoin
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/web-tool.html">
-        <i class="icon-tag icon-large"></i>web tool
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/data-structure.html">
-        <i class="icon-tag icon-large"></i>data structure
-    </a>
-</li>
 <li class="tag-4">
-    <a href="/tag/android.html">
-        <i class="icon-tag icon-large"></i>Android
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
+    <a href="/tag/page-sentences.html">
+        <i class="icon-tag icon-large"></i>page sentences
     </a>
 </li>
 <li class="tag-2">
@@ -834,23 +780,8 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/mysql.html">
-        <i class="icon-tag icon-large"></i>MySQL
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
     </a>
 </li>
 <li class="tag-3">
@@ -858,14 +789,89 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>Vim
     </a>
 </li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
 <li class="tag-4">
-    <a href="/tag/page-sentences.html">
-        <i class="icon-tag icon-large"></i>page sentences
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/web-tool.html">
+        <i class="icon-tag icon-large"></i>web tool
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/android.html">
+        <i class="icon-tag icon-large"></i>Android
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/tor.html">
+        <i class="icon-tag icon-large"></i>Tor
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/litecoin.html">
+        <i class="icon-tag icon-large"></i>litecoin
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/mysql.html">
+        <i class="icon-tag icon-large"></i>MySQL
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/proxy.html">
+        <i class="icon-tag icon-large"></i>proxy
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
     </a>
 </li>
 <li class="tag-1">
     <a href="/tag/arch-linux.html">
         <i class="icon-tag icon-large"></i>Arch Linux
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/data-structure.html">
+        <i class="icon-tag icon-large"></i>data structure
     </a>
 </li>
 

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>老逸的个人站 - litecoin</title>
+    <title>老逸的个人站 - Tor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="laoyi">
@@ -107,11 +107,11 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
-                <h1><a href="/litecoin002-mining.html">玩转莱特币：使用CPUMiner和proxy挖矿的办法</a></h1>
+                <h1><a href="/webTool003-how-to-use-tor-with-meek.html">Linux下Tor的安装和Meek的配置（非Browser Bundle模式）</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2014-06-16T10:00:00+08:00">
-        <i class="icon-calendar"></i>一 16 六月 2014
+<abbr class="published" title="2015-02-05T20:00:00+08:00">
+        <i class="icon-calendar"></i>四 05 二月 2015
 </abbr>
 <span class="label">By</span>
 <a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
@@ -120,124 +120,55 @@
 
 
 <span class="label">Tags</span>
-	<a href="/tag/litecoin.html"><i class="icon-tag"></i>litecoin</a>
+	<a href="/tag/tor.html"><i class="icon-tag"></i>Tor</a>
+	<a href="/tag/proxy.html"><i class="icon-tag"></i>proxy</a>
 </footer><!-- /.post-info --></div>
-                <div class="summary"><p>挖矿分为两种，
-简单暴力的直接挖矿，
-以及加入矿池进行合体挖矿。</p>
-<p>由于现在的全网算力已经超乎想象(博主玩的时候大概为300GH/s)，
-没有专用矿机只能选择矿池挖矿。</p>
-<p>由于博主以娱乐为主，
-没有钱和精力购买高速专用矿机，
-甚至没有好的显卡拿来用GPU挖矿，
-因此使用的是简单的CPU挖矿方式(10KH/s......)。</p>
-<p>如果正儿八经的想赚点钱，
-推荐至少要弄个好的显卡用GPU挖矿。</p>
-<p>在网上有一些算力的统计表，
-AMD系列的显卡跑GPU挖矿一般可以达到100KH/s以上。</p>
-<div class="section" id="id1">
-<h2>矿池的选择</h2>
-<p>由于博主用的是大陆的局域网，
-选择矿池显得比较困难。</p>
-<p>首先需要排除掉那些没什么人的矿池，
-听说没什么人的矿池由于全池算力都很差，
-因此找到新块的几率非常低，
-进而导致每个矿工分到的收益也很小。</p>
-<p>此外，
-由于网络的问题，
-需要选择能够稳定连接的矿池，
-否则经常断线就只能白白消耗电能。</p>
-<blockquote>
-<p>现在的矿池基本上都支持stratum协议，
-这种协议本质上是建立一个代理服务器中转矿机和目标服务器的连接，
-由于有了这种类似于buffer的协议层，
-相比最初的getwork方式直连，
-不仅网络的带宽占用变小，
-连接的稳定性等各方面也有较好的提升。</p>
-<p>许多矿池甚至强制性使用stratum协议，
-例如coinotron。</p>
-</blockquote>
-<p>矿池的选择可以参考莱特币的info页面：</p>
-<pre class="literal-block">
-https://litecoin.info/Mining_pool_comparison
-</pre>
-<p>选择好矿池后，
-在网站里注册一个新的用户，
-4位的PIN码非常重要，
-各种操作都需要PIN码。
-有些矿池支持Google的身份验证器，
-推荐开启。</p>
-<blockquote>
-<p>不过很多矿池不支持更换验证器，
-而且没有备选的身份识别方案 ...</p></blockquote></div>
-                        <a class="btn primary xsmall" href="/litecoin002-mining.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/litecoin001-coin-and-wallet.html">玩转莱特币：概念</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-06-08T10:00:00+08:00">
-        <i class="icon-calendar"></i>日 08 六月 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/web.html"><i class="icon-folder-open"></i>Web</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/litecoin.html"><i class="icon-tag"></i>litecoin</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><div class="section" id="p2p">
-<h2>关于p2p货币</h2>
-<p>其实这个概念已经出现好几年了，
-作为一种新类型的虚拟货币，
-它们的共同点是去中心化。</p>
-<p><strong>发行</strong></p>
-<p>传统的货币必须要有一个中央发行机构，
-负责印发钞票，对该货币的市场拥有控制的能力。
-据说这种形式的货币普遍存在的不足是容易受到各种势力的管制。</p>
-<p>比特币及各种类型的p2p货币(莱特币、狗币...)则不是如此，
-他们没有中央控制机构，
-而是基于特定的困难算法，
-通过一定的速率产生。
-没有任何机构能够控制新币的产生，
-这样就有效防止了受到某些势力管制的危险。</p>
-<p><strong>交易记录</strong></p>
-<p>而对于交易记录，
-传统的货币是通过某些中央机构进行存储，
-比如银行的数据库，
-仍然是中心化的特点。
-这种特点导致修改交易记录成为可能，
-例如直接篡改数据库内容。</p>
-<p>与此相反，
-p2p货币的交易记录存储在全网的所有运行的机器中，
-相当于分布式的数据库。
-这样，
-如果某人想要篡改某一次的交易记录，
-则需要入侵网络中所有的计算机，
-基本上不可能。</p>
-<p><strong>交易确认</strong></p>
-<p>使用一种叫做块链的东西用于储存交易记录，
-每份交易储存在区块中，
-区块逐个相连形成块链。</p>
-<p>通过困难的计算产生区块，
-当新的交易产生时，
-数据写入区块中，
-区块插入块链。
-这样就完成了交易的记录。</p>
-<p>此外，
-由于没有机制使区块从块链中移除，
-因此这种类型的交易是不可逆的。</p>
-<p>伪造交易的现有方式是，
-使用超过一半的全网算力，
-生成新的区块，
-由于算力超过其他机器的总和，
-能够使自行伪造的交易记录被确认。
-也就是常说的51 ...</p></div>
-                        <a class="btn primary xsmall" href="/litecoin001-coin-and-wallet.html">more ...</a>
+                <div class="summary"><p>博主喜欢折腾东西，
+比如说好好的Tor Browser Bundle不用，
+非要装一个纯的Tor来玩，
+于是各种好玩的事情便纷至沓来。</p>
+<div class="section" id="tormeek">
+<h2>关于Tor和Meek的基本介绍</h2>
+<p><strong>TOR</strong></p>
+<p>Tor就不怎么说了，
+都懂。
+三层代理支持，
+只有出口节点知道访问内容，
+只有入口节点知道访问的IP。</p>
+<p>纯Tor目前连接不上，
+目录服务器被Block掉了。
+导致的后果就是Tor无法直接连接Tor电路。</p>
+<p><strong>网桥</strong></p>
+<p>目前可用的办法是让Tor连接到中继网桥上，
+中继网桥相当于跳板，
+将客户端的请求转发到Tor电路中。</p>
+<p>常规的中继网桥流量明显，
+容易被盯上和封锁，
+因此有了几款流量混淆插件。</p>
+<p>obfs2/3/4，
+ScrambleSuit，
+当然还有今天的主角Meek。</p>
+<p>流量混淆插件可以将非常明显的Tor数据包伪装成普通的包，
+防止被流量检测器盯上。</p>
+<p>网桥存在问题在于经常会被动态Block，
+由于正常用户需要通过各种方式获取可用的网桥信息，
+博主猜是他们也用各种类似办法获取网桥，
+一旦发现新的就统统干掉。</p>
+<p>此外通过分析数据流量和目标地址，
+估计也有一些办法可以判定某些目标地址是网桥节点，
+只要被盯上就会被干掉。</p>
+<p>归根结底就是网桥无法长期稳定使用。</p>
+<p><strong>Meek</strong></p>
+<p>最后是Meek。</p>
+<p>Meek是最近一个牛逼虎虎的插件，
+用Meek可以让Tor连接到被封锁的网络上。</p>
+<p>Meek的原理简单来说是内容的欺骗，
+首先把真正需要访问的地址（Tor网桥地址）塞进HTTPS包内部Header中，
+在HTTPS包的外部把目标URL填写为没有被干掉的普通地址，
+在传输的过程中由于目标地址正常，
+所以数据包可以成功到达服务器。</p>
+<p>到达正常服务器 ...</p></div>
+                        <a class="btn primary xsmall" href="/webTool003-how-to-use-tor-with-meek.html">more ...</a>
                 </div>
         </div>
         <hr />

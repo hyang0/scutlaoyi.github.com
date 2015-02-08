@@ -1,5 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>老逸的个人站</title><link>/</link><description></description><atom:link href="http://www.scutlaoyi.tk/feeds/laoyi.rss.xml" rel="self"></atom:link><lastBuildDate>Sat, 24 Jan 2015 20:00:00 +0800</lastBuildDate><item><title>MySQL主备容灾不锁表的搭建记录</title><link>/mysql-replicant-without-table-lock.html</link><description>&lt;div class="section" id="id1"&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>老逸的个人站</title><link>/</link><description></description><atom:link href="http://www.scutlaoyi.tk/feeds/laoyi.rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 05 Feb 2015 20:00:00 +0800</lastBuildDate><item><title>Linux下Tor的安装和Meek的配置（非Browser Bundle模式）</title><link>/webTool003-how-to-use-tor-with-meek.html</link><description>&lt;p&gt;博主喜欢折腾东西，
+比如说好好的Tor Browser Bundle不用，
+非要装一个纯的Tor来玩，
+于是各种好玩的事情便纷至沓来。&lt;/p&gt;
+&lt;div class="section" id="tormeek"&gt;
+&lt;h2&gt;关于Tor和Meek的基本介绍&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;TOR&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Tor就不怎么说了，
+都懂。
+三层代理支持，
+只有出口节点知道访问内容，
+只有入口节点知道访问的IP。&lt;/p&gt;
+&lt;p&gt;纯Tor目前连接不上，
+目录服务器被Block掉了。
+导致的后果就是Tor无法直接连接Tor电路。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;网桥&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;目前可用的办法是让Tor连接到中继网桥上，
+中继网桥相当于跳板，
+将客户端的请求转发到Tor电路中。&lt;/p&gt;
+&lt;p&gt;常规的中继网桥流量明显，
+容易被盯上和封锁，
+因此有了几款流量混淆插件。&lt;/p&gt;
+&lt;p&gt;obfs2/3/4，
+ScrambleSuit，
+当然还有今天的主角Meek。&lt;/p&gt;
+&lt;p&gt;流量混淆插件可以将非常明显的Tor数据包伪装成普通的包，
+防止被流量检测器盯上。&lt;/p&gt;
+&lt;p&gt;网桥存在问题在于经常会被动态Block，
+由于正常用户需要通过各种方式获取可用的网桥信息，
+博主猜是他们也用各种类似办法获取网桥，
+一旦发现新的就统统干掉。&lt;/p&gt;
+&lt;p&gt;此外通过分析数据流量和目标地址，
+估计也有一些办法可以判定某些目标地址是网桥节点，
+只要被盯上就会被干掉。&lt;/p&gt;
+&lt;p&gt;归根结底就是网桥无法长期稳定使用。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Meek&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;最后是Meek。&lt;/p&gt;
+&lt;p&gt;Meek是最近一个牛逼虎虎的插件，
+用Meek可以让Tor连接到被封锁的网络上。&lt;/p&gt;
+&lt;p&gt;Meek的原理简单来说是内容的欺骗，
+首先把真正需要访问的地址（Tor网桥地址）塞进HTTPS包内部Header中，
+在HTTPS包的外部把目标URL填写为没有被干掉的普通地址，
+在传输的过程中由于目标地址正常，
+所以数据包可以成功到达服务器。&lt;/p&gt;
+&lt;p&gt;到达正常服务器，
+解析出HTTPS内容，
+在包的内部Header中发现HOST字段，
+HOST字段指向了真正需要访问的被封锁的URL。
+由正常服务器将包再次转发。
+由于这时候包已经成功到达敌国，
+在敌国的传输不会受到干扰，
+因此数据包正常到达真正的目标服务器。&lt;/p&gt;
+&lt;p&gt;相当于拿一个正常的服务器作为跳板转发请求。&lt;/p&gt;
+&lt;p&gt;Meek现在据称还处于测试阶段，
+Tor的开发者们把Meek部署到三个大型的服务商里，
+分别是亚马逊的AWS，
+微软的Azure，
+还有谷歌的GAE。
+这些大型的服务商都提供了上述的HTTPS解析能力。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="tor"&gt;
+&lt;h2&gt;Tor的安装&lt;/h2&gt;
+&lt;p&gt;最简单的办法是照着教程做，
+直接从torproject上面拉最新版：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+https://www.torproject.org/docs/debian.html.en
+&lt;/pre&gt;
+&lt;p&gt;源码编译也是可以的。
+注意glibc之类的依赖，
+博主手气不好，
+手动编译经常失败。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="meek"&gt;
+&lt;h2&gt;Meek的下载和安装&lt;/h2&gt;
+&lt;p&gt;从Tor的Git仓库中拉一个最新版本的代码：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+git clone https://git.torproject.org/pluggable-transports/meek.git
+&lt;/pre&gt;
+&lt;p&gt;把代码搞到手之后就可以准备编译了。
+代码是用go写的，
+博主由于不认识go，
+搞了很久才把客户端编译好。&lt;/p&gt;
+&lt;p&gt;这里需要了解的一点是meek-client是基于Tor的一个库写的，
+在代码中也可以看到工程的头部引用了Tor的一个go库。
+因此直接进入目录里编译的话会报错。&lt;/p&gt;
+&lt;p&gt;解决方案是让go拉取Tor的对应库：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+go get git.torproject.org/pluggable-transports/goptlib.git
+&lt;/pre&gt;
+&lt;p&gt;当然在这之前还必须把环境变量配置一下，
+例如GOPATH什么的。&lt;/p&gt;
+&lt;p&gt;最后进入meek-client编译：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+go build
+&lt;/pre&gt;
+&lt;p&gt;如果ok的话可以拿到一个叫做meek-client（没有任何后缀）的可执行文件，
+拿出来用即可。&lt;/p&gt;
+&lt;p&gt;这里假设把meek-client放到/tmp/meek-client里。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;Tor的配置&lt;/h2&gt;
+&lt;p&gt;接下来需要配置Tor让它走meek通道，
+编辑/etc/tor/torrc，
+加入下述几行：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+UseBridges 1
+Bridge meek 0.0.2.0:1 url=https://meek-reflect.appspot.com/ front=www.google.com
+ClientTransportPlugin meek exec /tmp/meek-client --log /tmp/meek-client.log
+&lt;/pre&gt;
+&lt;p&gt;解释一下：&lt;/p&gt;
+&lt;p&gt;首先是配置使用Bridge。&lt;/p&gt;
+&lt;p&gt;然后配置Bridge信息，
+是Meek类型的Bridge。&lt;/p&gt;
+&lt;p&gt;关键的来了，
+配置front为Google的玉米，
+配置meek服务器的地址为一个appspot的地址。&lt;/p&gt;
+&lt;p&gt;front便是写在HTTPS请求外层的所谓“合法”地址，
+如果Google没有被干掉的话。
+url为meek服务器的地址，
+也就是请求数据包最终发送到的地址。&lt;/p&gt;
+&lt;p&gt;最后一行配置了meek本地客户端的信息，
+可执行文件的地址，
+以及log日志的打印地址。&lt;/p&gt;
+&lt;p&gt;如此配置之后得到的效果是，
+所有本地的Tor数据包首先发送到Meek-client，
+由Meek-client封装成为HTTPS包发送到Google，
+Google解析HTTPS包的内容，
+拿到包头的HOST数据，
+发现是给appspot的，
+再由Google负责转发到对应的appspot地址。&lt;/p&gt;
+&lt;p&gt;在appspot上等着的是Meek服务器端，
+由该服务器解析并将数据传入Tor电路。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;神坑&lt;/h2&gt;
+&lt;p&gt;使用apt一类的包管理器安装Tor有一个坑，
+由于Tor安装到系统里，
+可以使用Service一类的命令启动Tor。&lt;/p&gt;
+&lt;p&gt;但是配置了Meek插件之后调用&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+service tor restart
+&lt;/pre&gt;
+&lt;p&gt;启动Tor会一直报权限不足，
+即使用Root也是。&lt;/p&gt;
+&lt;p&gt;最后在stackoverflow上找到答案，
+原来是Tor的Service有bug，
+搞定了Meek插件的安装之后，
+可以直接通过命令启动：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+tor
+&lt;/pre&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">laoyi</dc:creator><pubDate>Thu, 05 Feb 2015 20:00:00 +0800</pubDate><guid>tag:,2015-02-05:webTool003-how-to-use-tor-with-meek.html</guid><category>Tor</category><category>proxy</category></item><item><title>MySQL主备容灾不锁表的搭建记录</title><link>/mysql-replicant-without-table-lock.html</link><description>&lt;div class="section" id="id1"&gt;
 &lt;h2&gt;背景&lt;/h2&gt;
 &lt;p&gt;最近搭了一个MySQL的主备环境，
 感觉过程还是蛮好玩的。
