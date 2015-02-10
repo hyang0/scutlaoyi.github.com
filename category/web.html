@@ -107,6 +107,73 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/webTool004-how-to-build-a-meek-reflector.html">打造自用的Meek中继反射器</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-10T20:00:00+08:00">
+        <i class="icon-calendar"></i>二 10 二月 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/web.html"><i class="icon-folder-open"></i>Web</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/tor.html"><i class="icon-tag"></i>Tor</a>
+	<a href="/tag/proxy.html"><i class="icon-tag"></i>proxy</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><div class="section" id="id1">
+<h2>背景</h2>
+<p>Tor的Meek混淆插件最近比较好用，
+由于Amazon、GAE和Azure上都有现成的中继装置，
+直接让Tor启用Meek连接即可。</p>
+<p>不过博主喜欢折腾，
+用现成的东西感觉不是那么爽，
+因此多方尝试折腾出一个自用的Meek反射器，
+不用每次走Amazon的渠道了。</p>
+</div>
+<div class="section" id="id2">
+<h2>Meek基本原理介绍</h2>
+<p>首先启用了Meek的Tor链路是这样的状态：</p>
+<pre class="literal-block">
+本地Tor客户端-&gt;本地Meek客户端-&gt;服务器端Meek-&gt;服务器端Tor网桥
+</pre>
+<p>由本地的Meek客户端将Tor的数据包封装并发送到服务器端的Meek，
+服务器端解析并将数据塞给服务器端的Tor，
+由服务器端的Tor处理数据。</p>
+<p>从本地Meek到服务器端的Meek连接便是Meek技术的核心所在，
+即所谓的“Domain Fronting”技术。</p>
+<pre class="literal-block">
+本地Meek客户端-&gt;Google云服务器-&gt;GAE上的Meek服务器
+</pre>
+</div>
+<div class="section" id="id3">
+<h2>现有Meek网桥的简单分析</h2>
+<p>(以下内容为博主个人猜想，可能有重大谬误...)</p>
+<p>博主研究了Meek-Server的代码后发现，
+需要在服务器搭建Tor并配置为网桥之后，
+再让Meek-Server在Tor的前端接入Tor的流量。</p>
+<p>那么就奇怪了，
+难道所有的云服务器端都是部署了Tor的中继服务器？</p>
+<p>查看Meek-client的Git仓库，
+可以看到有多个版本的Server端部署代码，
+包括AppEngine、php甚至是nginx的配置。</p>
+<p>博主懂得一点php，
+所以斗胆观摩了一下php的代码，
+发现内容上其实只是把接收到的数据包转发给一个特定的地址。</p>
+<p>再继续观摩AppEngine和nginx的配置，
+发现它们的思路都是一样的，
+转发到下面这个地址：</p>
+<pre class="literal-block">
+http://meek.XXXX.com:1234
+</pre>
+<p>于是博主猜测真正的情况是这样的 ...</p></div>
+                        <a class="btn primary xsmall" href="/webTool004-how-to-build-a-meek-reflector.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/webTool003-how-to-use-tor-with-meek.html">Linux下Tor的安装和Meek的配置（非Browser Bundle模式）</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -607,52 +674,16 @@ php代码如下(假设文件名是test.php)：</p>
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/network001.html">socket编程(1):单线程tcp服务器/客户端</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2013-09-17T15:30:00+08:00">
-        <i class="icon-calendar"></i>二 17 九月 2013
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/web.html"><i class="icon-folder-open"></i>Web</a>.
 
-
-<span class="label">Tags</span>
-	<a href="/tag/socket.html"><i class="icon-tag"></i>socket</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p><strong>tcp的单线程socket比较简单，以下是GNU/Linux环境下socket通讯的测试，分为C++版本和Python版本。</strong></p>
-<div class="section" id="id1">
-<h2>服务器：</h2>
-<p>流程：创建socket-绑定端口-监听-获取连接-读写操作-关闭连接并结束</p>
-<p><strong>C++版本：</strong></p>
-<div class="highlight"><pre><span class="cp">#include &lt;cstdio&gt;</span>
-<span class="cp">#include &lt;cstdlib&gt;</span>
-<span class="cp">#include &lt;cstring&gt;</span>
-<span class="cp">#include &lt;cerrno&gt;</span>
-<span class="cp">#include &lt;unistd.h&gt;</span>
-<span class="cp">#include &lt;sys/types.h&gt;</span>
-<span class="cp">#include &lt;sys/socket.h&gt;</span>
-<span class="cp">#include &lt;netinet/in.h&gt;</span>
-<span class="cp">#include &lt;arpa/inet.h&gt;</span>
-
-<span class="c1">//定义缓冲区的大小</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXBUF</span> <span class="o">=</span> <span class="mi">4096</span><span class="p">;</span>
-<span class="c1">//定义端口号</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">SERVER_PORT</span> <span class="o">=</span> <span class="mi">9876</span><span class="p">;</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int ...</span></pre></div></div>
-                        <a class="btn primary xsmall" href="/network001.html">more ...</a>
-                </div>
+        <div class="pagination">
+        <ul>
+                        <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+                        <li class="active"><a href="/category/web.html">1</a></li>
+                        <li class=""><a href="/category/web2.html">2</a></li>
+                        <li class="next"><a href="/category/web2.html">Next &rarr;</a></li>
+        </ul>
         </div>
-        <hr />
 
-                <section id="content" class="body">
-                <h1>Pages</h1>
-                        <li><a href="/pages/about.html">About</a></li>
-                </section>
         </div><!--/span-->
 
                 <div class="span3 well sidebar-nav" id="sidebar">
@@ -715,29 +746,14 @@ window.onload=function(){
 </li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
-<li class="tag-4">
-    <a href="/tag/page-sentences.html">
-        <i class="icon-tag icon-large"></i>page sentences
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
-    </a>
-</li>
 <li class="tag-3">
     <a href="/tag/vim.html">
         <i class="icon-tag icon-large"></i>Vim
     </a>
 </li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
+<li class="tag-4">
+    <a href="/tag/page-sentences.html">
+        <i class="icon-tag icon-large"></i>page sentences
     </a>
 </li>
 <li class="tag-4">
@@ -745,9 +761,9 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>xss
     </a>
 </li>
-<li class="tag-2">
-    <a href="/tag/web-tool.html">
-        <i class="icon-tag icon-large"></i>web tool
+<li class="tag-3">
+    <a href="/tag/proxy.html">
+        <i class="icon-tag icon-large"></i>proxy
     </a>
 </li>
 <li class="tag-4">
@@ -755,44 +771,14 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>Android
     </a>
 </li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>Python
-    </a>
-</li>
 <li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/tor.html">
-        <i class="icon-tag icon-large"></i>Tor
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/litecoin.html">
-        <i class="icon-tag icon-large"></i>litecoin
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
     </a>
 </li>
 <li class="tag-2">
     <a href="/tag/audition.html">
         <i class="icon-tag icon-large"></i>audition
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/mysql.html">
-        <i class="icon-tag icon-large"></i>MySQL
     </a>
 </li>
 <li class="tag-2">
@@ -801,8 +787,8 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-4">
-    <a href="/tag/proxy.html">
-        <i class="icon-tag icon-large"></i>proxy
+    <a href="/tag/mysql.html">
+        <i class="icon-tag icon-large"></i>MySQL
     </a>
 </li>
 <li class="tag-4">
@@ -810,14 +796,59 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>md5
     </a>
 </li>
+<li class="tag-3">
+    <a href="/tag/tor.html">
+        <i class="icon-tag icon-large"></i>Tor
+    </a>
+</li>
 <li class="tag-1">
-    <a href="/tag/arch-linux.html">
-        <i class="icon-tag icon-large"></i>Arch Linux
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/litecoin.html">
+        <i class="icon-tag icon-large"></i>litecoin
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/web-tool.html">
+        <i class="icon-tag icon-large"></i>web tool
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
     </a>
 </li>
 <li class="tag-1">
     <a href="/tag/data-structure.html">
         <i class="icon-tag icon-large"></i>data structure
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/arch-linux.html">
+        <i class="icon-tag icon-large"></i>Arch Linux
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
     </a>
 </li>
 

@@ -1,5 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/web.atom.xml" rel="self"></link><id>/</id><updated>2015-02-05T20:00:00+08:00</updated><entry><title>Linux下Tor的安装和Meek的配置（非Browser Bundle模式）</title><link href="/webTool003-how-to-use-tor-with-meek.html" rel="alternate"></link><updated>2015-02-05T20:00:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2015-02-05:webTool003-how-to-use-tor-with-meek.html</id><summary type="html">&lt;p&gt;博主喜欢折腾东西，
+<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/web.atom.xml" rel="self"></link><id>/</id><updated>2015-02-10T20:00:00+08:00</updated><entry><title>打造自用的Meek中继反射器</title><link href="/webTool004-how-to-build-a-meek-reflector.html" rel="alternate"></link><updated>2015-02-10T20:00:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2015-02-10:webTool004-how-to-build-a-meek-reflector.html</id><summary type="html">&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;背景&lt;/h2&gt;
+&lt;p&gt;Tor的Meek混淆插件最近比较好用，
+由于Amazon、GAE和Azure上都有现成的中继装置，
+直接让Tor启用Meek连接即可。&lt;/p&gt;
+&lt;p&gt;不过博主喜欢折腾，
+用现成的东西感觉不是那么爽，
+因此多方尝试折腾出一个自用的Meek反射器，
+不用每次走Amazon的渠道了。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;Meek基本原理介绍&lt;/h2&gt;
+&lt;p&gt;首先启用了Meek的Tor链路是这样的状态：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+本地Tor客户端-&amp;gt;本地Meek客户端-&amp;gt;服务器端Meek-&amp;gt;服务器端Tor网桥
+&lt;/pre&gt;
+&lt;p&gt;由本地的Meek客户端将Tor的数据包封装并发送到服务器端的Meek，
+服务器端解析并将数据塞给服务器端的Tor，
+由服务器端的Tor处理数据。&lt;/p&gt;
+&lt;p&gt;从本地Meek到服务器端的Meek连接便是Meek技术的核心所在，
+即所谓的“Domain Fronting”技术。&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+本地Meek客户端-&amp;gt;Google云服务器-&amp;gt;GAE上的Meek服务器
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h2&gt;现有Meek网桥的简单分析&lt;/h2&gt;
+&lt;p&gt;(以下内容为博主个人猜想，可能有重大谬误...)&lt;/p&gt;
+&lt;p&gt;博主研究了Meek-Server的代码后发现，
+需要在服务器搭建Tor并配置为网桥之后，
+再让Meek-Server在Tor的前端接入Tor的流量。&lt;/p&gt;
+&lt;p&gt;那么就奇怪了，
+难道所有的云服务器端都是部署了Tor的中继服务器？&lt;/p&gt;
+&lt;p&gt;查看Meek-client的Git仓库，
+可以看到有多个版本的Server端部署代码，
+包括AppEngine、php甚至是nginx的配置。&lt;/p&gt;
+&lt;p&gt;博主懂得一点php，
+所以斗胆观摩了一下php的代码，
+发现内容上其实只是把接收到的数据包转发给一个特定的地址。&lt;/p&gt;
+&lt;p&gt;再继续观摩AppEngine和nginx的配置，
+发现它们的思路都是一样的，
+转发到下面这个地址：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+http://meek.XXXX.com:1234
+&lt;/pre&gt;
+&lt;p&gt;于是博主猜测真正的情况是这样的：
+其实GAE、Azure和AWS上现有的Meek中继都不是真正处理数据的服务器，
+它们只是起到一个反射器(reflector)的作用，
+将收到的数据包转发到真正的Meek服务器上，
+上述的地址就是真正的Meek服务器。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h2&gt;个人反射器的搭建&lt;/h2&gt;
+&lt;p&gt;搞定了原理之后，
+就可以着手打造自己的Meek中继反射器了。&lt;/p&gt;
+&lt;p&gt;其实方法很简单，
+照着仓库里的README把东西部署上去即可。&lt;/p&gt;
+&lt;p&gt;例如php版本需要一个能执行CURL的php空间，
+把代码上传到空间上，
+记录下URL，
+就可以配置本地的torrc进行使用了。&lt;/p&gt;
+&lt;p&gt;这里假设配置好之后Internet上访问的URL是这个：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+http://foo.com/bar.php
+&lt;/pre&gt;
+&lt;p&gt;那么在torrc里的配置应该是这样的东西：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+Bridge meek 0.0.2.0:1 url=http://foo.com/bar.php
+&lt;/pre&gt;
+&lt;p&gt;这里的更改让Meek把数据包发送到以上的地址，
+由服务器端的php代码（或者是nginx的反向代理）转发请求到真正的Meek服务器上。&lt;/p&gt;
+&lt;p&gt;没有front是因为这里不需要Meek的“domain fronting”技术，
+本来这个地址就没有被干掉，
+此外，
+如果这个域名被干掉的话，
+那么用这个域名搭建的任何东西也都没什么意义。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id5"&gt;
+&lt;h2&gt;收益分析&lt;/h2&gt;
+&lt;p&gt;基于自定义URL的Meek反射器可以提供比较稳定的连接，
+毕竟不是大量使用的话不会受到干扰或者封禁。&lt;/p&gt;
+&lt;p&gt;另外就是树大招风，
+像Google这种整个玉米被搞死的情况Meek也是无能为力的。
+对于自定义URL则风险比较小。&lt;/p&gt;
+&lt;p&gt;当然这么做的一个坏处是把Meek用歪了，
+废掉了Domain Fronting技术，
+只是纯粹的做一个数据包的转发。&lt;/p&gt;
+&lt;p&gt;管它呢，
+技术还是要能够实现功能最重要～&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="Tor"></category><category term="proxy"></category></entry><entry><title>Linux下Tor的安装和Meek的配置（非Browser Bundle模式）</title><link href="/webTool003-how-to-use-tor-with-meek.html" rel="alternate"></link><updated>2015-02-05T20:00:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2015-02-05:webTool003-how-to-use-tor-with-meek.html</id><summary type="html">&lt;p&gt;博主喜欢折腾东西，
 比如说好好的Tor Browser Bundle不用，
 非要装一个纯的Tor来玩，
 于是各种好玩的事情便纷至沓来。&lt;/p&gt;
