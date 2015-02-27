@@ -107,6 +107,65 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/OpenWrt_install_and_config.html">DLink DIR505刷OpenWrt</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-27T15:30:00+08:00">
+        <i class="icon-calendar"></i>五 27 二月 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/openwrt.html"><i class="icon-tag"></i>OpenWrt</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><div class="section" id="id1">
+<h2>背景</h2>
+<p>老早就听说过OpenWrt的大名，
+一直想自己搭建一个路由器玩。
+花了大价钱入手了一只DLink DIR505，
+听说是最适合用来入门的刷不死机型。</p>
+<p>经过一整天的研究，
+基本搞定了刷入、网络连接配置、shadowsocks和iptables等设置。
+期间也踩过许多的坑，
+在此做一下统一的记录。</p>
+</div>
+<div class="section" id="id2">
+<h2>固件写入过程</h2>
+<div class="section" id="id3">
+<h3>关于原版系统的连接</h3>
+<p>由于博主傻逼把路由器的Admin密码改过并且遗失，
+导致需要Reset路由器。</p>
+<p>结果Reset之后Ubuntu死活连接不上。</p>
+<p>后经多方调查发现，
+DLink这款路由器默认情况下 <strong>不会启动DHCP服务</strong> ，
+因此需要自行配置连接客户端的IP和网关信息，
+默认的网段应该是这样的:</p>
+<pre class="literal-block">
+IP: 192.168.0.X
+子网掩码：255.255.255.0
+网关： 192.168.0.1
+</pre>
+<p>X可以选择0、1和255以外的任意数值。</p>
+<p>搞定了之后就可以正常连接路由器的Wifi了。</p>
+</div>
+<div class="section" id="id4">
+<h3>刷入国际版原厂固件</h3>
+<p>由于博主搞到的是一只诡异的美国版路由器，
+原本的系统就是US，
+没有锁区，
+本步骤直接略过。</p>
+<p>可参考:</p>
+<pre class="literal-block">
+http://softwaredownload.gitbooks.io ...</pre></div></div>
+                        <a class="btn primary xsmall" href="/OpenWrt_install_and_config.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/webTool004-how-to-build-a-meek-reflector.html">打造自用的Meek中继反射器</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -625,74 +684,6 @@ GAE在转发用户请求的时候会把AppID也写入到User Agent里面去，
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/litecoin002-mining.html">玩转莱特币：使用CPUMiner和proxy挖矿的办法</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-06-16T10:00:00+08:00">
-        <i class="icon-calendar"></i>一 16 六月 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/web.html"><i class="icon-folder-open"></i>Web</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/litecoin.html"><i class="icon-tag"></i>litecoin</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>挖矿分为两种，
-简单暴力的直接挖矿，
-以及加入矿池进行合体挖矿。</p>
-<p>由于现在的全网算力已经超乎想象(博主玩的时候大概为300GH/s)，
-没有专用矿机只能选择矿池挖矿。</p>
-<p>由于博主以娱乐为主，
-没有钱和精力购买高速专用矿机，
-甚至没有好的显卡拿来用GPU挖矿，
-因此使用的是简单的CPU挖矿方式(10KH/s......)。</p>
-<p>如果正儿八经的想赚点钱，
-推荐至少要弄个好的显卡用GPU挖矿。</p>
-<p>在网上有一些算力的统计表，
-AMD系列的显卡跑GPU挖矿一般可以达到100KH/s以上。</p>
-<div class="section" id="id1">
-<h2>矿池的选择</h2>
-<p>由于博主用的是大陆的局域网，
-选择矿池显得比较困难。</p>
-<p>首先需要排除掉那些没什么人的矿池，
-听说没什么人的矿池由于全池算力都很差，
-因此找到新块的几率非常低，
-进而导致每个矿工分到的收益也很小。</p>
-<p>此外，
-由于网络的问题，
-需要选择能够稳定连接的矿池，
-否则经常断线就只能白白消耗电能。</p>
-<blockquote>
-<p>现在的矿池基本上都支持stratum协议，
-这种协议本质上是建立一个代理服务器中转矿机和目标服务器的连接，
-由于有了这种类似于buffer的协议层，
-相比最初的getwork方式直连，
-不仅网络的带宽占用变小，
-连接的稳定性等各方面也有较好的提升。</p>
-<p>许多矿池甚至强制性使用stratum协议，
-例如coinotron。</p>
-</blockquote>
-<p>矿池的选择可以参考莱特币的info页面：</p>
-<pre class="literal-block">
-https://litecoin.info/Mining_pool_comparison
-</pre>
-<p>选择好矿池后，
-在网站里注册一个新的用户，
-4位的PIN码非常重要，
-各种操作都需要PIN码。
-有些矿池支持Google的身份验证器，
-推荐开启。</p>
-<blockquote>
-<p>不过很多矿池不支持更换验证器，
-而且没有备选的身份识别方案 ...</p></blockquote></div>
-                        <a class="btn primary xsmall" href="/litecoin002-mining.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -770,78 +761,8 @@ window.onload=function(){
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
 <li class="tag-3">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/page-sentences.html">
-        <i class="icon-tag icon-large"></i>page sentences
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/proxy.html">
-        <i class="icon-tag icon-large"></i>proxy
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/android.html">
-        <i class="icon-tag icon-large"></i>Android
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/audition.html">
-        <i class="icon-tag icon-large"></i>audition
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/mysql.html">
-        <i class="icon-tag icon-large"></i>MySQL
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/tor.html">
-        <i class="icon-tag icon-large"></i>Tor
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
-<li class="tag-3">
     <a href="/tag/litecoin.html">
         <i class="icon-tag icon-large"></i>litecoin
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/web-tool.html">
-        <i class="icon-tag icon-large"></i>web tool
     </a>
 </li>
 <li class="tag-1">
@@ -850,8 +771,88 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/page-sentences.html">
+        <i class="icon-tag icon-large"></i>page sentences
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/openwrt.html">
+        <i class="icon-tag icon-large"></i>OpenWrt
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/arch-linux.html">
+        <i class="icon-tag icon-large"></i>Arch Linux
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/proxy.html">
+        <i class="icon-tag icon-large"></i>proxy
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/tor.html">
+        <i class="icon-tag icon-large"></i>Tor
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/data-structure.html">
+        <i class="icon-tag icon-large"></i>data structure
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/android.html">
+        <i class="icon-tag icon-large"></i>Android
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-2">
     <a href="/tag/recruitment.html">
         <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/mysql.html">
+        <i class="icon-tag icon-large"></i>MySQL
     </a>
 </li>
 <li class="tag-2">
@@ -860,18 +861,13 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-1">
-    <a href="/tag/data-structure.html">
-        <i class="icon-tag icon-large"></i>data structure
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/arch-linux.html">
-        <i class="icon-tag icon-large"></i>Arch Linux
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
+    <a href="/tag/web-tool.html">
+        <i class="icon-tag icon-large"></i>web tool
     </a>
 </li>
 

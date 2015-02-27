@@ -1,5 +1,274 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>老逸的个人站</title><link>/</link><description></description><atom:link href="http://www.scutlaoyi.tk/feeds/all.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 10 Feb 2015 20:00:00 +0800</lastBuildDate><item><title>打造自用的Meek中继反射器</title><link>/webTool004-how-to-build-a-meek-reflector.html</link><description>&lt;div class="section" id="id1"&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>老逸的个人站</title><link>/</link><description></description><atom:link href="http://www.scutlaoyi.tk/feeds/all.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 27 Feb 2015 15:30:00 +0800</lastBuildDate><item><title>DLink DIR505刷OpenWrt</title><link>/OpenWrt_install_and_config.html</link><description>&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;背景&lt;/h2&gt;
+&lt;p&gt;老早就听说过OpenWrt的大名，
+一直想自己搭建一个路由器玩。
+花了大价钱入手了一只DLink DIR505，
+听说是最适合用来入门的刷不死机型。&lt;/p&gt;
+&lt;p&gt;经过一整天的研究，
+基本搞定了刷入、网络连接配置、shadowsocks和iptables等设置。
+期间也踩过许多的坑，
+在此做一下统一的记录。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;固件写入过程&lt;/h2&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h3&gt;关于原版系统的连接&lt;/h3&gt;
+&lt;p&gt;由于博主傻逼把路由器的Admin密码改过并且遗失，
+导致需要Reset路由器。&lt;/p&gt;
+&lt;p&gt;结果Reset之后Ubuntu死活连接不上。&lt;/p&gt;
+&lt;p&gt;后经多方调查发现，
+DLink这款路由器默认情况下 &lt;strong&gt;不会启动DHCP服务&lt;/strong&gt; ，
+因此需要自行配置连接客户端的IP和网关信息，
+默认的网段应该是这样的:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+IP: 192.168.0.X
+子网掩码：255.255.255.0
+网关： 192.168.0.1
+&lt;/pre&gt;
+&lt;p&gt;X可以选择0、1和255以外的任意数值。&lt;/p&gt;
+&lt;p&gt;搞定了之后就可以正常连接路由器的Wifi了。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h3&gt;刷入国际版原厂固件&lt;/h3&gt;
+&lt;p&gt;由于博主搞到的是一只诡异的美国版路由器，
+原本的系统就是US，
+没有锁区，
+本步骤直接略过。&lt;/p&gt;
+&lt;p&gt;可参考:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+http://softwaredownload.gitbooks.io/openwrt-fanqiang/content/ebook/dir505/2.dir505-install-openwrt.html
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="openwrt"&gt;
+&lt;h3&gt;写入OpenWrt固件&lt;/h3&gt;
+&lt;p&gt;博主选择的是trunk版的OpenWrt，
+不带WebUI控制台的版本，
+直接在官网链接下载即可:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+https://downloads.openwrt.org/snapshots/trunk/ar71xx/generic/openwrt-ar71xx-generic-dir-505-a1-squashfs-factory.bin
+&lt;/pre&gt;
+&lt;p&gt;通过Web页面提交并更新后便直接搞定了固件的写入。&lt;/p&gt;
+&lt;p&gt;如果遇到问题可能参考这个:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+http://pstjuste.blogspot.com/2013/11/installing-openwrt-on-d-link-dir-505l.html
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id5"&gt;
+&lt;h2&gt;系统初始化和配置&lt;/h2&gt;
+&lt;div class="section" id="id6"&gt;
+&lt;h3&gt;路由器网段变化&lt;/h3&gt;
+&lt;p&gt;听说默认情况下OpenWrt关闭了wifi功能，
+博主从开始就一直选择用绳子进行连接，
+没有被卡住过。&lt;/p&gt;
+&lt;p&gt;这里有个坑，
+在刷OpenWrt之前，
+路由器的子网配置是192.168.0.1/24，
+在刷完之后，
+默认的子网变成192.168.1.1/24。
+因此需要更新一下本地系统的网络配置，
+才可以正常连接路由器。
+此外默认情况下DHCP服务是开启的，
+分配[100, 250]之间的地址。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id7"&gt;
+&lt;h3&gt;登陆和初始化配置&lt;/h3&gt;
+&lt;p&gt;改好本地网络配置后，
+如果可以ping通192.168.1.1，
+则说明已经成功和路由器取得联系了。&lt;/p&gt;
+&lt;p&gt;第一次登入系统使用Telnet:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+telnet 192.168.1.1
+&lt;/pre&gt;
+&lt;p&gt;成功连接，欢迎来到OpenWrt系统。&lt;/p&gt;
+&lt;p&gt;第一次登入需要用passwd配置root密码。
+之后Telnet就被禁用了，
+需要用ssh安全连接。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="ssh"&gt;
+&lt;h3&gt;配置ssh公钥登陆&lt;/h3&gt;
+&lt;p&gt;博主比较喜欢公钥直接登陆系统，
+简单粗暴，
+安全性也强。&lt;/p&gt;
+&lt;p&gt;照着之前玩Linux的经验熟练地把本机公钥上传到~/.ssh里面并改名authorized_keys，
+登出之后再次登入发现没有任何效果。&lt;/p&gt;
+&lt;p&gt;原来这是另外一个坑，
+由于OpenWrt是Dropbear，
+因此需要把authorized_keys放到下面这个目录:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+/etc/dropbear/
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id8"&gt;
+&lt;h2&gt;网络设置&lt;/h2&gt;
+&lt;div class="section" id="id9"&gt;
+&lt;h3&gt;目标&lt;/h3&gt;
+&lt;p&gt;由于DIR505这货只有一个网线接口，
+因此Lan网对博主来说没什么意义，
+目前的目标定义如下。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;有线网口（Wan）用于连接前端Modem或者前置路由器（对，博主土豪有两个路由器串联）&lt;/li&gt;
+&lt;li&gt;建立Wifi子网，将数据转发到Wan口&lt;/li&gt;
+&lt;li&gt;搭建透明代理选择转发敌国请求到Shadowsocks上&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;参考了这里:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+http://softwaredownload.gitbooks.io/openwrt-fanqiang/content/ebook/dir505/4.dir505-router-mode.html
+http://softwaredownload.gitbooks.io/openwrt-fanqiang/content/ebook/dir505/5.dir505-ap-mode.html
+&lt;/pre&gt;
+&lt;p&gt;介绍了配置成路由器模式或无线热点模式。&lt;/p&gt;
+&lt;p&gt;但总觉得不太理解，
+主要问题在于没有系统地介绍配置方法，
+让博主这种需要配置成前置路由器但又非AP模式的人感觉无从下手。&lt;/p&gt;
+&lt;p&gt;后来还是官方的文档看起来比较全面:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+http://wiki.openwrt.org/doc/start
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id10"&gt;
+&lt;h3&gt;OpenWrt的系统概况&lt;/h3&gt;
+&lt;p&gt;首先博主花了些时间在路由器上到处走走看了看，
+基本上这货就是一个Linux系统，
+默认情况下使用root账户登入，
+拥有全局权限。&lt;/p&gt;
+&lt;p&gt;路由器的功能主要由如下几个重要程序或模块负责管理。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;dnsmasq 负责DHCP相关&lt;/li&gt;
+&lt;li&gt;dropbear 负责SSH登陆&lt;/li&gt;
+&lt;li&gt;firewall 提供iptables相关功能，网络包的转发、NAT、防火墙&lt;/li&gt;
+&lt;li&gt;network 负责配置和维持网络&lt;/li&gt;
+&lt;li&gt;system 系统相关&lt;/li&gt;
+&lt;li&gt;wireless 配置无线模块的相关信息&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;刚装好的路由器就这几个核心的部分，
+其他的功能由于博主还没摸过暂时不好说。&lt;/p&gt;
+&lt;p&gt;至于配置的变更和维护OpenWrt提供了一个非常方便的工具就是uci，
+在众多教程里都可以看到各种uci set的命令，
+其实就是调用uci去编辑配置文件。&lt;/p&gt;
+&lt;p&gt;因此博主选择直接编辑配置文件，
+不使用uci。&lt;/p&gt;
+&lt;p&gt;当然uci还有一个好处是将常用的配置文件都统一了各式放到一起，
+路径是:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+/etc/config
+&lt;/pre&gt;
+&lt;p&gt;进去里面可以看到上述的几个模块配置文件都到齐了。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id11"&gt;
+&lt;h3&gt;开搞网络配置&lt;/h3&gt;
+&lt;p&gt;理清楚系统结构之后就比较好下手了，
+从官网搞到一份类似的配置文件，
+参考官网的配置项说明:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+http://wiki.openwrt.org/doc/recipes/routedap
+&lt;/pre&gt;
+&lt;p&gt;首先，是编辑/etc/config/network建立新网络，
+一个网络作为路由器连接前置路由器的有线接口配置，
+一个新的网络作为无线wifi:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+config 'interface' 'wan'
+        option  ifname  'eth1'
+        option  proto   'static'
+        option  ipaddr  '192.168.1.108'
+        option  netmask '255.255.255.0'
+        option  gateway '192.168.1.1'
+
+config 'interface' 'wifi'
+option 'proto'      'static'
+option 'ipaddr'     '192.168.5.1'
+option 'netmask'    '255.255.255.0'
+&lt;/pre&gt;
+&lt;p&gt;这里wan网络作为路由器的外部连接，
+通过eth1这个有线网卡连接前置的路由器，
+由于前置路由器配置了子网为192.168.1.1/24，
+且前置路由器ip为192.168.1.1，
+因此需要配置DIR505的ip与前置路由器在同一网络中。&lt;/p&gt;
+&lt;p&gt;此外这里有个小Hack，
+其实前置路由器存在DHCP服务，
+可以为DIR505自动分配ip地址，
+因此选择proto为dhcp的话可以不用自行配置ip。&lt;/p&gt;
+&lt;p&gt;但是博主考虑到万一脑残配错wifi会导致无法通过无线连接DIR505，
+那么就只能通过有线网卡连接，
+这种情况下如果路由器无法从博主的笔记本获取到正常的ip地址的话，
+会导致两个网卡都无法连接。&lt;/p&gt;
+&lt;p&gt;因此配置固定的ip地址有利于博主debug。
+(在写这篇博文的时候观察了一下防火墙，发现对wan口的INPUT是REJECT的，因此万一真出事其实这个hack是无效的...)&lt;/p&gt;
+&lt;p&gt;wifi部分，
+配置路由器在该网络里为静态ip，
+后面会给这个网络配置DHCP用于客户端的自动连接。&lt;/p&gt;
+&lt;p&gt;这里为了不与土豪博主的前置路由器（192.168.1.1/24）冲突，
+需要把ip地址改一下（192.168.5.1/24）。&lt;/p&gt;
+&lt;p&gt;然后，编辑/etc/config/wireless把无线网卡接入到上面的wifi网络里:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+config 'wifi-iface'
+option 'device'     radio0
+option 'network'    'wifi'
+option 'mode'       'ap'
+option 'ssid'       'Whatever'
+option 'encryption' 'psk2'
+        option 'key'            'havefundear'
+&lt;/pre&gt;
+&lt;p&gt;注意这里的device名称与官网配置不同，
+此外，
+私人的路由器还是需要开启一下密码的。&lt;/p&gt;
+&lt;p&gt;第三步是给wifi这个网络配置DHCP服务，
+编辑/etc/config/dhcp，加入:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+config 'dhcp' 'wifi'
+option 'interface'  'wifi'
+option 'start'      '100'
+option 'limit'      '150'
+option 'leasetime'  '12h'
+&lt;/pre&gt;
+&lt;p&gt;让DHCP服务从192.168.5.100到192.168.5.250这个区域之间给客户端配置ip地址。&lt;/p&gt;
+&lt;p&gt;最后一步，
+最关键的，
+现在两个网络（wan和wifi）都已经搞定，
+就需要把wifi的数据发到wan上。&lt;/p&gt;
+&lt;p&gt;编辑/etc/config/firewall，加入:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+config zone
+        option name wifi
+        list network 'wifi'
+        option input ACCEPT
+        option output ACCEPT
+        option forward REJECT
+&lt;/pre&gt;
+&lt;p&gt;让防火墙对来自wifi的出入数据包放行。&lt;/p&gt;
+&lt;p&gt;接着需要加入转发的配置:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+config forwarding
+        option src 'wifi'
+        option dest 'wan'
+&lt;/pre&gt;
+&lt;p&gt;将wifi转发到wan上。&lt;/p&gt;
+&lt;p&gt;官网的介绍里还配置了lan到wifi的转发，
+由于DIR505根本没有lan口，
+此处直接略过。（配了也没用，根本没有lan网络）&lt;/p&gt;
+&lt;p&gt;配置搞定，
+重启相应的服务即可:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+/etc/init.d/firewall restart
+/etc/init.d/dnsmasq restart
+/etc/init.d/network restart
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id12"&gt;
+&lt;h2&gt;后记&lt;/h2&gt;
+&lt;p&gt;博主比较懒，
+有些东西都没搞，
+比如说启用路由器的模式转换开关之类的，
+直接配置里写死网络就开始使用了。&lt;/p&gt;
+&lt;p&gt;下一篇记录一下shadowsocks透明代理和防火墙转发。&lt;/p&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">laoyi</dc:creator><pubDate>Fri, 27 Feb 2015 15:30:00 +0800</pubDate><guid>tag:,2015-02-27:OpenWrt_install_and_config.html</guid><category>OpenWrt</category></item><item><title>打造自用的Meek中继反射器</title><link>/webTool004-how-to-build-a-meek-reflector.html</link><description>&lt;div class="section" id="id1"&gt;
 &lt;h2&gt;背景&lt;/h2&gt;
 &lt;p&gt;Tor的Meek混淆插件最近比较好用，
 由于Amazon、GAE和Azure上都有现成的中继装置，

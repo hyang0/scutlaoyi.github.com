@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Android基础学习（一）：基本概念与理念</title>
+    <title>老逸的个人站 - OpenWrt</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="laoyi">
@@ -66,7 +66,7 @@
             <ul class="nav">
                 <li><a href="/pages/about.html">About</a></li>
                           <li class="divider-vertical"></li>
-                  <li class="active">
+                  <li >
                     <a href="/category/coding.html">
 						<i class="icon-folder-open icon-large"></i>Coding
 					</a>
@@ -106,204 +106,70 @@
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
-<section id="content">
-        <article>
-                <header>
-                        <h1>
-                                <a href=""
-                                        rel="bookmark"
-                                        title="Permalink to Android基础学习（一）：基本概念与理念">
-                                        Android基础学习（一）：基本概念与理念
-                                </a>
-                        </h1>
-                </header>
-                <div class="entry-content">
-                <div class="well">
-<footer class="post-info">
+        <div class="article">
+                <h1><a href="/OpenWrt_install_and_config.html">DLink DIR505刷OpenWrt</a></h1>
+                <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2014-05-01T16:00:00+08:00">
-        <i class="icon-calendar"></i>四 01 五月 2014
+<abbr class="published" title="2015-02-27T15:30:00+08:00">
+        <i class="icon-calendar"></i>五 27 二月 2015
 </abbr>
 <span class="label">By</span>
 <a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
 <span class="label">Category</span>
-<a href="/category/coding.html"><i class="icon-folder-open"></i>Coding</a>.
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
 
 
 <span class="label">Tags</span>
-	<a href="/tag/android.html"><i class="icon-tag"></i>Android</a>
-</footer><!-- /.post-info -->                </div>
-                <p>眼下正是移动客户端应用泛滥的时代，
-Android与iOS无疑是当前移动客户端最为热门的两大系统。</p>
-<p>于是博主也跟随潮流，
-学起了Android。</p>
-<p>本博文不涉及具体代码，
-只简单记录整理基本概念，
-权当总结。</p>
-<div class="section" id="id1">
-<h2>Android应用的基本理念</h2>
-<p>Android应用与传统应用程序一样基于操作系统提供的抽象硬件环境，
-而且有更多的运行限制。</p>
-<p>由于Android系统基于Linux内核，
-存在着众多的保护机制，
-每个Android应用会通过各自独立的用户启动和运行。
-并且每个应用在运行时处在Android系统内建的沙盒中，
-与外界多了一层隔离。</p>
-<p>在资源管理方面，
-Android应用必须声明对特定资源的访问请求，
-才可执行对应的操作。
-例如外部存储器的读写、
-照相机的调用、
-网络的调用等。
-这些权限声明在用户安装的过程中进行确认，
-仅当用户授权才可以安装应用。</p>
-<p>虽然这点在实际操作过程中有很大变数，哈哈～</p>
-<p>与桌面程序较为不同的是，
-Android应用更多依赖于用户的交互，</p>
-<p>在Android应用中事件是一个非常重要的概念，
-用户的任何操作都会触发一个事件，
-例如手指的滑动，或者是按钮的点击。</p>
-<p>当用户的事件触发时，
-Android系统通知应用程序事件的发生，
-交由应用进行处理。</p>
-<p>在Android应用的内部，
-通过编写对应的回调函数来完成对事件的处理,
-例如onClick()函数，
-当用户点击按钮时该回调函数就会被调用。
-这也就构成了最简单的Android应用形式。</p>
+	<a href="/tag/openwrt.html"><i class="icon-tag"></i>OpenWrt</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><div class="section" id="id1">
+<h2>背景</h2>
+<p>老早就听说过OpenWrt的大名，
+一直想自己搭建一个路由器玩。
+花了大价钱入手了一只DLink DIR505，
+听说是最适合用来入门的刷不死机型。</p>
+<p>经过一整天的研究，
+基本搞定了刷入、网络连接配置、shadowsocks和iptables等设置。
+期间也踩过许多的坑，
+在此做一下统一的记录。</p>
 </div>
 <div class="section" id="id2">
-<h2>四大组件基本概念</h2>
-<p>Android应用中存在着四大组件，
-分别是Activity、Service、Content Provider和Broadcast Receiver</p>
-<p><strong>Activity</strong></p>
-<p>Android应用通过若干Activity进行组织。</p>
-<p>Activity控制着应用的某个窗口界面，
-处理这个界面中的所有事件，
-控制与用户的交互。</p>
-<p>Activity有多种状态，
-当对应的窗口在屏幕上可见时，
-对应的Activity处于活动状态，
-接收系统通知的事件消息。</p>
-<p><strong>Service</strong></p>
-<p>与Activity不同，
-Service没有用户界面，
-通常用于处理后台任务，
-例如音乐播放等。</p>
-<p>Service的一个特点是可以常驻内存，
-Activity被暂停或者停止的情况下不会再运行，
-然而Service可以在应用被退到后台后继续执行。</p>
-<p>对于某些消耗高资源却不需要用户交互的任务，
-通常的处理方式是用一个单独的子线程跑一个Service处理，
-避免过多计算任务交给UI线程。</p>
-<p>UI线程过度忙碌会导致应用的响应过慢甚至无相应，
-不仅影响用户体验还有可能被Android系统强退。</p>
-<p><strong>Broadcast Receiver</strong></p>
-<p>顾名思义，
-广播接收者。</p>
-<p>在Android系统中发生的许多事件，
-系统会通过广播通知感兴趣的应用程序，
-例如电话的打入等。</p>
-<p>这个时候应用内需要Broadcast Receiver用于监听事件的发生。
-并且在事件发生的时候做对应的处理。</p>
-<p>Android应用内部也可通过广播声明某些事件的产生，
-例如网络模块接收完成某些数据，
-通过广播告知应用内的其他模块该数据已可用，
-由感兴趣的模块自行处理。</p>
-<p><strong>Content Provider</strong></p>
-<p>Content Provider说到底是用来操作数据的，
-这个没什么好说。</p>
-</div>
+<h2>固件写入过程</h2>
 <div class="section" id="id3">
-<h2>Android应用的基本运行流程</h2>
-<p>Android应用中充斥着各种回调，
-运行的基本流程也大量依赖这些回调函数进行处理。</p>
-<p>最简单的启动情况是应用程序图标被用户点击，
-系统启动该应用，
-这个时候作为入口的Activity被实例化并且执行。</p>
-<p>在Activity被创建的时候，
-onCreate函数可能是最常用的回调了，
-在这里可以初始化界面元素，
-设置某些界面元素的事件监听回调函数等。</p>
-<p>直到初始化完毕，
-入口Activity管理的界面显示在屏幕上，
-等待用户操作。</p>
-<p>用户通过与界面元素交互控制应用的执行，
-例如点击按钮，
-Activity中设定的点击回调函数被触发，
-例如onClick函数，
-执行相应的操作。</p>
-<p>同时也存在大量情况，
-用户点击的某个按钮弹出新的交互界面，
-在Android应用中通过在点击事件的回调函数里开启新的Activity实现。</p>
-<p>Android的每个应用都有类似栈结构的Activity调用栈，
-保存着Activity之间的调用关系，
-当某个Activity被调用显示时会被入栈，
-当交互完成时出栈，
-栈中的前一个Activity回到前台显示。</p>
-<p>某些情况下应用可能会暂时退到后台，
-例如用户点击了Home键，
-那么Activity相应的onPause等回调函数被执行，
-这个时候需要保存一些相关的应用状态。</p>
-<p>不仅如此，
-当Activity启动新的Activity并推到前台后，
-原有的Activity也会被停止，
-onPause和onStop回调被执行。</p>
-<p>当应用重新回到前台，
-onResume等回调被调用，
-恢复界面的元素状态并重新显示。</p>
-<p>自然，
-也可以启动新的Service，
-例如用户点击播放音乐，
-Activity启动后台Service进行处理，
-其自身继续监听下一个事件。</p>
-<p>在用户交互完成后便准备退出应用了，
-当所有的Activity交互完成并退出，
-调用栈即为空，
-相应的应用也就结束退出了。</p>
-</div>
-<div class="section" id="intent">
-<h2>Intent的基本知识</h2>
-<p>Intent字面上是意图的意思，
-而它也确实用来表达程序作者的意图。</p>
-<p>在应用内部，
-可以通过声明Intent并设置适当的参数，
-通过调用对应的start函数来启动其他Activity、
-调用bind或者start启动一个Service、
-或者调用send发送一个Broadcast。</p>
-<p>而Intent的作用还不止在应用内部，
-它同样可以通过设置参数声明需要启动的应用类型，
-并设置好相关的参数，
-扔给Android系统，
-在这种情况下，
-Android系统会弹出一个实现这个操作的其他应用列表，
-由用户决定启动的应用。</p>
-<p>例如某应用需要用户拍一张照片，
-应用内部不需要自行实现拍照的功能，
-只需要声明一个Intent并交由用户自行选择已有的相机应用拍照，
-最终返回获得的图像数据即可。</p>
-<p>十分强大的设计。</p>
+<h3>关于原版系统的连接</h3>
+<p>由于博主傻逼把路由器的Admin密码改过并且遗失，
+导致需要Reset路由器。</p>
+<p>结果Reset之后Ubuntu死活连接不上。</p>
+<p>后经多方调查发现，
+DLink这款路由器默认情况下 <strong>不会启动DHCP服务</strong> ，
+因此需要自行配置连接客户端的IP和网关信息，
+默认的网段应该是这样的:</p>
+<pre class="literal-block">
+IP: 192.168.0.X
+子网掩码：255.255.255.0
+网关： 192.168.0.1
+</pre>
+<p>X可以选择0、1和255以外的任意数值。</p>
+<p>搞定了之后就可以正常连接路由器的Wifi了。</p>
 </div>
 <div class="section" id="id4">
-<h2>总结</h2>
-<p>简单来讲，
-一堆Activity构成了若干界面交互环境，
-一堆回调函数处理事件，
-用Service管理后台任务，
-用Broadcast处理广播消息，
-操作数据使用Content Provider，
-最后用Intent将这些东西连接起来，
-用调用栈保存Activity之间的关系，
-这就是Android应用的基本形态了。</p>
-</div>
+<h3>刷入国际版原厂固件</h3>
+<p>由于博主搞到的是一只诡异的美国版路由器，
+原本的系统就是US，
+没有锁区，
+本步骤直接略过。</p>
+<p>可参考:</p>
+<pre class="literal-block">
+http://softwaredownload.gitbooks.io ...</pre></div></div>
+                        <a class="btn primary xsmall" href="/OpenWrt_install_and_config.html">more ...</a>
+                </div>
+        </div>
+        <hr />
 
-                </div><!-- /.entry-content -->
-        </article>
-        <license>
-        <br/>
-        This work by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.scutlaoyi.tk" property="cc:attributionName" rel="cc:attributionURL">scutLaoYi</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-        </license>
-</section>
+                <section id="content" class="body">
+                <h1>Pages</h1>
+                        <li><a href="/pages/about.html">About</a></li>
+                </section>
         </div><!--/span-->
 
                 <div class="span3 well sidebar-nav" id="sidebar">

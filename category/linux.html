@@ -107,6 +107,65 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/OpenWrt_install_and_config.html">DLink DIR505刷OpenWrt</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-27T15:30:00+08:00">
+        <i class="icon-calendar"></i>五 27 二月 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/openwrt.html"><i class="icon-tag"></i>OpenWrt</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><div class="section" id="id1">
+<h2>背景</h2>
+<p>老早就听说过OpenWrt的大名，
+一直想自己搭建一个路由器玩。
+花了大价钱入手了一只DLink DIR505，
+听说是最适合用来入门的刷不死机型。</p>
+<p>经过一整天的研究，
+基本搞定了刷入、网络连接配置、shadowsocks和iptables等设置。
+期间也踩过许多的坑，
+在此做一下统一的记录。</p>
+</div>
+<div class="section" id="id2">
+<h2>固件写入过程</h2>
+<div class="section" id="id3">
+<h3>关于原版系统的连接</h3>
+<p>由于博主傻逼把路由器的Admin密码改过并且遗失，
+导致需要Reset路由器。</p>
+<p>结果Reset之后Ubuntu死活连接不上。</p>
+<p>后经多方调查发现，
+DLink这款路由器默认情况下 <strong>不会启动DHCP服务</strong> ，
+因此需要自行配置连接客户端的IP和网关信息，
+默认的网段应该是这样的:</p>
+<pre class="literal-block">
+IP: 192.168.0.X
+子网掩码：255.255.255.0
+网关： 192.168.0.1
+</pre>
+<p>X可以选择0、1和255以外的任意数值。</p>
+<p>搞定了之后就可以正常连接路由器的Wifi了。</p>
+</div>
+<div class="section" id="id4">
+<h3>刷入国际版原厂固件</h3>
+<p>由于博主搞到的是一只诡异的美国版路由器，
+原本的系统就是US，
+没有锁区，
+本步骤直接略过。</p>
+<p>可参考:</p>
+<pre class="literal-block">
+http://softwaredownload.gitbooks.io ...</pre></div></div>
+                        <a class="btn primary xsmall" href="/OpenWrt_install_and_config.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/arch_upgrade_note.html">Arch Linux升级笔记</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -574,74 +633,6 @@ Arch Linux提供了非常大的自由度和开放度供用户完全控制自己�
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/Bash002.html">Bash笔记(二)</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-01-03T22:30:00+08:00">
-        <i class="icon-calendar"></i>五 03 一月 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/bash.html"><i class="icon-tag"></i>Bash</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p><strong>本系列博文记录学习Shell终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录。</strong></p>
-<hr class="docutils" />
-<div class="section" id="id1">
-<h2>变量</h2>
-<p>dollar sign</p>
-<blockquote>
-<p>使用美元符标记变量,
-变量大小写敏感。
-常用的系统变量有：</p>
-<p>$HOSTNAME, $USER, $UID, $HOME</p>
-</blockquote>
-<p>$PS1</p>
-<blockquote>
-<p>变量定义终端的提示符,
-可通过设置该变量改变提示符的内容：</p>
-<p>$PS1='\u&#64;\h:\W$'</p>
-<p>显示内容：用户&#64;主机:当前目录$</p>
-</blockquote>
-<p>$PATH</p>
-<blockquote>
-设定系统搜索执行命令的路径</blockquote>
-<p>使用自定义变量</p>
-<blockquote>
-<p>直接对变量名赋值即可</p>
-<p>MyVar=123</p>
-<p>使用时加上美元符</p>
-<p>echo $MyVar</p>
-</blockquote>
-<p>使用变量时引号的差异</p>
-<blockquote>
-<p>简单说来就是这样：</p>
-<p>echo '$MyVar' // $MyVar</p>
-<p>echo &quot;$MyVar&quot; // 123</p>
-</blockquote>
-<p>set</p>
-<blockquote>
-<p>查看当前所有变量</p>
-<p>set</p>
-</blockquote>
-<p>env</p>
-<blockquote>
-<p>查看当前exported的变量</p>
-<p>env</p>
-</blockquote>
-<p>unset</p>
-<blockquote>
-<p>取消设置某个变量</p>
-<p>unset [variable ...</p></blockquote></div>
-                        <a class="btn primary xsmall" href="/Bash002.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -715,78 +706,8 @@ window.onload=function(){
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
 <li class="tag-3">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/page-sentences.html">
-        <i class="icon-tag icon-large"></i>page sentences
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/proxy.html">
-        <i class="icon-tag icon-large"></i>proxy
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/android.html">
-        <i class="icon-tag icon-large"></i>Android
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/audition.html">
-        <i class="icon-tag icon-large"></i>audition
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/mysql.html">
-        <i class="icon-tag icon-large"></i>MySQL
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/tor.html">
-        <i class="icon-tag icon-large"></i>Tor
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
-<li class="tag-3">
     <a href="/tag/litecoin.html">
         <i class="icon-tag icon-large"></i>litecoin
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/web-tool.html">
-        <i class="icon-tag icon-large"></i>web tool
     </a>
 </li>
 <li class="tag-1">
@@ -795,8 +716,88 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/page-sentences.html">
+        <i class="icon-tag icon-large"></i>page sentences
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/openwrt.html">
+        <i class="icon-tag icon-large"></i>OpenWrt
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/arch-linux.html">
+        <i class="icon-tag icon-large"></i>Arch Linux
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/proxy.html">
+        <i class="icon-tag icon-large"></i>proxy
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/tor.html">
+        <i class="icon-tag icon-large"></i>Tor
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/data-structure.html">
+        <i class="icon-tag icon-large"></i>data structure
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/android.html">
+        <i class="icon-tag icon-large"></i>Android
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-2">
     <a href="/tag/recruitment.html">
         <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/mysql.html">
+        <i class="icon-tag icon-large"></i>MySQL
     </a>
 </li>
 <li class="tag-2">
@@ -805,18 +806,13 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-1">
-    <a href="/tag/data-structure.html">
-        <i class="icon-tag icon-large"></i>data structure
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/arch-linux.html">
-        <i class="icon-tag icon-large"></i>Arch Linux
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
+    <a href="/tag/web-tool.html">
+        <i class="icon-tag icon-large"></i>web tool
     </a>
 </li>
 

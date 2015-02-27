@@ -107,6 +107,43 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/PythonExpe004.html">软件体系结构：N皇后问题系列整体实现方案</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-11-29T22:40:00+08:00">
+        <i class="icon-calendar"></i>五 29 十一月 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/coding.html"><i class="icon-folder-open"></i>Coding</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+	<a href="/tag/softwarearchitect.html"><i class="icon-tag"></i>SoftwareArchitect</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Python过程的实践小作，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
+<p><strong>使用的Python版本为2.7.3</strong></p>
+<p><strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
+<hr class="docutils" />
+<p>前面三篇博文粗略描述了N皇后问题的主要解决方案，由于四种风格（包括调用返回）归属同一个作业，因此将其整合在一个文件夹中并提取了部分共有模块。</p>
+<p><strong>main.py</strong></p>
+<p>此程序作为用户交互接口，接收用户输入参数，检测合法性并调用对应程序实现计算。</p>
+<p>通过构造命令行参数将N的值、重复计算的次数等数据传入对应模块中。</p>
+<p>使用os.system()系统函数直接调用其他运算程序。</p>
+<p><strong>checkOk.py</strong></p>
+<p>此模块作为公用模块存在，用于检测当前状态是否合法。</p>
+<p>内部是一个isOk函数，接收当前的棋盘状态，当前尝试摆放的位置，以及当前的层数。</p>
+<p>若当前位置可以摆放皇后，则返回True；若检测到冲突，则返回False。</p>
+<p><strong>pipe.py/blackboard.py/callReturn.py/traceback.py</strong></p>
+<p>分别是四个风格的主程序，接收命令行参数定义N以及测试的次数。</p>
+<p>内部调用了Python库的timeit模块 ...</p>
+                        <a class="btn primary xsmall" href="/PythonExpe004.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/PythonExpe003.html">软件体系结构：N皇后问题之黑板风格</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -434,44 +471,6 @@
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/Python004.html">Python 笔记（四）</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2013-09-23T15:30:00+08:00">
-        <i class="icon-calendar"></i>一 23 九月 2013
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/coding.html"><i class="icon-folder-open"></i>Coding</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
-<p><strong>使用的Python版本为2.7.3，</strong>
-<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
-<hr class="docutils" />
-<div class="section" id="id1">
-<h2>类的初识</h2>
-<p><strong>关于称呼的一些声明</strong></p>
-<p>本文以&lt;Python基础教程&gt;为基础，沿用了其中的部分称呼，一般的函数通称函数，类的成员函数称为方法。</p>
-<p>但由于C++的一些思想比较根深蒂固，有时会混用两种称呼。</p>
-<p><strong>类的定义及创建对象</strong></p>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">SimpleClass</span><span class="p">:</span>
-        <span class="k">def</span> <span class="nf">funcA</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-                <span class="k">print</span> <span class="s">&quot;Hey!Function A called!&quot;</span>
-        <span class="k">def</span> <span class="nf">funcB</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-                <span class="k">print</span> <span class="s">&quot;Hey!Function B called!&quot;</span>
-        <span class="k">def</span> <span class="nf">funcC</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-                <span class="k">print ...</span></pre></div></div>
-                        <a class="btn primary xsmall" href="/Python004.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -549,78 +548,8 @@ window.onload=function(){
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
 <li class="tag-3">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/page-sentences.html">
-        <i class="icon-tag icon-large"></i>page sentences
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/proxy.html">
-        <i class="icon-tag icon-large"></i>proxy
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/android.html">
-        <i class="icon-tag icon-large"></i>Android
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/audition.html">
-        <i class="icon-tag icon-large"></i>audition
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/mysql.html">
-        <i class="icon-tag icon-large"></i>MySQL
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/tor.html">
-        <i class="icon-tag icon-large"></i>Tor
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
-    </a>
-</li>
-<li class="tag-3">
     <a href="/tag/litecoin.html">
         <i class="icon-tag icon-large"></i>litecoin
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/web-tool.html">
-        <i class="icon-tag icon-large"></i>web tool
     </a>
 </li>
 <li class="tag-1">
@@ -629,8 +558,88 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/page-sentences.html">
+        <i class="icon-tag icon-large"></i>page sentences
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/openwrt.html">
+        <i class="icon-tag icon-large"></i>OpenWrt
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/arch-linux.html">
+        <i class="icon-tag icon-large"></i>Arch Linux
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/proxy.html">
+        <i class="icon-tag icon-large"></i>proxy
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/tor.html">
+        <i class="icon-tag icon-large"></i>Tor
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/data-structure.html">
+        <i class="icon-tag icon-large"></i>data structure
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/android.html">
+        <i class="icon-tag icon-large"></i>Android
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-2">
     <a href="/tag/recruitment.html">
         <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/mysql.html">
+        <i class="icon-tag icon-large"></i>MySQL
     </a>
 </li>
 <li class="tag-2">
@@ -639,18 +648,13 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-1">
-    <a href="/tag/data-structure.html">
-        <i class="icon-tag icon-large"></i>data structure
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/arch-linux.html">
-        <i class="icon-tag icon-large"></i>Arch Linux
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
+    <a href="/tag/web-tool.html">
+        <i class="icon-tag icon-large"></i>web tool
     </a>
 </li>
 
