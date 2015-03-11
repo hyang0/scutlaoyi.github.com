@@ -1,5 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2015-02-27T15:30:00+08:00</updated><entry><title>DLink DIR505刷OpenWrt</title><link href="/OpenWrt_install_and_config.html" rel="alternate"></link><updated>2015-02-27T15:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2015-02-27:OpenWrt_install_and_config.html</id><summary type="html">&lt;div class="section" id="id1"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2015-03-11T20:00:00+08:00</updated><entry><title>利用Google App Engine加速网络连接</title><link href="/webTool005-speed-up-network-by-gae.html" rel="alternate"></link><updated>2015-03-11T20:00:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2015-03-11:webTool005-speed-up-network-by-gae.html</id><summary type="html">&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;背景&lt;/h2&gt;
+&lt;p&gt;博主因为工作原因时常需要远程连接国际主机，
+由于国际链路较长且国际出口带宽限制，
+导致经常出现连接不稳定及超长时间的等待过程。&lt;/p&gt;
+&lt;p&gt;经过一段时间的调研，
+发现使用Google App Engine做数据中转，
+加上一些奇技淫巧，
+可以较大幅度提高连接的速度和稳定性，
+因此记录一下方案的详细构思和实现过程。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;基本情况和原理&lt;/h2&gt;
+&lt;p&gt;博主与远程服务器的连接需求是socks5协议的tcp连接。
+博主拥有远程主机的控制权，可以部署任意程序。&lt;/p&gt;
+&lt;p&gt;连接缓慢的原因是服务器经常部署在米国之类的地方。
+由于各种原因直接连接的tcp包需要非常长的延迟，
+有时候甚至会丢包。&lt;/p&gt;
+&lt;p&gt;加速的原理如下：&lt;/p&gt;
+&lt;p&gt;Google拥有部署在全世界数以万计的服务器，
+通过接入Google的稳定国际链路，
+可以获得比较好的线路传输效果。&lt;/p&gt;
+&lt;p&gt;接入的方式是使用Google App Engine部署自己的转发程序，
+将请求发送给GAE，
+由GAE将数据包发送到目标服务器上。&lt;/p&gt;
+&lt;p&gt;其次，
+由于Google的许多ip均支持接入GAE服务，
+因此可以通过查找位于自己物理位置较近的服务器减少传输时延。&lt;/p&gt;
+&lt;p&gt;GAE这个特性现在被广泛用于GoAgent的代理服务（ip查找器什么的）。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h2&gt;方案介绍&lt;/h2&gt;
+&lt;p&gt;主要以Meek这套技术作为基础。&lt;/p&gt;
+&lt;p&gt;基本方案是将本地的socket请求通过Meek客户端封装成为HTTP数据包，
+发送到GAE上的中继反射器，
+由GAE上的中继将HTTP数据包转发到目标服务器上。
+目标服务器解析HTTP包并得到原始的socket数据包，
+最终把socket数据包塞给本地的socks5服务器。&lt;/p&gt;
+&lt;p&gt;回程直接把数据塞给HTTP请求的response中。&lt;/p&gt;
+&lt;p&gt;流程如下:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+本地socks5请求&amp;lt;-socket-&amp;gt;本地Meek Client&amp;lt;-http-&amp;gt;GAE转发&amp;lt;-http-&amp;gt;服务器Meek Server&amp;lt;-socket-&amp;gt;服务器Socks5 Server
+&lt;/pre&gt;
+&lt;p&gt;之所以要使用HTTP协议做封装，
+主要是因为GAE不支持纯socket连接（貌似付费版有beta支持），
+此外，HTTP协议的数据包受到干扰的情况比较少，
+连接较为稳定。&lt;/p&gt;
+&lt;p&gt;此外，
+通过HOST指定的https连接还能穿透某些入侵监测系统的限制，
+比如阻止了google系列服务的网络情况。
+这是Meek本身的原理，
+对成功连接GAE也很关键。&lt;/p&gt;
+&lt;p&gt;工具列表如下:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+Tor上Meek系列工具的地址： https://git.torproject.org/pluggable-transports/meek.git
+一个Python写的Meek服务端/客户端套件： https://github.com/yinghuocho/meeksocks-py.git
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="meek"&gt;
+&lt;h2&gt;基本Meek层搭建流程&lt;/h2&gt;
+&lt;p&gt;首先，
+可以通过客户端直接连接服务器的方式打通流程:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+本地socks5请求&amp;lt;-socket-&amp;gt;本地Meek Client&amp;lt;-http-&amp;gt;服务器Meek Server&amp;lt;-socket-&amp;gt;服务器Socks5 Server
+&lt;/pre&gt;
+&lt;p&gt;这种情况其实就是在原有连接上套上一个Meek层做HTTP封装。&lt;/p&gt;
+&lt;p&gt;第一步，
+clone得到上述Python套件，
+注意可能需要依赖那个兄弟写的另一个叫做gsocks的东西。&lt;/p&gt;
+&lt;p&gt;启动的命令应该是python server.py，
+看到基本参数有四个，
+博主研究了半天代码才搞清楚他们的含义:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;http_ip和http_port指的是Meek Server本身监听的ip和端口，
+即对外服务的端口。
+假设指定为0.0.0.0:1234，
+则可以处理任意地址发到1234端口的HTTP请求，
+启动成功后可以wget一下:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+wget 127.0.0.1:1234
+&lt;/pre&gt;
+&lt;p&gt;正常会返回Hello, world&lt;/p&gt;
+&lt;p&gt;socks_ip和socks_port是指内置的socks5服务器的监听配置，
+这货自带了一个socks5服务器，
+代码默认将Meek Server收到的HTTP解析为socks5请求数据包，
+转发到内置的socks5服务器进行处理。&lt;/p&gt;
+&lt;p&gt;因此socks_ip指定为127.0.0.1是比较保险的，
+防止对外暴露不必要的服务。
+端口的话随意指定一个没有被占用的就好，
+代码中自动将请求转发到相应的端口上。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;第二步，
+直接在本地启动Meek Client。&lt;/p&gt;
+&lt;p&gt;看到参数中有relay的设置，
+代码中给出了简单的一个示范，
+由于我们直接连接服务器，
+因此front和host全部设置为服务器的ip和端口，
+例如:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+python client.py 127.0.0.1 8975 http://a.b.c.d:e/,http://a.b.c.d:e/,stream
+&lt;/pre&gt;
+&lt;p&gt;这样就监听本地的8975端口，
+并由Meek通过HTTP连接服务器a.b.c.d的e端口。&lt;/p&gt;
+&lt;p&gt;完成上述两步之后可以尝试socks5连接本地8975端口连通性，
+跑跑proxychains什么的，
+如果正常就可以继续下一步GAE中转的搭建了。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h2&gt;Google App Engine反射器的搭建和配置&lt;/h2&gt;
+&lt;p&gt;需要用到Tor项目里appengine文件夹下的那套工具，
+可以看到是用go写的一个GAE应用，
+直接通过Google提供的SDK上传到自己的应用上。&lt;/p&gt;
+&lt;p&gt;后续假设上传到这个地方:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+reflector.appspot.com
+&lt;/pre&gt;
+&lt;p&gt;那么，
+需要修改上面Meek Client的启动参数为这个:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+python client.py 127.0.0.1 8975 https://www.google.com,reflector.appspot.com,stream
+&lt;/pre&gt;
+&lt;p&gt;需要注意一个是front为https连接，
+另一个是host没有http这个段。（博主被坑了好些时候&lt;/p&gt;
+&lt;p&gt;在某些特定的网络环境下，
+google的域名是不可用的，
+则需要自行寻找可用的ip。&lt;/p&gt;
+&lt;p&gt;可以找那些用于GoAgent可用IP查找器的工具，
+搜出来的ip直接替换上述Client启动命令中的front字段，
+例如搜到一个ip是123.123.123.123，
+则启动命令为:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+python client.py 127.0.0.1 8975 https://123.123.132.123,reflecter.appspot.com,stream
+&lt;/pre&gt;
+&lt;p&gt;该Client原生支持多个ip，
+但源代码有bug，
+问题在于用竖线&amp;quot;|&amp;quot;做分割符在bash里会认为是管道命令。&lt;/p&gt;
+&lt;p&gt;解决方法一个是修改源代码把分隔符替换成别的东西。&lt;/p&gt;
+&lt;p&gt;博主的方法直接修改了源码，
+从ip_list.txt文件读取一坨ip，
+在系统内部再构造最终的front url。&lt;/p&gt;
+&lt;p&gt;以上。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id5"&gt;
+&lt;h2&gt;方案的收益&lt;/h2&gt;
+&lt;p&gt;最大的收益是这种状态下所有数据传输都不直接依赖目标服务器了，
+利用Google大量的ip进行服务相当于获得了分布式的效果。&lt;/p&gt;
+&lt;p&gt;此外，
+通过针对性连接timeout较短的Google可用IP，
+能够在目标服务器连接缓慢（甚至直连链路故障）的情况下得到稳定的数据传输。&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="GAE"></category><category term="Meek"></category></entry><entry><title>DLink DIR505刷OpenWrt</title><link href="/OpenWrt_install_and_config.html" rel="alternate"></link><updated>2015-02-27T15:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2015-02-27:OpenWrt_install_and_config.html</id><summary type="html">&lt;div class="section" id="id1"&gt;
 &lt;h2&gt;背景&lt;/h2&gt;
 &lt;p&gt;老早就听说过OpenWrt的大名，
 一直想自己搭建一个路由器玩。

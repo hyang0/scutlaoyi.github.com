@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Bash笔记(四)</title>
+    <title>老逸的个人站 - GAE</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="laoyi">
@@ -76,7 +76,7 @@
 						<i class="icon-folder-open icon-large"></i>Life
 					</a>
                   </li>
-                  <li class="active">
+                  <li >
                     <a href="/category/linux.html">
 						<i class="icon-folder-open icon-large"></i>Linux
 					</a>
@@ -106,222 +106,74 @@
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
-<section id="content">
-        <article>
-                <header>
-                        <h1>
-                                <a href=""
-                                        rel="bookmark"
-                                        title="Permalink to Bash笔记(四)">
-                                        Bash笔记(四)
-                                </a>
-                        </h1>
-                </header>
-                <div class="entry-content">
-                <div class="well">
-<footer class="post-info">
+        <div class="article">
+                <h1><a href="/webTool005-speed-up-network-by-gae.html">利用Google App Engine加速网络连接</a></h1>
+                <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2014-01-05T22:30:00+08:00">
-        <i class="icon-calendar"></i>日 05 一月 2014
+<abbr class="published" title="2015-03-11T20:00:00+08:00">
+        <i class="icon-calendar"></i>三 11 三月 2015
 </abbr>
 <span class="label">By</span>
 <a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
 <span class="label">Category</span>
-<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
+<a href="/category/web.html"><i class="icon-folder-open"></i>Web</a>.
 
 
 <span class="label">Tags</span>
-	<a href="/tag/bash.html"><i class="icon-tag"></i>Bash</a>
-</footer><!-- /.post-info -->                </div>
-                <p><strong>本系列博文记录学习Shell终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录。</strong></p>
-<hr class="docutils" />
-<div class="section" id="id1">
-<h2>用户管理</h2>
-<p>Unix的用户列表在/etc/passwd中，
-该文件为每个用户保存了一行信息，
-包括用户名、用户id、组id、用户描述、用户的home目录及默认的shell信息</p>
-<p>用户密码加密后保存在/etc/shadow文件中，
-包含用户名、用户密码、最小密码修改间隔时间、最大密码修改间隔时间、密码无效前提醒时间等。
-时间的单位是天。</p>
-<p>用户的密码管理默认设置在/etc/login.defs中。
-设置了包含上述几个时间在内的多个参数。</p>
-<p><strong>识别用户</strong></p>
-<p>whoami</p>
-<blockquote>
-查看当前用户名</blockquote>
-<p>who</p>
-<blockquote>
-列表显示当前所有登录用户相关信息</blockquote>
-<p>who am i</p>
-<blockquote>
-这货是空格分开的，相当于who，只显示当前用户</blockquote>
-<p>w</p>
-<blockquote>
-这个能显示当前所有用户正在执行的工作</blockquote>
-<p>id</p>
-<blockquote>
-显示当前用户的用户id，组id等</blockquote>
-<p><strong>用户管理</strong></p>
-<p>useradd</p>
-<blockquote>
-<p>创建一个新用户scutlaoyi，设置home目录及用户描述</p>
-<p>useradd -m -d /home/scutlaoyi -c &quot;new user&quot; scutlaoyi</p>
-<p>系统默认给新用户一个独立的用户id和组id.</p>
-</blockquote>
-<p>userdel</p>
-<blockquote>
-<p>删除用户，-r设置连带删除对应的home目录</p>
-<p>userdel -r [username]</p>
-</blockquote>
-<p>usermod</p>
-<blockquote>
-<p>编辑用户信息，例如，修改用户描述</p>
-<p>usermod -c &quot;just a user&quot; [username]</p>
-<p>锁定某个用户的密码，使其不能正常登录</p>
-<p>usermod -L [username]</p>
-<p>解锁</p>
-<p>usermod -U [username]</p>
-<p>设置默认登录的shell</p>
-<p>usermod -s /bin/bash [username]</p>
-<p>设定用户归属的组(注意这个操作会清除用户原有的组归属数据)</p>
-<p>usermod -G [groupname] [username]</p>
-</blockquote>
-<p>passwd</p>
-<blockquote>
-<p>不带参数输入可修改当前用户密码</p>
-<p>passwd</p>
-<p>对某个用户设置密码</p>
-<p>passwd [username]</p>
-</blockquote>
-<p><strong>用户切换</strong></p>
-<p>su</p>
-<blockquote>
-<p>快速切换到某个用户,包括root也行，如果你有密码</p>
-<p>su [username]</p>
-</blockquote>
-<p>sudo</p>
-<blockquote>
-<p>sudo命令可以让当前用户以root权限执行程序。</p>
-<p>sudo [command]</p>
-<p>sudo命令可以在不交出root密码的前提下给某些用户root权限管理系统。</p>
-<p>sudo命令成功的前提是当前用户在/etc/sudoers文件中存在对应的权限。
-没有权限而执行sudo的话，在我的Ubuntu里会显示错误信息，
-并威胁道:&quot;此事件将被报告。&quot; -_-\</p>
-</blockquote>
-<p>visudo</p>
-<blockquote>
-<p>sudoers文件的专用编辑器，可防止多种安全问题。</p>
-<p>关于该命令的具体信息可查man。</p>
-<p>不推荐直接编辑/etc/sudoers文件。
-（虽然上次糊里糊涂用vim编辑了一次，还好没死。-_-\）</p>
-</blockquote>
+	<a href="/tag/gae.html"><i class="icon-tag"></i>GAE</a>
+	<a href="/tag/meek.html"><i class="icon-tag"></i>Meek</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><div class="section" id="id1">
+<h2>背景</h2>
+<p>博主因为工作原因时常需要远程连接国际主机，
+由于国际链路较长且国际出口带宽限制，
+导致经常出现连接不稳定及超长时间的等待过程。</p>
+<p>经过一段时间的调研，
+发现使用Google App Engine做数据中转，
+加上一些奇技淫巧，
+可以较大幅度提高连接的速度和稳定性，
+因此记录一下方案的详细构思和实现过程。</p>
 </div>
 <div class="section" id="id2">
-<h2>组管理</h2>
-<p>用户组的信息保存在/etc/group文件中。
-其格式为：组名:组密码(可能为空):组id:组内成员列表</p>
-<p>groupadd</p>
-<blockquote>
-添加一个组
-groupadd [groupname]</blockquote>
-<p>添加用户到某个组中</p>
-<blockquote>
-<p>使用usermod，-a为保持原有组信息并追加新组</p>
-<p>usermod -a -G [groupname] [username]</p>
-</blockquote>
-<p>groupmod</p>
-<blockquote>
-<p>编辑组名称</p>
-<p>groupmod -n [new_groupname] [groupname]</p>
-</blockquote>
-<p>groupdel</p>
-<blockquote>
-<p>删除组</p>
-<p>groupdel [groupname]</p>
-</blockquote>
-<p>groups</p>
-<blockquote>
-查看当前用户所属的组信息</blockquote>
-<p>gpasswd</p>
-<blockquote>
-<p>赋予某些用户管理组的权限</p>
-<p>设定某个组的管理员</p>
-<p>gpasswd -A [user1],[user2],[...] [groupname]</p>
-<p>使某个用户加入组</p>
-<p>gpasswd -a [username] [groupname]</p>
-<p>从组中清除某个用户</p>
-<p>gpasswd -d [username] [groupname]</p>
-<p>设定某个组的成员</p>
-<p>gpasswd -M [user1],[user2],[...]</p>
-</blockquote>
+<h2>基本情况和原理</h2>
+<p>博主与远程服务器的连接需求是socks5协议的tcp连接。
+博主拥有远程主机的控制权，可以部署任意程序。</p>
+<p>连接缓慢的原因是服务器经常部署在米国之类的地方。
+由于各种原因直接连接的tcp包需要非常长的延迟，
+有时候甚至会丢包。</p>
+<p>加速的原理如下：</p>
+<p>Google拥有部署在全世界数以万计的服务器，
+通过接入Google的稳定国际链路，
+可以获得比较好的线路传输效果。</p>
+<p>接入的方式是使用Google App Engine部署自己的转发程序，
+将请求发送给GAE，
+由GAE将数据包发送到目标服务器上。</p>
+<p>其次，
+由于Google的许多ip均支持接入GAE服务，
+因此可以通过查找位于自己物理位置较近的服务器减少传输时延。</p>
+<p>GAE这个特性现在被广泛用于GoAgent的代理服务（ip查找器什么的）。</p>
 </div>
 <div class="section" id="id3">
-<h2>文件权限</h2>
-<p>Unix类系统的文件权限分为三种：
-文件所有者权限、文件所属组权限、其他人权限。
-文件的权限有三款：读(r)、写(w)、执行(x)。</p>
-<p>当使用ls -l命令时，可以看到列表中每个文件的最左方即文件的权限设置</p>
-<p>第一个字符为文件类型，文件类型有：</p>
-<blockquote>
-<p>-:普通文件</p>
-<p>d:目录</p>
-<p>l:符号链接文件</p>
-<p>p:命名管道</p>
-<p>b:块设备</p>
-<p>c:字符设备</p>
-<p>s:socket</p>
-</blockquote>
-<p>接着每三个字符依次指定了对应的权限：所有者、组、其他人。
-r、w、x分别说明拥有该项权限，横杆-说明无此权限。</p>
-<p>如：</p>
-<p>drwxr-xr-x 2 laoyi laoyi    4096 12月 23 20:28 desktop</p>
-<p>该文件是一个目录，
-所有者拥有读写执行权限，
-组用户拥有读和执行权限，
-而其他人也拥有读和执行权限</p>
-<p>后面的依次是所有者、所有组，大小，时间和名称等信息。</p>
-<p>chgrp</p>
-<blockquote>
-<p>修改一个文件的组</p>
-<p>chgrp [groupname] [filename]</p>
-</blockquote>
-<p>chown</p>
-<blockquote>
-<p>修改一个文件的所有者</p>
-<p>chown [username] [filename]</p>
-<p>同时修改所有者和组</p>
-<p>chown [username]:[groupname] [filename]</p>
-</blockquote>
-<p>chmod</p>
-<blockquote>
-<p><strong>代号方式管理权限</strong></p>
-<p>u为所有者，g为组用户，o为其他人，a对上述三者同时操作</p>
-<p>+为增加权限， 相反， -为去除权限</p>
-<p>r读，w写，x执行</p>
-<p>权限配置可以多个组合</p>
-<p>chmod u+w [filename]</p>
-<p><strong>数字方式管理权限</strong></p>
-<p>读的数值为4， 写的数值为2， 执行的数值为1</p>
-<p>对应权限的数字求和得到最终的权限数值</p>
-<p>因此下述例子分配所有者读写执行权限，组用户读和执行权限，其他人读取的权限</p>
-<p>chmod 754 [filename]</p>
-</blockquote>
-<hr class="docutils" />
-<p>简单的Bash命令就到此为止了，
-后面的一些比较复杂我就不记了，
-像ACL之类的，
-现在学一下过几天也会忘，
-以后用到我再搞上来。</p>
-<p><strong>明天开始搞Arch Linux!</strong></p>
-</div>
+<h2>方案介绍</h2>
+<p>主要以Meek这套技术作为基础。</p>
+<p>基本方案是将本地的socket请求通过Meek客户端封装成为HTTP数据包，
+发送到GAE上的中继反射器，
+由GAE上的中继将HTTP数据包转发到目标服务器上。
+目标服务器解析HTTP包并得到原始的socket数据包，
+最终把socket数据包塞给本地的socks5服务器。</p>
+<p>回程直接把数据塞给HTTP请求的response中。</p>
+<p>流程如下:</p>
+<pre class="literal-block">
+本地socks5请求&lt;-socket-&gt;本地Meek Client&lt;-http-&gt;GAE转发&lt;-http-&gt;服务器Meek Server ...</pre></div>
+                        <a class="btn primary xsmall" href="/webTool005-speed-up-network-by-gae.html">more ...</a>
+                </div>
+        </div>
+        <hr />
 
-                </div><!-- /.entry-content -->
-        </article>
-        <license>
-        <br/>
-        This work by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.scutlaoyi.tk" property="cc:attributionName" rel="cc:attributionURL">scutLaoYi</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-        </license>
-</section>
+                <section id="content" class="body">
+                <h1>Pages</h1>
+                        <li><a href="/pages/about.html">About</a></li>
+                </section>
         </div><!--/span-->
 
                 <div class="span3 well sidebar-nav" id="sidebar">

@@ -107,6 +107,69 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/webTool005-speed-up-network-by-gae.html">利用Google App Engine加速网络连接</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-03-11T20:00:00+08:00">
+        <i class="icon-calendar"></i>三 11 三月 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/web.html"><i class="icon-folder-open"></i>Web</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/gae.html"><i class="icon-tag"></i>GAE</a>
+	<a href="/tag/meek.html"><i class="icon-tag"></i>Meek</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><div class="section" id="id1">
+<h2>背景</h2>
+<p>博主因为工作原因时常需要远程连接国际主机，
+由于国际链路较长且国际出口带宽限制，
+导致经常出现连接不稳定及超长时间的等待过程。</p>
+<p>经过一段时间的调研，
+发现使用Google App Engine做数据中转，
+加上一些奇技淫巧，
+可以较大幅度提高连接的速度和稳定性，
+因此记录一下方案的详细构思和实现过程。</p>
+</div>
+<div class="section" id="id2">
+<h2>基本情况和原理</h2>
+<p>博主与远程服务器的连接需求是socks5协议的tcp连接。
+博主拥有远程主机的控制权，可以部署任意程序。</p>
+<p>连接缓慢的原因是服务器经常部署在米国之类的地方。
+由于各种原因直接连接的tcp包需要非常长的延迟，
+有时候甚至会丢包。</p>
+<p>加速的原理如下：</p>
+<p>Google拥有部署在全世界数以万计的服务器，
+通过接入Google的稳定国际链路，
+可以获得比较好的线路传输效果。</p>
+<p>接入的方式是使用Google App Engine部署自己的转发程序，
+将请求发送给GAE，
+由GAE将数据包发送到目标服务器上。</p>
+<p>其次，
+由于Google的许多ip均支持接入GAE服务，
+因此可以通过查找位于自己物理位置较近的服务器减少传输时延。</p>
+<p>GAE这个特性现在被广泛用于GoAgent的代理服务（ip查找器什么的）。</p>
+</div>
+<div class="section" id="id3">
+<h2>方案介绍</h2>
+<p>主要以Meek这套技术作为基础。</p>
+<p>基本方案是将本地的socket请求通过Meek客户端封装成为HTTP数据包，
+发送到GAE上的中继反射器，
+由GAE上的中继将HTTP数据包转发到目标服务器上。
+目标服务器解析HTTP包并得到原始的socket数据包，
+最终把socket数据包塞给本地的socks5服务器。</p>
+<p>回程直接把数据塞给HTTP请求的response中。</p>
+<p>流程如下:</p>
+<pre class="literal-block">
+本地socks5请求&lt;-socket-&gt;本地Meek Client&lt;-http-&gt;GAE转发&lt;-http-&gt;服务器Meek Server ...</pre></div>
+                        <a class="btn primary xsmall" href="/webTool005-speed-up-network-by-gae.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/webTool004-how-to-build-a-meek-reflector.html">打造自用的Meek中继反射器</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -635,45 +698,6 @@ php代码如下(假设文件名是test.php)：</p>
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/network002.html">socket编程(2):单线程udp服务器/客户端</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2013-09-24T10:00:00+08:00">
-        <i class="icon-calendar"></i>二 24 九月 2013
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/web.html"><i class="icon-folder-open"></i>Web</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/socket.html"><i class="icon-tag"></i>socket</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p><strong>基本流程</strong></p>
-<p>与tcp的通讯非常类似，不同之处在于udp是无连接的，因此没有创建连接这种操作，服务器开启端口后接受数据并直接返回。
-设置时将socket类型设置为SOCK_DGRAM即可创建udp通讯。</p>
-<p><strong>C++版本：</strong></p>
-<p>服务器：</p>
-<div class="highlight"><pre><span class="c1">//filename:udpServer.cpp</span>
-
-<span class="cp">#include &lt;cstdio&gt;</span>
-<span class="cp">#include &lt;cstring&gt;</span>
-<span class="cp">#include &lt;sys/types.h&gt;</span>
-<span class="cp">#include &lt;sys/socket.h&gt;</span>
-<span class="cp">#include &lt;netinet/in.h&gt;</span>
-<span class="cp">#include &lt;arpa/inet.h&gt;</span>
-<span class="cp">#include &lt;unistd.h&gt;</span>
-<span class="cp">#include &lt;errno.h&gt;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">BUF_SIZE</span> <span class="o">=</span> <span class="mi">512</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">SOCKET_PORT</span> <span class="o">=</span> <span class="mi">9999</span><span class="p">;</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc ...</span></pre></div>
-                        <a class="btn primary xsmall" href="/network002.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -746,34 +770,9 @@ window.onload=function(){
 </li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
-<li class="tag-3">
-    <a href="/tag/litecoin.html">
-        <i class="icon-tag icon-large"></i>litecoin
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>Python
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
-    </a>
-</li>
 <li class="tag-4">
-    <a href="/tag/page-sentences.html">
-        <i class="icon-tag icon-large"></i>page sentences
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/openwrt.html">
-        <i class="icon-tag icon-large"></i>OpenWrt
+    <a href="/tag/mysql.html">
+        <i class="icon-tag icon-large"></i>MySQL
     </a>
 </li>
 <li class="tag-2">
@@ -782,28 +781,8 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-3">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/arch-linux.html">
-        <i class="icon-tag icon-large"></i>Arch Linux
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/proxy.html">
-        <i class="icon-tag icon-large"></i>proxy
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/tor.html">
-        <i class="icon-tag icon-large"></i>Tor
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/data-structure.html">
-        <i class="icon-tag icon-large"></i>data structure
+    <a href="/tag/litecoin.html">
+        <i class="icon-tag icon-large"></i>litecoin
     </a>
 </li>
 <li class="tag-4">
@@ -811,39 +790,14 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>Android
     </a>
 </li>
-<li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
-    </a>
-</li>
 <li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
+    <a href="/tag/meek.html">
+        <i class="icon-tag icon-large"></i>Meek
     </a>
 </li>
-<li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/mysql.html">
-        <i class="icon-tag icon-large"></i>MySQL
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
     </a>
 </li>
 <li class="tag-1">
@@ -852,8 +806,88 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-2">
     <a href="/tag/web-tool.html">
         <i class="icon-tag icon-large"></i>web tool
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/openwrt.html">
+        <i class="icon-tag icon-large"></i>OpenWrt
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/data-structure.html">
+        <i class="icon-tag icon-large"></i>data structure
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/arch-linux.html">
+        <i class="icon-tag icon-large"></i>Arch Linux
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/gae.html">
+        <i class="icon-tag icon-large"></i>GAE
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/page-sentences.html">
+        <i class="icon-tag icon-large"></i>page sentences
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/proxy.html">
+        <i class="icon-tag icon-large"></i>proxy
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/tor.html">
+        <i class="icon-tag icon-large"></i>Tor
     </a>
 </li>
 
