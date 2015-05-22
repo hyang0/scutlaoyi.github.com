@@ -1,5 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>老逸的个人站</title><link>/</link><description></description><atom:link href="http://www.scutlaoyi.tk/feeds/all.rss.xml" rel="self"></atom:link><lastBuildDate>Wed, 11 Mar 2015 20:00:00 +0800</lastBuildDate><item><title>利用Google App Engine加速网络连接</title><link>/webTool005-speed-up-network-by-gae.html</link><description>&lt;div class="section" id="id1"&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>老逸的个人站</title><link>/</link><description></description><atom:link href="http://www.scutlaoyi.tk/feeds/all.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 22 May 2015 20:30:00 +0800</lastBuildDate><item><title>关于时间管理的笔记</title><link>/personal_management_of_time.html</link><description>&lt;p&gt;关于时间的管理有四个重要的步骤：确定目标、分析选择、制定计划以及实施行动。&lt;/p&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;一、确定目标&lt;/h2&gt;
+&lt;p&gt;时间管理首先需要解决的问题是列举所有正在执行的或者计划执行的目标，
+明确记录下的目标列表有助于进行全局的进度把控，
+也防止花费太多时间在某些细碎的事情上造成无故浪费。&lt;/p&gt;
+&lt;p&gt;时间管理的目标列表存在多种时间计算单位，
+例如针对每一天的工作进行当日工作目标列举，
+针对长远的计划进行十年规划目标列举，均是可以接受的。
+但存在的一个问题是，时间跨度越长的目标规划更容易模糊，
+也更难进行具体的确定，例如设定某日的工作内容相比设定十年内的目标规划要简单得多。
+这种情况下不能急于求成，通过积累小时间跨度的目标列表，依靠经验逐步推进更长时间的目标设定能力。&lt;/p&gt;
+&lt;p&gt;列举目标一定要把所有项目落地，电子版也行纸质版也行，
+特别需要避免的是只在脑子里汇总，很容易导致丢失和混乱。&lt;/p&gt;
+&lt;p&gt;希望达到的一个境界是既能够快速处理短期（每天、每个月）的目标规划，
+也能够有能力大致掌控较长时间（几年甚至每十年）为周期的目标规划。&lt;/p&gt;
+&lt;p&gt;产出：所有计划中的目标列表&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h2&gt;二、分析选择&lt;/h2&gt;
+&lt;p&gt;在确定所有目标内容及时间范围之后，进行的第二项工作是对现有列表的目标进行分析和选择。&lt;/p&gt;
+&lt;p&gt;一个需要铭记的原则是：你永远没有时间做完你想做的所有事情。&lt;/p&gt;
+&lt;p&gt;因此对于某些低价值目标需要进行适当剔除，这也是二八原则的一种应用。&lt;/p&gt;
+&lt;p&gt;基于这个原则，一个较好的解决方案是将现有的目标列表通过时间管理四象限进行分类。
+分类后的目标列表可以通过下述方法进行处理：
+扔掉不重要不紧急的事情；
+交出不重要而紧急的事情；
+关注重要而紧急的事情；
+持续留意重要不紧急的事情。&lt;/p&gt;
+&lt;p&gt;对无价值的事件要培养一颗果断放弃的心。&lt;/p&gt;
+&lt;p&gt;产出：最终决定执行的有价值目标列表&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h2&gt;三、制定计划&lt;/h2&gt;
+&lt;p&gt;通过分析选择我们可以得到一份需要自己完成的目标列表。现在需要做的是规划实现这些目标的时间分配。&lt;/p&gt;
+&lt;p&gt;制定计划的原则是：主动面对最大的困难，保持从容的节奏。&lt;/p&gt;
+&lt;p&gt;具体的实施有如下两点：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;一是优先安排关键困难点的工作，并尽早解决之，在剩余的时间中分配处理其他细碎目标。
+一般而言关键的困难点往往也是关键的收益所在，
+这种操作可以尽早完成二八原则所述的关键部分，
+尽快得到大部分的利益获取，
+即使由于剩余时间不够无法全部完成剩余的小目标项，
+也不会影响全局的价值。&lt;/p&gt;
+&lt;p&gt;二是在不影响重要紧急事情的前提下尽快将不紧急的重要事情提前扼杀在摇篮中。
+毫无疑问，随着时间的推移不紧急的事情会逐步变化为紧急的事情，一种需要避免的情况是所有时间都花费在处理大量紧急事情的流程中。
+一旦紧急事情的工作量超过负荷，或个人本身状态出现异常，或有其他事情插入，就极有可能造成目标的推迟。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;产出：目标的完成顺序排期&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id5"&gt;
+&lt;h2&gt;四、实施行动&lt;/h2&gt;
+&lt;p&gt;确定了目标的排期之后就可以执行了，行动实施的过程可以积极利用各种时间管理工具作为辅助。以下列举了部分时间管理工具。&lt;/p&gt;
+&lt;div class="section" id="id6"&gt;
+&lt;h3&gt;1、时间日志&lt;/h3&gt;
+&lt;p&gt;通过类似流水账的时间日志记录每个时间段的工作内容，便于分析回顾及统计汇总。&lt;/p&gt;
+&lt;p&gt;还可以进一步在日志的基础上添加个人感受和收获环节，有利于个人的积累。&lt;/p&gt;
+&lt;p&gt;时间日志的养成可以逐步执行，根据个人习惯进行逐步调整。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id7"&gt;
+&lt;h3&gt;2、番茄钟&lt;/h3&gt;
+&lt;p&gt;概念：每二十五分钟作为一个工作循环，也称为一个番茄钟。两个番茄钟之间设定五分钟的强制性间隔休息时间。&lt;/p&gt;
+&lt;p&gt;操作流程：首先给目标任务预计一个大致的时间需求，例如两个番茄钟。
+然后就可以执行了，保证工作时间的高效性和抗干扰，
+例如屏蔽所有外部的插入事件，同时限制工作时间在二十五分钟左右。
+在二十五分钟的番茄之后强制插入五分钟的休息时间。&lt;/p&gt;
+&lt;p&gt;收益：二十五分钟的工作时间可以保持较高的效率，特别是屏蔽了外界的所有插入事件后。
+在番茄之间的五分钟休息时间可以让身心得到较好的调整，
+避免由于过长时间的专注导致精神集中力的快速下降，为下一个番茄做好充足准备。&lt;/p&gt;
+&lt;p&gt;注意项：即使在二十五分钟后还没有将事情完成一段落，即使即使自己本身并没有感觉特别大的疲劳度，也需要 &lt;strong&gt;强制&lt;/strong&gt; 执行五分钟休息时间。&lt;/p&gt;
+&lt;p&gt;可能遇到的问题：前期可能出现工作时间预估偏差太大，这要根据具体工作内容进行分析，可能的原因有：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;1、由于对工作内容难度预判错误导致的番茄钟计算错误，这属于外部因素，可通过逐步培养时间预估的感觉进行调整；&lt;/p&gt;
+&lt;p&gt;2、由于工作过程注意力不集中导致效率降低，这属于内因，需要提高自身的专注力度，并减少外部干扰；&lt;/p&gt;
+&lt;p&gt;3、由于工作中纠结具体细节导致整体工作延迟，同样属于内因，可以通过进一步细化事件粒度降低时间预估的尺度，即把大的事件划分为小的工作步骤；
+同时需要注意学习提高对工作进度的掌控能力，避免在同一个问题点上耗费超量时间。
+当某个节点进度超时，可想办法直接跳过避免在某个细节上死磕，过后再回来解决该问题。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id8"&gt;
+&lt;h2&gt;五、总结&lt;/h2&gt;
+&lt;p&gt;目标要明确，选择有取舍，着重打击高价值目标，维持稳定和高效的状态。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id9"&gt;
+&lt;h2&gt;六、道理我们都懂，但依然过不好生活&lt;/h2&gt;
+&lt;p&gt;个人感觉执行力是各种问题的通用解法，或者说， &lt;strong&gt;执行力&lt;/strong&gt; 是各种方法的基本条件。
+就类似汽车和汽油的关系，再好的办法再优秀的理论，
+类似汽车，都只能在有执行力作为内因，即汽油的驱动下才能发挥出它们的作用。&lt;/p&gt;
+&lt;p&gt;所以说类似时间管理一类的东西也都只是一些辅助的手段，
+可以帮助有比较好执行力但缺少一些经验的人提高管理效率，
+最终还是得看自己有多少动力去执行。
+而对于一直没什么能力自我控制和管理的人来说，
+他们需要的不是方法，
+&lt;em&gt;他们需要的是生活的打击和在浪费了很多时间后产生深深的后悔和自责。&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">laoyi</dc:creator><pubDate>Fri, 22 May 2015 20:30:00 +0800</pubDate><guid>tag:,2015-05-22:personal_management_of_time.html</guid><category>time</category><category>tools</category></item><item><title>利用Google App Engine加速网络连接</title><link>/webTool005-speed-up-network-by-gae.html</link><description>&lt;div class="section" id="id1"&gt;
 &lt;h2&gt;背景&lt;/h2&gt;
 &lt;p&gt;博主因为工作原因时常需要远程连接国际主机，
 由于国际链路较长且国际出口带宽限制，

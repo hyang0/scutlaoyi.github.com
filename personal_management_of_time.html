@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Arch Linux学习：安装篇(二)</title>
+    <title>关于时间管理的笔记</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="laoyi">
@@ -71,12 +71,12 @@
 						<i class="icon-folder-open icon-large"></i>Coding
 					</a>
                   </li>
-                  <li >
+                  <li class="active">
                     <a href="/category/life.html">
 						<i class="icon-folder-open icon-large"></i>Life
 					</a>
                   </li>
-                  <li class="active">
+                  <li >
                     <a href="/category/linux.html">
 						<i class="icon-folder-open icon-large"></i>Linux
 					</a>
@@ -112,8 +112,8 @@
                         <h1>
                                 <a href=""
                                         rel="bookmark"
-                                        title="Permalink to Arch Linux学习：安装篇(二)">
-                                        Arch Linux学习：安装篇(二)
+                                        title="Permalink to 关于时间管理的笔记">
+                                        关于时间管理的笔记
                                 </a>
                         </h1>
                 </header>
@@ -121,158 +121,114 @@
                 <div class="well">
 <footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2014-01-14T19:30:00+08:00">
-        <i class="icon-calendar"></i>二 14 一月 2014
+<abbr class="published" title="2015-05-22T20:30:00+08:00">
+        <i class="icon-calendar"></i>五 22 五月 2015
 </abbr>
 <span class="label">By</span>
 <a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
 <span class="label">Category</span>
-<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
+<a href="/category/life.html"><i class="icon-folder-open"></i>Life</a>.
 
 
 <span class="label">Tags</span>
-	<a href="/tag/arch-linux.html"><i class="icon-tag"></i>Arch Linux</a>
+	<a href="/tag/time.html"><i class="icon-tag"></i>time</a>
+	<a href="/tag/tools.html"><i class="icon-tag"></i>tools</a>
 </footer><!-- /.post-info -->                </div>
-                <p>本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。</p>
-<hr class="docutils" />
-<p>当你看到这篇博文的时候，
-老逸的新系统已安装完毕，
-弹冠相庆！^_^</p>
-<p>替换掉原来恶心的win7+Ubuntu双系统，
-现在直接将整个硬盘重新分区并安装Arch Linux.</p>
-<p>分区如下:</p>
-<pre class="literal-block">
-NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
-sda      8:0    0 298.1G  0 disk
-├─sda1   8:1    0   500M  0 part /boot
-├─sda2   8:2    0    50G  0 part /
-├─sda3   8:3    0     2G  0 part [SWAP]
-├─sda4   8:4    0   100G  0 part /home
-└─sda5   8:5    0 145.6G  0 part /data
-</pre>
-<p>除了swap外所有分区均使用ext4。
-根据Arch官方说法，留多25%的空间能够消除碎片，
-考虑到300G硬盘的实际使用率，因此确定了上面的分区方案。</p>
-<p>boot分区给了夸张的500M，因为1G以下的空间对现在的硬盘来说都不够算。
-root分区因为要装一些软件什么的，考虑到之前的Ubuntu只有10G也没用尽，因此给了50G以防以后拓展。
-home分区用来存自己的数据，文档啦源码啦，还有我这网站的content也在里面，乱七八糟的都放，给了个100G。
-剩下的统统交给data，计划用来放些电影啦音乐啥子的，这种搞法其实是Arch的文档中介绍的。</p>
-<p>基本配置如下，列表以供参考：</p>
-<pre class="literal-block">
-partition table: GPT
-bootloader: syslinux
-linux kernal: 3.12.6-1-ARCH (tobias&#64;T-POWA-LX)
-Desktop Environment: Lightweight X11 Desktop Environment(LXDE)
-</pre>
-<p>由于确定不再使用windows，所以完全没有考虑双系统的兼容性问题，带来的好处就是可以直接使用新款分区表GPT，
-相比老旧的MBR确实优势多多。
-bootloader也相应选择了看起来更加牛逼一些的syslinux，安装过程也非常顺利方便。（当然，相比windows的无人值守性质的安装还是多少有一些事情要做的。不过windows嘛，就不说什么了...）
-内核就没有自己geek一番了，毕竟是生手第一次安装，主要考虑系统的稳定性和便捷性，直接pacstrap搞定。</p>
-<p>应用软件方面还是以轻量级为主。</p>
-<p>桌面环境直接排除了GNOME和KDE，GNOME虽然效果非常炫，但用起来机器居然有时会卡，而且GNOME本身也过于庞大。
-KDE的话，看到Arch官网的介绍和GNOME同属重量级的环境，就一起排除了。
-在xfce和LXDE之间纠结了很久，因为这俩货主打轻量级，而且是官方支持的版本。
-之前用的是xfce，考虑到尝鲜的因素、浏览器的因素（LXDE推荐网页浏览器是Firefox），以及其他心理因素，最终确定使用LXDE作为桌面环境。</p>
-<p>输入法本来安装了ibus和googlepinyin，用了两次感觉比较不爽，默认的界面非常难看，而且启动也有点慢（居然要我开启完桌面环境好一会之后才自己慢吞吞出现在菜单栏里）。
-所以果断换了fcitx。刚换上去就知道找对东西了，不仅开启的速度非常快，不用怎么配置，而且默认的黑色界面也和我的桌面主题很搭。再装上google拼音，好用的很。</p>
-<p>浏览器就Firefox无疑了，autoProxy用起来忒爽。这里插句题外话，前天给家里的winXP(老古董，想换个Lubuntu，但不是我在用，麻烦。=_=)装Firefox，居然下错Firefox搞到一个中国版，各种插件各种弹窗，各种恶心...提醒大家装Firefox去官网选择中文原版，别去中国官网下，当然故意找插件的除外。</p>
-<div class="section" id="id1">
-<h2>桌面环境的安装</h2>
-<p>安装桌面环境首先要安装xorg-server，直接pacman就行。</p>
-<p>接着是mesa，据说是用来处理3D显示的。</p>
-<p>然后要搞定显卡的驱动。</p>
-<p>从这里：</p>
-<blockquote>
-<a class="reference external" href="https://wiki.archlinux.org/index.php/Xorg#Driver_installation">https://wiki.archlinux.org/index.php/Xorg#Driver_installation</a></blockquote>
-<p>可以找到自己显卡对应的驱动，pacman安装即可。</p>
-<p>现在便可以通过启动X来测试了，直接命令：startx
-如果能出几个框框鼠标能动，说明安装正确，不行的话就找troubleshooting咯。</p>
-<p>安装好X便可以选择一个桌面环境自己安装了，所谓的根据喜好选择。 ^_^</p>
-<p>最后是一些配置什么的，就不赘述了。</p>
-</div>
+                <p>关于时间的管理有四个重要的步骤：确定目标、分析选择、制定计划以及实施行动。</p>
 <div class="section" id="id2">
-<h2>杂七杂八的经验</h2>
-<div class="section" id="id3">
-<h3>关于虚拟机</h3>
-<p>虚拟机的安装很容易出现问题，
-上回博主在virtualbox里安装的时候曾经在bootloader里卡很久，
-所有的配置都没有问题，但敲回车选择进入Arch，屏幕闪了一下又跳回bootloader主界面。</p>
-<p>查文档说如果敲了回车什么事情都没有发生，说明是配置错误引导系统失败。</p>
-<p>但是多敲几次回车它却偶尔会进系统，并且系统完全正常...</p>
-<p>此外，显示器的识别也出现过问题。
-在virtualbox里startx失败，报错为：没有找到显示器</p>
-<p>所幸这些问题在自己的真机里都没有出现，一切顺利。</p>
+<h2>一、确定目标</h2>
+<p>时间管理首先需要解决的问题是列举所有正在执行的或者计划执行的目标，
+明确记录下的目标列表有助于进行全局的进度把控，
+也防止花费太多时间在某些细碎的事情上造成无故浪费。</p>
+<p>时间管理的目标列表存在多种时间计算单位，
+例如针对每一天的工作进行当日工作目标列举，
+针对长远的计划进行十年规划目标列举，均是可以接受的。
+但存在的一个问题是，时间跨度越长的目标规划更容易模糊，
+也更难进行具体的确定，例如设定某日的工作内容相比设定十年内的目标规划要简单得多。
+这种情况下不能急于求成，通过积累小时间跨度的目标列表，依靠经验逐步推进更长时间的目标设定能力。</p>
+<p>列举目标一定要把所有项目落地，电子版也行纸质版也行，
+特别需要避免的是只在脑子里汇总，很容易导致丢失和混乱。</p>
+<p>希望达到的一个境界是既能够快速处理短期（每天、每个月）的目标规划，
+也能够有能力大致掌控较长时间（几年甚至每十年）为周期的目标规划。</p>
+<p>产出：所有计划中的目标列表</p>
 </div>
-<div class="section" id="mirrorlist">
-<h3>关于mirrorlist</h3>
-<p>有了虚拟机的麻烦经历，
-实体安装的时候我把mirrorlist内容全部换成国内几个速度很快的服务器，
-效果非常好，
-速度一般都有几百K到几个M。</p>
-<p>不过遇到了另一个问题，
-不知为何国内的服务器某些软件找不到。
-具体的忘记了，但有不少的软件在国内的服务器返回了404，导致pacman报错。</p>
-<p>于是不得不再次更改mirrorlist加几个山姆大叔家的服务器。</p>
-<p>最终的最佳实践是：
-首先放几个离自己的地域最近的服务器（相同国家一般就可以了）。
-然后在文件的末尾放几个山姆大叔的主力服务器，找那些score高的，用于国内服务器找不到资源时的备用。
-要注意把远程的服务器放在文件末尾，因为pacman是按顺序搜索的。</p>
-<p>另外，千万要记得的是，每次更新mirrorlist要敲这个：</p>
-<blockquote>
-pacman -Syy</blockquote>
+<div class="section" id="id3">
+<h2>二、分析选择</h2>
+<p>在确定所有目标内容及时间范围之后，进行的第二项工作是对现有列表的目标进行分析和选择。</p>
+<p>一个需要铭记的原则是：你永远没有时间做完你想做的所有事情。</p>
+<p>因此对于某些低价值目标需要进行适当剔除，这也是二八原则的一种应用。</p>
+<p>基于这个原则，一个较好的解决方案是将现有的目标列表通过时间管理四象限进行分类。
+分类后的目标列表可以通过下述方法进行处理：
+扔掉不重要不紧急的事情；
+交出不重要而紧急的事情；
+关注重要而紧急的事情；
+持续留意重要不紧急的事情。</p>
+<p>对无价值的事件要培养一颗果断放弃的心。</p>
+<p>产出：最终决定执行的有价值目标列表</p>
 </div>
 <div class="section" id="id4">
-<h3>关于时间</h3>
-<p>时间的同步可以按教程搞：</p>
+<h2>三、制定计划</h2>
+<p>通过分析选择我们可以得到一份需要自己完成的目标列表。现在需要做的是规划实现这些目标的时间分配。</p>
+<p>制定计划的原则是：主动面对最大的困难，保持从容的节奏。</p>
+<p>具体的实施有如下两点：</p>
 <blockquote>
-<a class="reference external" href="https://wiki.archlinux.org/index.php/Network_Time_Protocol">https://wiki.archlinux.org/index.php/Network_Time_Protocol</a></blockquote>
-<p>官方的说法是，没有启动deamon的情况下敲这个：</p>
-<blockquote>
-ntpd -q</blockquote>
-<p>不过我倒是没搞定 -_-</p>
-<p>貌似服务器连接有问题，
-而且更恶心的是同步失败是没有任何出错提示的。</p>
-<p>最后在google上找到另一款方案：</p>
-<blockquote>
-ntpdate 0.us.pool.ntp.org</blockquote>
-<p>记得写入硬件时钟：</p>
-<blockquote>
-hwclock -w</blockquote>
+<p>一是优先安排关键困难点的工作，并尽早解决之，在剩余的时间中分配处理其他细碎目标。
+一般而言关键的困难点往往也是关键的收益所在，
+这种操作可以尽早完成二八原则所述的关键部分，
+尽快得到大部分的利益获取，
+即使由于剩余时间不够无法全部完成剩余的小目标项，
+也不会影响全局的价值。</p>
+<p>二是在不影响重要紧急事情的前提下尽快将不紧急的重要事情提前扼杀在摇篮中。
+毫无疑问，随着时间的推移不紧急的事情会逐步变化为紧急的事情，一种需要避免的情况是所有时间都花费在处理大量紧急事情的流程中。
+一旦紧急事情的工作量超过负荷，或个人本身状态出现异常，或有其他事情插入，就极有可能造成目标的推迟。</p>
+</blockquote>
+<p>产出：目标的完成顺序排期</p>
 </div>
 <div class="section" id="id5">
-<h3>一些好用的命令</h3>
-<p><strong>lsblk</strong></p>
-<p>这货最近敲了很多次，不带参数则显示所有存储设备的分区情况，也可以加入参数限定显示的设备。</p>
-<p>博文最前面的分区信息显示就是用lsblk打出来的。</p>
-<p><strong>ip link</strong></p>
-<p>搞网络也花了一些时间。</p>
-<p>这货显示当前所有网络设备的详细信息。</p>
-<p>启动某个设备敲：</p>
-<blockquote>
-ip link set [device] up</blockquote>
-<p>其中device是设备的名称，在ip link输出中的第一个便是。
-一般来说e开头的是有线网卡，wl开头的是无线网卡。lo据称是本地的回路，不是真实网卡。</p>
-<p>然后自己被坑的地方是这里：</p>
-<p>教程说首先使用ip link set让对应的设备state为up，然后便可以连接。
-但要注意的是这种说法对应的是有线网卡的情况。
-如果是无线网卡，直接set是没法让它从down变成up的，
-只有成功创建连接后自己才会更改状态。</p>
-<p>于是我花了好久时间一直在研究为何没法让它up，
-而google到的结果看样子没有人遇到这种奇葩情况。
-直到第二天睡醒想想算了不管它直接用wifi-menu连接看看，
-一试才发现这货根本就没有问题。</p>
-<p><strong>wifi-menu 和 dhcpcd</strong></p>
-<p>两个方便的东西，wifi-menu加上无线网卡的设备名作为参数，
-自动搜索并列表显示所有找到的网络，
-还能输入密码自动创建连接。</p>
-<p>而dhcpcd可以用在有线网卡里，
-默认状态下网卡是down的，用上面的ip link让它up，
-然后直接敲dhcpcd，
-全自动连接并从路由的dhcp服务里获取并设置网络。
-一般根据自己的网络环境选用上面俩命令的一个，成功执行便能ping www.google.com了。</p>
-<hr class="docutils" />
-<p>下一次将尝试安装virtualbox，据说很难搞...</p>
+<h2>四、实施行动</h2>
+<p>确定了目标的排期之后就可以执行了，行动实施的过程可以积极利用各种时间管理工具作为辅助。以下列举了部分时间管理工具。</p>
+<div class="section" id="id6">
+<h3>1、时间日志</h3>
+<p>通过类似流水账的时间日志记录每个时间段的工作内容，便于分析回顾及统计汇总。</p>
+<p>还可以进一步在日志的基础上添加个人感受和收获环节，有利于个人的积累。</p>
+<p>时间日志的养成可以逐步执行，根据个人习惯进行逐步调整。</p>
 </div>
+<div class="section" id="id7">
+<h3>2、番茄钟</h3>
+<p>概念：每二十五分钟作为一个工作循环，也称为一个番茄钟。两个番茄钟之间设定五分钟的强制性间隔休息时间。</p>
+<p>操作流程：首先给目标任务预计一个大致的时间需求，例如两个番茄钟。
+然后就可以执行了，保证工作时间的高效性和抗干扰，
+例如屏蔽所有外部的插入事件，同时限制工作时间在二十五分钟左右。
+在二十五分钟的番茄之后强制插入五分钟的休息时间。</p>
+<p>收益：二十五分钟的工作时间可以保持较高的效率，特别是屏蔽了外界的所有插入事件后。
+在番茄之间的五分钟休息时间可以让身心得到较好的调整，
+避免由于过长时间的专注导致精神集中力的快速下降，为下一个番茄做好充足准备。</p>
+<p>注意项：即使在二十五分钟后还没有将事情完成一段落，即使即使自己本身并没有感觉特别大的疲劳度，也需要 <strong>强制</strong> 执行五分钟休息时间。</p>
+<p>可能遇到的问题：前期可能出现工作时间预估偏差太大，这要根据具体工作内容进行分析，可能的原因有：</p>
+<blockquote>
+<p>1、由于对工作内容难度预判错误导致的番茄钟计算错误，这属于外部因素，可通过逐步培养时间预估的感觉进行调整；</p>
+<p>2、由于工作过程注意力不集中导致效率降低，这属于内因，需要提高自身的专注力度，并减少外部干扰；</p>
+<p>3、由于工作中纠结具体细节导致整体工作延迟，同样属于内因，可以通过进一步细化事件粒度降低时间预估的尺度，即把大的事件划分为小的工作步骤；
+同时需要注意学习提高对工作进度的掌控能力，避免在同一个问题点上耗费超量时间。
+当某个节点进度超时，可想办法直接跳过避免在某个细节上死磕，过后再回来解决该问题。</p>
+</blockquote>
+</div>
+</div>
+<div class="section" id="id8">
+<h2>五、总结</h2>
+<p>目标要明确，选择有取舍，着重打击高价值目标，维持稳定和高效的状态。</p>
+</div>
+<div class="section" id="id9">
+<h2>六、道理我们都懂，但依然过不好生活</h2>
+<p>个人感觉执行力是各种问题的通用解法，或者说， <strong>执行力</strong> 是各种方法的基本条件。
+就类似汽车和汽油的关系，再好的办法再优秀的理论，
+类似汽车，都只能在有执行力作为内因，即汽油的驱动下才能发挥出它们的作用。</p>
+<p>所以说类似时间管理一类的东西也都只是一些辅助的手段，
+可以帮助有比较好执行力但缺少一些经验的人提高管理效率，
+最终还是得看自己有多少动力去执行。
+而对于一直没什么能力自我控制和管理的人来说，
+他们需要的不是方法，
+<em>他们需要的是生活的打击和在浪费了很多时间后产生深深的后悔和自责。</em></p>
 </div>
 
                 </div><!-- /.entry-content -->
