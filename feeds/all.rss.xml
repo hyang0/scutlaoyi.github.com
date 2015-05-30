@@ -1,5 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>老逸的个人站</title><link>/</link><description></description><atom:link href="http://www.scutlaoyi.tk/feeds/all.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 22 May 2015 20:30:00 +0800</lastBuildDate><item><title>关于时间管理的笔记</title><link>/personal_management_of_time.html</link><description>&lt;p&gt;关于时间的管理有四个重要的步骤：确定目标、分析选择、制定计划以及实施行动。&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>老逸的个人站</title><link>/</link><description></description><atom:link href="http://www.scutlaoyi.tk/feeds/all.rss.xml" rel="self"></atom:link><lastBuildDate>Sat, 30 May 2015 15:30:00 +0800</lastBuildDate><item><title>OpenWrt搭建透明Shadowsocks笔记</title><link>/OpenWrt_shadowsocks.html</link><description>&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;一、背景&lt;/h2&gt;
+&lt;p&gt;自从上次写过一篇DLink路由器刷OpenWrt的笔记之后，
+到现在已经过去好几个月了。
+一直在研究最正确的姿势搭建Shadowsocks，
+但过程中一直有问题。&lt;/p&gt;
+&lt;p&gt;本篇记录搭建过程中踩过的一些坑。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;二、任务目标&lt;/h2&gt;
+&lt;p&gt;本次任务的总目标是：
+将通过路由器的流量自动分流，
+国内的直连目标服务器，
+国外的通过敌国的Shadowsocks服务器转发。&lt;/p&gt;
+&lt;p&gt;详细的操作有如下几步：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+1. 需要本地建立转发代理服务器将出国流量通过该服务转发；
+2. 由于存在DNS污染，需要提供稳定的线路向Google的DNS服务器查询，本地转发53端口流量；
+3. 国内流量需要能无缝切换，且不通过Google DNS查询（太慢）；
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h2&gt;三、相关资料&lt;/h2&gt;
+&lt;p&gt;现有一份比较周全的文档在这里：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+https://github.com/softwaredownload/openwrt-fanqiang/blob/master/SUMMARY.md
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h2&gt;四、详细步骤与坑&lt;/h2&gt;
+&lt;div class="section" id="id5"&gt;
+&lt;h3&gt;4.1 服务器端搭建&lt;/h3&gt;
+&lt;p&gt;这里博主踩了很久的坑，
+由于对Shadowsocks不太熟悉，
+而且个人比较偏爱Python，
+所以一直使用Python版本搭建服务器端，
+导致后面的DNS转发一直出问题。&lt;/p&gt;
+&lt;p&gt;经过探索发现目前为止貌似只有libev版的Shadowsocks支持UDP转发，
+可用于搭建DNS转发线路。&lt;/p&gt;
+&lt;p&gt;关于libev版的安装，
+个人推荐直接参考GitHub上的项目README，
+比较直观。&lt;/p&gt;
+&lt;p&gt;最粗暴的安装方式是先克隆仓库到服务器本地，
+然后跑这个:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+sudo apt-get install build-essential autoconf libtool libssl-dev
+./configure &amp;amp;&amp;amp; make
+sudo make install
+&lt;/pre&gt;
+&lt;p&gt;之后随便在什么地方都可以直接启动服务。&lt;/p&gt;
+&lt;p&gt;关于UDP转发的另一个坑是，
+需要服务器启动的时候加入一个启动参数 &lt;strong&gt;-u&lt;/strong&gt; ，
+官方的说法是启动udprelay模式，
+这样服务器才会转发UDP请求。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id6"&gt;
+&lt;h3&gt;4.2 路由器客户端的部署&lt;/h3&gt;
+&lt;p&gt;安装的步骤直接参考教程基本可以搞定，
+分为两个大步骤，
+首先是客户端的安装，
+直接下载并搞进路由器里用dpkg安装即可；
+其次是配置自动切换，
+国内流量直连，
+国外流量走代理。&lt;/p&gt;
+&lt;p&gt;很多时候由于网络的原因会导致各种下载失败，
+推荐直接在本地用各种办法把文件搞下来之后再scp传进路由器里。&lt;/p&gt;
+&lt;p&gt;需要注意的主要是服务器的ip，
+各种端口的设置。&lt;/p&gt;
+&lt;p&gt;常用的几个配置项如下:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+0. 敌国服务器Shadowsocks配置(写到config.json里由本地Shadowsocks读取即可)
+1. 敌国服务器的ip地址：需要在iptables转发的设置里配置为直连
+2. 路由器本地Shadowsocks监听端口（UDP转发的需要在dnsmasq里配置，TCP的需要在iptables转发里设置）
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id7"&gt;
+&lt;h3&gt;4.3 步骤测试&lt;/h3&gt;
+&lt;p&gt;很多时候有各种各样脑残的故障，
+通过一些特定的办法可以快速找到问题的原因。&lt;/p&gt;
+&lt;div class="section" id="id8"&gt;
+&lt;h4&gt;4.3.1 测试基本的网络连通性&lt;/h4&gt;
+&lt;p&gt;简单，直接用各种终端连接路由器，
+测试百度是否能够打开即可。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="tcp"&gt;
+&lt;h4&gt;4.3.2 测试tcp转发是否正常&lt;/h4&gt;
+&lt;p&gt;由于是智能转发，
+因此可以通过访问国外网站测试连通性。&lt;/p&gt;
+&lt;p&gt;这里需要注意的是，
+应该避免由于UDP转发失败导致的网络断开，
+如果百度可以访问但所有国外网站均无法打开，
+可以通过如下步骤测试tcp是否正常:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+1. 修改路由器中/etc/dnsmasq.d/gfwlist.conf，将查询修改为114.114.114.114，确保所有DNS请求正常（不保证防污染）
+2. 重启dnsmasq让配置生效
+3. 终端通过路由器访问国外未被DNS污染的网站，例如http://lifehacker.com/
+4. 如果访问成功说明tcp转发没有问题，反之则需要检查Shadowsocks链路是否故障
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="udp"&gt;
+&lt;h4&gt;4.3.3 测试udp转发是否正常&lt;/h4&gt;
+&lt;p&gt;如果网络通讯正常，
+且去掉UDP转发的情况下一般的国外网站可以访问，
+则问题归结为UDP转发失败。&lt;/p&gt;
+&lt;p&gt;UDP转发依赖于服务器的udprelay，
+因此需要注意自建的服务器是否使用支持UDP转发的版本并开启udprelay（参考4.1节内容）。
+如果是购买的Shadowsocks服务则需要确认是否支持udp转发。&lt;/p&gt;
+&lt;p&gt;排除服务器故障之后，
+本地的UDP转发需要检查端口设置是否正确，
+并通过进程查看ss-tunnel是否启动。&lt;/p&gt;
+&lt;p&gt;重新修改/etc/dnsmasq.d/gfwlist.conf恢复为本地UDP转发，
+配置正确的端口设置。&lt;/p&gt;
+&lt;p&gt;通过路由器直接nslookup检查twitter的DNS解析是否成功，
+如果成功说明DNS转发正常，
+否则说明还有问题。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id9"&gt;
+&lt;h2&gt;五、总结&lt;/h2&gt;
+&lt;p&gt;本篇主要记录在OpenWrt上配置Shadowsocks的流程及各种常见问题，
+以及一些简单的问题定位方法。&lt;/p&gt;
+&lt;p&gt;基本的流程为:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+服务器搭建
+本地ss搭建
+配置本地ss智能转发
+步骤故障排除
+&lt;/pre&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">laoyi</dc:creator><pubDate>Sat, 30 May 2015 15:30:00 +0800</pubDate><guid>tag:,2015-05-30:OpenWrt_shadowsocks.html</guid><category>OpenWrt</category></item><item><title>关于时间管理的笔记</title><link>/personal_management_of_time.html</link><description>&lt;p&gt;关于时间的管理有四个重要的步骤：确定目标、分析选择、制定计划以及实施行动。&lt;/p&gt;
 &lt;div class="section" id="id2"&gt;
 &lt;h2&gt;一、确定目标&lt;/h2&gt;
 &lt;p&gt;时间管理首先需要解决的问题是列举所有正在执行的或者计划执行的目标，

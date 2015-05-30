@@ -107,6 +107,66 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/OpenWrt_shadowsocks.html">OpenWrt搭建透明Shadowsocks笔记</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-05-30T15:30:00+08:00">
+        <i class="icon-calendar"></i>六 30 五月 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/openwrt.html"><i class="icon-tag"></i>OpenWrt</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><div class="section" id="id1">
+<h2>一、背景</h2>
+<p>自从上次写过一篇DLink路由器刷OpenWrt的笔记之后，
+到现在已经过去好几个月了。
+一直在研究最正确的姿势搭建Shadowsocks，
+但过程中一直有问题。</p>
+<p>本篇记录搭建过程中踩过的一些坑。</p>
+</div>
+<div class="section" id="id2">
+<h2>二、任务目标</h2>
+<p>本次任务的总目标是：
+将通过路由器的流量自动分流，
+国内的直连目标服务器，
+国外的通过敌国的Shadowsocks服务器转发。</p>
+<p>详细的操作有如下几步：</p>
+<pre class="literal-block">
+1. 需要本地建立转发代理服务器将出国流量通过该服务转发；
+2. 由于存在DNS污染，需要提供稳定的线路向Google的DNS服务器查询，本地转发53端口流量；
+3. 国内流量需要能无缝切换，且不通过Google DNS查询（太慢）；
+</pre>
+</div>
+<div class="section" id="id3">
+<h2>三、相关资料</h2>
+<p>现有一份比较周全的文档在这里：</p>
+<pre class="literal-block">
+https://github.com/softwaredownload/openwrt-fanqiang/blob/master/SUMMARY.md
+</pre>
+</div>
+<div class="section" id="id4">
+<h2>四、详细步骤与坑</h2>
+<div class="section" id="id5">
+<h3>4.1 服务器端搭建</h3>
+<p>这里博主踩了很久的坑，
+由于对Shadowsocks不太熟悉，
+而且个人比较偏爱Python，
+所以一直使用Python版本搭建服务器端，
+导致后面的DNS转发一直出问题。</p>
+<p>经过探索发现目前为止貌似只有libev版的Shadowsocks支持UDP转发，
+可用于搭建DNS转发线路。</p>
+<p>关于libev版的安装 ...</p></div></div>
+                        <a class="btn primary xsmall" href="/OpenWrt_shadowsocks.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/OpenWrt_install_and_config.html">DLink DIR505刷OpenWrt</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -233,78 +293,8 @@ window.onload=function(){
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
 <li class="tag-4">
-    <a href="/tag/page-sentences.html">
-        <i class="icon-tag icon-large"></i>page sentences
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/openwrt.html">
-        <i class="icon-tag icon-large"></i>OpenWrt
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/tools.html">
-        <i class="icon-tag icon-large"></i>tools
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/gae.html">
-        <i class="icon-tag icon-large"></i>GAE
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/litecoin.html">
-        <i class="icon-tag icon-large"></i>litecoin
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/time.html">
-        <i class="icon-tag icon-large"></i>time
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/data-structure.html">
-        <i class="icon-tag icon-large"></i>data structure
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/tor.html">
-        <i class="icon-tag icon-large"></i>Tor
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/web-tool.html">
-        <i class="icon-tag icon-large"></i>web tool
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/audition.html">
-        <i class="icon-tag icon-large"></i>audition
+    <a href="/tag/mysql.html">
+        <i class="icon-tag icon-large"></i>MySQL
     </a>
 </li>
 <li class="tag-2">
@@ -313,8 +303,23 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
+    <a href="/tag/gae.html">
+        <i class="icon-tag icon-large"></i>GAE
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/web-tool.html">
+        <i class="icon-tag icon-large"></i>web tool
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/page-sentences.html">
+        <i class="icon-tag icon-large"></i>page sentences
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/proxy.html">
+        <i class="icon-tag icon-large"></i>proxy
     </a>
 </li>
 <li class="tag-1">
@@ -322,9 +327,59 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>Python
     </a>
 </li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/data-structure.html">
+        <i class="icon-tag icon-large"></i>data structure
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/meek.html">
+        <i class="icon-tag icon-large"></i>Meek
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/android.html">
+        <i class="icon-tag icon-large"></i>Android
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/tools.html">
+        <i class="icon-tag icon-large"></i>tools
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
 <li class="tag-3">
-    <a href="/tag/proxy.html">
-        <i class="icon-tag icon-large"></i>proxy
+    <a href="/tag/litecoin.html">
+        <i class="icon-tag icon-large"></i>litecoin
     </a>
 </li>
 <li class="tag-1">
@@ -338,8 +393,18 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-4">
-    <a href="/tag/android.html">
-        <i class="icon-tag icon-large"></i>Android
+    <a href="/tag/time.html">
+        <i class="icon-tag icon-large"></i>time
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
     </a>
 </li>
 <li class="tag-1">
@@ -347,19 +412,14 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>Arch Linux
     </a>
 </li>
-<li class="tag-4">
-    <a href="/tag/mysql.html">
-        <i class="icon-tag icon-large"></i>MySQL
+<li class="tag-3">
+    <a href="/tag/tor.html">
+        <i class="icon-tag icon-large"></i>Tor
     </a>
 </li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/meek.html">
-        <i class="icon-tag icon-large"></i>Meek
+<li class="tag-3">
+    <a href="/tag/openwrt.html">
+        <i class="icon-tag icon-large"></i>OpenWrt
     </a>
 </li>
 

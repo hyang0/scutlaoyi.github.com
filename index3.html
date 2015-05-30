@@ -107,6 +107,77 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/CppLearning007-array.html">C++学习(七)：线性表及搜索相关</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-03-28T22:30:00+08:00">
+        <i class="icon-calendar"></i>五 28 三月 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/coding.html"><i class="icon-folder-open"></i>Coding</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
+	<a href="/tag/data-structure.html"><i class="icon-tag"></i>data structure</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>其实这个系列应该归结为数据结构专题的，
+但由于记录的都是简单至极的基础知识，
+标榜数据结构吸引眼球有点过于隆重，
+于是统统放在C++的内容里。</p>
+<p>就算是C++的编程训练罢了。</p>
+<div class="section" id="id1">
+<h2>数组与链表的归纳总结</h2>
+<p>这些基础概念应该在开始学习编程的时候就有所涉及了，
+这里试着总结一下：</p>
+<p><strong>基本定义</strong></p>
+<p>朴素意义上，
+数组与链表一样都是用来储存若干相同类型元素的数据结构，
+其特点就是一个或多个元素以先后顺序保存在内存中。</p>
+<p>根据组织方式上的区别区分数组和链表。</p>
+<p><strong>组织区别</strong></p>
+<p>数组占用了内存中的一段连续的空间，
+在这段连续空间上，
+通过指定数组的类型确定每一个元素占用的空间大小，
+由此将所有元素依次紧密排列存放到对应空间上。</p>
+<p>相对的，
+链表不占用连续空间，
+通过在每个元素中保存下一个元素所在内存地址，
+达到组织的目的。</p>
+<p><strong>数组特点</strong></p>
+<p>由于每个元素占用空间相同，
+加上所有元素在同一片连续空间上，
+数组可以通过计算某元素相对头元素在内存中的偏移量，
+快速访问某个特定的元素。</p>
+<p>而由于相同的原因，
+数组在元素的插入和删除操作上比较麻烦，
+不管是插入还是删除，
+都需要移动所有后续的节点使其重新紧密排列。</p>
+<p><strong>链表特点</strong></p>
+<p>相对于数组，
+由于链表元素是通过指针指向下一个节点，
+没有连续空间，
+因此插入新节点或删除原有节点在正常情况下只需要操作对应位置的前后元素，
+使它们的指针指向正确的位置，
+对其他元素没有影响，
+因此插入删除操作的效率非常高。</p>
+<p>然而，
+在访问某个特定节点时，
+以单链表为例，
+则必须从头节点开始逐个遍历链上的节点直到达到目标节点，
+因此相对数组来说访问的效率较低。</p>
+</div>
+<div class="section" id="id2">
+<h2>搜索的相关知识</h2>
+<p>最简单的暴力搜索莫过于直接遍历每个元素查找目标元素是否存在。
+时间复杂度为O(n ...</p></div>
+                        <a class="btn primary xsmall" href="/CppLearning007-array.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/VimExperience002-registers.html">Vim经验记录(二):寄存器的相关知识</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -629,60 +700,6 @@ set selection=exclusive ...</pre></div>
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/CppLearning003.html">C++学习(三)：线性表的奇技淫巧(一)</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-02-11T21:30:00+08:00">
-        <i class="icon-calendar"></i>二 11 二月 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/coding.html"><i class="icon-folder-open"></i>Coding</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
-	<a href="/tag/data-structure.html"><i class="icon-tag"></i>data structure</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>在Github上建了一个新仓库练习数据结构，
-地址在这里：</p>
-<blockquote>
-<a class="reference external" href="https://github.com/scutLaoYi/data-structure">https://github.com/scutLaoYi/data-structure</a></blockquote>
-<p>clone的话记得在后面加.git后缀(没什么好clone的)。</p>
-<p>我觉得莫名其妙的是代码类型居然被判为57%的C、25%的C++，
-以及18%的Objective-C。</p>
-<p>学习的资料上一篇博文已经说过了，是个好地方。</p>
-<p>从线性表学起，实现了资料里说的一些问题，
-光看不写的话感觉倒是容易看懂，不过真的写起来总是一大堆问题。</p>
-<p>上哪都一样。</p>
-<p>线性表才看了一半不到，
-总结一下自己用的一些实现方法及若干这几天见到的牛逼技术。</p>
-<div class="section" id="id1">
-<h2>数据结构的实现</h2>
-<p>自己的实现方案使用了类模板，
-首先定义了一个节点的结构：</p>
-<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="n">Node</span>
-<span class="p">{</span>
-    <span class="n">Type</span> <span class="n">value</span><span class="p">;</span>
-    <span class="n">Node</span> <span class="o">*</span><span class="n">nex</span><span class="p">;</span>
-
-    <span class="n">Node</span><span class="p">();</span>
-<span class="p">};</span>
-</pre></div>
-<p>包含一个节点值及一个指向下一个节点的指针。
-构造函数用于初始化指针，赋值为0。</p>
-<p>然后搞了一个freelist用于处理内存。</p>
-<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
-<span class="k">class</span> <span class="nc">Freelist</span>
-<span class="p">{</span>
-    <span class="n">Node</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">top ...</span></pre></div></div>
-                        <a class="btn primary xsmall" href="/CppLearning003.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -760,78 +777,8 @@ window.onload=function(){
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
 <li class="tag-4">
-    <a href="/tag/page-sentences.html">
-        <i class="icon-tag icon-large"></i>page sentences
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/openwrt.html">
-        <i class="icon-tag icon-large"></i>OpenWrt
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/tools.html">
-        <i class="icon-tag icon-large"></i>tools
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/gae.html">
-        <i class="icon-tag icon-large"></i>GAE
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/litecoin.html">
-        <i class="icon-tag icon-large"></i>litecoin
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/time.html">
-        <i class="icon-tag icon-large"></i>time
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/data-structure.html">
-        <i class="icon-tag icon-large"></i>data structure
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/tor.html">
-        <i class="icon-tag icon-large"></i>Tor
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/web-tool.html">
-        <i class="icon-tag icon-large"></i>web tool
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/audition.html">
-        <i class="icon-tag icon-large"></i>audition
+    <a href="/tag/mysql.html">
+        <i class="icon-tag icon-large"></i>MySQL
     </a>
 </li>
 <li class="tag-2">
@@ -840,8 +787,23 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
+    <a href="/tag/gae.html">
+        <i class="icon-tag icon-large"></i>GAE
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/web-tool.html">
+        <i class="icon-tag icon-large"></i>web tool
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/page-sentences.html">
+        <i class="icon-tag icon-large"></i>page sentences
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/proxy.html">
+        <i class="icon-tag icon-large"></i>proxy
     </a>
 </li>
 <li class="tag-1">
@@ -849,9 +811,59 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>Python
     </a>
 </li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/data-structure.html">
+        <i class="icon-tag icon-large"></i>data structure
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/meek.html">
+        <i class="icon-tag icon-large"></i>Meek
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/android.html">
+        <i class="icon-tag icon-large"></i>Android
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/tools.html">
+        <i class="icon-tag icon-large"></i>tools
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
 <li class="tag-3">
-    <a href="/tag/proxy.html">
-        <i class="icon-tag icon-large"></i>proxy
+    <a href="/tag/litecoin.html">
+        <i class="icon-tag icon-large"></i>litecoin
     </a>
 </li>
 <li class="tag-1">
@@ -865,8 +877,18 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-4">
-    <a href="/tag/android.html">
-        <i class="icon-tag icon-large"></i>Android
+    <a href="/tag/time.html">
+        <i class="icon-tag icon-large"></i>time
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
     </a>
 </li>
 <li class="tag-1">
@@ -874,19 +896,14 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>Arch Linux
     </a>
 </li>
-<li class="tag-4">
-    <a href="/tag/mysql.html">
-        <i class="icon-tag icon-large"></i>MySQL
+<li class="tag-3">
+    <a href="/tag/tor.html">
+        <i class="icon-tag icon-large"></i>Tor
     </a>
 </li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/meek.html">
-        <i class="icon-tag icon-large"></i>Meek
+<li class="tag-3">
+    <a href="/tag/openwrt.html">
+        <i class="icon-tag icon-large"></i>OpenWrt
     </a>
 </li>
 

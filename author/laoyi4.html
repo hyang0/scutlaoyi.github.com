@@ -107,6 +107,60 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/CppLearning003.html">C++学习(三)：线性表的奇技淫巧(一)</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-02-11T21:30:00+08:00">
+        <i class="icon-calendar"></i>二 11 二月 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/coding.html"><i class="icon-folder-open"></i>Coding</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
+	<a href="/tag/data-structure.html"><i class="icon-tag"></i>data structure</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>在Github上建了一个新仓库练习数据结构，
+地址在这里：</p>
+<blockquote>
+<a class="reference external" href="https://github.com/scutLaoYi/data-structure">https://github.com/scutLaoYi/data-structure</a></blockquote>
+<p>clone的话记得在后面加.git后缀(没什么好clone的)。</p>
+<p>我觉得莫名其妙的是代码类型居然被判为57%的C、25%的C++，
+以及18%的Objective-C。</p>
+<p>学习的资料上一篇博文已经说过了，是个好地方。</p>
+<p>从线性表学起，实现了资料里说的一些问题，
+光看不写的话感觉倒是容易看懂，不过真的写起来总是一大堆问题。</p>
+<p>上哪都一样。</p>
+<p>线性表才看了一半不到，
+总结一下自己用的一些实现方法及若干这几天见到的牛逼技术。</p>
+<div class="section" id="id1">
+<h2>数据结构的实现</h2>
+<p>自己的实现方案使用了类模板，
+首先定义了一个节点的结构：</p>
+<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="n">Node</span>
+<span class="p">{</span>
+    <span class="n">Type</span> <span class="n">value</span><span class="p">;</span>
+    <span class="n">Node</span> <span class="o">*</span><span class="n">nex</span><span class="p">;</span>
+
+    <span class="n">Node</span><span class="p">();</span>
+<span class="p">};</span>
+</pre></div>
+<p>包含一个节点值及一个指向下一个节点的指针。
+构造函数用于初始化指针，赋值为0。</p>
+<p>然后搞了一个freelist用于处理内存。</p>
+<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">Freelist</span>
+<span class="p">{</span>
+    <span class="n">Node</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">top ...</span></pre></div></div>
+                        <a class="btn primary xsmall" href="/CppLearning003.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/CppLearning002.html">C++学习(二)：大家一起来Makefile</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -516,60 +570,6 @@ Arch Linux提供了非常大的自由度和开放度供用户完全控制自己�
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/Bash003.html">Bash笔记(三)</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-01-04T22:00:00+08:00">
-        <i class="icon-calendar"></i>六 04 一月 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/bash.html"><i class="icon-tag"></i>Bash</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p><strong>本系列博文记录学习Shell终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录。</strong></p>
-<hr class="docutils" />
-<div class="section" id="id1">
-<h2>常用过滤器</h2>
-<p>cat</p>
-<blockquote>
-<p>就是把输入流或文件内容输出出来</p>
-<p>cat [filename]</p>
-<p>文件太长就可以用less分页显示</p>
-<p>cat [filename] | less</p>
-</blockquote>
-<p>tee</p>
-<blockquote>
-<p>管道默认把输出作为下一级的输入，
-某些情况下需要显示保存中间结果（管道很长之类的），
-可以使用tee</p>
-<p>tee类似cat将输入作为标准输出，同时输出到文件</p>
-<p>tac [filename] | tee [tempfilename] | tac | [......]</p>
-</blockquote>
-<p>grep</p>
-<blockquote>
-<p>Unix中的一个非常重要的过滤器。</p>
-<p>在输入流中搜索并输出符合对应条件的行,
-下面这货过滤出所有带'str'的行</p>
-<p>cat [filename] | grep 'str'</p>
-<p>设置过滤对大小写不敏感</p>
-<p>grep -i [str]</p>
-<p>反向过滤，找出所有不包含str的行</p>
-<p>grep -v [str]</p>
-<p>设置连带输出目标行后的4行（数字可变）</p>
-<p>grep -A4 ......</p>
-<p>设置连带输出目标行前的3行</p>
-<p>grep -B3 ......</p>
-<p>设置连带输出目标行前后的2行 ...</p></blockquote></div>
-                        <a class="btn primary xsmall" href="/Bash003.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -647,78 +647,8 @@ window.onload=function(){
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
 <li class="tag-4">
-    <a href="/tag/page-sentences.html">
-        <i class="icon-tag icon-large"></i>page sentences
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/openwrt.html">
-        <i class="icon-tag icon-large"></i>OpenWrt
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/tools.html">
-        <i class="icon-tag icon-large"></i>tools
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/gae.html">
-        <i class="icon-tag icon-large"></i>GAE
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/litecoin.html">
-        <i class="icon-tag icon-large"></i>litecoin
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/time.html">
-        <i class="icon-tag icon-large"></i>time
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/data-structure.html">
-        <i class="icon-tag icon-large"></i>data structure
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/tor.html">
-        <i class="icon-tag icon-large"></i>Tor
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/web-tool.html">
-        <i class="icon-tag icon-large"></i>web tool
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/audition.html">
-        <i class="icon-tag icon-large"></i>audition
+    <a href="/tag/mysql.html">
+        <i class="icon-tag icon-large"></i>MySQL
     </a>
 </li>
 <li class="tag-2">
@@ -727,8 +657,23 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
+    <a href="/tag/gae.html">
+        <i class="icon-tag icon-large"></i>GAE
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/web-tool.html">
+        <i class="icon-tag icon-large"></i>web tool
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/page-sentences.html">
+        <i class="icon-tag icon-large"></i>page sentences
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/proxy.html">
+        <i class="icon-tag icon-large"></i>proxy
     </a>
 </li>
 <li class="tag-1">
@@ -736,9 +681,59 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>Python
     </a>
 </li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/data-structure.html">
+        <i class="icon-tag icon-large"></i>data structure
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/meek.html">
+        <i class="icon-tag icon-large"></i>Meek
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/android.html">
+        <i class="icon-tag icon-large"></i>Android
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/tools.html">
+        <i class="icon-tag icon-large"></i>tools
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
 <li class="tag-3">
-    <a href="/tag/proxy.html">
-        <i class="icon-tag icon-large"></i>proxy
+    <a href="/tag/litecoin.html">
+        <i class="icon-tag icon-large"></i>litecoin
     </a>
 </li>
 <li class="tag-1">
@@ -752,8 +747,18 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-4">
-    <a href="/tag/android.html">
-        <i class="icon-tag icon-large"></i>Android
+    <a href="/tag/time.html">
+        <i class="icon-tag icon-large"></i>time
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
     </a>
 </li>
 <li class="tag-1">
@@ -761,19 +766,14 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>Arch Linux
     </a>
 </li>
-<li class="tag-4">
-    <a href="/tag/mysql.html">
-        <i class="icon-tag icon-large"></i>MySQL
+<li class="tag-3">
+    <a href="/tag/tor.html">
+        <i class="icon-tag icon-large"></i>Tor
     </a>
 </li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/meek.html">
-        <i class="icon-tag icon-large"></i>Meek
+<li class="tag-3">
+    <a href="/tag/openwrt.html">
+        <i class="icon-tag icon-large"></i>OpenWrt
     </a>
 </li>
 

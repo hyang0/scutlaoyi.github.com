@@ -107,6 +107,60 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/Bash003.html">Bash笔记(三)</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-01-04T22:00:00+08:00">
+        <i class="icon-calendar"></i>六 04 一月 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/bash.html"><i class="icon-tag"></i>Bash</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><strong>本系列博文记录学习Shell终端Bash过程中的收获，主要为常用命令一览表及相关功能的记录。</strong></p>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>常用过滤器</h2>
+<p>cat</p>
+<blockquote>
+<p>就是把输入流或文件内容输出出来</p>
+<p>cat [filename]</p>
+<p>文件太长就可以用less分页显示</p>
+<p>cat [filename] | less</p>
+</blockquote>
+<p>tee</p>
+<blockquote>
+<p>管道默认把输出作为下一级的输入，
+某些情况下需要显示保存中间结果（管道很长之类的），
+可以使用tee</p>
+<p>tee类似cat将输入作为标准输出，同时输出到文件</p>
+<p>tac [filename] | tee [tempfilename] | tac | [......]</p>
+</blockquote>
+<p>grep</p>
+<blockquote>
+<p>Unix中的一个非常重要的过滤器。</p>
+<p>在输入流中搜索并输出符合对应条件的行,
+下面这货过滤出所有带'str'的行</p>
+<p>cat [filename] | grep 'str'</p>
+<p>设置过滤对大小写不敏感</p>
+<p>grep -i [str]</p>
+<p>反向过滤，找出所有不包含str的行</p>
+<p>grep -v [str]</p>
+<p>设置连带输出目标行后的4行（数字可变）</p>
+<p>grep -A4 ......</p>
+<p>设置连带输出目标行前的3行</p>
+<p>grep -B3 ......</p>
+<p>设置连带输出目标行前后的2行 ...</p></blockquote></div>
+                        <a class="btn primary xsmall" href="/Bash003.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/Bash002.html">Bash笔记(二)</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -294,78 +348,8 @@ window.onload=function(){
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
 <li class="tag-4">
-    <a href="/tag/page-sentences.html">
-        <i class="icon-tag icon-large"></i>page sentences
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/openwrt.html">
-        <i class="icon-tag icon-large"></i>OpenWrt
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/tools.html">
-        <i class="icon-tag icon-large"></i>tools
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/gae.html">
-        <i class="icon-tag icon-large"></i>GAE
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/litecoin.html">
-        <i class="icon-tag icon-large"></i>litecoin
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/time.html">
-        <i class="icon-tag icon-large"></i>time
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/data-structure.html">
-        <i class="icon-tag icon-large"></i>data structure
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/tor.html">
-        <i class="icon-tag icon-large"></i>Tor
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/web-tool.html">
-        <i class="icon-tag icon-large"></i>web tool
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/audition.html">
-        <i class="icon-tag icon-large"></i>audition
+    <a href="/tag/mysql.html">
+        <i class="icon-tag icon-large"></i>MySQL
     </a>
 </li>
 <li class="tag-2">
@@ -374,8 +358,23 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
+    <a href="/tag/gae.html">
+        <i class="icon-tag icon-large"></i>GAE
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/web-tool.html">
+        <i class="icon-tag icon-large"></i>web tool
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/page-sentences.html">
+        <i class="icon-tag icon-large"></i>page sentences
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/proxy.html">
+        <i class="icon-tag icon-large"></i>proxy
     </a>
 </li>
 <li class="tag-1">
@@ -383,9 +382,59 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>Python
     </a>
 </li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/data-structure.html">
+        <i class="icon-tag icon-large"></i>data structure
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/meek.html">
+        <i class="icon-tag icon-large"></i>Meek
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/android.html">
+        <i class="icon-tag icon-large"></i>Android
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/tools.html">
+        <i class="icon-tag icon-large"></i>tools
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
 <li class="tag-3">
-    <a href="/tag/proxy.html">
-        <i class="icon-tag icon-large"></i>proxy
+    <a href="/tag/litecoin.html">
+        <i class="icon-tag icon-large"></i>litecoin
     </a>
 </li>
 <li class="tag-1">
@@ -399,8 +448,18 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-4">
-    <a href="/tag/android.html">
-        <i class="icon-tag icon-large"></i>Android
+    <a href="/tag/time.html">
+        <i class="icon-tag icon-large"></i>time
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/audition.html">
+        <i class="icon-tag icon-large"></i>audition
     </a>
 </li>
 <li class="tag-1">
@@ -408,19 +467,14 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>Arch Linux
     </a>
 </li>
-<li class="tag-4">
-    <a href="/tag/mysql.html">
-        <i class="icon-tag icon-large"></i>MySQL
+<li class="tag-3">
+    <a href="/tag/tor.html">
+        <i class="icon-tag icon-large"></i>Tor
     </a>
 </li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/meek.html">
-        <i class="icon-tag icon-large"></i>Meek
+<li class="tag-3">
+    <a href="/tag/openwrt.html">
+        <i class="icon-tag icon-large"></i>OpenWrt
     </a>
 </li>
 
