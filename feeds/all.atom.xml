@@ -1,5 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2015-05-30T15:30:00+08:00</updated><entry><title>OpenWrt搭建透明Shadowsocks笔记</title><link href="/OpenWrt_shadowsocks.html" rel="alternate"></link><updated>2015-05-30T15:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2015-05-30:OpenWrt_shadowsocks.html</id><summary type="html">&lt;div class="section" id="id1"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2015-06-04T22:30:00+08:00</updated><entry><title>PSysMonitor：基于psutil和多线程的简单服务器监控实现</title><link href="/PSysMonitor_introduction.html" rel="alternate"></link><updated>2015-06-04T22:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2015-06-04:PSysMonitor_introduction.html</id><summary type="html">&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;项目背景&lt;/h2&gt;
+&lt;p&gt;博主自建的两台VPS，都是Ubuntu Server系统，
+需要一套东西监测系统的运行状态，
+包括硬件资源（CPU、Memory、网络吞吐量等），
+以及软件资源（关键进程存活性监测）。&lt;/p&gt;
+&lt;p&gt;此外，需要一套简单的通告系统在系统运行异常的情况下发送告警邮件到博主的邮箱里。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;基础组件&lt;/h2&gt;
+&lt;p&gt;本系统基于Python2进行实现，
+利用一套叫做psutil的库实现简单的系统信息获取。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h2&gt;架构&lt;/h2&gt;
+&lt;p&gt;抽象的架构有三大模块：采集器、监控器及通告发送模块&lt;/p&gt;
+&lt;div class="section" id="datapicker"&gt;
+&lt;h3&gt;采集器(DataPicker)&lt;/h3&gt;
+&lt;p&gt;采集器的设计目标是独立于主线程之外进行资源数据的获取，
+因此利用threading库实现了多线程。&lt;/p&gt;
+&lt;p&gt;编写了通用的基类BasicDataPicker，
+基于独立线程，
+在设定的时间间隔中不断获取资源当前状态数据信息。&lt;/p&gt;
+&lt;p&gt;数据存储在内部的数据map中(data_report)，
+包括监控项目名称、当前值、以及其他描述信息。&lt;/p&gt;
+&lt;p&gt;通过继承该基类并实现实际的监测函数(pick)，
+可以针对不同的资源进行针对性监测，
+例如拉取CPU当前负载、
+拉取网络吞吐量并进行速率计算等。
+得到最终的数值全部写入通用存储中。&lt;/p&gt;
+&lt;p&gt;通用数据存储的好处是便于监控器直接拿到格式化的数据进行阀值比较，
+以确定当前项目是否异常。&lt;/p&gt;
+&lt;p&gt;而基类实现了基本的多线程采集框架，
+统一了数据格式，
+便于后续添加个性化的监控项目。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="monitor"&gt;
+&lt;h3&gt;监控器(Monitor)&lt;/h3&gt;
+&lt;p&gt;监控器的主要目的在于管理所有采集器，
+获取所有采集器数值并与阀值比较，
+当发现异常时调用通告发送模块进行报警。&lt;/p&gt;
+&lt;p&gt;此外，
+监控器实现了定时心跳信息的发送，
+目前的设定是每天发送一份心跳邮件告知管理员当前监控系统正常。&lt;/p&gt;
+&lt;p&gt;因此监控器的实现是比较直观的，
+初始化所有采集器，
+定时拉取采集器数据并与阀值比较，
+格式化得到的数据并判定是否发送告警邮件。&lt;/p&gt;
+&lt;p&gt;目前的实现是在系统异常时发送一份邮件，
+在系统恢复正常时发送恢复邮件。
+没有统计异常总时长等信息。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h3&gt;通告发送模块&lt;/h3&gt;
+&lt;p&gt;目前实现的是简单的邮件发送机制。&lt;/p&gt;
+&lt;p&gt;调用第三方SMTP服务器，
+通过登录第三方邮箱帐号进行告警邮件发送。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id5"&gt;
+&lt;h2&gt;安装说明&lt;/h2&gt;
+&lt;p&gt;本系统依赖Python和psutil库，
+安装psutil库的命令在Ubuntu里是这样的:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+apt-get install pip
+apt-get install python-dev
+pip install psutil
+&lt;/pre&gt;
+&lt;p&gt;直接把github上本项目的代码文件丢到本地某个文件夹就完成部署了。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id6"&gt;
+&lt;h2&gt;配置&lt;/h2&gt;
+&lt;p&gt;配置项目主要有：阀值与进程列表、管理员与客户端邮箱信息、日志位置。&lt;/p&gt;
+&lt;p&gt;配置项都统一放在setting.py文件中。&lt;/p&gt;
+&lt;p&gt;mail_config函数返回邮箱信息，
+包括SMTP服务器信息，
+告警邮箱的用户名密码等。&lt;/p&gt;
+&lt;p&gt;log_file函数返回日志地址。&lt;/p&gt;
+&lt;p&gt;monitor_config返回监控配置，
+包括管理员邮箱，
+存活性监测的进程列表，
+以及用于标识服务器的服务器名称。&lt;/p&gt;
+&lt;p&gt;服务器名称会显示在所有邮件的title里便于区别不同的服务器。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id7"&gt;
+&lt;h2&gt;启动&lt;/h2&gt;
+&lt;p&gt;直接在代码目录里敲:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+python monitor.py &amp;amp;
+&lt;/pre&gt;
+&lt;p&gt;让主监控器启动并后台运行即可。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="github"&gt;
+&lt;h2&gt;Github仓库地址&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/scutLaoYi/PSysMonitor"&gt;https://github.com/scutLaoYi/PSysMonitor&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="Python"></category><category term="tools"></category></entry><entry><title>OpenWrt搭建透明Shadowsocks笔记</title><link href="/OpenWrt_shadowsocks.html" rel="alternate"></link><updated>2015-05-30T15:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2015-05-30:OpenWrt_shadowsocks.html</id><summary type="html">&lt;div class="section" id="id1"&gt;
 &lt;h2&gt;一、背景&lt;/h2&gt;
 &lt;p&gt;自从上次写过一篇DLink路由器刷OpenWrt的笔记之后，
 到现在已经过去好几个月了。

@@ -107,6 +107,62 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/CppLearning008-sort-one.html">C++学习(八)：排序啊排序</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-03-30T22:30:00+08:00">
+        <i class="icon-calendar"></i>日 30 三月 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/coding.html"><i class="icon-folder-open"></i>Coding</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
+	<a href="/tag/data-structure.html"><i class="icon-tag"></i>data structure</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>每一本数据结构的课本都会聊九大排序，
+作为基础知识掌握这些经典的算法可能是每个搞代码的人必修的一课。</p>
+<p>冒泡、插入和选择作为简单易懂而最基本的三种方式，
+常常被用作算法学习的入门课程。</p>
+<p>这里试着以自己的理解总结一下。</p>
+<div class="section" id="id1">
+<h2>冒泡排序</h2>
+<p>冒泡排序的基本思路如下：</p>
+<pre class="literal-block">
+从数组头部开始，使用指针遍历每个节点；
+对于每个当前节点，将其与相邻节点的值比较；
+若前一个节点比后一个节点大，则交换使其有序；
+移动指针，对下一个节点继续前述操作；
+</pre>
+<p>一个上述的循环作为一趟，
+不断将节点两两比较，
+使数组趋向有序。</p>
+<p>同时，
+可以肯定的是最大的节点经过一趟排序会被交换到数组末尾。
+因为最大的节点每次都被操作与后续节点替换，
+直到循环结束。</p>
+<p>因此一个循环下来最末的元素必然已被排序成功。</p>
+<p>基于这种性质，
+不断循环调用上述过程，
+每次缩短排序数组的长度使尾节点不参与排序，
+直到参与排序的数组长度为0，
+则整个数组的排序过程就完成了。</p>
+<p>基本的代码如下：</p>
+<div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Type</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;::</span><span class="n">bubblesort</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">bool</span> <span class="n">flag</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int ...</span></pre></div></div>
+                        <a class="btn primary xsmall" href="/CppLearning008-sort-one.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/CppLearning007-array.html">C++学习(七)：线性表及搜索相关</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -647,59 +703,6 @@ fast每次移动两个节点，slow每次移动一个节点。</p>
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/VimExperience001.html">Vim经验记录(一):与系统共享剪贴板</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-02-13T12:30:00+08:00">
-        <i class="icon-calendar"></i>四 13 二月 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/tool.html"><i class="icon-folder-open"></i>Tool</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/vim.html"><i class="icon-tag"></i>Vim</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>这几天玩剪贴板搞得灰头土脸，
-幸好现在终于找到最佳的解决方案了，
-虽然好用，方法还是有点猥琐。</p>
-<p>博主主要的目的在于多个Vim之间可以共享剪贴板。
-写博文的时候，
-像上一篇博文中就有非常多的代码片段，
-因此需要快捷的复制粘贴操作。</p>
-<p>目标：</p>
-<blockquote>
-找到一种方法方便快速地访问系统剪贴板，
-使Vim支持从系统剪贴板中复制粘贴数据，
-通过系统剪贴板快捷地与其他应用程序交换数据，
-如Firefox中网页的某些文本框，
-或者与其他Vim进程交换数据。</blockquote>
-<p>环境：</p>
-<pre class="literal-block">
-OS: Arch Linux(x64)
-Window Manager: X11
-DesktopEnvironment: LXDE
-Package Manager: Pacman
-</pre>
-<div class="section" id="id1">
-<h2>鼠标解法</h2>
-<p>最初遇到这个问题时想到了上学期在工作室的Ubuntu系统，
-通过配置标神找到的vimrc文件，
-可以直接支持鼠标点击、鼠标选择、右键复制粘贴甚至是滚轮翻页。</p>
-<p>不知道是因为桌面环境不一样还是系统问题，
-原有的配置文件在Arch Linux加LXDE的环境里会导致Vim出错。</p>
-<p>重新配置了vimrc使现在的Vim支持原有的大部分功能，
-然而鼠标的功能还是没有以前那么强悍了。</p>
-<pre class="literal-block">
-set mouse=a         &quot; Enable the use of the mouse.
-set selection=exclusive ...</pre></div>
-                        <a class="btn primary xsmall" href="/VimExperience001.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -710,6 +713,7 @@ set selection=exclusive ...</pre></div>
                         <li class=""><a href="/author/laoyi4.html">4</a></li>
                         <li class=""><a href="/author/laoyi5.html">5</a></li>
                         <li class=""><a href="/author/laoyi6.html">6</a></li>
+                        <li class=""><a href="/author/laoyi7.html">7</a></li>
                         <li class="next"><a href="/author/laoyi4.html">Next &rarr;</a></li>
         </ul>
         </div>
@@ -777,53 +781,8 @@ window.onload=function(){
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
 <li class="tag-4">
-    <a href="/tag/mysql.html">
-        <i class="icon-tag icon-large"></i>MySQL
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/gae.html">
-        <i class="icon-tag icon-large"></i>GAE
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/web-tool.html">
-        <i class="icon-tag icon-large"></i>web tool
-    </a>
-</li>
-<li class="tag-4">
     <a href="/tag/page-sentences.html">
         <i class="icon-tag icon-large"></i>page sentences
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/proxy.html">
-        <i class="icon-tag icon-large"></i>proxy
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>Python
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/data-structure.html">
-        <i class="icon-tag icon-large"></i>data structure
     </a>
 </li>
 <li class="tag-4">
@@ -832,23 +791,18 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-4">
-    <a href="/tag/android.html">
-        <i class="icon-tag icon-large"></i>Android
+    <a href="/tag/mysql.html">
+        <i class="icon-tag icon-large"></i>MySQL
     </a>
 </li>
-<li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/tools.html">
-        <i class="icon-tag icon-large"></i>tools
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
     </a>
 </li>
 <li class="tag-2">
@@ -856,19 +810,34 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>git
     </a>
 </li>
-<li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
+<li class="tag-4">
+    <a href="/tag/android.html">
+        <i class="icon-tag icon-large"></i>Android
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
     </a>
 </li>
 <li class="tag-3">
-    <a href="/tag/litecoin.html">
-        <i class="icon-tag icon-large"></i>litecoin
+    <a href="/tag/tools.html">
+        <i class="icon-tag icon-large"></i>tools
     </a>
 </li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
+<li class="tag-4">
+    <a href="/tag/gae.html">
+        <i class="icon-tag icon-large"></i>GAE
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
     </a>
 </li>
 <li class="tag-3">
@@ -876,14 +845,9 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>Vim
     </a>
 </li>
-<li class="tag-4">
-    <a href="/tag/time.html">
-        <i class="icon-tag icon-large"></i>time
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
+<li class="tag-2">
+    <a href="/tag/web-tool.html">
+        <i class="icon-tag icon-large"></i>web tool
     </a>
 </li>
 <li class="tag-2">
@@ -896,14 +860,54 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>Arch Linux
     </a>
 </li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/proxy.html">
+        <i class="icon-tag icon-large"></i>proxy
+    </a>
+</li>
 <li class="tag-3">
     <a href="/tag/tor.html">
         <i class="icon-tag icon-large"></i>Tor
     </a>
 </li>
+<li class="tag-1">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/time.html">
+        <i class="icon-tag icon-large"></i>time
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
 <li class="tag-3">
     <a href="/tag/openwrt.html">
         <i class="icon-tag icon-large"></i>OpenWrt
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/litecoin.html">
+        <i class="icon-tag icon-large"></i>litecoin
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/data-structure.html">
+        <i class="icon-tag icon-large"></i>data structure
     </a>
 </li>
 

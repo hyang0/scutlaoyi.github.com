@@ -107,6 +107,70 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="/PSysMonitor_introduction.html">PSysMonitor：基于psutil和多线程的简单服务器监控实现</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-06-04T22:30:00+08:00">
+        <i class="icon-calendar"></i>四 04 六月 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+	<a href="/tag/tools.html"><i class="icon-tag"></i>tools</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><div class="section" id="id1">
+<h2>项目背景</h2>
+<p>博主自建的两台VPS，都是Ubuntu Server系统，
+需要一套东西监测系统的运行状态，
+包括硬件资源（CPU、Memory、网络吞吐量等），
+以及软件资源（关键进程存活性监测）。</p>
+<p>此外，需要一套简单的通告系统在系统运行异常的情况下发送告警邮件到博主的邮箱里。</p>
+</div>
+<div class="section" id="id2">
+<h2>基础组件</h2>
+<p>本系统基于Python2进行实现，
+利用一套叫做psutil的库实现简单的系统信息获取。</p>
+</div>
+<div class="section" id="id3">
+<h2>架构</h2>
+<p>抽象的架构有三大模块：采集器、监控器及通告发送模块</p>
+<div class="section" id="datapicker">
+<h3>采集器(DataPicker)</h3>
+<p>采集器的设计目标是独立于主线程之外进行资源数据的获取，
+因此利用threading库实现了多线程。</p>
+<p>编写了通用的基类BasicDataPicker，
+基于独立线程，
+在设定的时间间隔中不断获取资源当前状态数据信息。</p>
+<p>数据存储在内部的数据map中(data_report)，
+包括监控项目名称、当前值、以及其他描述信息。</p>
+<p>通过继承该基类并实现实际的监测函数(pick)，
+可以针对不同的资源进行针对性监测，
+例如拉取CPU当前负载、
+拉取网络吞吐量并进行速率计算等。
+得到最终的数值全部写入通用存储中。</p>
+<p>通用数据存储的好处是便于监控器直接拿到格式化的数据进行阀值比较，
+以确定当前项目是否异常。</p>
+<p>而基类实现了基本的多线程采集框架，
+统一了数据格式，
+便于后续添加个性化的监控项目。</p>
+</div>
+<div class="section" id="monitor">
+<h3>监控器(Monitor)</h3>
+<p>监控器的主要目的在于管理所有采集器，
+获取所有采集器数值并与阀值比较，
+当发现异常时调用通告发送模块进行报警。</p>
+<p>此外，
+监控器实现了定时心跳信息的发送 ...</p></div></div>
+                        <a class="btn primary xsmall" href="/PSysMonitor_introduction.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/personal_management_of_time.html">关于时间管理的笔记</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -226,53 +290,8 @@ window.onload=function(){
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
 <li class="tag-4">
-    <a href="/tag/mysql.html">
-        <i class="icon-tag icon-large"></i>MySQL
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/softwarearchitect.html">
-        <i class="icon-tag icon-large"></i>SoftwareArchitect
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/gae.html">
-        <i class="icon-tag icon-large"></i>GAE
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/web-tool.html">
-        <i class="icon-tag icon-large"></i>web tool
-    </a>
-</li>
-<li class="tag-4">
     <a href="/tag/page-sentences.html">
         <i class="icon-tag icon-large"></i>page sentences
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/proxy.html">
-        <i class="icon-tag icon-large"></i>proxy
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>Python
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/data-structure.html">
-        <i class="icon-tag icon-large"></i>data structure
     </a>
 </li>
 <li class="tag-4">
@@ -281,23 +300,18 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-4">
-    <a href="/tag/android.html">
-        <i class="icon-tag icon-large"></i>Android
+    <a href="/tag/mysql.html">
+        <i class="icon-tag icon-large"></i>MySQL
     </a>
 </li>
-<li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/tools.html">
-        <i class="icon-tag icon-large"></i>tools
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
     </a>
 </li>
 <li class="tag-2">
@@ -305,19 +319,34 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>git
     </a>
 </li>
-<li class="tag-2">
-    <a href="/tag/github.html">
-        <i class="icon-tag icon-large"></i>github
+<li class="tag-4">
+    <a href="/tag/android.html">
+        <i class="icon-tag icon-large"></i>Android
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
     </a>
 </li>
 <li class="tag-3">
-    <a href="/tag/litecoin.html">
-        <i class="icon-tag icon-large"></i>litecoin
+    <a href="/tag/tools.html">
+        <i class="icon-tag icon-large"></i>tools
     </a>
 </li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
+<li class="tag-4">
+    <a href="/tag/gae.html">
+        <i class="icon-tag icon-large"></i>GAE
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
     </a>
 </li>
 <li class="tag-3">
@@ -325,14 +354,9 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>Vim
     </a>
 </li>
-<li class="tag-4">
-    <a href="/tag/time.html">
-        <i class="icon-tag icon-large"></i>time
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
+<li class="tag-2">
+    <a href="/tag/web-tool.html">
+        <i class="icon-tag icon-large"></i>web tool
     </a>
 </li>
 <li class="tag-2">
@@ -345,14 +369,54 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>Arch Linux
     </a>
 </li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/proxy.html">
+        <i class="icon-tag icon-large"></i>proxy
+    </a>
+</li>
 <li class="tag-3">
     <a href="/tag/tor.html">
         <i class="icon-tag icon-large"></i>Tor
     </a>
 </li>
+<li class="tag-1">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/github.html">
+        <i class="icon-tag icon-large"></i>github
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/time.html">
+        <i class="icon-tag icon-large"></i>time
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/softwarearchitect.html">
+        <i class="icon-tag icon-large"></i>SoftwareArchitect
+    </a>
+</li>
 <li class="tag-3">
     <a href="/tag/openwrt.html">
         <i class="icon-tag icon-large"></i>OpenWrt
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/litecoin.html">
+        <i class="icon-tag icon-large"></i>litecoin
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/data-structure.html">
+        <i class="icon-tag icon-large"></i>data structure
     </a>
 </li>
 

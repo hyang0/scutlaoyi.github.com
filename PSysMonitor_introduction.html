@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>一些好用web工具的记录</title>
+    <title>PSysMonitor：基于psutil和多线程的简单服务器监控实现</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="laoyi">
@@ -76,7 +76,7 @@
 						<i class="icon-folder-open icon-large"></i>Life
 					</a>
                   </li>
-                  <li >
+                  <li class="active">
                     <a href="/category/linux.html">
 						<i class="icon-folder-open icon-large"></i>Linux
 					</a>
@@ -86,7 +86,7 @@
 						<i class="icon-folder-open icon-large"></i>Tool
 					</a>
                   </li>
-                  <li class="active">
+                  <li >
                     <a href="/category/web.html">
 						<i class="icon-folder-open icon-large"></i>Web
 					</a>
@@ -112,8 +112,8 @@
                         <h1>
                                 <a href=""
                                         rel="bookmark"
-                                        title="Permalink to 一些好用web工具的记录">
-                                        一些好用web工具的记录
+                                        title="Permalink to PSysMonitor：基于psutil和多线程的简单服务器监控实现">
+                                        PSysMonitor：基于psutil和多线程的简单服务器监控实现
                                 </a>
                         </h1>
                 </header>
@@ -121,168 +121,114 @@
                 <div class="well">
 <footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2014-07-16T10:00:00+08:00">
-        <i class="icon-calendar"></i>三 16 七月 2014
+<abbr class="published" title="2015-06-04T22:30:00+08:00">
+        <i class="icon-calendar"></i>四 04 六月 2015
 </abbr>
 <span class="label">By</span>
 <a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
 <span class="label">Category</span>
-<a href="/category/web.html"><i class="icon-folder-open"></i>Web</a>.
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
 
 
 <span class="label">Tags</span>
-	<a href="/tag/web-tool.html"><i class="icon-tag"></i>web tool</a>
+	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+	<a href="/tag/tools.html"><i class="icon-tag"></i>tools</a>
 </footer><!-- /.post-info -->                </div>
-                <p>最近找到了许多好用的Web工具，在此记录一下使用心得。</p>
-<div class="section" id="id1">
-<h2>爬墙类</h2>
-<p>几年前，
-詹神曾经在班级邮件里说过，
-“作为程序员，翻墙应该是基本技能”。
-这句话我一直印象很深。</p>
-<p>当时的自己年少无知，
-对爬墙技术的了解也不深，
-但随着对Google依赖的不断深化，
-搜文档、找工具、查资料，
-加上许多信息工具的应用，
-这才越来越体会到这句话的深刻含义。</p>
-<p>爬墙的一个原则是不要在一棵树上吊死，
-这句是在某知名博主的博客上看到的，
-永远要留有备用的手段。</p>
-<p><strong>goagent</strong></p>
-<p>这货连接的是Google的服务器，
-凭借限定流量免费的Google App Engine服务，
-热心的技术人员开发出了一套转发代理的工具，
-是最近一段时间比较稳定的爬墙方式。</p>
-<p>自己搭建服务器的话需要注册一个GAE的账户，
-建立一个新的App，
-然后把服务器端给传上去。</p>
-<p>本地的客户端通过指定AppID连接服务器端，
-把本地的网络请求转发给服务器，
-由服务器代理处理页面并返回结果。</p>
-<p><em>安全问题</em></p>
-<p>月光博客之前曾经谈过这货的安全性问题，
-由于CA证书是伪造的，
-而且默认的CA证书是公开的，
-因此非常容易被中间人攻击。</p>
-<p>解决的方案是把目录下的默认CA.crt删掉，
-让GoAgent启动时自行生成新的唯一证书，
-相当于私有的证书。
-然后再把这个新的CA导入到系统的证书信任里。</p>
-<p>此外，
-最好开启服务器端的验证，
-在配置文件里把validate开启。</p>
-<p>但不管怎样优化也不能让这货有比较好的安全性，
-GAE在转发用户请求的时候会把AppID也写入到User Agent里面去，
-这非常容易暴露用户的身份。</p>
-<p>而且这货是Http代理。</p>
-<p><em>一些优化</em></p>
-<p>这货说到底都是通过Google的服务器进行代理转发，
-因此存在的一个单点故障就是Google的服务器被墙。
-然后...
-最近真的Google服务器被墙...
-因此最近一段时间GAE系列的工具都存在连接失败的问题。</p>
-<p>经过热心网友的仔细分析，
-发现墙的工作原理是干掉那些连接比较多的IP段，
-听说由于Google在全球范围的IP有几十万个，
-因此现有的技术貌似没有办法将所有IP全部墙死。</p>
-<p>在Google被针对性IP封锁之后，
-有好心人造出了许多用于检测IP是否可用的工具，
-例如最近比较好用的GoGoTester。</p>
-<p>Linux系列系统也有Python版本的IP检测工具可用，
-实在不行就自己写一个。</p>
-<p>方法其实也很简单，
-基本上是把Google的全球IP作为列表导入，
-然后暴力一个个ping一下测试能否连接。</p>
-<p>检测到可用的IP后写入到proxy.ini的配置里面即可。</p>
-<p>通过自定义的IP列表可以保持稳定的Google服务器连接。</p>
-<p>此外，
-使用最新版本的Chrome浏览器并且开启实验性质的QUIC协议，
-可以更大幅度提高与Google的连接稳定性和速度。
-当然Firefox就没得搞，可惜了。</p>
-<p><strong>VPN Gate</strong></p>
-<p>Windows下用这货还是比较方便的。</p>
-<p>这货的好处是代理服务器都是分布式的，
-不存在像GAE系那种单点故障，
-一个服务器挂掉只需要更换一个新的服务器即可。</p>
-<p>但是不爽的地方在于使用这货经常需要一些运气，
-在长长的列表里面找到能用的服务器有时候也挺麻烦。</p>
-<p>经过一段时间的使用总结了以下的经验（有些是别人教的）：</p>
-<pre class="literal-block">
-0、要经常使用让它获取最新的服务器列表，即使不连接服务器保持其运行也行；
-1、尝试连接超过五秒未完成的直接切换下一个，因为即使连接上也基本不可用；
-2、连接成功后在首页里右键服务器点击“查看状态”，查看“输入数据量”一栏，一边打开浏览器访问Google，如果那个数值几秒内都没有变化，那就是被墙了，不用等直接换下一个；
-3、可以在官网订阅更新邮件让自己随时能获取到最新版本的软件；
-</pre>
-<p>不知道是不是博主运气不好，
-保存的连接下次都基本都不能用，
-因此每次都直接找新的服务器。</p>
-<p><strong>shadowsocks</strong></p>
-<p>神器，
-全平台支持。</p>
-<p>Linux和Windows下都非常简便快捷，
-Android下比fqrouter占用资源小很多，
-也比较稳定。</p>
-<p>不爽的是需要自己搞到帐号，
-可以去网上买，
-一般一年一两百块钱就能买到共用的帐号。</p>
-<p>也可以土豪自己租个外国服务器，
-架个服务端自己用。
-Digital Ocean的服务器听说比较好，
-一个月几十美刀。</p>
+                <div class="section" id="id1">
+<h2>项目背景</h2>
+<p>博主自建的两台VPS，都是Ubuntu Server系统，
+需要一套东西监测系统的运行状态，
+包括硬件资源（CPU、Memory、网络吞吐量等），
+以及软件资源（关键进程存活性监测）。</p>
+<p>此外，需要一套简单的通告系统在系统运行异常的情况下发送告警邮件到博主的邮箱里。</p>
 </div>
 <div class="section" id="id2">
-<h2>辅助类</h2>
-<p><strong>HTTPS Everywhere</strong></p>
-<p>这货是浏览器的拓展，
-可以让支持HTTPS连接的网站全部强制启用https。</p>
-<p>以前Google很多服务还是被简单封锁http的时候，
-使用https可以方便的访问google code等服务。</p>
-<p><strong>DNSCrypt</strong></p>
-<p>OpenDNS的一个项目，
-为本地DNS请求执行DNS转发。</p>
-<p>众所周知的是有一种东西叫做DNS污染，
-例如默认情况下跑一下这个</p>
+<h2>基础组件</h2>
+<p>本系统基于Python2进行实现，
+利用一套叫做psutil的库实现简单的系统信息获取。</p>
+</div>
+<div class="section" id="id3">
+<h2>架构</h2>
+<p>抽象的架构有三大模块：采集器、监控器及通告发送模块</p>
+<div class="section" id="datapicker">
+<h3>采集器(DataPicker)</h3>
+<p>采集器的设计目标是独立于主线程之外进行资源数据的获取，
+因此利用threading库实现了多线程。</p>
+<p>编写了通用的基类BasicDataPicker，
+基于独立线程，
+在设定的时间间隔中不断获取资源当前状态数据信息。</p>
+<p>数据存储在内部的数据map中(data_report)，
+包括监控项目名称、当前值、以及其他描述信息。</p>
+<p>通过继承该基类并实现实际的监测函数(pick)，
+可以针对不同的资源进行针对性监测，
+例如拉取CPU当前负载、
+拉取网络吞吐量并进行速率计算等。
+得到最终的数值全部写入通用存储中。</p>
+<p>通用数据存储的好处是便于监控器直接拿到格式化的数据进行阀值比较，
+以确定当前项目是否异常。</p>
+<p>而基类实现了基本的多线程采集框架，
+统一了数据格式，
+便于后续添加个性化的监控项目。</p>
+</div>
+<div class="section" id="monitor">
+<h3>监控器(Monitor)</h3>
+<p>监控器的主要目的在于管理所有采集器，
+获取所有采集器数值并与阀值比较，
+当发现异常时调用通告发送模块进行报警。</p>
+<p>此外，
+监控器实现了定时心跳信息的发送，
+目前的设定是每天发送一份心跳邮件告知管理员当前监控系统正常。</p>
+<p>因此监控器的实现是比较直观的，
+初始化所有采集器，
+定时拉取采集器数据并与阀值比较，
+格式化得到的数据并判定是否发送告警邮件。</p>
+<p>目前的实现是在系统异常时发送一份邮件，
+在系统恢复正常时发送恢复邮件。
+没有统计异常总时长等信息。</p>
+</div>
+<div class="section" id="id4">
+<h3>通告发送模块</h3>
+<p>目前实现的是简单的邮件发送机制。</p>
+<p>调用第三方SMTP服务器，
+通过登录第三方邮箱帐号进行告警邮件发送。</p>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>安装说明</h2>
+<p>本系统依赖Python和psutil库，
+安装psutil库的命令在Ubuntu里是这样的:</p>
 <pre class="literal-block">
-nslookup twitter.com
+apt-get install pip
+apt-get install python-dev
+pip install psutil
 </pre>
-<p>会发现twitter的DNS解析被指向一个莫名其妙的IP上面去。</p>
-<p>用DNSCrypt可以将所有DNS请求通过加密的443端口发送到openDNS进行解析，
-防止被DNS污染。</p>
-<p>Windows下直接安装启动即可。</p>
-<p>Linux下可以参考这个进行安装和启动：</p>
-<blockquote>
-<a class="reference external" href="http://dnscrypt.org">http://dnscrypt.org</a></blockquote>
-<p>居然官网也被墙了...</p>
-<p>DNS解析要更改为127.0.0.1，
-默认的端口是53。</p>
-<p>由于权限限制，
-在Linux下DNSCrypt没有办法直接绑定53号端口，
-博主的解决方案是setcap。</p>
+<p>直接把github上本项目的代码文件丢到本地某个文件夹就完成部署了。</p>
+</div>
+<div class="section" id="id6">
+<h2>配置</h2>
+<p>配置项目主要有：阀值与进程列表、管理员与客户端邮箱信息、日志位置。</p>
+<p>配置项都统一放在setting.py文件中。</p>
+<p>mail_config函数返回邮箱信息，
+包括SMTP服务器信息，
+告警邮箱的用户名密码等。</p>
+<p>log_file函数返回日志地址。</p>
+<p>monitor_config返回监控配置，
+包括管理员邮箱，
+存活性监测的进程列表，
+以及用于标识服务器的服务器名称。</p>
+<p>服务器名称会显示在所有邮件的title里便于区别不同的服务器。</p>
+</div>
+<div class="section" id="id7">
+<h2>启动</h2>
+<p>直接在代码目录里敲:</p>
 <pre class="literal-block">
-setcap cap_net_bind_service=ep dnscrypt-proxy
+python monitor.py &amp;
 </pre>
-<p>这样dnscrypt就拥有了绑定1024以下端口的能力。</p>
-<p>然后需要更改/etc/resolv.conf，加一行：</p>
-<pre class="literal-block">
-nameserver 127.0.0.1
-</pre>
-<p><strong>Adblock Plus</strong></p>
-<p>神器！
-干掉超级多的网站广告，
-同时可以过滤掉一些跟踪。</p>
-<p>作为浏览器的扩展，
-用起来很爽就是了。</p>
-<p><strong>Startpage</strong></p>
-<p>Google搜索的匿名版，
-在Google行情不好的时候这货一直没有被墙，
-使用安全方便。</p>
-<p>更神奇的是startpage的lxquick代理浏览，
-相当于Google的网页快照，
-然后..
-可以随便打开每一个搜索结果页，
-不管它有没有被墙！
-网页代理了感觉是。</p>
+<p>让主监控器启动并后台运行即可。</p>
+</div>
+<div class="section" id="github">
+<h2>Github仓库地址</h2>
+<p><a class="reference external" href="https://github.com/scutLaoYi/PSysMonitor">https://github.com/scutLaoYi/PSysMonitor</a></p>
 </div>
 
                 </div><!-- /.entry-content -->
