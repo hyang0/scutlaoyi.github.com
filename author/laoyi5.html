@@ -82,6 +82,11 @@
 					</a>
                   </li>
                   <li >
+                    <a href="/category/reading.html">
+						<i class="icon-folder-open icon-large"></i>Reading
+					</a>
+                  </li>
+                  <li >
                     <a href="/category/tool.html">
 						<i class="icon-folder-open icon-large"></i>Tool
 					</a>
@@ -106,6 +111,47 @@
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
+        <div class="article">
+                <h1><a href="/Arch001.html">Arch Linux学习：安装篇(一)</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-01-08T19:30:00+08:00">
+        <i class="icon-calendar"></i>三 08 一月 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/linux.html"><i class="icon-folder-open"></i>Linux</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/arch-linux.html"><i class="icon-tag"></i>Arch Linux</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>本系列博文记录学习Arch Linux这个Linux发行版过程中的总结与收获。</p>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h2>关于Arch Linux</h2>
+<p>Arch Linux是一个现在较为流行的Linux发行版，
+支持32/64位处理器,
+以Rolling Releases方式发布新版本。</p>
+<p>官方站点：</p>
+<p><a class="reference external" href="https://www.archlinux.org">https://www.archlinux.org</a></p>
+<p>Arch Linux的哲学是简洁、保证代码的正确性、用户为中心、开放性及自由性。
+因此据称Arch Linux的一个非常重要的特点是轻量级，
+让用户自行选择所需的组件构建属于自己的系统，
+当然这都以系统的开放性作为前提，
+Arch Linux提供了非常大的自由度和开放度供用户完全控制自己的系统。</p>
+<p><a class="reference external" href="https://wiki.archlinux.org/index.php/The_Arch_Way">https://wiki.archlinux.org/index.php/The_Arch_Way</a></p>
+<p>Arch Linux支持syslinux或GRUB两种bootloader，
+包管理器为Pacman(package manager)，
+使用systemd作为系统的服务管理器(这货还没弄清楚)</p>
+<p>在下列资源的帮助下我顺利完成了系统的安装:</p>
+<p>一个是Arch官方的Beginners' Guide:</p>
+<p><a class="reference external" href="https://wiki.archlinux.org/index.php/Beginners%27_Guide">https://wiki.archlinux.org/index.php/Beginners ...</a></p></div>
+                        <a class="btn primary xsmall" href="/Arch001.html">more ...</a>
+                </div>
+        </div>
+        <hr />
         <div class="article">
                 <h1><a href="/Bash004.html">Bash笔记(四)</a></h1>
                 <div class="well small"><footer class="post-info">
@@ -490,52 +536,6 @@
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/Python007.html">Python 笔记（七）</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2013-10-04T10:30:00+08:00">
-        <i class="icon-calendar"></i>五 04 十月 2013
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/coding.html"><i class="icon-folder-open"></i>Coding</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p><strong>本系列博文记录学习Python过程的笔记和想法，简单而狗血，杂乱而无章，主要目的是方便来日查看。</strong></p>
-<p><strong>使用的Python版本为2.7.3，</strong>
-<strong>在GNU/Linux Ubuntu 12.04LTS操作系统下实现和测试</strong></p>
-<hr class="docutils" />
-<div class="section" id="id1">
-<h2>文件和流</h2>
-<p><strong>打开文件</strong></p>
-<p>使用open函数打开文件，参数一为文件名，参数二为打开方式，参数三为缓冲区设置</p>
-<p>最简单的打开文件代码如下：</p>
-<div class="highlight"><pre><span class="n">myFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;myFile.txt&quot;</span><span class="p">)</span>
-</pre></div>
-<p>程序自动以读取方式打开文件，如果文件不存在会引发IOError异常</p>
-<p>以写入方式打开文件：</p>
-<div class="highlight"><pre><span class="n">myFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;myFile.txt&quot;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
-</pre></div>
-<p>'b'属性以二进制方式打开文件</p>
-<p>'a'属性以追加方式打开文件</p>
-<p>'+'属性以读写方式打开文件</p>
-<p>缓冲区设置：</p>
-<blockquote>
-<p>0(False) 不设置缓冲区，直接写入硬盘;</p>
-<p>1(True) 开启缓冲区;</p>
-<p>&gt;1 设置缓冲区大小;</p>
-<p>-1 使用默认缓冲区大小</p>
-</blockquote>
-<p><strong>读写文件（单字符 ...</strong></p></div>
-                        <a class="btn primary xsmall" href="/Python007.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -602,6 +602,11 @@ window.onload=function(){
 </a>
 </li>
 <li>
+<a href="/category/reading.html">
+    <i class="icon-folder-open icon-large"></i>Reading
+</a>
+</li>
+<li>
 <a href="/category/tool.html">
     <i class="icon-folder-open icon-large"></i>Tool
 </a>
@@ -613,104 +618,14 @@ window.onload=function(){
 </li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
-<li class="tag-4">
-    <a href="/tag/page-sentences.html">
-        <i class="icon-tag icon-large"></i>page sentences
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/meek.html">
-        <i class="icon-tag icon-large"></i>Meek
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/mysql.html">
-        <i class="icon-tag icon-large"></i>MySQL
-    </a>
-</li>
 <li class="tag-1">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>Python
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/android.html">
-        <i class="icon-tag icon-large"></i>Android
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/tools.html">
-        <i class="icon-tag icon-large"></i>tools
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/gae.html">
-        <i class="icon-tag icon-large"></i>GAE
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/web-tool.html">
-        <i class="icon-tag icon-large"></i>web tool
+    <a href="/tag/data-structure.html">
+        <i class="icon-tag icon-large"></i>data structure
     </a>
 </li>
 <li class="tag-2">
     <a href="/tag/audition.html">
         <i class="icon-tag icon-large"></i>audition
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/arch-linux.html">
-        <i class="icon-tag icon-large"></i>Arch Linux
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/proxy.html">
-        <i class="icon-tag icon-large"></i>proxy
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/tor.html">
-        <i class="icon-tag icon-large"></i>Tor
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
     </a>
 </li>
 <li class="tag-2">
@@ -719,8 +634,18 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-4">
-    <a href="/tag/time.html">
-        <i class="icon-tag icon-large"></i>time
+    <a href="/tag/mysql.html">
+        <i class="icon-tag icon-large"></i>MySQL
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/meek.html">
+        <i class="icon-tag icon-large"></i>Meek
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
     </a>
 </li>
 <li class="tag-2">
@@ -728,9 +653,74 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>SoftwareArchitect
     </a>
 </li>
+<li class="tag-4">
+    <a href="/tag/page-sentences.html">
+        <i class="icon-tag icon-large"></i>page sentences
+    </a>
+</li>
 <li class="tag-3">
     <a href="/tag/openwrt.html">
         <i class="icon-tag icon-large"></i>OpenWrt
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/time.html">
+        <i class="icon-tag icon-large"></i>time
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/web-tool.html">
+        <i class="icon-tag icon-large"></i>web tool
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/tor.html">
+        <i class="icon-tag icon-large"></i>Tor
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/proxy.html">
+        <i class="icon-tag icon-large"></i>proxy
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/gae.html">
+        <i class="icon-tag icon-large"></i>GAE
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/book.html">
+        <i class="icon-tag icon-large"></i>Book
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
     </a>
 </li>
 <li class="tag-3">
@@ -738,9 +728,29 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>litecoin
     </a>
 </li>
+<li class="tag-3">
+    <a href="/tag/tools.html">
+        <i class="icon-tag icon-large"></i>tools
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
 <li class="tag-1">
-    <a href="/tag/data-structure.html">
-        <i class="icon-tag icon-large"></i>data structure
+    <a href="/tag/arch-linux.html">
+        <i class="icon-tag icon-large"></i>Arch Linux
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/android.html">
+        <i class="icon-tag icon-large"></i>Android
     </a>
 </li>
 

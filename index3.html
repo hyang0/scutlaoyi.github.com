@@ -82,6 +82,11 @@
 					</a>
                   </li>
                   <li >
+                    <a href="/category/reading.html">
+						<i class="icon-folder-open icon-large"></i>Reading
+					</a>
+                  </li>
+                  <li >
                     <a href="/category/tool.html">
 						<i class="icon-folder-open icon-large"></i>Tool
 					</a>
@@ -106,6 +111,70 @@
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
+        <div class="article">
+                <h1><a href="/CppLearning009-heapsort.html">C++学习(九)：最大堆与堆排序</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-04-06T22:30:00+08:00">
+        <i class="icon-calendar"></i>日 06 四月 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/coding.html"><i class="icon-folder-open"></i>Coding</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
+	<a href="/tag/data-structure.html"><i class="icon-tag"></i>data structure</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>初次认识堆之后就对堆排序比较有好感，
+感觉算法很有趣，
+效率也很高。</p>
+<p>谈堆排序就必须对堆的基本原理和性质有所掌握，
+因此这里记录一下个人对堆的基本理解。</p>
+<div class="section" id="id1">
+<h2>二叉堆与最大最小堆</h2>
+<p>二叉堆有如下的基本性质：
+首先二叉堆是一棵完全二叉树，
+因此二叉堆经常使用数组进行实现。</p>
+<p>在数组实现的二叉堆中，
+假设根节点索引值为1，
+则有如下性质：
+父节点是n号元素，
+则其孩子节点索引值分别为2n和2n+1。</p>
+<p>对于根节点为0的二叉堆，
+则孩子节点分别为2n+1和2n+2，
+均能通过偏移量快速找到孩子节点。</p>
+<p>其次，二叉堆的元素是部分有序的，
+每一个父节点和其子节点之间存在某些关系。</p>
+<p>而最大/最小堆则是二叉堆的一种形式，
+最大堆的每一个父节点都比子节点的值大，
+最小堆则相反，每个父节点都比其子节点的值小。</p>
+<p>这种情况下，最大堆的根节点就是所有节点中的最大元素，
+由于这种性质使得快速的排序算法得以实现。</p>
+<p>需要注意的是，
+最大/最小堆的大小关系仅存在于父子节点之间，
+兄弟节点之间没有直接的大小关系。</p>
+<p>简单起见，以下只讨论最大堆的相关内容。</p>
+</div>
+<div class="section" id="id2">
+<h2>最大堆的构建</h2>
+<p>构建最大堆的基本目标是使数组满足最大堆的性质，
+即所有父节点比其子节点的值大。</p>
+<p>一般的做法是定义一种siftdown操作，
+siftdown操作某个特定的节点，
+将其不断与子节点比较并交换位置直到到达树中正确的位置。</p>
+<p>题外话：博主一直以为是shiftdown...</p>
+<p><strong>siftdown操作的具体实现</strong></p>
+<p>其具体的思路如下：</p>
+<pre class="literal-block">
+比较当前节点与其孩子节点的值:
+    若当前节点比其孩子节点都大，则该父子节点形成的子树已经满足最大堆性质 ...</pre></div>
+                        <a class="btn primary xsmall" href="/CppLearning009-heapsort.html">more ...</a>
+                </div>
+        </div>
+        <hr />
         <div class="article">
                 <h1><a href="/CppLearning008-sort-one.html">C++学习(八)：排序啊排序</a></h1>
                 <div class="well small"><footer class="post-info">
@@ -641,68 +710,6 @@ php代码如下(假设文件名是test.php)：</p>
                 </div>
         </div>
         <hr />
-        <div class="article">
-                <h1><a href="/CppLearning004.html">C++学习(四)：线性表的奇技淫巧(二)</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-02-16T21:30:00+08:00">
-        <i class="icon-calendar"></i>日 16 二月 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
-<span class="label">Category</span>
-<a href="/category/coding.html"><i class="icon-folder-open"></i>Coding</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/cc.html"><i class="icon-tag"></i>C/C++</a>
-	<a href="/tag/data-structure.html"><i class="icon-tag"></i>data structure</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>这两天去玩了，
-进度比较慢。</p>
-<p>无序线性表终于算是搞了个大概，
-有些过于繁琐的就没有管了。</p>
-<p>准备入手有序线性表，
-把一些牛逼的算法也弄进去，
-二分、堆排序、归并排序什么的。</p>
-<div class="section" id="id1">
-<h2>奇技淫巧大收集（续）</h2>
-<p><strong>线性表判环</strong></p>
-<blockquote>
-<p>就是判别一个线性表中有没有出现环。</p>
-<p><strong>简单标记方案</strong></p>
-<p>几种标记都可以。</p>
-<p>如果是不重复的整数并且范围比较小的话，
-直接开个bool型的数组，用下标表示某个特定的数，
-对应值为1指定该值出现过，
-对应值为0指定该值没有出现。</p>
-<p>整数下标的数组搞不定则可以考虑弄个标准库的哈希表。</p>
-<p>总之，思路就是遍历链表，
-把出现过的标记起来，
-当遍历过程中再次碰到被标记过的节点说明链表有环，
-否则肯定能搜索到链表的表尾并结束。</p>
-<p>需要一些额外的空间及计算量。</p>
-<p><strong>Floyd方案</strong></p>
-<p>感觉搞数学的家伙总能找到一些神奇的方法解决某些奇怪的问题。</p>
-<p>开两个指针fast, slow，均初始化为头节点，
-fast每次移动两个节点，slow每次移动一个节点。</p>
-<p>单步运行，直到：</p>
-<blockquote>
-<p>1、fast指针到达表尾，无环；</p>
-<p>2、fast指针与slow指针在某一步指向同一个节点，有环；</p>
-</blockquote>
-</blockquote>
-<p><strong>线性表除环</strong></p>
-<blockquote>
-<p>简单办法就直观了，
-直接每个节点检查，
-很蠢，不详谈。</p>
-<p><strong>高效方案</strong></p>
-<p>首先，用上述的Floyd算法找到环 ...</p></blockquote></div>
-                        <a class="btn primary xsmall" href="/CppLearning004.html">more ...</a>
-                </div>
-        </div>
-        <hr />
 
         <div class="pagination">
         <ul>
@@ -769,6 +776,11 @@ window.onload=function(){
 </a>
 </li>
 <li>
+<a href="/category/reading.html">
+    <i class="icon-folder-open icon-large"></i>Reading
+</a>
+</li>
+<li>
 <a href="/category/tool.html">
     <i class="icon-folder-open icon-large"></i>Tool
 </a>
@@ -780,104 +792,14 @@ window.onload=function(){
 </li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
-<li class="tag-4">
-    <a href="/tag/page-sentences.html">
-        <i class="icon-tag icon-large"></i>page sentences
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/meek.html">
-        <i class="icon-tag icon-large"></i>Meek
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/mysql.html">
-        <i class="icon-tag icon-large"></i>MySQL
-    </a>
-</li>
 <li class="tag-1">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>Python
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/android.html">
-        <i class="icon-tag icon-large"></i>Android
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/tools.html">
-        <i class="icon-tag icon-large"></i>tools
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/gae.html">
-        <i class="icon-tag icon-large"></i>GAE
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/web-tool.html">
-        <i class="icon-tag icon-large"></i>web tool
+    <a href="/tag/data-structure.html">
+        <i class="icon-tag icon-large"></i>data structure
     </a>
 </li>
 <li class="tag-2">
     <a href="/tag/audition.html">
         <i class="icon-tag icon-large"></i>audition
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/arch-linux.html">
-        <i class="icon-tag icon-large"></i>Arch Linux
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/proxy.html">
-        <i class="icon-tag icon-large"></i>proxy
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/tor.html">
-        <i class="icon-tag icon-large"></i>Tor
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
     </a>
 </li>
 <li class="tag-2">
@@ -886,8 +808,18 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-4">
-    <a href="/tag/time.html">
-        <i class="icon-tag icon-large"></i>time
+    <a href="/tag/mysql.html">
+        <i class="icon-tag icon-large"></i>MySQL
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/meek.html">
+        <i class="icon-tag icon-large"></i>Meek
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
     </a>
 </li>
 <li class="tag-2">
@@ -895,9 +827,74 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>SoftwareArchitect
     </a>
 </li>
+<li class="tag-4">
+    <a href="/tag/page-sentences.html">
+        <i class="icon-tag icon-large"></i>page sentences
+    </a>
+</li>
 <li class="tag-3">
     <a href="/tag/openwrt.html">
         <i class="icon-tag icon-large"></i>OpenWrt
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/time.html">
+        <i class="icon-tag icon-large"></i>time
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/web-tool.html">
+        <i class="icon-tag icon-large"></i>web tool
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/tor.html">
+        <i class="icon-tag icon-large"></i>Tor
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/proxy.html">
+        <i class="icon-tag icon-large"></i>proxy
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/gae.html">
+        <i class="icon-tag icon-large"></i>GAE
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/book.html">
+        <i class="icon-tag icon-large"></i>Book
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
     </a>
 </li>
 <li class="tag-3">
@@ -905,9 +902,29 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>litecoin
     </a>
 </li>
+<li class="tag-3">
+    <a href="/tag/tools.html">
+        <i class="icon-tag icon-large"></i>tools
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
 <li class="tag-1">
-    <a href="/tag/data-structure.html">
-        <i class="icon-tag icon-large"></i>data structure
+    <a href="/tag/arch-linux.html">
+        <i class="icon-tag icon-large"></i>Arch Linux
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/android.html">
+        <i class="icon-tag icon-large"></i>Android
     </a>
 </li>
 

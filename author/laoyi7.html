@@ -82,6 +82,11 @@
 					</a>
                   </li>
                   <li >
+                    <a href="/category/reading.html">
+						<i class="icon-folder-open icon-large"></i>Reading
+					</a>
+                  </li>
+                  <li >
                     <a href="/category/tool.html">
 						<i class="icon-folder-open icon-large"></i>Tool
 					</a>
@@ -106,6 +111,48 @@
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
+        <div class="article">
+                <h1><a href="/learning-git-002.html">Git 与 GitHub 不完全教程（二）</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-09-07T16:10:00+08:00">
+        <i class="icon-calendar"></i>六 07 九月 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/laoyi.html"><i class="icon-user"></i>laoyi</a>
+<span class="label">Category</span>
+<a href="/category/tool.html"><i class="icon-folder-open"></i>Tool</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/git.html"><i class="icon-tag"></i>git</a>
+	<a href="/tag/github.html"><i class="icon-tag"></i>github</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><div class="section" id="id1">
+<h2>分支</h2>
+<p>分支(branch)是Git的一个强大功能，它可以在不改变现有仓库、不新增仓库的情况下，通过新建一个分支以建立当前文档一模一样的支线版本，在支线版本的修改不影响主线文档的内容。</p>
+<p>分支的一个重要的功能是能够在同一个时间点上保存多份不同版本的代码，并且均为随时可用的状态，根据官方的一个示例，你可以保持一份稳定的发布版，在发布版内的代码都是可运行的，之后，你可以再拥有一个分支专门用于开发，在这上面的代码用于任意修改和处理，不对外，还能再有一个分支用于测试开发新的功能。这三个分支都可以随时切换随时合并，应变自如。</p>
+<p>当支线任务成功完成时，可通过命令简单地将支线版本合并到主线上，若由于手潮不幸把事情搞砸了，可直接删除支线，回到主线上，则原有的文档内容不受任何影响。这种功能特别适合在当前状态下需要测试开发一些新的功能，但又想要与主线的开发有所并行的情况。</p>
+<p>默认情况下，git创建完仓库后会生成一个主分支master，所有的操作均在主分支上进行，这就相当于文档的主线版本。而我们可以按自己的需要增删改查新的分支。</p>
+<p><strong>分支的创建和切换</strong></p>
+<p>显示当前仓库的分支状态:</p>
+<pre class="literal-block">
+git branch
+</pre>
+<p>Git会列表显示当前的所有分支，并在当前所在分支上作相应标记。
+新建分支（假设需要新建的分支名字为:newBranch）:</p>
+<pre class="literal-block">
+git branch newBranch
+</pre>
+<p>此时再次检查branch状态就会发现新的分支已经出现了。
+新的分支和现有的分支内容完全相同，相当于当前分支的一个副本。
+跳转到某个分支:</p>
+<pre class="literal-block">
+git ...</pre></div>
+                        <a class="btn primary xsmall" href="/learning-git-002.html">more ...</a>
+                </div>
+        </div>
+        <hr />
         <div class="article">
                 <h1><a href="/learning-git-001.html">Git 与 GitHub 不完全教程（一）</a></h1>
                 <div class="well small"><footer class="post-info">
@@ -219,6 +266,11 @@ window.onload=function(){
 </a>
 </li>
 <li>
+<a href="/category/reading.html">
+    <i class="icon-folder-open icon-large"></i>Reading
+</a>
+</li>
+<li>
 <a href="/category/tool.html">
     <i class="icon-folder-open icon-large"></i>Tool
 </a>
@@ -230,104 +282,14 @@ window.onload=function(){
 </li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
-<li class="tag-4">
-    <a href="/tag/page-sentences.html">
-        <i class="icon-tag icon-large"></i>page sentences
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/meek.html">
-        <i class="icon-tag icon-large"></i>Meek
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/mysql.html">
-        <i class="icon-tag icon-large"></i>MySQL
-    </a>
-</li>
 <li class="tag-1">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>Python
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/socket.html">
-        <i class="icon-tag icon-large"></i>socket
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/android.html">
-        <i class="icon-tag icon-large"></i>Android
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/xss.html">
-        <i class="icon-tag icon-large"></i>xss
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/tools.html">
-        <i class="icon-tag icon-large"></i>tools
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/gae.html">
-        <i class="icon-tag icon-large"></i>GAE
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/recruitment.html">
-        <i class="icon-tag icon-large"></i>recruitment
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/md5.html">
-        <i class="icon-tag icon-large"></i>md5
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/vim.html">
-        <i class="icon-tag icon-large"></i>Vim
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/web-tool.html">
-        <i class="icon-tag icon-large"></i>web tool
+    <a href="/tag/data-structure.html">
+        <i class="icon-tag icon-large"></i>data structure
     </a>
 </li>
 <li class="tag-2">
     <a href="/tag/audition.html">
         <i class="icon-tag icon-large"></i>audition
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/arch-linux.html">
-        <i class="icon-tag icon-large"></i>Arch Linux
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/bash.html">
-        <i class="icon-tag icon-large"></i>Bash
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/proxy.html">
-        <i class="icon-tag icon-large"></i>proxy
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/tor.html">
-        <i class="icon-tag icon-large"></i>Tor
-    </a>
-</li>
-<li class="tag-1">
-    <a href="/tag/cc.html">
-        <i class="icon-tag icon-large"></i>C/C++
     </a>
 </li>
 <li class="tag-2">
@@ -336,8 +298,18 @@ window.onload=function(){
     </a>
 </li>
 <li class="tag-4">
-    <a href="/tag/time.html">
-        <i class="icon-tag icon-large"></i>time
+    <a href="/tag/mysql.html">
+        <i class="icon-tag icon-large"></i>MySQL
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/meek.html">
+        <i class="icon-tag icon-large"></i>Meek
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/bash.html">
+        <i class="icon-tag icon-large"></i>Bash
     </a>
 </li>
 <li class="tag-2">
@@ -345,9 +317,74 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>SoftwareArchitect
     </a>
 </li>
+<li class="tag-4">
+    <a href="/tag/page-sentences.html">
+        <i class="icon-tag icon-large"></i>page sentences
+    </a>
+</li>
 <li class="tag-3">
     <a href="/tag/openwrt.html">
         <i class="icon-tag icon-large"></i>OpenWrt
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/time.html">
+        <i class="icon-tag icon-large"></i>time
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/recruitment.html">
+        <i class="icon-tag icon-large"></i>recruitment
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/web-tool.html">
+        <i class="icon-tag icon-large"></i>web tool
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/cc.html">
+        <i class="icon-tag icon-large"></i>C/C++
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/tor.html">
+        <i class="icon-tag icon-large"></i>Tor
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/proxy.html">
+        <i class="icon-tag icon-large"></i>proxy
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/socket.html">
+        <i class="icon-tag icon-large"></i>socket
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/gae.html">
+        <i class="icon-tag icon-large"></i>GAE
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/xss.html">
+        <i class="icon-tag icon-large"></i>xss
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/book.html">
+        <i class="icon-tag icon-large"></i>Book
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/vim.html">
+        <i class="icon-tag icon-large"></i>Vim
     </a>
 </li>
 <li class="tag-3">
@@ -355,9 +392,29 @@ window.onload=function(){
         <i class="icon-tag icon-large"></i>litecoin
     </a>
 </li>
+<li class="tag-3">
+    <a href="/tag/tools.html">
+        <i class="icon-tag icon-large"></i>tools
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/md5.html">
+        <i class="icon-tag icon-large"></i>md5
+    </a>
+</li>
 <li class="tag-1">
-    <a href="/tag/data-structure.html">
-        <i class="icon-tag icon-large"></i>data structure
+    <a href="/tag/arch-linux.html">
+        <i class="icon-tag icon-large"></i>Arch Linux
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>Python
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/android.html">
+        <i class="icon-tag icon-large"></i>Android
     </a>
 </li>
 

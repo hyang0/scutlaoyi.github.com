@@ -1,5 +1,251 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/laoyi.atom.xml" rel="self"></link><id>/</id><updated>2015-06-04T22:30:00+08:00</updated><entry><title>PSysMonitor：基于psutil和多线程的简单服务器监控实现</title><link href="/PSysMonitor_introduction.html" rel="alternate"></link><updated>2015-06-04T22:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2015-06-04:PSysMonitor_introduction.html</id><summary type="html">&lt;div class="section" id="id1"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>老逸的个人站</title><link href="/" rel="alternate"></link><link href="http://www.scutlaoyi.tk/feeds/laoyi.atom.xml" rel="self"></link><id>/</id><updated>2015-06-07T16:30:00+08:00</updated><entry><title>书籍阅读：禅与摩托车维修艺术</title><link href="/reading_zen_and_the_art_of_motorcycle.html" rel="alternate"></link><updated>2015-06-07T16:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2015-06-07:reading_zen_and_the_art_of_motorcycle.html</id><summary type="html">&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;第一部分：认知的法则，古典和浪漫的对峙&lt;/h2&gt;
+&lt;p&gt;在以前的环境中，
+他们认为鬼神是存在的，
+就像现代人认为原子、质子和光子是存在的。
+从这个角度来说，我相信有鬼，
+也就是说，
+现代人也有属于他们的鬼神。&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+保持开放的心态，
+才有可能接触更多的思想，
+才有可能从架构上更新内心对世界的定义。&lt;/blockquote&gt;
+&lt;p&gt;我们从所观察到的事物中选出一把沙子，
+然后称这把沙子为世界...
+古典的认知法就是针对这些不同的沙堆以及分类法还有彼此之间的关系，
+而浪漫的认知则是针对分类之前的那把沙子。&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+无所谓好，无所谓坏，
+但是在实践中古典和浪漫之间却经常互不认同。&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h2&gt;第二部分：传统理性存在的问题，变革的时代&lt;/h2&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h3&gt;科学的问题&lt;/h3&gt;
+&lt;p&gt;如果科学方法的目的就是要从一大堆的假设当中选出正确的，
+然而假设出现的速度远远超过实验所能处理的速度，
+那么很明显地就来不及证明所有的假设。
+如果不能够证明所有的假设，
+那么任何实验的结果都变得很不可靠。&lt;/p&gt;
+&lt;p&gt;你想要接着科学方法接近真理，
+实际上你根本没有任何进展，
+甚至离它越来越远，
+这是你所运用的科学方法造成的。&lt;/p&gt;
+&lt;p&gt;科学把人从未以绝对的真理，
+引向多元、摇摆不定、相对的世界，
+是造成社会混乱、思想价值混淆的主要元凶。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id5"&gt;
+&lt;h3&gt;社会的洗脑与真理的追求&lt;/h3&gt;
+&lt;p&gt;像学校、教会、政府和政治组织这种机构，
+都是想用某种特定的目标而非真理来引导别人思考，
+以使他们的机构能够继续存活下去，
+以控制别人来继续为这些机构服务。&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+想到了暗网上的《The Matrix》: &lt;a class="reference external" href="http://zqktlwi4fecvo6ri.onion/wiki/The_Matrix"&gt;http://zqktlwi4fecvo6ri.onion/wiki/The_Matrix&lt;/a&gt;&lt;/blockquote&gt;
+&lt;p&gt;真正的大学是心灵的世界，
+是多少世纪以来流传给我们的理性思想，
+它不存在于任何特定的建筑物之内。&lt;/p&gt;
+&lt;p&gt;理性教会所追求的最主要目标，
+就是苏格拉底一向认为的真理。
+只不过它不断以不同的面貌出现在历史中，
+所有的一切都隶属于它。&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+大学应该是中立的，
+不应该被任何势力所影响。&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id6"&gt;
+&lt;h3&gt;变革&lt;/h3&gt;
+&lt;p&gt;真正的学习来自于四处游荡。
+你必须先停止拓展原先的知识，
+四处游荡一阵子，
+直到碰到一些事，
+能够让你拓展原先知识的根基，
+才会继续前进...
+每到拓展根基的时候，
+世事就会变得像现在这样混淆不清，
+而且目标不明。
+哥伦布发现新大陆之后，
+在社会上引起了价值观的混乱，
+因而出现了文艺复兴。&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+从架构层面更新价值观&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id7"&gt;
+&lt;h2&gt;第三部分：良质的探索&lt;/h2&gt;
+&lt;div class="section" id="id8"&gt;
+&lt;h3&gt;大多数学生的问题&lt;/h3&gt;
+&lt;p&gt;因为多年来胡萝卜和鞭子的教育方式，
+造成了他思考上的惰性。
+就好象一头驴子：“如果你不打我，我就不工作。”&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+很多时候这种情况很常见&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id9"&gt;
+&lt;h3&gt;良质是主体和客体的因&lt;/h3&gt;
+&lt;p&gt;“过去”只存在于我们的记忆之中，
+“未来”则存在于我们的计划之中，
+而只有“现在”才是唯一的真实...
+真实总是存在于你所看到的那一刹那，
+且在你还没有意识到之前。
+除此之外，没有别的真实。&lt;/p&gt;
+&lt;p&gt;良质无形、无状，也无法形容，
+看得到形状和形式就是由理性去认知，
+良质是超越形状和形式之上的。&lt;/p&gt;
+&lt;p&gt;我们发明了许多事物，
+包括天、地、树、石头...文化和科学，
+我们称这些为模拟实体。
+而他们的确实真实的，
+所以我们就说服孩子相信它们是真实的。
+然后把不接受这套理论的人丢进疯人院里，
+但是让我们发明模拟实体的是良质。&lt;/p&gt;
+&lt;p&gt;如果我们想用我们所创造的世界去涵盖、
+去刺激我们创造的源头，
+这是不可能的。&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+这也就是问题的根本所在，
+妄想用结果去定义原因。&lt;/blockquote&gt;
+&lt;p&gt;我们对空间与时间的概念也只是定义，
+是在它们处理事实的方便性基础上所做出的选择...
+发明者的真实工作在于选择这些组合，
+以便减少无用者，
+或者设法避免制造它们的麻烦。&lt;/p&gt;
+&lt;p&gt;今天在科技上出现的根本问题，
+就在于学科学的人和反科学的人，
+都缺乏在科学上洞悉良质的能力。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id10"&gt;
+&lt;h3&gt;关于“卡住了”&lt;/h3&gt;
+&lt;p&gt;我认为“卡住了”的毛病中最基本的问题，
+在于传统的理性坚持要保持客观的态度。
+传统的理性将世界分为主观和客观，
+把良质摈除在外，
+一旦卡住了的时候，
+任何主客观的事物均无法像良质一样，
+告诉你该往哪里去...
+修理的人不再受限于传统的做法，
+因为他有足够理性的基础拒绝这些思想。
+真实不再是静态的，
+它不是让你决定是去奋战还是打退堂鼓的思想，
+他们是会跟着你成长的思想。&lt;/p&gt;
+&lt;p&gt;你必须能判断什么才是好的，
+这一点才能促使你行动。&lt;/p&gt;
+&lt;p&gt;先有了纯粹的良质，
+接着才会意识到主体、客体...
+现代二分法的科技正缺乏这种一体感，
+创造者和拥有者对他们所创造和拥有的物体没有**认同感**，
+而使用者也一样。&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+解决的方案是维持内心的宁静。&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id11"&gt;
+&lt;h3&gt;内心宁静的三种等级&lt;/h3&gt;
+&lt;p&gt;生理上的宁静...精神上的宁静...价值方面的宁静。&lt;/p&gt;
+&lt;p&gt;你能从高超的技术人员身上观察到这种融合。
+如果你不认为他们是艺术家，那就误解了艺术的本质。
+他们有耐心和关怀，
+也专注于自己的工作，
+但是更让人感动的是，
+他们与手中的工作融合为一，
+因而产生了内心的宁静，
+能够独立处理自己的工作...
+对自己手中的工作产生认同感，
+当一个人产生这种认同感的时候，
+他就会看到关心的另外一面--良质。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id12"&gt;
+&lt;h3&gt;进取心&lt;/h3&gt;
+&lt;p&gt;一个具有进取心的人，
+不会闲散得无事可做，
+在一旁忧心忡忡地焦虑。
+相反，他总是站在自我意识的火车头前，
+一发现有什么出现，
+必然立刻迎上去，
+这就是进取心。&lt;/p&gt;
+&lt;p&gt;进取心的陷阱：
+第一种是因外在的环境是你放弃了良质，我称之为挫折。
+第二种是你内在的因素引起的...姑且称之为忧虑。&lt;/p&gt;
+&lt;p&gt;外因的陷阱：
+通过尝试得到的信息才是真正的目的...
+虽然这个过程很辛苦，但是你对它已经有了感情，这是专家不可能拥有的。&lt;/p&gt;
+&lt;p&gt;内心价值的陷阱：
+如果你的价值观僵化了，
+你要做的是刻意放慢脚步，
+然后重新检视过去你认为重要的事物是否仍然重要。&lt;/p&gt;
+&lt;p&gt;内心过分自我的陷阱：
+机器会反映出你真正的个性、感受、推理和行动，
+而不是反映你自我吹嘘、膨胀的那一部分。
+如果你的士气来自于你的自我，
+而非良质，
+那么这种虚假的形象很快就会完全崩溃，
+那你就会非常沮丧。&lt;/p&gt;
+&lt;p&gt;内心焦虑的陷阱：
+如果你做什么事情都做不对，
+那你就会很害怕。
+就是这个因素往往让你迟迟不敢动手，
+而不是懒惰。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id13"&gt;
+&lt;h3&gt;关于问题&lt;/h3&gt;
+&lt;p&gt;如果你一时找不到答案，
+就表明你设计的问题无法替你找到想要的答案，
+因而你对问题的了解必须**更广泛**。
+要做的是进一步研究你的问题，
+而不是摒弃这些无法回答的状况...
+它们能够让你成长。&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;经常会有这种时候，
+人生的意义也好，
+某些特定的技术问题也好，
+由于对情况没有能够全面的了解，
+因此一直原地转圈没法找到最认可的解决方案。&lt;/p&gt;
+&lt;p&gt;解决的办法是暂时放下这个问题，
+更广泛地接收学习相关的信息，
+让自己有更加充分的了解，
+再回头重新思考问题的答案。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id14"&gt;
+&lt;h2&gt;第四部分：良质孕育了世界，而非辩证法&lt;/h2&gt;
+&lt;p&gt;理性是指建立我们对世界的了解的方式，
+而神话则是指史前人类的世界观...
+这个世界之所以不再回到山顶洞人的时代，
+是因为每一代都有属于他们自己的神话。&lt;/p&gt;
+&lt;p&gt;在亚里士多德的影响下，
+读者不具有古希腊人卓越的观念，
+因而让形式与本质占据了思想。
+善的观念变成一支被称为伦理学的次要学科，
+它主要讨论的课题是理性、逻辑和知识。
+这时卓越已经死了，
+而大学则以科学和逻辑作为建校的根基：
+针对现存世界的实际延伸出无穷的形式，
+然后称其为知识。
+而把这些形式传给下一代的就是系统。&lt;/p&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+当代社会早已被Matrix占领，
+各种组织与机构通过各个层面误导思想，
+维持自身的运转，
+而我们离良质和真理却越来越远。&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id15"&gt;
+&lt;h2&gt;总结&lt;/h2&gt;
+&lt;p&gt;总的来说，《禅》这本书相当值得一读，
+在这里可以找到从人生哲学到面对技术的态度等各种信息。&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="Book"></category></entry><entry><title>PSysMonitor：基于psutil和多线程的简单服务器监控实现</title><link href="/PSysMonitor_introduction.html" rel="alternate"></link><updated>2015-06-04T22:30:00+08:00</updated><author><name>laoyi</name></author><id>tag:,2015-06-04:PSysMonitor_introduction.html</id><summary type="html">&lt;div class="section" id="id1"&gt;
 &lt;h2&gt;项目背景&lt;/h2&gt;
 &lt;p&gt;博主自建的两台VPS，都是Ubuntu Server系统，
 需要一套东西监测系统的运行状态，
